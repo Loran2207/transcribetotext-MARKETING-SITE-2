@@ -1,19 +1,14 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "../primitives/Button";
-import { TopWave } from "../primitives/TopWave";
 import { hero } from "../../data/content";
 import { brand } from "../../data/assets";
 import { fadeUp, stagger } from "../../lib/motion";
 
-const GRID_MASK = "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.22) 38%, transparent 72%)";
-
 export function Hero() {
   const reduceMotion = useReducedMotion();
   return (
-    <section id="top" className="relative overflow-hidden bg-hero-wash pt-[120px] pb-16">
-      <div aria-hidden="true" className="bg-grid-lines pointer-events-none absolute inset-0" style={{ WebkitMaskImage: GRID_MASK, maskImage: GRID_MASK }} />
-      <TopWave />
+    <section id="top" className="relative overflow-hidden bg-canvas pt-[120px] pb-16">
       <div className="relative mx-auto w-full max-w-[1200px] px-6 md:px-10">
         <motion.div variants={stagger(0.1)} initial="hidden" animate="show" className="grid items-center gap-12 lg:grid-cols-2">
           <div>
