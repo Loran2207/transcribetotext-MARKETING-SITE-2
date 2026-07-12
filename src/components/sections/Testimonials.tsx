@@ -46,6 +46,9 @@ export function Testimonials() {
             <motion.figure
               key={t.user}
               variants={scaleIn}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
               className="flex flex-col items-center rounded-[24px] border border-border-soft bg-surface-soft px-7 py-8 text-center transition hover:-translate-y-0.5 hover:shadow-card"
             >
               <img src={brand.avatars[t.avatar]} alt="" className="size-20 rounded-full object-cover shadow-soft ring-4 ring-white" />

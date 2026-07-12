@@ -3,11 +3,17 @@
 
 export const subscribe = {
   discount: { label: "Applied limited discount", offer: "Welcome 50% off" },
+  skip: "Skip",
   countdownSeconds: 8 * 60 + 39, // 08:39
   cta: "Get my plan",
   heading: "Choose your plan",
   subheading: "Unlock unlimited, high-accuracy transcription. Cancel anytime.",
   promo: { label: "Your promo code applied", code: "welcome50" },
+  legal: {
+    pre: "By clicking Get my plan or Continue, I agree to the",
+    links: ["Terms of Service", "Privacy Policy", "Subscription Policy"],
+    body: "I authorize Transcribetotext.ai to charge {now} for the introductory plan. If I do not cancel before the end of the trial period, my subscription will automatically renew at {was} per billing period until I cancel. I can cancel anytime in my account settings at least 24 hours before the end of my subscription to avoid being charged for the next billing cycle. All prices include applicable taxes.",
+  },
   plans: [
     { key: "week", name: "1-Week Trial", was: "$13.99", now: "$5.99", perDayWas: "$1.99", perDay: "$0.85", popular: false },
     { key: "month", name: "1-Month Plan", was: "$13.99", now: "$5.99", perDayWas: "$1.99", perDay: "$0.85", popular: true },
@@ -37,7 +43,11 @@ export const subscribe = {
     { name: "Kate", avatar: 3, quote: "This transcription service is a game-changer! Super fast turnaround and the accuracy is spot-on, even with tricky audio. The interface is clean and easy to use. Definitely recommend it for anyone needing quick, reliable transcripts." },
     { name: "Peter", avatar: 1, quote: "Solid service! The transcripts are accurate, and delivery is always on time. I love how user-friendly the platform is, uploading files is a breeze. Perfect for professionals or students needing quality transcription." },
   ],
-  safeCheckout: "Guaranteed safe and secure checkout",
+  safeCheckout: "Guaranteed safe checkout",
+  help: { title: "Need help?", prefix: "Send us an email:", email: "support@transcribetotext.ai" },
+  publisher: { title: "Publisher", name: "Mithrilmobile OU", address: "Address: Tallinn, J. Vilmsi 47, 10115" },
+  legalLinks: ["Terms of use", "Privacy policy", "Subscription Policy"],
+  continueCta: "Continue",
   payments: ["Visa", "Mastercard", "Amex", "Google Pay", "Apple Pay", "PayPal"],
   checkout: {
     title: "Complete checkout",

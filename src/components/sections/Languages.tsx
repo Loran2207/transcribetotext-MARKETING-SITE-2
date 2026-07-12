@@ -24,7 +24,7 @@ export function Languages() {
       >
         <AnimatePresence initial={false}>
         {list.map((name) => (
-          <motion.div key={name} variants={fadeUp}>
+          <motion.div key={name} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <a
               href="#languages"
               className="group flex items-center gap-3.5 rounded-2xl border border-border bg-white px-5 py-4 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"

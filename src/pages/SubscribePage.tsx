@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { CountdownBar } from "../components/subscribe/CountdownBar";
@@ -15,7 +15,8 @@ import { fadeUp, stagger } from "../lib/motion";
 export function SubscribePage() {
   const [selected, setSelected] = useState(1);
   const [open, setOpen] = useState(false);
-  const reduce = useReducedMotion();
+  const plan = subscribe.plans[selected];
+  const legalBody = subscribe.legal.body.replace("{now}", plan.now).replace("{was}", plan.was);
   return (
     <div className="relative min-h-screen bg-canvas">
       <CountdownBar onGetPlan={() => setOpen(true)} />
@@ -27,10 +28,19 @@ export function SubscribePage() {
           </div>
           <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="mt-12 flex flex-col items-center text-center">
             <motion.h1 variants={fadeUp} className="text-balance font-display text-4xl font-semibold tracking-[-0.025em] text-ink sm:text-5xl">{subscribe.heading}</motion.h1>
-            <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-md text-pretty text-lg text-ink-2">{subscribe.subheading}</motion.p>
           </motion.div>
           <PromoCode />
           <PlanCards selected={selected} onSelect={setSelected} />
+          <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-muted">
+            {subscribe.legal.pre}{" "}
+            {subscribe.legal.links.map((l, i) => (
+              <span key={l}>
+                <a href="#" className="font-medium text-accent hover:underline">{l}</a>
+                {i < subscribe.legal.links.length - 1 ? (i === subscribe.legal.links.length - 2 ? " and " : ", ") : ". "}
+              </span>
+            ))}
+            {legalBody}
+          </p>
           <Guarantee />
           <Benefits />
           <div className="h-16" />
@@ -38,23 +48,20 @@ export function SubscribePage() {
       </div>
       <DarkFeedback />
       <div className="bg-canvas">
-        <div className="mx-auto w-full max-w-5xl px-4 pb-32 pt-10 sm:px-6">
+        <div className="mx-auto w-full max-w-5xl px-4 pb-40 pt-2 sm:px-6">
           <SafeCheckout />
         </div>
       </div>
-      <div className="pointer-events-none fixed inset-x-0 bottom-6 z-40 flex justify-center px-4">
-        <motion.button
-          onClick={() => setOpen(true)}
-          initial={reduce ? undefined : { y: 24, opacity: 0 }}
-          animate={reduce ? undefined : { y: [0, -5, 0], opacity: 1 }}
-          transition={reduce ? undefined : { y: { duration: 3.4, repeat: Infinity, ease: "easeInOut" }, opacity: { duration: 0.5 } }}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="pointer-events-auto inline-flex h-14 items-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] px-9 text-base font-semibold text-white ring-1 ring-inset ring-white/25 transition-[filter] hover:brightness-[1.06]"
-          style={{ boxShadow: "0 14px 44px rgba(37,99,235,0.55), 0 2px 8px rgba(37,99,235,0.4)" }}
-        >
-          {subscribe.cta} <ArrowRight size={18} />
-        </motion.button>
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 px-4 py-4 backdrop-blur" style={{ boxShadow: "0 -10px 34px rgba(16,24,40,.10)" }}>
+        <div className="flex justify-center">
+          <motion.button
+            onClick={() => setOpen(true)}
+            whileTap={{ scale: 0.985 }}
+            className="flex h-14 w-full max-w-2xl items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-base font-semibold text-white shadow-blue ring-1 ring-inset ring-white/25 transition-[filter] hover:brightness-[1.05]"
+          >
+            {subscribe.continueCta} <ArrowRight size={18} />
+          </motion.button>
+        </div>
       </div>
       <CheckoutModal open={open} onClose={() => setOpen(false)} planIndex={selected} />
     </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { subscribe } from "../../data/subscribe";
 
 function fmt(s: number) {
@@ -27,6 +28,7 @@ export function CountdownBar({ onGetPlan }: { onGetPlan: () => void }) {
         <button onClick={onGetPlan} className="shrink-0 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] px-5 py-2.5 text-sm font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20 transition-[filter] hover:brightness-[1.05]">
           {subscribe.cta}
         </button>
+        <Link to="/" className="shrink-0 text-sm font-medium text-accent transition-colors hover:text-accent-dark">{subscribe.skip}</Link>
       </div>
     </div>
   );

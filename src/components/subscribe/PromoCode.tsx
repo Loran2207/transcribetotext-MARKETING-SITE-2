@@ -16,13 +16,13 @@ export function PromoCode() {
   return (
     <div className="mx-auto mt-8 max-w-md">
       {applied && (
-        <p className="mb-2 flex items-center justify-center gap-2 text-sm font-semibold text-deal sm:justify-start">
+        <p className="mb-2 flex items-center justify-center gap-2 text-sm font-semibold text-accent sm:justify-start">
           <Tag size={15} /> {subscribe.promo.label}!
         </p>
       )}
-      <div className={`flex items-center gap-2 rounded-2xl border p-2 transition-colors ${applied ? "border-deal/40 bg-deal-soft" : "border-border bg-surface-soft"}`}>
+      <div className={`flex items-center gap-2 rounded-2xl border p-2 transition-colors ${applied ? "border-accent/30 bg-accent-soft/60" : "border-border bg-surface-soft"}`}>
         <div className="flex min-w-0 flex-1 items-center gap-2 rounded-xl bg-white px-3 py-2.5 shadow-soft">
-          {applied ? <Check size={16} className="shrink-0 text-deal" /> : <Tag size={16} className="shrink-0 text-muted" />}
+          {applied ? <Check size={16} className="shrink-0 text-accent" /> : <Tag size={16} className="shrink-0 text-muted" />}
           <input
             value={code}
             onChange={(e) => { setCode(e.target.value); setApplied(false); }}
@@ -32,9 +32,9 @@ export function PromoCode() {
         </div>
         {applied ? (
           <div className="flex shrink-0 items-center gap-1.5 rounded-xl bg-white px-3 py-1.5 shadow-soft">
-            <div className="text-center"><p className="font-mono text-lg font-bold leading-none tabular-nums text-deal">{pad(mm)}</p><p className="mt-0.5 text-[9px] font-medium text-muted">min</p></div>
-            <span className="pb-2 font-mono text-base font-bold text-deal">:</span>
-            <div className="text-center"><p className="font-mono text-lg font-bold leading-none tabular-nums text-deal">{pad(ss)}</p><p className="mt-0.5 text-[9px] font-medium text-muted">sec</p></div>
+            <div className="text-center"><p className="font-mono text-lg font-bold leading-none tabular-nums text-accent">{pad(mm)}</p><p className="mt-0.5 text-[9px] font-medium text-muted">min</p></div>
+            <span className="pb-2 font-mono text-base font-bold text-accent">:</span>
+            <div className="text-center"><p className="font-mono text-lg font-bold leading-none tabular-nums text-accent">{pad(ss)}</p><p className="mt-0.5 text-[9px] font-medium text-muted">sec</p></div>
           </div>
         ) : (
           <button onClick={() => setApplied(true)} className="shrink-0 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] px-5 py-2.5 text-sm font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20 transition-[filter] hover:brightness-[1.05]">Apply</button>
