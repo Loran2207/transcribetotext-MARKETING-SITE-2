@@ -32,7 +32,7 @@ export function Hero() {
             <motion.img
               src={brand.compareShot}
               alt="Comparison of transcribing now versus with TranscribeToText.AI: time efficiency, accuracy, and speed all rated high"
-              className="w-full max-w-[560px]"
+              className="w-full max-w-[560px] mix-blend-multiply"
               animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
               transition={reduceMotion ? undefined : { duration: 6, repeat: Infinity, ease: "easeInOut" }}
             />

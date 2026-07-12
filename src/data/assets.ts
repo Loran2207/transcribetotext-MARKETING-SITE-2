@@ -4,7 +4,7 @@ const B = "/brand/";
 export const brand = {
   logo: B + "logo.svg",
   heroShot: B + "audio_upload_ui_1b66ce2e3d.png",
-  compareShot: B + "ccae55d6_main_2_3a02f96b84.png",
+  compareShot: B + "hero-compare-v2.jpg",
   guarantee: B + "icon_guarantee_10458fc00f.svg",
   speed: B + "icon_speed_1_a678036734.svg",
   unlimited: B + "icon_unlimited_2_5f0873c17c.svg",
