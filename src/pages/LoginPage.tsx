@@ -22,11 +22,11 @@ function GoogleMark() {
 
 function MicrosoftMark() {
   return (
-    <svg width="18" height="18" viewBox="0 0 21 21" className="shrink-0">
-      <rect x="1" y="1" width="9" height="9" fill="#F25022" />
-      <rect x="11" y="1" width="9" height="9" fill="#7FBA00" />
-      <rect x="1" y="11" width="9" height="9" fill="#00A4EF" />
-      <rect x="11" y="11" width="9" height="9" fill="#FFB900" />
+    <svg width="18" height="18" viewBox="0 0 20 20" className="shrink-0">
+      <rect x="0" y="0" width="9.4" height="9.4" fill="#F25022" />
+      <rect x="10.6" y="0" width="9.4" height="9.4" fill="#7FBA00" />
+      <rect x="0" y="10.6" width="9.4" height="9.4" fill="#00A4EF" />
+      <rect x="10.6" y="10.6" width="9.4" height="9.4" fill="#FFB900" />
     </svg>
   );
 }
@@ -41,21 +41,21 @@ export function LoginPage() {
       <Nav />
       <main className="flex flex-1 flex-col items-center px-4 pb-20 pt-28">
         <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="flex w-full max-w-[460px] flex-col items-center">
-          <motion.div variants={fadeUp} className="flex rounded-full border border-border bg-white p-1 shadow-soft">
+          <motion.div variants={fadeUp} className="inline-flex h-10 items-center justify-center rounded-xl bg-[oklch(0.967_0.001_286.375)] p-[3px]">
             {(["signin", "signup"] as const).map((m) => (
               <button
                 key={m}
                 type="button"
                 onClick={() => setMode(m)}
-                className={`h-10 rounded-full px-7 text-sm font-medium transition-colors ${
-                  mode === m ? "bg-primary text-primary-foreground" : "text-primary hover:text-primary/80"
+                className={`inline-flex h-[calc(100%-1px)] items-center justify-center rounded-xl border border-transparent px-6 text-sm font-medium transition-[color,box-shadow] ${
+                  mode === m ? "bg-white text-foreground shadow-[0_1px_2px_rgba(16,24,40,0.08)]" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {m === "signin" ? login.tabs.login : login.tabs.signup}
               </button>
             ))}
           </motion.div>
-          <motion.div variants={fadeUp} className="mt-6 w-full rounded-[24px] border border-accent/10 bg-accent-soft/50 p-8">
+          <motion.div variants={fadeUp} className="mt-10 w-full max-w-[400px]">
             <h1 className="text-center text-2xl font-semibold text-foreground">{copy.title}</h1>
             <p className="mt-2 text-center text-sm text-muted-foreground">{copy.subtitle}</p>
             <div className="mt-6 flex flex-col gap-3">

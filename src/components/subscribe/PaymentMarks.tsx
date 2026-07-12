@@ -12,27 +12,26 @@ export function GoogleG({ size = 18 }: { size?: number }) {
   );
 }
 
-function Apple({ size = 15 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="currentColor" d="M17.05 12.7c-.03-2.6 2.13-3.85 2.22-3.9-1.21-1.77-3.1-2.02-3.77-2.05-1.6-.16-3.13.94-3.94.94-.81 0-2.07-.92-3.4-.9-1.75.03-3.36 1.02-4.26 2.58-1.82 3.15-.47 7.82 1.3 10.38.86 1.25 1.89 2.66 3.24 2.6 1.3-.05 1.79-.84 3.36-.84 1.57 0 2.01.84 3.39.81 1.4-.02 2.29-1.27 3.14-2.53.99-1.45 1.4-2.85 1.42-2.93-.03-.01-2.72-1.04-2.75-4.13-.02-2.58 2.11-3.82 2.2-3.88Zm-2.6-7.13c.72-.87 1.2-2.08 1.07-3.29-1.03.04-2.28.69-3.02 1.56-.66.77-1.24 2-.09 3.16 0 0 1.32.1 2.04-1.43Z" />
-    </svg>
-  );
-}
+const chip = "inline-flex h-9 items-center rounded-lg border border-border bg-white px-3 shadow-soft";
 
-const chip = "inline-flex h-8 items-center gap-1 rounded-md border border-border bg-white px-2.5 shadow-soft";
+const MARKS = [
+  { name: "Visa", src: "/brand/pay/visa.svg", h: "h-3.5" },
+  { name: "Mastercard", src: "/brand/pay/mastercard.svg", h: "h-5" },
+  { name: "American Express", src: "/brand/pay/amex.svg", h: "h-5" },
+  { name: "Google Pay", src: "/brand/pay/gpay.svg", h: "h-4" },
+  { name: "Apple Pay", src: "/brand/pay/applepay.svg", h: "h-4" },
+  { name: "PayPal", src: "/brand/pay/paypal.svg", h: "h-4.5" },
+];
 
+// Real brand logos (vector, original colors), left-aligned per the mockup.
 export function PaymentRow() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-2">
-      <span className={chip} title="Visa"><span className="text-[13px] font-bold italic tracking-tight text-[#1A1F71]">Visa</span></span>
-      <span className={chip} title="Mastercard">
-        <svg width="26" height="16" viewBox="0 0 36 24" aria-hidden="true"><circle cx="14" cy="12" r="9" fill="#EB001B" /><circle cx="22" cy="12" r="9" fill="#F79E1B" fillOpacity="0.85" /></svg>
-      </span>
-      <span className={chip} title="American Express"><span className="text-[12px] font-bold text-[#2E77BC]">Amex</span></span>
-      <span className={chip} title="Google Pay"><GoogleG size={16} /><span className="text-[12px] font-medium text-ink-2">Pay</span></span>
-      <span className={chip} title="Apple Pay"><Apple size={14} /><span className="text-[12px] font-medium text-ink">Pay</span></span>
-      <span className={chip} title="PayPal"><span className="text-[13px] font-bold italic"><span className="text-[#003087]">Pay</span><span className="text-[#0099DE]">Pal</span></span></span>
+    <div className="flex flex-wrap items-center gap-2">
+      {MARKS.map((m) => (
+        <span key={m.name} className={chip} title={m.name}>
+          <img src={m.src} alt={m.name} className={m.h + " w-auto"} />
+        </span>
+      ))}
     </div>
   );
 }
