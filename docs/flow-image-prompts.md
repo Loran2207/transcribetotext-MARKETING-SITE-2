@@ -7,7 +7,9 @@
 Стилевой блок (добавлен в конец каждого промпта):
 "Premium light SaaS aesthetic: white and ice-blue (#EAF1FE) surfaces, brand blue #2563EB accents,
 dark navy (#14162B) text, soft shadows, rounded corners (16-24px), clean Inter-style typography,
-crisp vector-like UI rendering, high resolution. No teal, no green, no purple, no orange accents."
+crisp vector-like UI rendering, high resolution. No teal, no green, no purple, no orange accents.
+The entire image sits on a pure white background (#FFFFFF), no colored or gradient backdrop behind
+the cards and elements."
 
 ## 1. Hero collage - public/brand/ccae55d6_main_2_3a02f96b84.png
 
@@ -19,7 +21,7 @@ segment bars), "Speed" (Low / High, slider with round knob). Replace every teal/
 brand blue #2563EB: the chevrons, the "TranscribeToText.AI" chip background, all slider tracks,
 knobs and segment bars (use light blue #DBEAFE for empty track parts). Circular portrait
 backgrounds: soft blue gradient (#EAF1FE to #BFDBFE). Keep the "Now" chip white with dark navy
-text. Transparent background. + стилевой блок
+text. Pure white background (#FFFFFF). + стилевой блок
 
 ## 2. Audio upload UI - public/brand/audio_upload_ui_1b66ce2e3d.png
 
