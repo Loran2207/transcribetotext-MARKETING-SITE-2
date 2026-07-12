@@ -14,8 +14,8 @@ function hrefFor(columnTitle: string, index: number): string {
 }
 
 const SOCIALS = [
-  { label: "YouTube", href: "https://www.youtube.com/@Transcribetotextai", Icon: Youtube },
-  { label: "Facebook", href: "https://www.facebook.com/transcribetotextai", Icon: Facebook },
+  { label: "YouTube", href: "https://www.youtube.com/@Transcribetotextai", Icon: Youtube, bg: "#FF0000" },
+  { label: "Facebook", href: "https://www.facebook.com/transcribetotextai", Icon: Facebook, bg: "#1877F2" },
 ] as const;
 
 export function Footer() {
@@ -46,16 +46,17 @@ export function Footer() {
           <motion.div variants={fadeUp}>
             <p className="mb-4 font-display font-semibold text-ink">{footer.followTitle}</p>
             <div className="flex gap-3">
-              {SOCIALS.map(({ label, href, Icon }) => (
+              {SOCIALS.map(({ label, href, Icon, bg }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label}
-                  className="flex size-10 items-center justify-center rounded-full border border-border bg-white text-ink-2 transition hover:border-accent/40 hover:text-accent"
+                  className="flex size-10 items-center justify-center rounded-full text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
+                  style={{ backgroundColor: bg }}
                 >
-                  <Icon size={18} />
+                  <Icon size={18} fill="currentColor" strokeWidth={label === "Facebook" ? 0 : 1.5} />
                 </a>
               ))}
             </div>

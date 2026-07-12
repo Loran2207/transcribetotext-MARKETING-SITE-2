@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Globe } from "lucide-react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, ChevronDown, Globe } from "lucide-react";
 import { Section } from "../primitives/Section";
 import { SectionHeading } from "../primitives/SectionHeading";
 import { Button } from "../primitives/Button";
@@ -9,6 +10,8 @@ import { brand } from "../../data/assets";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
 
 export function Languages() {
+  const [showAll, setShowAll] = useState(false);
+  const list = showAll ? [...languages.list, ...languages.extra] : languages.list;
   return (
     <Section id="languages" tone="sky">
       <SectionHeading title={languages.title} subtitle={languages.subtitle} />
@@ -19,7 +22,8 @@ export function Languages() {
         viewport={viewportOnce}
         className="mx-auto mt-12 grid max-w-6xl grid-cols-4 gap-5"
       >
-        {languages.list.map((name) => (
+        <AnimatePresence initial={false}>
+        {list.map((name) => (
           <motion.div key={name} variants={fadeUp}>
             <a
               href="#languages"
@@ -31,6 +35,7 @@ export function Languages() {
             </a>
           </motion.div>
         ))}
+        </AnimatePresence>
       </motion.div>
       <motion.div
         variants={fadeUp}
@@ -39,11 +44,11 @@ export function Languages() {
         viewport={viewportOnce}
         className="mt-10 flex flex-col items-center"
       >
-        <a href="#languages" className="inline-flex items-center gap-2 font-medium text-accent transition hover:text-accent/80">
+        <button type="button" onClick={() => setShowAll((v) => !v)} className="inline-flex items-center gap-2 font-medium text-accent transition hover:text-accent/80">
           <Globe size={16} />
-          {languages.seeAll}
-          <ArrowRight size={16} />
-        </a>
+          {showAll ? languages.seeFewer : languages.seeAll}
+          <ChevronDown size={16} className={showAll ? "rotate-180 transition-transform" : "transition-transform"} />
+        </button>
         <Button href="/subscribe" size="lg" className="mt-6">
           <span className="flex size-6 items-center justify-center rounded-full bg-white"><GoogleG size={14} /></span>
           {languages.cta}

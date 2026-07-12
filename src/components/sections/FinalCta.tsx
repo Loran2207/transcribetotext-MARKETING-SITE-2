@@ -40,7 +40,7 @@ export function FinalCta() {
           })}
         </motion.div>
         <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-12 flex justify-center">
-          <Button size="lg" href="#pricing" variant="outline" className="border-transparent font-semibold text-accent"><GoogleG size={18} /> {finalCta.cta}</Button>
+          <Button size="lg" href="/subscribe" variant="outline" className="border-transparent font-semibold text-accent"><GoogleG size={18} /> {finalCta.cta}</Button>
         </motion.div>
       </Container>
     </section>

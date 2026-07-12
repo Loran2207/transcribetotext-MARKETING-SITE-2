@@ -72,7 +72,7 @@ export function TranscriptionServices() {
                   <span className="block text-accent">{t.accent}</span>
                 </h3>
                 <p className="mt-6 max-w-md text-pretty text-lg leading-relaxed text-ink-2">{t.desc}</p>
-                <Button size="lg" href="#pricing" className="mt-8">
+                <Button size="lg" href="/subscribe" className="mt-8">
                   {t.cta} <ArrowRight size={18} />
                 </Button>
               </motion.div>

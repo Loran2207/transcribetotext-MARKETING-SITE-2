@@ -3,6 +3,7 @@ import { MotionConfig } from "framer-motion";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Landing } from "./pages/Landing";
 import { SubscribePage } from "./pages/SubscribePage";
+import { LoginPage } from "./pages/LoginPage";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -17,6 +18,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/subscribe" element={<SubscribePage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </MotionConfig>
   );

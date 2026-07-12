@@ -114,7 +114,7 @@ export function Nav() {
           )}
         </ul>
         <div className="ml-auto flex items-center gap-3">
-          <a href="#" className="inline-flex h-10 items-center gap-2 rounded-full bg-surface-soft px-4 text-sm font-medium text-ink-2 transition-colors hover:text-ink">
+          <a href="/login" className="inline-flex h-10 items-center gap-2 rounded-full bg-surface-soft px-4 text-sm font-medium text-ink-2 transition-colors hover:text-ink">
             <UserRound size={16} />
             {nav.login}
           </a>

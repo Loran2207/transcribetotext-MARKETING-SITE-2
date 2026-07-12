@@ -102,7 +102,12 @@ export const languages = {
     "French", "Chinese", "Polish", "Japanese",
     "Turkish", "Portuguese", "Arabic", "Greek",
   ],
+  extra: [
+    "Swedish", "Afrikaans", "Armenian",
+    "Azerbaijani", "Bosnian", "Catalan",
+  ],
   seeAll: "See all languages",
+  seeFewer: "Show fewer languages",
   cta: "Start now for free",
 };
 
@@ -263,3 +268,33 @@ export const navServices = [
   { key: "tiktok", label: "TikTok Transcription", desc: "Transcribe TikTok videos to text for captions, subtitles, and content ideas." },
   { key: "lyrics", label: "Lyrics Transcriber", desc: "Extract accurate song lyrics from any audio or music video track." },
 ];
+
+// /login page copy (mirrors app.transcribetotext.ai/login, system-component version).
+export const login = {
+  tabs: { login: "Login", signup: "Sign up" },
+  signup: {
+    title: "Sign up",
+    subtitle: "Welcome to TranscribeToText.AI! Let's get started.",
+    submit: "Continue",
+    switchPrompt: "Already have an account?",
+    switchAction: "Sign in",
+  },
+  signin: {
+    title: "Welcome back",
+    subtitle: "Sign in to your TranscribeToText account",
+    submit: "Sign in",
+    switchPrompt: "No account?",
+    switchAction: "Create one free",
+    forgot: "Forgot password?",
+  },
+  google: "Continue with Google",
+  microsoft: "Continue with Microsoft",
+  divider: "or",
+  email: { label: "Email", placeholder: "you@example.com" },
+  password: { label: "Password", placeholder: "Enter your password" },
+  terms: {
+    prefix: "By using our service, you agree to",
+    links: ["terms", "privacy policy", "subscription & refund policy"],
+  },
+  help: { prefix: "Need help? Contact us at", email: "support@transcribetotext.ai" },
+};

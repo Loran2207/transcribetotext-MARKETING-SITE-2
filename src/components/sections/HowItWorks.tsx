@@ -42,7 +42,7 @@ export function HowItWorks() {
         </motion.div>
       </div>
       <motion.div initial={{ opacity: 0, y: 20, filter: "blur(6px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={viewportOnce} transition={{ duration: 0.6, ease: EASE_OUT }} className="mt-12 flex justify-center">
-        <Button href="#pricing" size="lg">
+        <Button href="/subscribe" size="lg">
           {howItWorks.cta}
           <ArrowRight size={18} />
         </Button>

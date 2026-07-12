@@ -118,3 +118,20 @@
   --breakpoint-xl: 0rem;
   --breakpoint-2xl: 0rem;
 }
+
+/* App design-system tokens (ported from transcribe2text src/styles/theme.css)
+   for the /login page, which renders the SYSTEM components, not the site ones. */
+@theme {
+  --color-primary: oklch(0.488 0.243 264.376);
+  --color-primary-foreground: oklch(0.97 0.014 254.604);
+  --color-foreground: oklch(0.141 0.005 285.823);
+  --color-background: oklch(1 0 0);
+  --color-input: oklch(0.92 0.004 286.32);
+  --color-input-background: oklch(1 0 0);
+  --color-muted-foreground: oklch(0.552 0.016 285.938);
+  --color-ring: oklch(0.488 0.243 264.376);
+  --color-oauth: oklch(0.208 0.042 265.755);
+  --color-oauth-hover: oklch(0.279 0.041 260.031);
+  --color-oauth-foreground: oklch(1 0 0);
+  --color-destructive: #EE1A1A;
+}

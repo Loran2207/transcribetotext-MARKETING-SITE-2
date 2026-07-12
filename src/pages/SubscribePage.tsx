@@ -9,7 +9,6 @@ import { CheckoutModal } from "../components/subscribe/CheckoutModal";
 import { DarkFeedback } from "../components/subscribe/DarkFeedback";
 import { Guarantee, Benefits, SafeCheckout } from "../components/subscribe/SubscribeSections";
 import { Logo } from "../components/primitives/Logo";
-import { TopWave } from "../components/primitives/TopWave";
 import { subscribe } from "../data/subscribe";
 import { fadeUp, stagger } from "../lib/motion";
 
@@ -19,14 +18,8 @@ export function SubscribePage() {
   const reduce = useReducedMotion();
   return (
     <div className="relative min-h-screen bg-canvas">
-      {/* Top wash + waveform are pinned to the very top of the page, exactly like the
-          landing hero, so the wave sits in the same place when you navigate between
-          the two pages. The countdown bar floats over it the way the nav does on the
-          landing page. */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[540px] bg-hero-wash" />
-      <TopWave />
       <CountdownBar onGetPlan={() => setOpen(true)} />
-      <div className="relative z-10 overflow-hidden bg-grid-lines-fine">
+      <div className="relative z-10 overflow-hidden">
         <div className="mx-auto w-full max-w-5xl px-4 pt-10 sm:px-6">
           <div className="flex items-center justify-between">
             <Logo />
