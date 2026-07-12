@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion, animate } from "framer-motion";
-import { Target, Languages as LangIcon, Users, Heart, Lock } from "lucide-react";
+import { Sparkles, ThumbsUp, Globe, ShieldCheck, Users } from "lucide-react";
 import { Container } from "../primitives/Container";
 import { stats } from "../../data/content";
 import { scaleIn, stagger, viewportOnce } from "../../lib/motion";
 
-const ICONS = [Target, LangIcon, Users, Heart, Lock];
+const ICONS = [Sparkles, ThumbsUp, Globe, ShieldCheck, Users];
 
 function StatValue({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -21,29 +21,41 @@ function StatValue({ value }: { value: string }) {
     return () => c.stop();
   }, [inView, reduce, target]);
   return (
-    <span className="font-display text-4xl font-semibold tracking-tight text-ink md:text-[40px]">
-      <span ref={ref}>{m ? n : value}</span><span className="text-accent">{suffix}</span>
+    <span className="font-display text-4xl font-extrabold tracking-tight text-ink">
+      <span ref={ref}>{m ? n : value}</span>{suffix}
     </span>
   );
 }
 
 export function Stats() {
   return (
-    <div className="border-y border-border bg-white">
+    <section id="features" className="bg-white py-16">
       <Container>
-        <motion.dl variants={stagger(0.06)} initial="hidden" whileInView="show" viewport={viewportOnce} className="grid grid-cols-2 gap-y-10 py-14 sm:grid-cols-3 md:grid-cols-5">
+        <motion.div
+          variants={stagger(0.08)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+          className="mx-auto grid max-w-6xl grid-cols-5 gap-6"
+        >
           {stats.map((s, i) => {
             const Icon = ICONS[i];
             return (
-              <motion.div key={s.label} variants={scaleIn} className="flex flex-col items-center gap-2 px-2 text-center">
-                <span className="text-accent"><Icon size={24} strokeWidth={1.7} /></span>
-                <dd><StatValue value={s.value} /></dd>
-                <dt className="text-sm text-ink-2">{s.label}</dt>
+              <motion.div
+                key={s.label}
+                variants={scaleIn}
+                className="relative mt-7 rounded-[24px] border border-border-soft bg-surface-soft px-4 pb-6 pt-12 text-center"
+              >
+                <span className="shadow-blue absolute -top-7 left-1/2 flex size-14 -translate-x-1/2 items-center justify-center rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-white">
+                  <Icon size={24} strokeWidth={1.9} />
+                </span>
+                <div><StatValue value={s.value} /></div>
+                <div className="mt-1 text-sm text-ink-2">{s.label}</div>
               </motion.div>
             );
           })}
-        </motion.dl>
+        </motion.div>
       </Container>
-    </div>
+    </section>
   );
 }

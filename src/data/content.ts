@@ -4,7 +4,7 @@
 export const nav = {
   logo: "TranscribeToText.AI",
   links: [
-    { label: "Features", href: "#features" },
+    { label: "Features", href: "#services" },
     { label: "Premium", href: "#premium" },
     { label: "How it works", href: "#how" },
     { label: "Languages", href: "#languages" },
@@ -17,20 +17,19 @@ export const nav = {
 };
 
 export const hero = {
-  eyebrow: "Powered by Whisper AI",
-  title: "Whisper AI-Powered Audio & Video Transcription",
+  titleAccent: "Whisper AI-Powered",
+  titleRest: "Audio & Video Transcription",
   subtitle:
-    "Convert any audio, video, or meeting into text with 99% accuracy, in seconds.",
+    "Convert any audio, video, or meeting into text with 99% accuracy, in seconds!",
   primaryCta: "Start for free",
-  secondaryCta: "Watch demo",
 };
 
 export const stats = [
   { value: "99%", label: "Accuracy" },
-  { value: "117", label: "Languages supported" },
-  { value: "55k+", label: "Satisfied users" },
   { value: "100%", label: "Satisfaction guarantee" },
+  { value: "117", label: "Languages supported" },
   { value: "100%", label: "Privacy guarantee" },
+  { value: "55k+", label: "Satisfied users" },
 ];
 
 export const serviceQuickLinks = [
@@ -56,17 +55,17 @@ export const howItWorks = {
   subtitle: "Experience the fastest and most accurate transcription service available.",
   steps: [
     {
-      n: "01",
+      n: "1",
       title: "Upload Your File",
       body: "Start by easily uploading your audio or video file through our secure platform. You can upload multiple files, supporting all common media formats: mp3, mp4, m4a, mov, aac, wav, ogg, opus, mpeg, wma, wmv.",
     },
     {
-      n: "02",
+      n: "2",
       title: "Choose Language",
       body: "Select the language of the audio or video content from our list, accommodating over 100 languages and dialects. This ensures the transcription is tailored accurately to the specific linguistic nuances.",
     },
     {
-      n: "03",
+      n: "3",
       title: "Receive Result",
       body: "Once your file is uploaded and language selected, our advanced AI-powered system begins transcribing immediately. You'll receive a highly accurate transcription, which you can download in DOCX, PDF, or TXT, or even as subtitles and captions.",
     },
@@ -98,43 +97,43 @@ export const languages = {
   subtitle:
     "Here you can find a list of popular languages people use to transcribe audio and video to text.",
   count: "117",
-  highlightPair: "EN to ES",
   list: [
-    "English", "German", "Italian", "Spanish", "French", "Chinese", "Polish",
-    "Japanese", "Turkish", "Portuguese", "Arabic", "Greek", "Swedish",
-    "Afrikaans", "Armenian", "Azerbaijani", "Bosnian", "Bulgarian", "Catalan", "Croatian",
+    "English", "German", "Italian", "Spanish",
+    "French", "Chinese", "Polish", "Japanese",
+    "Turkish", "Portuguese", "Arabic", "Greek",
   ],
-  cta: "See all languages",
+  seeAll: "See all languages",
+  cta: "Start now for free",
 };
 
 export const pricing = {
+  title: "Pricing",
   toggle: { monthly: "Billed monthly", yearly: "Billed yearly", save: "Save 50%" },
-  badge: "Premium Plan, Unlock Full AI Transcription Power",
-  popular: "Most popular",
-  free: {
-    name: "Free",
-    price: "100% Free",
-    features: [
-      "1 free upload daily, one file per day, up to 10 minutes max.",
-      "100% free access, try AI transcription with basic limits.",
-      "Slower processing, free users have lower priority, so transcription may take longer.",
-    ],
-    cta: "Try for free",
-  },
   premium: {
-    name: "Premium",
-    monthlyPrice: "$19.99",
-    yearlyPrice: "$9.99",
-    yearlyNote: "per month, billed yearly",
-    monthlyNote: "billed monthly",
+    badge: "Premium Plan, Unlock Full AI Transcription Power",
+    yearlyPrice: "Only $9.99/month",
+    monthlyPrice: "$19.99/month",
+    yearlyNote: "Billed yearly",
+    monthlyNote: "Billed monthly",
     features: [
-      "Unlimited transcriptions, no daily limits, transcribe as much as you need.",
-      "Extended file uploads, up to 10 hours or 5GB and process 20 files at once.",
-      "Advanced AI features, translate into 117+ languages, bulk exports, speaker recognition and more.",
-      "Priority processing, get lightning-fast transcriptions, always at the front of the queue.",
+      { title: "Unlimited Transcriptions", body: "No daily limits, transcribe as much as you need." },
+      { title: "Extended File Uploads", body: "Upload files up to 10 hours or 5GB and process 20 files at once." },
+      { title: "Advanced AI Features", body: "Translate into 117+ languages, bulk exports, speaker recognition and more." },
+      { title: "Priority Processing", body: "Get lightning-fast transcriptions, always at the front of the queue." },
     ],
-    ctaMonthly: "Start transcription",
     ctaYearly: "Upgrade to Premium, start now",
+    ctaMonthly: "Start transcription",
+  },
+  free: {
+    name: "Free Plan",
+    price: "100%",
+    priceNote: "Free",
+    features: [
+      { title: "1 Free Upload Daily", body: "One file per day, up to 10 minutes max." },
+      { title: "100% Free Access", body: "Try AI transcription with basic limits." },
+      { title: "Slower Processing", body: "Free users have lower priority, so transcription may take longer." },
+    ],
+    cta: "Try for free, start transcription",
   },
 };
 
@@ -147,7 +146,9 @@ export const industries = {
 
 export const testimonials = {
   title: "Customers Reviews",
-  rating: "Rated 4.9 based on 300+ reviews",
+  ratingPrefix: "Rated",
+  rating: "4.9",
+  ratingSuffix: "based on 300+ reviews",
   items: [
     { user: "sovvin01", avatar: 3, title: "Finally", quote: "The effective and easy-to-use transcription service I needed has finally arrived, and it's fantastic!" },
     { user: "Jacob", avatar: 0, title: "really works!", quote: "This service has nailed it, simple to use with exceptional performance. It's everything I've been looking for in transcription." },
@@ -155,9 +156,12 @@ export const testimonials = {
     { user: "Quang", avatar: 4, title: "nice nice", quote: "Absolutely what I needed, a transcription service that's both powerful and straightforward." },
     { user: "tbrman", avatar: 5, title: "omg, the best transcriber", quote: "The high-quality, easy-to-use transcription solution I've long been searching for has finally arrived!" },
     { user: "amarizzz01", avatar: 2, title: "Really good", quote: "I've found my go-to for reliable, high-quality transcriptions. It's just so simple and effective!" },
+  ],
+  more: [
     { user: "Princess", avatar: 6, title: "wow!", quote: "Exactly the effortless, yet powerful transcription tool our team needed to streamline our workflows." },
   ],
   cta: "See more reviews",
+  ctaLess: "Show fewer reviews",
 };
 
 export const faq = {
@@ -171,7 +175,9 @@ export const faq = {
     { q: "How do I cancel my subscription?", a: "You can cancel anytime from your account settings in a couple of clicks. Your Premium features stay active until the end of the current billing period." },
     { q: "Can I transcribe from YouTube, Google Drive, or Dropbox?", a: "Yes. Paste a YouTube URL or connect Google Drive and Dropbox to transcribe files directly, without downloading anything first." },
   ],
-  support: "More questions? Contact us by email for prompt support and any further inquiries. We are here to assist you.",
+  supportTitle: "More questions?",
+  support: "Contact us by email for prompt support and any further inquiries. We are here to assist you!",
+  supportEmail: "support@transcribetotext.ai",
 };
 
 export const finalCta = {
@@ -179,24 +185,33 @@ export const finalCta = {
   items: [
     { title: "Unlimited Transcriptions", body: "Transcribe as much as you need, no limits, no restrictions. Perfect for content creators, businesses, and professionals." },
     { title: "Blazing-Fast Transcriptions", body: "Convert audio and video to text in seconds, saving hours of manual work." },
-    { title: "Risk-Free Satisfaction Guarantee", body: "Try it worry-free. If you experience technical issues that prevent you from using the service, you may be eligible for a full refund within 7 days." },
+    { title: "Risk-Free Satisfaction Guarantee", body: "Try it worry-free! If you experience technical issues that prevent you from using the service, you may be eligible for a full refund within 7 days.", link: "Learn more about our refund policy" },
     { title: "99% AI-Powered Accuracy", body: "Advanced AI ensures crystal-clear speech recognition, even with accents and background noise." },
   ],
   cta: "Start for free",
-  trust: ["No credit card required", "Free plan available", "Cancel anytime"],
 };
 
 export const footer = {
-  services: ["MP3 to Text", "M4A to Text", "MP4 to Text", "MP4 to VTT", "WAV to Text"],
-  company: ["Premium Access to AI Transcription", "How it works?", "Supported Languages", "Pricing", "Customers Reviews", "FAQs"],
-  information: ["Privacy Policy", "Terms of Use", "Subscription and Refund Policy", "Blog"],
-  social: ["YouTube", "Facebook"],
-  copyright: "TranscribeToText.AI, 2024",
-  companyDetails: "Mithrilmobile OU, Tallinn, J. Vilmsi 47, 10115",
+  columns: [
+    {
+      title: "Top Services",
+      links: ["MP3 to Text", "M4A to Text", "MP4 to Text", "MP4 to VTT", "WAV to Text"],
+    },
+    {
+      title: "Company",
+      links: ["Premium Access to AI Transcription", "How it works?", "Supported Languages", "Pricing", "Customers Reviews", "FAQs"],
+    },
+    {
+      title: "Information",
+      links: ["Privacy Policy", "Terms of Use", "Subscription & Refund Policy", "Blog"],
+    },
+  ],
+  followTitle: "Follow us on",
+  copyright: "© TranscribeToText.AI, 2024",
+  companyDetails: "Mithrilmobile OU, Tallinn, J. Vilmsi 47, 10115, info@transcribetotext.ai",
 };
 
 export const transcriptionServices = {
-  eyebrow: "Services",
   title: "Our Transcription Services",
   autoMs: 6000,
   tabs: [
@@ -237,9 +252,14 @@ export const transcriptionServices = {
 
 export const stickyCta = { label: "Continue", href: "/subscribe" };
 
-export const security = {
-  eyebrow: "Security",
-  title: "Your transcripts stay private",
-  subtitle: "Every file is encrypted end-to-end. No one else can read your transcripts, not even us.",
-  chips: ["End-to-end encrypted", "100% privacy guarantee", "Delete files anytime"],
-};
+// Features mega-menu: one entry per service (live-site dropdown).
+export const navServices = [
+  { key: "audio", label: "Audio to Text", desc: "Upload any audio file, interviews, lectures, podcasts, and get instant, accurate transcripts powered by AI.", formats: true },
+  { key: "video", label: "Video to Text", desc: "Transcribe videos with audio in 125+ languages. Extract subtitles or full transcripts while preserving clarity and speaker separation." },
+  { key: "meeting", label: "Meeting Transcription", desc: "Record and transcribe meetings from Zoom, Google Meet, and Teams. Capture every word and generate accurate summaries automatically." },
+  { key: "cloud", label: "Cloud File Transcription", desc: "Connect Google Drive, Dropbox, or OneDrive and transcribe audio or video directly from the cloud, no uploads needed." },
+  { key: "memos", label: "Voice Memos to Text", desc: "Turn iPhone and Android voice memos into clean, searchable text in seconds." },
+  { key: "youtube", label: "Transcribe Youtube Video to Text", desc: "Paste a YouTube link and get the full video transcript, no download needed." },
+  { key: "tiktok", label: "TikTok Transcription", desc: "Transcribe TikTok videos to text for captions, subtitles, and content ideas." },
+  { key: "lyrics", label: "Lyrics Transcriber", desc: "Extract accurate song lyrics from any audio or music video track." },
+];

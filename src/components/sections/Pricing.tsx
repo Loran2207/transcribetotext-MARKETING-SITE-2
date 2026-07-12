@@ -1,21 +1,35 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
-import { Check } from "lucide-react";
+import {
+  CalendarCheck,
+  FilePlus2,
+  Flame,
+  Gauge,
+  Hourglass,
+  Infinity as InfinityIcon,
+  Sparkles,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import { Container } from "../primitives/Container";
-import { SectionHeading } from "../primitives/SectionHeading";
-import { SectionCutout } from "../primitives/SectionCutout";
-import { StarField } from "../mocks/StarField";
-import { CosmicGlow } from "../mocks/CosmicGlow";
+import { Button } from "../primitives/Button";
 import { pricing } from "../../data/content";
-import { EASE_OUT, SPRING, viewportOnce } from "../../lib/motion";
+import { fadeUp, stagger, SPRING, viewportOnce } from "../../lib/motion";
 
-function Feature({ children }: { children: ReactNode }) {
+const premiumIcons: LucideIcon[] = [InfinityIcon, FilePlus2, Sparkles, Zap];
+const freeIcons: LucideIcon[] = [CalendarCheck, Gauge, Hourglass];
+
+function FeatureRow({ icon: Icon, title, body }: { icon: LucideIcon; title: string; body: string }) {
   return (
-    <li className="flex gap-3 text-sm text-muted-invert">
-      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent/20"><Check size={13} className="text-accent-glow" /></span>
-      <span>{children}</span>
-    </li>
+    <div className="flex items-start gap-4">
+      <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+        <Icon size={22} />
+      </span>
+      <div>
+        <p className="font-display text-lg font-semibold text-ink">{title}</p>
+        <p className="mt-1 text-sm text-ink-2">{body}</p>
+      </div>
+    </div>
   );
 }
 
@@ -25,57 +39,64 @@ export function Pricing() {
   const price = yearly ? p.yearlyPrice : p.monthlyPrice;
   const note = yearly ? p.yearlyNote : p.monthlyNote;
   return (
-    <section id="pricing" className="relative overflow-hidden bg-dark-atmosphere py-20 md:py-28">
-      <SectionCutout />
-      <StarField />
-      <CosmicGlow variant="orbit" className="top-[-120px] opacity-70" />
-      <motion.div aria-hidden="true" initial={{ scaleX: 0, opacity: 0 }} whileInView={{ scaleX: 1, opacity: 1 }} viewport={viewportOnce} transition={{ duration: 1.1, ease: EASE_OUT }} className="pointer-events-none absolute inset-x-0 top-0 h-px origin-center bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-      <Container className="relative">
-        <SectionHeading eyebrow="Pricing" title="Simple pricing that scales with you" tone="dark" />
-        <motion.div initial={{ opacity: 0, y: 16, filter: "blur(6px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={viewportOnce} transition={{ duration: 0.55, ease: EASE_OUT }} className="mt-12 flex justify-center">
-          <div className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 p-1">
-            {([["monthly", false], ["yearly", true]] as const).map(([label, val]) => (
-              <button key={label} onClick={() => setYearly(val)} className="relative rounded-full px-4 py-2 text-sm font-medium">
-                {yearly === val && <motion.span layoutId="toggle" transition={SPRING} className="absolute inset-0 rounded-full bg-accent" />}
-                <span className={`relative z-10 ${yearly === val ? "text-white" : "text-muted-invert"}`}>{label === "monthly" ? pricing.toggle.monthly : pricing.toggle.yearly}</span>
-                {label === "yearly" && <span className={`relative z-10 ml-2 rounded-full px-2 py-0.5 text-[11px] font-semibold ${yearly ? "bg-white/25 text-white" : "bg-accent/20 text-accent-glow"}`}>{pricing.toggle.save}</span>}
-              </button>
-            ))}
-          </div>
+    <section id="pricing" className="bg-white py-20">
+      <Container>
+        <motion.h2 variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="text-center font-display text-4xl font-extrabold tracking-tight text-ink">
+          {pricing.title}
+        </motion.h2>
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-6 flex items-center justify-center gap-3">
+          <span className={yearly ? "text-ink-2" : "font-medium text-ink"}>{pricing.toggle.monthly}</span>
+          <button type="button" role="switch" aria-checked={yearly} aria-label="Toggle yearly billing" onClick={() => setYearly((v) => !v)} className="h-7 w-12 rounded-full bg-accent p-1">
+            <motion.span animate={{ x: yearly ? 20 : 0 }} transition={SPRING} className="block size-5 rounded-full bg-white shadow-soft" />
+          </button>
+          <span className={yearly ? "font-medium text-accent" : "text-ink-2"}>{pricing.toggle.yearly}</span>
+          <span className="rounded-full bg-deal-soft px-2.5 py-1 text-xs font-bold text-deal">{pricing.toggle.save}</span>
         </motion.div>
-        <div className="mx-auto mt-12 grid max-w-4xl items-stretch gap-6 md:grid-cols-2">
-          <motion.div initial={{ opacity: 0, x: -50, filter: "blur(10px)" }} whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }} viewport={viewportOnce} transition={{ duration: 0.8, ease: EASE_OUT }} className="flex h-full flex-col rounded-tile border border-white/10 surface-dark p-8">
-            <p className="text-sm font-semibold text-muted-invert">{pricing.free.name}</p>
-            <div className="mt-3 flex min-h-[3.5rem] items-end"><p className="font-display text-4xl font-semibold tracking-tight text-ink-invert">{pricing.free.price}</p></div>
-            <ul className="mt-7 flex-1 space-y-4 border-t border-white/10 pt-7">
-              {pricing.free.features.map((f) => (<Feature key={f}>{f}</Feature>))}
-            </ul>
-            <Link to="/subscribe" className="mt-8 inline-flex h-14 items-center justify-center rounded-full border border-white/15 bg-white/5 text-base font-medium text-ink-invert transition-colors hover:bg-white/10">{pricing.free.cta}</Link>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 50, filter: "blur(10px)" }} whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }} viewport={viewportOnce} transition={{ duration: 0.8, ease: EASE_OUT, delay: 0.08 }} className="relative h-full">
-            <div aria-hidden="true" className="pointer-events-none absolute -inset-3 -z-10 rounded-[38px] opacity-80 blur-2xl" style={{ background: "radial-gradient(closest-side, rgba(37,99,235,0.4), transparent)" }} />
-            <div className="h-full rounded-tile p-[1.5px] shadow-blue" style={{ background: "linear-gradient(180deg,#3B82F6,#2563EB)" }}>
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[26px] surface-dark p-8">
-                <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-44" style={{ background: "linear-gradient(180deg, rgba(76,155,255,0.12), transparent)" }} />
-                <div className="relative flex items-center justify-between">
-                  <p className="text-sm font-semibold text-ink-invert">{p.name}</p>
-                  <span className="rounded-full px-3 py-1 text-xs font-semibold text-white" style={{ background: "linear-gradient(180deg,#3B82F6,#2563EB)" }}>{pricing.popular}</span>
-                </div>
-                <div className="relative mt-3 flex min-h-[3.5rem] items-end gap-2">
-                  <AnimatePresence mode="popLayout">
-                    <motion.span key={price} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="font-display text-5xl font-semibold tracking-tight text-ink-invert">{price}</motion.span>
-                  </AnimatePresence>
-                  <span className="mb-1.5 text-xs text-muted-invert">{note}</span>
-                </div>
-                <ul className="relative mt-7 flex-1 space-y-4 border-t border-white/10 pt-7">
-                  {p.features.map((f) => (<Feature key={f}>{f}</Feature>))}
-                </ul>
-                <Link to="/subscribe" className="relative mt-8 inline-flex h-14 items-center justify-center rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-base font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20 transition-all hover:brightness-[1.05]">{yearly ? p.ctaYearly : p.ctaMonthly}</Link>
+        <motion.div variants={stagger(0.12)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mx-auto mt-12 grid max-w-5xl grid-cols-2 items-stretch gap-8">
+          <motion.div variants={fadeUp} className="flex flex-col overflow-hidden rounded-[24px] border border-accent/25 bg-white shadow-card">
+            <div className="relative overflow-hidden bg-[linear-gradient(135deg,#3B82F6_0%,#1D4ED8_100%)] px-8 py-9 text-center text-white">
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,0.10), transparent 62%)" }} />
+              <p className="relative flex items-center justify-center gap-2 text-sm font-semibold text-white/90">
+                <Flame size={16} />
+                <span>{p.badge}</span>
+              </p>
+              <div className="relative mt-3 flex h-12 items-center justify-center">
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.span key={price} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="font-display text-5xl font-extrabold tracking-tight">
+                    {price}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+              <div className="relative mt-3 flex items-center justify-center gap-2">
+                <span className="text-sm font-medium text-white/85">{note}</span>
+                {yearly && <span className="rounded-full bg-deal px-2.5 py-1 text-xs font-bold text-white">{pricing.toggle.save}</span>}
               </div>
             </div>
+            <div className="flex-1 space-y-7 p-8">
+              {p.features.map((f, i) => (
+                <FeatureRow key={f.title} icon={premiumIcons[i]} title={f.title} body={f.body} />
+              ))}
+            </div>
+            <div className="px-8 pb-8">
+              <Button size="lg" href="/subscribe" className="w-full">{yearly ? p.ctaYearly : p.ctaMonthly}</Button>
+            </div>
           </motion.div>
-        </div>
-        <motion.p initial={{ opacity: 0, filter: "blur(6px)" }} whileInView={{ opacity: 1, filter: "blur(0px)" }} viewport={viewportOnce} transition={{ duration: 0.6, ease: EASE_OUT }} className="mt-8 text-center text-xs text-muted-invert">{pricing.badge}</motion.p>
+          <motion.div variants={fadeUp} className="flex flex-col overflow-hidden rounded-[24px] border border-border bg-white shadow-soft">
+            <div className="bg-surface-soft px-8 py-9 text-center">
+              <p className="font-semibold text-ink-2">{pricing.free.name}</p>
+              <p className="mt-2 font-display text-5xl font-extrabold tracking-tight text-ink">{pricing.free.price}</p>
+              <p className="mt-1 font-medium text-ink-2">{pricing.free.priceNote}</p>
+            </div>
+            <div className="flex-1 space-y-7 p-8">
+              {pricing.free.features.map((f, i) => (
+                <FeatureRow key={f.title} icon={freeIcons[i]} title={f.title} body={f.body} />
+              ))}
+            </div>
+            <div className="px-8 pb-8">
+              <Button variant="outline" size="lg" href="/subscribe" className="w-full">{pricing.free.cta}</Button>
+            </div>
+          </motion.div>
+        </motion.div>
       </Container>
     </section>
   );

@@ -21,6 +21,12 @@ export const brand = {
     meeting: B + "icon_meeting_1_5e9bd70a55.svg",
     cloud: B + "icon_cloud_4d6b777875.svg",
   },
+  serviceShots: {
+    audio: B + "audio_upload_ui_1b66ce2e3d.png",
+    video: B + "img_c435e79e4d.png",
+    meeting: B + "img_1_78f229d95b.png",
+    cloud: B + "img_2_8cba23b4a9.png",
+  } as Record<string, string>,
   features: [
     B + "icon_unlimited_2_5f0873c17c.svg",
     B + "icon_speed_1_a678036734.svg",

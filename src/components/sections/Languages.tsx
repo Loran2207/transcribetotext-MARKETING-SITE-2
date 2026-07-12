@@ -1,35 +1,54 @@
 import { motion } from "framer-motion";
+import { ArrowRight, Globe } from "lucide-react";
 import { Section } from "../primitives/Section";
 import { SectionHeading } from "../primitives/SectionHeading";
 import { Button } from "../primitives/Button";
-import { LangRow } from "../mocks/LangRow";
-import { Globe3D } from "../mocks/Globe3D";
+import { GoogleG } from "../subscribe/PaymentMarks";
 import { languages } from "../../data/content";
-import { fadeLeft, fadeRight, fadeUp, stagger, viewportOnce } from "../../lib/motion";
-
-const half = Math.ceil(languages.list.length / 2);
-const row1 = languages.list.slice(0, half);
-const row2 = languages.list.slice(half);
-const MASK = "linear-gradient(to right, transparent, black 10%, black 90%, transparent)";
+import { brand } from "../../data/assets";
+import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
 
 export function Languages() {
   return (
-    <Section id="languages" tone="white" className="relative overflow-hidden">
-      <SectionHeading eyebrow={`${languages.count} languages`} title={languages.title} subtitle={languages.subtitle} />
-      <div className="relative mt-10">
-        <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[62%] h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 sm:h-[820px] sm:w-[820px]">
-          <Globe3D />
-        </div>
-        <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[52%] h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.05] blur-[80px]" />
-        <motion.div variants={stagger(0.14)} initial="hidden" whileInView="show" viewport={viewportOnce} className="relative flex flex-col gap-4 overflow-hidden py-6" style={{ WebkitMaskImage: MASK, maskImage: MASK }}>
-          <motion.div variants={fadeRight}><LangRow items={row1} /></motion.div>
-          <motion.div variants={fadeLeft}><LangRow items={row2} reverse /></motion.div>
-        </motion.div>
-        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="relative mt-8 flex justify-center">
-          <Button href="#" variant="outline" size="md">{languages.cta}</Button>
-        </motion.div>
-        <div aria-hidden="true" className="h-44 sm:h-72" />
-      </div>
+    <Section id="languages" tone="sky">
+      <SectionHeading title={languages.title} subtitle={languages.subtitle} />
+      <motion.div
+        variants={stagger(0.05)}
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
+        className="mx-auto mt-12 grid max-w-6xl grid-cols-4 gap-5"
+      >
+        {languages.list.map((name) => (
+          <motion.div key={name} variants={fadeUp}>
+            <a
+              href="#languages"
+              className="group flex items-center gap-3.5 rounded-2xl border border-border bg-white px-5 py-4 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
+            >
+              <img src={brand.langFlags[name]} alt={`${name} flag`} loading="lazy" className="size-10 rounded-full" />
+              <span className="flex-1 font-semibold text-ink">{name}</span>
+              <ArrowRight size={16} className="text-muted transition group-hover:translate-x-0.5 group-hover:text-accent" />
+            </a>
+          </motion.div>
+        ))}
+      </motion.div>
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
+        className="mt-10 flex flex-col items-center"
+      >
+        <a href="#languages" className="inline-flex items-center gap-2 font-medium text-accent transition hover:text-accent/80">
+          <Globe size={16} />
+          {languages.seeAll}
+          <ArrowRight size={16} />
+        </a>
+        <Button href="/subscribe" size="lg" className="mt-6">
+          <span className="flex size-6 items-center justify-center rounded-full bg-white"><GoogleG size={14} /></span>
+          {languages.cta}
+        </Button>
+      </motion.div>
     </Section>
   );
 }

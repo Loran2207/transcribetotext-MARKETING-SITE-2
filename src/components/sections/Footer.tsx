@@ -1,51 +1,76 @@
 import { motion } from "framer-motion";
 import { Youtube, Facebook } from "lucide-react";
 import { Container } from "../primitives/Container";
-import { Logo } from "../primitives/Logo";
-import { Waveform } from "../primitives/Waveform";
-import { footer } from "../../data/content";
-import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
+import { footer, nav } from "../../data/content";
+import { brand } from "../../data/assets";
+import { fadeUp, fadeIn, stagger, viewportOnce } from "../../lib/motion";
 
-const SOCIAL = { YouTube: Youtube, Facebook: Facebook } as const;
+const COMPANY_ANCHORS = ["#premium", "#how", "#languages", "#pricing", "#reviews", "#faq"];
 
-function Column({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div>
-      <p className="text-sm font-semibold text-ink">{title}</p>
-      <ul className="mt-4 space-y-3">
-        {items.map((it) => (<li key={it}><a href="#" className="text-sm text-ink-2 transition-colors hover:text-accent">{it}</a></li>))}
-      </ul>
-    </div>
-  );
+function hrefFor(columnTitle: string, index: number): string {
+  if (columnTitle === "Top Services") return "#services";
+  if (columnTitle === "Company") return COMPANY_ANCHORS[index] ?? "#";
+  return "#";
 }
+
+const SOCIALS = [
+  { label: "YouTube", href: "https://www.youtube.com/@Transcribetotextai", Icon: Youtube },
+  { label: "Facebook", href: "https://www.facebook.com/transcribetotextai", Icon: Facebook },
+] as const;
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-surface-soft">
-      <Container className="py-16">
-        <motion.div variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={viewportOnce} className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+    <footer className="bg-tint-sky pt-14">
+      <Container>
+        <motion.div
+          variants={stagger(0.08)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+          className="grid grid-cols-4 gap-10"
+        >
+          {footer.columns.map((col) => (
+            <motion.div key={col.title} variants={fadeUp}>
+              <p className="mb-4 font-display font-semibold text-ink">{col.title}</p>
+              <ul className="space-y-2.5">
+                {col.links.map((link, i) => (
+                  <li key={link}>
+                    <a href={hrefFor(col.title, i)} className="text-[15px] text-ink-2 transition-colors hover:text-accent">
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
           <motion.div variants={fadeUp}>
-            <Logo />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-2">AI-powered audio and video transcription in 117 languages, with 99% accuracy.</p>
-            <Waveform bars={26} height={20} color="accent" className="mt-5 max-w-[170px] opacity-70" />
-            <div className="mt-6 flex gap-3">
-              {footer.social.map((s) => {
-                const Icon = SOCIAL[s as keyof typeof SOCIAL];
-                return (
-                  <a key={s} href="#" aria-label={s} className="grid h-9 w-9 place-items-center rounded-full border border-border bg-white text-ink-2 shadow-soft transition-all hover:-translate-y-0.5 hover:text-accent">
-                    <Icon size={16} />
-                  </a>
-                );
-              })}
+            <p className="mb-4 font-display font-semibold text-ink">{footer.followTitle}</p>
+            <div className="flex gap-3">
+              {SOCIALS.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="flex size-10 items-center justify-center rounded-full border border-border bg-white text-ink-2 transition hover:border-accent/40 hover:text-accent"
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
             </div>
           </motion.div>
-          <motion.div variants={fadeUp}><Column title="Services" items={footer.services} /></motion.div>
-          <motion.div variants={fadeUp}><Column title="Company" items={footer.company} /></motion.div>
-          <motion.div variants={fadeUp}><Column title="Information" items={footer.information} /></motion.div>
         </motion.div>
-        <motion.div initial={{ opacity: 0, y: 20, filter: "blur(6px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-12 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
-          <span>© {footer.copyright}</span>
-          <span>{footer.companyDetails}</span>
+        <motion.div
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+          className="mt-12 flex items-center justify-between gap-6 border-t border-border pb-28 pt-6"
+        >
+          <img src={brand.logo} alt={nav.logo} className="h-6 w-auto" />
+          <span className="text-sm text-ink-2">{footer.copyright}</span>
+          <span className="text-xs text-muted">{footer.companyDetails}</span>
         </motion.div>
       </Container>
     </footer>
