@@ -52,17 +52,21 @@ export const subscribe = {
   checkout: {
     title: "Complete checkout",
     summaryLabel: "Order summary",
-    // Order summary composition mirrors the source funnel (Figma 8079-4):
-    // one priced line + one free bonuses line, and the total equals the priced line.
-    regularLabel: "Regular 4-week price",
-    bonusLabel: "30+ Exclusive bonuses",
-    bonusValue: "Free",
+    summary: [
+      { label: "Premium Membership", value: "{now}" },
+      { label: "Business Package", value: "Free" },
+      { label: "Priority Processing", value: "Free" },
+    ],
     totalLabel: "Total today:",
-    cardLabel: "Card number",
-    expiryLabel: "Expiry date MM / YY",
-    cvcLabel: "CVC",
+    cardPlaceholder: "Card number",
+    expiryPlaceholder: "Expiry date",
+    cvcPlaceholder: "Security code",
     continue: "Continue",
-    terms: "By proceeding with the purchase, you agree to our Terms of Service, Privacy Policy, and Subscription Policy. You can cancel anytime in your account settings.",
+    termsPre: "By proceeding with the purchase, you agree to our",
+    termsLinks: ["Terms of Service", "Privacy Policy", "Subscription Policy"],
+    helpPrefix: "Need help? Contact us at",
+    helpEmail: "support@transcribetotext.ai",
+    renewal: "You'll pay {now} today for your 1-month trial. After your trial ends, it will convert into a subscription. Your subscription starts at the end of the trial period and renews at {was} per 1 month subscription unless you cancel. You can cancel anytime in your account settings at least 24 hours before the end of your 1-month subscription. If you don't cancel, your membership will automatically renew at the end of each billing period.",
     success: { title: "You're all set", body: "Welcome to Premium. Your transcription superpowers are unlocked." },
   },
 };
