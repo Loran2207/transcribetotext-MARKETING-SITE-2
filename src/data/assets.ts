@@ -85,5 +85,7 @@ export const brand = {
     Azerbaijani: B + "e632a137_az_601adeeee0.svg",
     Bosnian: B + "84b8fb68_ba_37f3ae7964.svg",
     Catalan: B + "aa5f6c29_es_ct_33e7a1119a.svg",
+    Bulgarian: B + "6a8d15b4_bg_45bc5fbbf7.svg",
+    Croatian: B + "469614ce_hr_056e0e9e0f.svg",
   } as Record<string, string>,
 };

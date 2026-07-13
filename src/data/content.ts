@@ -103,11 +103,11 @@ export const languages = {
     "Turkish", "Portuguese", "Arabic", "Greek",
   ],
   extra: [
-    "Swedish", "Afrikaans", "Armenian",
-    "Azerbaijani", "Bosnian", "Catalan",
+    "Swedish", "Afrikaans", "Armenian", "Azerbaijani",
+    "Bosnian", "Bulgarian", "Catalan", "Croatian",
   ],
   seeAll: "See all languages",
-  seeFewer: "Show fewer languages",
+  seeFewer: "Close all languages",
   cta: "Start now for free",
 };
 
@@ -166,7 +166,7 @@ export const testimonials = {
     { user: "Princess", avatar: 6, title: "wow!", quote: "Exactly the effortless, yet powerful transcription tool our team needed to streamline our workflows." },
   ],
   cta: "See more reviews",
-  ctaLess: "Show fewer reviews",
+  ctaLess: "Close all reviews",
 };
 
 export const faq = {

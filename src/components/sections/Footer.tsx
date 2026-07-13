@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Youtube, Facebook } from "lucide-react";
 import { Container } from "../primitives/Container";
 import { footer, nav } from "../../data/content";
 import { brand } from "../../data/assets";
@@ -14,8 +13,8 @@ function hrefFor(columnTitle: string, index: number): string {
 }
 
 const SOCIALS = [
-  { label: "YouTube", href: "https://www.youtube.com/@Transcribetotextai", Icon: Youtube, bg: "#FF0000" },
-  { label: "Facebook", href: "https://www.facebook.com/transcribetotextai", Icon: Facebook, bg: "#1877F2" },
+  { label: "YouTube", href: "https://www.youtube.com/@Transcribetotextai", src: "/brand/social/youtube.svg", h: "h-7" },
+  { label: "Facebook", href: "https://www.facebook.com/transcribetotextai", src: "/brand/social/facebook.svg", h: "h-9" },
 ] as const;
 
 export function Footer() {
@@ -46,17 +45,16 @@ export function Footer() {
           <motion.div variants={fadeUp}>
             <p className="mb-4 font-display font-semibold text-ink">{footer.followTitle}</p>
             <div className="flex gap-3">
-              {SOCIALS.map(({ label, href, Icon, bg }) => (
+              {SOCIALS.map(({ label, href, src, h }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label}
-                  className="flex size-10 items-center justify-center rounded-full text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
-                  style={{ backgroundColor: bg }}
+                  className="flex h-9 items-center transition hover:-translate-y-0.5 hover:opacity-90"
                 >
-                  <Icon size={18} fill="currentColor" strokeWidth={label === "Facebook" ? 0 : 1.5} />
+                  <img src={src} alt={label} className={h + " w-auto"} />
                 </a>
               ))}
             </div>
