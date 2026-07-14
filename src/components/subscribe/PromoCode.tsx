@@ -33,7 +33,7 @@ export function PromoCode() {
             <p className="text-sm font-semibold text-accent-dark sm:text-[15px]">{subscribe.promo.label}</p>
           </div>
         )}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-stretch gap-2.5 sm:items-center">
           <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-2xl bg-white px-3.5 py-3 shadow-soft sm:px-4">
             {applied ? <Check size={18} className="shrink-0 text-accent" strokeWidth={3} /> : <Tag size={18} className="shrink-0 text-muted" />}
             <input
@@ -46,7 +46,7 @@ export function PromoCode() {
           {applied ? (
             <>
               {/* phone: one compact clock */}
-              <span className="flex shrink-0 items-center gap-1.5 rounded-2xl bg-white px-3 py-3 font-mono text-base font-bold tabular-nums text-accent shadow-soft sm:hidden">
+              <span className="flex shrink-0 items-center justify-center gap-1.5 rounded-2xl bg-white px-3.5 font-mono text-base font-bold tabular-nums text-accent shadow-soft sm:hidden">
                 <Clock size={15} />
                 {pad(mm)}:{pad(ss)}
               </span>

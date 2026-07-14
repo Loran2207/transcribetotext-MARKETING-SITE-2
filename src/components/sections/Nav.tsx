@@ -86,7 +86,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.24, ease: EASE_OUT }}
-      className="absolute inset-x-0 top-16 max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-border bg-white px-6 pb-8 pt-2 shadow-lift lg:hidden"
+      className="fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col overflow-y-auto border-t border-border bg-white px-6 pb-8 pt-2 shadow-lift lg:hidden"
     >
       <ul className="flex flex-col divide-y divide-border">
         {nav.links.map((l) =>
@@ -121,7 +121,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                             key={s.key}
                             href="#services"
                             onClick={onClose}
-                            className="flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-ink-2 transition-colors hover:bg-surface-soft hover:text-ink"
+                            className="-mx-3 flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-ink-2 transition-colors hover:bg-surface-soft hover:text-ink"
                           >
                             <RowIcon size={17} className="shrink-0 text-muted" />
                             <span className="flex-1">{s.label}</span>
@@ -146,15 +146,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
           )
         )}
       </ul>
-      <div className="mt-5 flex flex-col gap-3">
-        <a
-          href="/login"
-          onClick={onClose}
-          className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-surface-soft text-sm font-medium text-ink-2 transition-colors hover:text-ink"
-        >
-          <UserRound size={16} />
-          {nav.login}
-        </a>
+      <div className="mt-auto pt-6">
         <Button href="/subscribe" size="md" className="w-full">{nav.cta}</Button>
       </div>
     </motion.div>
@@ -171,8 +163,26 @@ export function Nav() {
     <motion.header initial={{ y: -64, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5, ease: EASE_OUT }} className="fixed inset-x-0 top-0 z-50">
       <motion.div style={{ opacity: bg }} className="absolute inset-0 -z-10 bg-white/85 backdrop-blur-xl" />
       <motion.div style={{ opacity: shadow }} className="absolute inset-x-0 bottom-0 h-px bg-border" />
-      <nav className="mx-auto flex h-16 w-full max-w-[1200px] items-center gap-6 px-6 md:px-10">
-        <Logo />
+      <nav className="mx-auto grid h-16 w-full max-w-[1200px] grid-cols-[auto_1fr_auto] items-center px-5 sm:px-6 md:px-10 lg:flex lg:gap-6">
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-label={open ? "Close menu" : "Open menu"}
+          className="grid size-11 shrink-0 place-items-center rounded-full bg-surface-soft text-ink-2 transition-colors hover:text-ink lg:hidden"
+        >
+          {open ? <X size={20} /> : <Menu size={20} />}
+        </button>
+        <div className="flex justify-center lg:justify-start">
+          <Logo />
+        </div>
+        <a
+          href="/login"
+          aria-label={nav.login}
+          className="grid size-11 shrink-0 place-items-center rounded-full bg-surface-soft text-ink-2 transition-colors hover:text-ink lg:hidden"
+        >
+          <UserRound size={19} />
+        </a>
         <ul className="ml-2 hidden items-center gap-7 lg:flex">
           {nav.links.map((l) =>
             l.label === "Features" ? (
@@ -198,21 +208,6 @@ export function Nav() {
             {nav.login}
           </a>
           <Button href="/subscribe" size="md">{nav.cta}</Button>
-        </div>
-
-        <div className="ml-auto flex items-center gap-2 lg:hidden">
-          <span className="hidden sm:block">
-            <Button href="/subscribe" size="md">{nav.cta}</Button>
-          </span>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-label={open ? "Close menu" : "Open menu"}
-            className="grid size-11 shrink-0 place-items-center rounded-full bg-surface-soft text-ink-2 transition-colors hover:text-ink"
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
         </div>
       </nav>
 

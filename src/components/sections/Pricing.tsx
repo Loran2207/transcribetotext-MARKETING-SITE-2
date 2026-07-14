@@ -44,9 +44,9 @@ export function Pricing() {
           <motion.div variants={fadeUp} className="flex flex-col overflow-hidden rounded-[24px] border border-accent/25 bg-white shadow-card">
             <div className="relative overflow-hidden bg-[linear-gradient(135deg,#3B82F6_0%,#1D4ED8_100%)] px-6 py-8 text-center text-white md:px-8 md:py-9">
               <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,0.10), transparent 62%)" }} />
-              <p className="relative flex items-center justify-center gap-2 text-sm font-semibold text-white/90">
-                <Flame size={16} />
-                <span>{p.badge}</span>
+              <p className="relative text-center text-sm font-semibold text-white/90">
+                <Flame size={15} className="mr-1.5 inline-block align-[-2px]" />
+                {p.badge}
               </p>
               <p className="relative mt-3 font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-[42px]">{p.price}</p>
               <p className="relative mt-3 text-sm font-medium text-white/85">{p.note}</p>
