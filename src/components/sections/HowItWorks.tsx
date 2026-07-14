@@ -25,9 +25,7 @@ export function HowItWorks() {
             viewport={viewportOnce}
             transition={{ duration: 0.8, delay: 0.25 + i * 0.15, ease: EASE_OUT }}
             className={`pointer-events-none absolute top-8 hidden origin-left border-t-2 border-dashed border-accent/50 md:block ${pos}`}
-          >
-            <ArrowRight size={20} className="absolute -right-1 -top-[9px] text-accent" />
-          </motion.div>
+          />
         ))}
         <motion.div variants={stagger(0.14)} initial="hidden" whileInView="show" viewport={viewportOnce} className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {howItWorks.steps.map((s) => (
