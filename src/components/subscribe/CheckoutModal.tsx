@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Lock, Check, ArrowRight, Info } from "lucide-react";
 import { subscribe } from "../../data/subscribe";
 import { EASE_OUT } from "../../lib/motion";
-import { PaymentRow } from "./PaymentMarks";
+import { PaymentMarks } from "./PaymentMarks";
 
 const field = "h-12 w-full rounded-input border border-border bg-white px-3 text-sm text-ink outline-none transition-all placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/15 sm:px-4";
 // Every button in the project is a full pill.
@@ -39,9 +39,9 @@ export function CheckoutModal({ open, onClose, planIndex }: { open: boolean; onC
   return (
     <AnimatePresence>
       {open && (
-        <motion.div className="fixed inset-0 z-[60] flex items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+        <motion.div className="fixed inset-0 z-[60] flex items-center justify-center p-0 sm:p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
           <div className="absolute inset-0 bg-ink/60 backdrop-blur-sm" onClick={onClose} />
-          <motion.div id="checkout-modal" initial={{ opacity: 0, y: 24, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.98 }} transition={{ duration: 0.35, ease: EASE_OUT }} className="relative max-h-[92vh] w-full max-w-md overflow-y-auto rounded-tile bg-white p-5 shadow-lift sm:p-7">
+          <motion.div id="checkout-modal" initial={{ opacity: 0, y: 24, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.98 }} transition={{ duration: 0.35, ease: EASE_OUT }} className="relative max-h-[100dvh] w-full max-w-none overflow-y-auto rounded-none bg-white px-4 py-5 shadow-lift sm:max-h-[92vh] sm:max-w-md sm:rounded-tile sm:p-7">
             <button onClick={onClose} aria-label="Close" className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full bg-accent-soft text-accent transition-colors hover:text-accent-dark sm:h-9 sm:w-9"><X size={18} /></button>
             {done ? (
               <div className="flex flex-col items-center py-6 text-center">
@@ -52,7 +52,7 @@ export function CheckoutModal({ open, onClose, planIndex }: { open: boolean; onC
               </div>
             ) : (
               <>
-                <h3 className="px-12 text-center font-display text-2xl font-bold text-ink sm:px-0">{c.title}</h3>
+                <h3 className="pr-12 text-left font-display text-xl font-bold text-ink sm:pr-0 sm:text-center sm:text-2xl">{c.title}</h3>
                 <p className="mt-5 text-xs font-medium text-muted">{c.summaryLabel}</p>
                 <div className="mt-2 space-y-1.5">
                   {c.summary.map((row) => <Row key={row.label} label={row.label} value={fill(row.value)} />)}
@@ -76,7 +76,7 @@ export function CheckoutModal({ open, onClose, planIndex }: { open: boolean; onC
                 <div className="my-4 flex items-center gap-3 text-[11px] text-muted"><span className="h-px flex-1 bg-border" />or pay with card<span className="h-px flex-1 bg-border" /></div>
                 <div className="space-y-3">
                   <div className="relative">
-                    <input value={card} onChange={(e) => setCard(e.target.value)} inputMode="numeric" placeholder={c.cardPlaceholder} className={`${field} pr-[8.5rem] sm:pr-32`} />
+                    <input value={card} onChange={(e) => setCard(e.target.value)} inputMode="numeric" placeholder={c.cardPlaceholder} className={`${field} pr-[8.75rem] sm:pr-32`} />
                     <span className="pointer-events-none absolute right-2 top-1/2 flex -translate-y-1/2 items-center gap-1 sm:right-3.5 sm:gap-1.5">
                       {CARD_BRANDS.map((b) => <img key={b.alt} src={b.src} alt={b.alt} className={`${b.h} w-auto`} />)}
                     </span>
@@ -90,7 +90,7 @@ export function CheckoutModal({ open, onClose, planIndex }: { open: boolean; onC
                   </div>
                 </div>
                 <button onClick={() => setDone(true)} className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-sm font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20 transition-[filter] hover:brightness-[1.05]">{c.continue} <ArrowRight size={16} /></button>
-                <div className="mt-5 flex flex-col items-center gap-3"><span className="inline-flex items-center gap-1.5 text-[11px] text-muted"><Lock size={12} /> {subscribe.safeCheckout}</span><PaymentRow /></div>
+                <div className="mt-5 flex flex-col items-center gap-3"><span className="inline-flex items-center gap-1.5 text-[11px] text-muted"><Lock size={12} /> {subscribe.safeCheckout}</span><PaymentMarks variant="grid" /></div>
                 <p className="mt-4 text-center text-[11px] leading-relaxed text-muted">
                   {c.termsPre}{" "}
                   {c.termsLinks.map((l, i) => (

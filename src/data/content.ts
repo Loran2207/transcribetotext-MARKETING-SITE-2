@@ -114,7 +114,7 @@ export const languages = {
 export const pricing = {
   title: "Pricing",
   premium: {
-    badge: "Premium Plan, Unlock Full AI Transcription Power",
+    badge: "Premium Plan - Unlock Full AI Transcription Power",
     price: "From $14.99/month",
     note: "Cancel anytime",
     features: [
@@ -123,7 +123,7 @@ export const pricing = {
       { title: "Advanced AI Features", body: "Translate into 117+ languages, bulk exports, speaker recognition and more." },
       { title: "Priority Processing", body: "Get lightning-fast transcriptions, always at the front of the queue." },
     ],
-    cta: "Upgrade to Premium, start now",
+    cta: "Upgrade to Premium - start now",
   },
   free: {
     name: "Free Plan",
@@ -134,7 +134,7 @@ export const pricing = {
       { title: "100% Free Access", body: "Try AI transcription with basic limits." },
       { title: "Slower Processing", body: "Free users have lower priority, so transcription may take longer." },
     ],
-    cta: "Try for free, start transcription",
+    cta: "Try for free - start transcription",
   },
 };
 

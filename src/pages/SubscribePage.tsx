@@ -21,7 +21,7 @@ export function SubscribePage() {
       <CountdownBar onGetPlan={() => setOpen(true)} />
       <div className="relative z-10 overflow-hidden">
         <div className="mx-auto w-full max-w-5xl px-4 pt-8 sm:px-6 md:pt-10">
-          <div className="flex items-center justify-center">
+          <div className="hidden items-center justify-center md:flex">
             <Logo />
           </div>
           <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="mt-8 flex flex-col items-center text-center md:mt-12">

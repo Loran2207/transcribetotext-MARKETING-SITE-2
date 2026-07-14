@@ -48,7 +48,7 @@ export function Pricing() {
                 <Flame size={16} />
                 <span>{p.badge}</span>
               </p>
-              <p className="relative mt-3 font-display text-4xl font-extrabold tracking-tight md:text-5xl">{p.price}</p>
+              <p className="relative mt-3 font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-[42px]">{p.price}</p>
               <p className="relative mt-3 text-sm font-medium text-white/85">{p.note}</p>
             </div>
             <div className="flex-1 space-y-6 p-6 md:space-y-7 md:p-8">

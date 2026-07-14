@@ -1,5 +1,4 @@
-// Recognizable payment-brand marks as inline SVG / styled chips. Brand casing kept
-// as each brand's own mark (Visa, Amex, PayPal, stripe), Google uses its 4-color G.
+// Recognizable payment-brand marks. Real vector logos in their own colors.
 
 export function GoogleG({ size = 18 }: { size?: number }) {
   return (
@@ -12,7 +11,7 @@ export function GoogleG({ size = 18 }: { size?: number }) {
   );
 }
 
-const chip = "inline-flex h-9 shrink-0 items-center rounded-lg border border-border bg-white px-2.5 shadow-soft sm:px-3";
+const chip = "inline-flex h-9 w-full items-center justify-center rounded-lg border border-border bg-white px-3 shadow-soft sm:w-auto";
 
 const MARKS = [
   { name: "Visa", src: "/brand/pay/visa.svg", h: "h-3.5" },
@@ -23,10 +22,16 @@ const MARKS = [
   { name: "PayPal", src: "/brand/pay/paypal.svg", h: "h-4.5" },
 ];
 
-// Real brand logos (vector, original colors), left-aligned per the mockup.
-export function PaymentRow() {
+// "row": the paywall's bottom block, left-aligned as in the design.
+// "grid": inside the checkout dialog, where six marks must land as two tidy
+// centered rows of three instead of a five-plus-one orphan.
+export function PaymentMarks({ variant = "row" }: { variant?: "row" | "grid" }) {
+  const wrap =
+    variant === "grid"
+      ? "grid w-full grid-cols-3 place-items-center gap-2"
+      : "flex flex-wrap items-center gap-2";
   return (
-    <div className="flex max-w-full flex-wrap items-center justify-start gap-1.5 sm:gap-2">
+    <div className={wrap}>
       {MARKS.map((m) => (
         <span key={m.name} className={chip} title={m.name}>
           <img src={m.src} alt={m.name} className={m.h + " w-auto"} />
@@ -36,10 +41,7 @@ export function PaymentRow() {
   );
 }
 
-export function StripeBadge() {
-  return (
-    <span className="inline-flex items-center gap-1.5 rounded-md bg-surface-soft px-2.5 py-1 text-[11px] font-medium text-muted">
-      Powered by <span className="font-bold italic tracking-tight text-[#635BFF]">stripe</span>
-    </span>
-  );
+// Back-compat name used by the paywall bottom block.
+export function PaymentRow() {
+  return <PaymentMarks variant="row" />;
 }

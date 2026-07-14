@@ -204,12 +204,6 @@ export function Nav() {
           <span className="hidden sm:block">
             <Button href="/subscribe" size="md">{nav.cta}</Button>
           </span>
-          <span className="block sm:hidden">
-            <Button href="/subscribe" size="md">
-              <span className="sr-only">{nav.cta}</span>
-              <ArrowRight size={16} />
-            </Button>
-          </span>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
