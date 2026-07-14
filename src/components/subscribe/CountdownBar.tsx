@@ -42,7 +42,7 @@ export function CountdownBar({ onGetPlan }: { onGetPlan: () => void }) {
 
       {/* Desktop: the discount block sits in the middle, the spacer column keeps it
           optically centered, Skip stays a text link away from Get my plan. */}
-      <div className="mx-auto hidden max-w-[1100px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-6 py-2.5 lg:grid">
+      <div className="hidden w-full grid-cols-[1fr_auto_1fr] items-center gap-4 px-6 py-2.5 lg:grid">
         <span aria-hidden="true" />
         <div className="flex items-center justify-center gap-5">
           <div className="text-center">
@@ -55,10 +55,9 @@ export function CountdownBar({ onGetPlan }: { onGetPlan: () => void }) {
             <p className="font-mono text-sm font-semibold tabular-nums text-accent">{fmt(left)}</p>
           </div>
         </div>
-        <div className="flex items-center justify-end gap-4">
+        <div className="flex items-center justify-end gap-6">
           <button onClick={onGetPlan} className={`${cta} px-5 py-2.5 text-sm`}>{subscribe.cta}</button>
-          <span aria-hidden="true" className="h-6 w-px bg-border" />
-          <Link to="/" className="shrink-0 pl-1 text-sm font-medium text-muted transition-colors hover:text-ink">{subscribe.skip}</Link>
+          <Link to="/" className="shrink-0 text-sm font-medium text-muted transition-colors hover:text-ink">{subscribe.skip}</Link>
         </div>
       </div>
     </div>

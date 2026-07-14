@@ -11,7 +11,7 @@ export function GoogleG({ size = 18 }: { size?: number }) {
   );
 }
 
-const chip = "inline-flex h-9 w-full items-center justify-center rounded-lg border border-border bg-white px-3 shadow-soft sm:w-auto";
+const CHIP = "inline-flex h-9 items-center justify-center rounded-lg border border-border bg-white px-3 shadow-soft";
 
 const MARKS = [
   { name: "Visa", src: "/brand/pay/visa.svg", h: "h-3.5" },
@@ -22,14 +22,15 @@ const MARKS = [
   { name: "PayPal", src: "/brand/pay/paypal.svg", h: "h-4.5" },
 ];
 
-// "row": the paywall's bottom block, left-aligned as in the design.
-// "grid": inside the checkout dialog, where six marks must land as two tidy
-// centered rows of three instead of a five-plus-one orphan.
+// Six marks never wrap into a tidy row on a phone, so they land as two rows of
+// three. "grid" keeps that shape everywhere (the checkout dialog is narrow at any
+// width); "row" returns to the left-aligned row from the tablet up.
 export function PaymentMarks({ variant = "row" }: { variant?: "row" | "grid" }) {
   const wrap =
     variant === "grid"
-      ? "grid w-full grid-cols-3 place-items-center gap-2"
-      : "flex flex-wrap items-center gap-2";
+      ? "grid w-full grid-cols-3 gap-2"
+      : "grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:items-center";
+  const chip = variant === "grid" ? `${CHIP} w-full` : `${CHIP} w-full sm:w-auto`;
   return (
     <div className={wrap}>
       {MARKS.map((m) => (
@@ -41,7 +42,6 @@ export function PaymentMarks({ variant = "row" }: { variant?: "row" | "grid" }) 
   );
 }
 
-// Back-compat name used by the paywall bottom block.
 export function PaymentRow() {
   return <PaymentMarks variant="row" />;
 }

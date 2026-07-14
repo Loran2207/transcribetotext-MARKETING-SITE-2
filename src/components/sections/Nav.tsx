@@ -86,9 +86,9 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.24, ease: EASE_OUT }}
-      className="fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col overflow-y-auto border-t border-border bg-white px-6 pb-8 pt-2 shadow-lift lg:hidden"
+      className="fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col overflow-hidden border-t border-border bg-white shadow-lift lg:hidden"
     >
-      <ul className="flex flex-col divide-y divide-border">
+      <ul className="flex flex-1 flex-col divide-y divide-border overflow-y-auto px-6 pb-4 pt-2">
         {nav.links.map((l) =>
           l.label === "Features" ? (
             <li key={l.href}>
@@ -146,8 +146,8 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
           )
         )}
       </ul>
-      <div className="mt-auto pt-6">
-        <Button href="/subscribe" size="md" className="w-full">{nav.cta}</Button>
+      <div className="shrink-0 border-t border-border bg-white px-6 pb-6 pt-4">
+        <Button href="/subscribe" size="lg" className="w-full">{nav.cta}</Button>
       </div>
     </motion.div>
   );
