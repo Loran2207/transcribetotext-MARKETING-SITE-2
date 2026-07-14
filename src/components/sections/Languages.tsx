@@ -4,7 +4,6 @@ import { ArrowRight, ChevronDown, Globe } from "lucide-react";
 import { Section } from "../primitives/Section";
 import { SectionHeading } from "../primitives/SectionHeading";
 import { Button } from "../primitives/Button";
-import { GoogleG } from "../subscribe/PaymentMarks";
 import { languages } from "../../data/content";
 import { brand } from "../../data/assets";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
@@ -20,18 +19,18 @@ export function Languages() {
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="mx-auto mt-12 grid max-w-6xl grid-cols-4 gap-5"
+        className="mx-auto mt-8 grid max-w-6xl grid-cols-2 gap-3 sm:gap-4 md:mt-10 md:grid-cols-3 lg:mt-12 lg:grid-cols-4 lg:gap-5"
       >
         <AnimatePresence initial={false}>
         {list.map((name) => (
           <motion.div key={name} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <a
               href="#languages"
-              className="group flex items-center gap-3.5 rounded-2xl border border-border bg-white px-5 py-4 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
+              className="group flex items-center gap-2 rounded-2xl border border-border bg-white px-3 py-3 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card sm:gap-3 sm:px-4 sm:py-3.5 lg:gap-3.5 lg:px-5 lg:py-4"
             >
-              <img src={brand.langFlags[name]} alt={`${name} flag`} loading="lazy" className="size-10 rounded-full" />
-              <span className="flex-1 font-semibold text-ink">{name}</span>
-              <ArrowRight size={16} className="text-muted transition group-hover:translate-x-0.5 group-hover:text-accent" />
+              <img src={brand.langFlags[name]} alt={`${name} flag`} loading="lazy" className="size-8 shrink-0 rounded-full sm:size-9 lg:size-10" />
+              <span className="flex-1 font-semibold text-ink max-sm:text-sm">{name}</span>
+              <ArrowRight size={16} className="text-muted transition group-hover:translate-x-0.5 group-hover:text-accent max-sm:hidden" />
             </a>
           </motion.div>
         ))}
@@ -42,15 +41,14 @@ export function Languages() {
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="mt-10 flex flex-col items-center"
+        className="mt-8 flex flex-col items-center lg:mt-10"
       >
-        <button type="button" onClick={() => setShowAll((v) => !v)} className="inline-flex items-center gap-2 font-medium text-accent transition hover:text-accent/80">
+        <button type="button" onClick={() => setShowAll((v) => !v)} className="inline-flex items-center gap-2 font-medium text-accent transition hover:text-accent/80 max-lg:min-h-11 max-lg:px-2">
           <Globe size={16} />
           {showAll ? languages.seeFewer : languages.seeAll}
           <ChevronDown size={16} className={showAll ? "rotate-180 transition-transform" : "transition-transform"} />
         </button>
         <Button href="/subscribe" size="lg" className="mt-6">
-          <span className="flex size-6 items-center justify-center rounded-full bg-white"><GoogleG size={14} /></span>
           {languages.cta}
         </Button>
       </motion.div>

@@ -12,7 +12,7 @@ export function GoogleG({ size = 18 }: { size?: number }) {
   );
 }
 
-const chip = "inline-flex h-9 items-center rounded-lg border border-border bg-white px-3 shadow-soft";
+const chip = "inline-flex h-9 shrink-0 items-center rounded-lg border border-border bg-white px-2.5 shadow-soft sm:px-3";
 
 const MARKS = [
   { name: "Visa", src: "/brand/pay/visa.svg", h: "h-3.5" },
@@ -26,7 +26,7 @@ const MARKS = [
 // Real brand logos (vector, original colors), left-aligned per the mockup.
 export function PaymentRow() {
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <div className="flex max-w-full flex-wrap items-center justify-start gap-1.5 sm:gap-2">
       {MARKS.map((m) => (
         <span key={m.name} className={chip} title={m.name}>
           <img src={m.src} alt={m.name} className={m.h + " w-auto"} />

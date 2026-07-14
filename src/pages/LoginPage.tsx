@@ -39,15 +39,18 @@ export function LoginPage() {
   return (
     <div className="flex min-h-screen flex-col bg-canvas">
       <Nav />
-      <main className="flex flex-1 flex-col items-center px-4 pb-20 pt-28">
+      <main className="flex flex-1 flex-col items-center px-5 pb-16 pt-24 md:px-4 md:pb-20 md:pt-28">
         <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="flex w-full max-w-[460px] flex-col items-center">
-          <motion.div variants={fadeUp} className="inline-flex h-10 items-center justify-center rounded-xl bg-[oklch(0.967_0.001_286.375)] p-[3px]">
+          <motion.div
+            variants={fadeUp}
+            className="flex h-11 w-full max-w-[400px] items-center justify-center rounded-xl bg-[oklch(0.967_0.001_286.375)] p-[3px] md:inline-flex md:h-10 md:w-auto md:max-w-none"
+          >
             {(["signin", "signup"] as const).map((m) => (
               <button
                 key={m}
                 type="button"
                 onClick={() => setMode(m)}
-                className={`inline-flex h-[calc(100%-1px)] items-center justify-center rounded-xl border border-transparent px-6 text-sm font-medium transition-[color,box-shadow] ${
+                className={`inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center rounded-xl border border-transparent px-6 text-sm font-medium transition-[color,box-shadow] md:flex-initial ${
                   mode === m ? "bg-white text-foreground shadow-[0_1px_2px_rgba(16,24,40,0.08)]" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -55,12 +58,12 @@ export function LoginPage() {
               </button>
             ))}
           </motion.div>
-          <motion.div variants={fadeUp} className="mt-10 w-full max-w-[400px]">
+          <motion.div variants={fadeUp} className="mt-8 w-full max-w-[400px] md:mt-10">
             <h1 className="text-center text-2xl font-semibold text-foreground">{copy.title}</h1>
             <p className="mt-2 text-center text-sm text-muted-foreground">{copy.subtitle}</p>
             <div className="mt-6 flex flex-col gap-3">
-              <AppButton variant="pill-dark" size="lg" className="w-full"><GoogleMark /> {login.google}</AppButton>
-              <AppButton variant="pill-dark" size="lg" className="w-full"><MicrosoftMark /> {login.microsoft}</AppButton>
+              <AppButton variant="pill-dark" size="lg" className="w-full min-h-11 lg:min-h-10"><GoogleMark /> {login.google}</AppButton>
+              <AppButton variant="pill-dark" size="lg" className="w-full min-h-11 lg:min-h-10"><MicrosoftMark /> {login.microsoft}</AppButton>
             </div>
             <div className="my-5 flex items-center gap-3">
               <div className="h-px flex-1 bg-border" />
@@ -70,29 +73,29 @@ export function LoginPage() {
             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
                 <AppLabel htmlFor="email">{login.email.label}</AppLabel>
-                <AppInput id="email" type="email" placeholder={login.email.placeholder} autoComplete="email" />
+                <AppInput id="email" type="email" placeholder={login.email.placeholder} autoComplete="email" className="min-h-11 lg:min-h-9" />
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
                   <AppLabel htmlFor="password">{login.password.label}</AppLabel>
                   {mode === "signin" ? (
-                    <button type="button" className="text-xs text-primary hover:underline">{login.signin.forgot}</button>
+                    <button type="button" className="-my-3.5 py-3.5 text-xs text-primary hover:underline lg:my-0 lg:py-0">{login.signin.forgot}</button>
                   ) : null}
                 </div>
                 <div className="relative">
-                  <AppInput id="password" type={showPassword ? "text" : "password"} placeholder={login.password.placeholder} autoComplete="current-password" className="pr-10" />
+                  <AppInput id="password" type={showPassword ? "text" : "password"} placeholder={login.password.placeholder} autoComplete="current-password" className="min-h-11 pr-10 lg:min-h-9" />
                   <button
                     type="button"
                     onClick={() => setShowPassword((v) => !v)}
                     tabIndex={-1}
                     aria-label={showPassword ? "Hide password" : "Show password"}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
+                    className="absolute right-3 top-1/2 -mr-3 flex size-11 -translate-y-1/2 items-center justify-center text-muted-foreground transition-colors hover:text-foreground lg:mr-0 lg:inline-block lg:size-auto"
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
                 </div>
               </div>
-              <AppButton type="submit" size="lg" className="w-full">{copy.submit}</AppButton>
+              <AppButton type="submit" size="lg" className="w-full min-h-11 lg:min-h-10">{copy.submit}</AppButton>
             </form>
             <p className="mt-5 text-center text-xs leading-relaxed text-muted-foreground">
               {login.terms.prefix}{" "}
@@ -105,14 +108,14 @@ export function LoginPage() {
             </p>
             <p className="mt-2 text-center text-xs text-muted-foreground">
               {login.help.prefix}{" "}
-              <a href={`mailto:${login.help.email}`} className="text-primary hover:underline">{login.help.email}</a>
+              <a href={`mailto:${login.help.email}`} className="break-words text-primary hover:underline">{login.help.email}</a>
             </p>
             <p className="mt-4 text-center text-sm text-muted-foreground">
               {copy.switchPrompt}{" "}
               <button
                 type="button"
                 onClick={() => setMode(mode === "signup" ? "signin" : "signup")}
-                className="font-medium text-primary hover:underline"
+                className="-my-2 py-2 font-medium text-primary hover:underline lg:my-0 lg:py-0"
               >
                 {copy.switchAction}
               </button>
@@ -120,8 +123,8 @@ export function LoginPage() {
           </motion.div>
         </motion.div>
       </main>
-      <footer className="border-t border-border bg-tint-sky py-5">
-        <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-6 px-6 md:px-10">
+      <footer className="border-t border-border bg-tint-sky py-6 md:py-5">
+        <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-3 px-5 text-center md:flex-row md:justify-between md:gap-6 md:px-10 md:text-left">
           <img src={brand.logo} alt="TranscribeToText.AI" className="h-6 w-auto" />
           <p className="text-sm text-ink-2">{footer.copyright}</p>
           <p className="text-xs text-muted">{footer.companyDetails}</p>

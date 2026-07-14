@@ -6,9 +6,10 @@ import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
 // Mirrors the original app paywall cards (app.transcribetotext.ai/subscribe):
 // white cards, radio top-right, popular card gets a full-width blue header band,
 // selected card gets the accent border. Restyled with our tokens.
+// Below lg the three cards stack: at 768 a 3-up row squeezes the $0.85 price line.
 export function PlanCards({ selected, onSelect }: { selected: number; onSelect: (i: number) => void }) {
   return (
-    <motion.div variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-12 grid grid-cols-3 items-stretch gap-5">
+    <motion.div variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-12 grid grid-cols-1 items-stretch gap-4 lg:grid-cols-3 lg:gap-5">
       {subscribe.plans.map((p, i) => {
         const on = i === selected;
         return (
@@ -26,9 +27,10 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
                 Most popular
               </span>
             ) : (
-              <span aria-hidden="true" className="block w-full py-1.5 text-xs">&nbsp;</span>
+              // Only needed to align the card headers when they sit side by side.
+              <span aria-hidden="true" className="hidden w-full py-1.5 text-xs lg:block">&nbsp;</span>
             )}
-            <div className="flex flex-1 flex-col p-7 pt-4">
+            <div className="flex flex-1 flex-col p-5 pt-4 lg:p-7 lg:pt-4">
               <div className="flex items-start justify-between">
                 <p className="text-xl font-semibold tracking-tight text-ink">{p.name}</p>
                 <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-full border-2 transition-colors ${on ? "border-accent bg-accent text-white" : "border-border text-transparent"}`}><Check size={13} strokeWidth={3} /></span>
@@ -37,12 +39,11 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
                 <p className="text-sm text-muted"><span className="line-through">{p.was}</span> <span className="font-semibold text-ink">{p.now}</span></p>
                 <span className="rounded-full bg-deal px-2 py-0.5 text-[10px] font-semibold text-white">50% off</span>
               </div>
-              <div className="mt-6 flex items-end gap-1.5 border-t border-border/70 pt-6">
+              <div className="mt-5 flex flex-wrap items-end gap-1.5 border-t border-border/70 pt-5 lg:mt-6 lg:pt-6">
                 <span className="mb-1.5 text-sm text-muted line-through">{p.perDayWas}</span>
                 <span className="font-display text-[42px] font-semibold leading-none tracking-tight text-ink">{p.perDay}</span>
                 <span className="mb-1.5 text-sm text-muted">per day</span>
               </div>
-              <p className="mt-3 text-xs text-muted">Billed as {p.now}, cancel anytime</p>
             </div>
           </motion.button>
         );

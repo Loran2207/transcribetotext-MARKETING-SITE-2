@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { CountdownBar } from "../components/subscribe/CountdownBar";
 import { PromoCode } from "../components/subscribe/PromoCode";
 import { PlanCards } from "../components/subscribe/PlanCards";
@@ -21,13 +20,12 @@ export function SubscribePage() {
     <div className="relative min-h-screen bg-canvas">
       <CountdownBar onGetPlan={() => setOpen(true)} />
       <div className="relative z-10 overflow-hidden">
-        <div className="mx-auto w-full max-w-5xl px-4 pt-10 sm:px-6">
-          <div className="flex items-center justify-between">
+        <div className="mx-auto w-full max-w-5xl px-4 pt-8 sm:px-6 md:pt-10">
+          <div className="flex items-center justify-center">
             <Logo />
-            <Link to="/" className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-2 transition-colors hover:text-ink"><ArrowLeft size={15} /> Back to site</Link>
           </div>
-          <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="mt-12 flex flex-col items-center text-center">
-            <motion.h1 variants={fadeUp} className="text-balance font-display text-4xl font-semibold tracking-[-0.025em] text-ink sm:text-5xl">{subscribe.heading}</motion.h1>
+          <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="mt-8 flex flex-col items-center text-center md:mt-12">
+            <motion.h1 variants={fadeUp} className="text-balance font-display text-3xl font-semibold tracking-[-0.025em] text-ink md:text-4xl lg:text-5xl">{subscribe.heading}</motion.h1>
           </motion.div>
           <PromoCode />
           <PlanCards selected={selected} onSelect={setSelected} />
@@ -43,16 +41,17 @@ export function SubscribePage() {
           </p>
           <Guarantee />
           <Benefits />
-          <div className="h-16" />
+          <div className="h-10 md:h-16" />
         </div>
       </div>
       <DarkFeedback />
       <div className="bg-canvas">
-        <div className="mx-auto w-full max-w-5xl px-4 pb-40 pt-2 sm:px-6">
+        {/* pb clears the fixed Continue bar (h-14 button + py-4 = 89px tall). */}
+        <div className="mx-auto w-full max-w-5xl px-4 pb-32 pt-2 sm:px-6 md:pb-40">
           <SafeCheckout />
         </div>
       </div>
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 px-4 py-4 backdrop-blur" style={{ boxShadow: "0 -10px 34px rgba(16,24,40,.10)" }}>
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 px-4 py-3 backdrop-blur md:py-4" style={{ boxShadow: "0 -10px 34px rgba(16,24,40,.10)" }}>
         <div className="flex justify-center">
           <motion.button
             onClick={() => setOpen(true)}

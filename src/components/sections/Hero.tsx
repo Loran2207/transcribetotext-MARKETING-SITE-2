@@ -8,15 +8,15 @@ import { fadeUp, stagger } from "../../lib/motion";
 export function Hero() {
   const reduceMotion = useReducedMotion();
   return (
-    <section id="top" className="relative overflow-hidden bg-canvas pt-[120px] pb-16">
+    <section id="top" className="relative overflow-hidden bg-canvas pt-28 pb-12 md:pt-[120px] md:pb-16">
       <div className="relative mx-auto w-full max-w-[1200px] px-6 md:px-10">
-        <motion.div variants={stagger(0.1)} initial="hidden" animate="show" className="grid items-center gap-12 lg:grid-cols-2">
-          <div>
+        <motion.div variants={stagger(0.1)} initial="hidden" animate="show" className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+          <div className="text-center lg:text-left">
             <motion.h1 variants={fadeUp} className="font-display tracking-tight">
-              <span className="block whitespace-nowrap text-[54px] font-extrabold leading-none text-accent">{hero.titleAccent}</span>
-              <span className="mt-3 block text-3xl font-bold text-ink">{hero.titleRest}</span>
+              <span className="block text-3xl font-extrabold leading-none text-accent md:text-4xl lg:whitespace-nowrap lg:text-[54px]">{hero.titleAccent}</span>
+              <span className="mt-3 block text-xl font-bold text-ink md:text-2xl lg:text-3xl">{hero.titleRest}</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="mt-5 max-w-md text-pretty text-lg leading-relaxed text-ink-2">
+            <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-md text-pretty text-base leading-relaxed text-ink-2 md:text-lg lg:mx-0 lg:mt-5">
               {hero.subtitle}
             </motion.p>
             <motion.div variants={fadeUp} className="mt-8">

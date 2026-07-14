@@ -27,7 +27,7 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className={`relative py-20 md:py-28 ${toneClass[tone]} ${className}`}>
+    <section id={id} className={`relative py-14 sm:py-20 md:py-28 ${toneClass[tone]} ${className}`}>
       {cutout ? <SectionCutout fill={cutout} /> : null}
       <Container className={containerClassName}>{children}</Container>
     </section>

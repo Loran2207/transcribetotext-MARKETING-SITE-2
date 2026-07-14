@@ -113,21 +113,17 @@ export const languages = {
 
 export const pricing = {
   title: "Pricing",
-  toggle: { monthly: "Billed monthly", yearly: "Billed yearly", save: "Save 50%" },
   premium: {
     badge: "Premium Plan, Unlock Full AI Transcription Power",
-    yearlyPrice: "Only $9.99/month",
-    monthlyPrice: "$19.99/month",
-    yearlyNote: "Billed yearly",
-    monthlyNote: "Billed monthly",
+    price: "From $14.99/month",
+    note: "Cancel anytime",
     features: [
       { title: "Unlimited Transcriptions", body: "No daily limits, transcribe as much as you need." },
       { title: "Extended File Uploads", body: "Upload files up to 10 hours or 5GB and process 20 files at once." },
       { title: "Advanced AI Features", body: "Translate into 117+ languages, bulk exports, speaker recognition and more." },
       { title: "Priority Processing", body: "Get lightning-fast transcriptions, always at the front of the queue." },
     ],
-    ctaYearly: "Upgrade to Premium, start now",
-    ctaMonthly: "Start transcription",
+    cta: "Upgrade to Premium, start now",
   },
   free: {
     name: "Free Plan",
@@ -219,13 +215,20 @@ export const footer = {
 export const transcriptionServices = {
   title: "Our Transcription Services",
   autoMs: 6000,
+  // Heading renders on one line, the trailing word in accent blue (like the live site).
+  // desc is a run of segments; b: true marks the phrases the live site sets in bold.
   tabs: [
     {
       key: "audio",
       tab: "Audio to Text",
       lead: "Audio to",
       accent: "Text",
-      desc: "Upload any audio file, interviews, lectures, podcasts, and get instant, accurate transcripts powered by AI.",
+      desc: [
+        { t: "Upload any audio file", b: true },
+        { t: ", interviews, lectures, podcasts, and get instant, accurate transcripts " },
+        { t: "powered by AI", b: true },
+        { t: "." },
+      ],
       cta: "Start transcribing audio",
     },
     {
@@ -233,7 +236,11 @@ export const transcriptionServices = {
       tab: "Video to Text",
       lead: "Video to",
       accent: "Text",
-      desc: "Transcribe videos with audio in 125+ languages. Extract subtitles or full transcripts while preserving clarity and speaker separation.",
+      desc: [
+        { t: "Transcribe videos with audio in " },
+        { t: "125+ languages. Extract subtitles or full transcripts", b: true },
+        { t: " while preserving clarity and speaker separation." },
+      ],
       cta: "Start transcribing video",
     },
     {
@@ -241,7 +248,13 @@ export const transcriptionServices = {
       tab: "Meeting Transcription",
       lead: "Meeting",
       accent: "Transcription",
-      desc: "Record and transcribe meetings from Zoom, Google Meet, and Teams. Capture every word and generate accurate summaries automatically.",
+      desc: [
+        { t: "Record and transcribe meetings from " },
+        { t: "Zoom, Google Meet, and Teams.", b: true },
+        { t: " Capture every word and generate " },
+        { t: "accurate summaries automatically", b: true },
+        { t: "." },
+      ],
       cta: "Start transcribing meeting",
     },
     {
@@ -249,7 +262,13 @@ export const transcriptionServices = {
       tab: "Cloud File Transcription",
       lead: "Cloud File",
       accent: "Transcription",
-      desc: "Connect Google Drive, Dropbox, or OneDrive and transcribe audio or video directly from the cloud, no uploads needed.",
+      desc: [
+        { t: "Connect " },
+        { t: "Google Drive, Dropbox, or OneDrive", b: true },
+        { t: " and transcribe audio or video directly from the cloud, " },
+        { t: "no uploads needed", b: true },
+        { t: "." },
+      ],
       cta: "Transcribe cloud file",
     },
   ],

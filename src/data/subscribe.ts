@@ -8,7 +8,7 @@ export const subscribe = {
   cta: "Get my plan",
   heading: "Choose your plan",
   subheading: "Unlock unlimited, high-accuracy transcription. Cancel anytime.",
-  promo: { label: "Your promo code applied", code: "welcome50" },
+  promo: { label: "Your promo code is applied", code: "welcome50", discount: "50% off" },
   legal: {
     pre: "By clicking Get my plan or Continue, I agree to the",
     links: ["Terms of Service", "Privacy Policy", "Subscription Policy"],
@@ -16,8 +16,8 @@ export const subscribe = {
   },
   plans: [
     { key: "week", name: "1-Week Trial", was: "$13.99", now: "$5.99", perDayWas: "$1.99", perDay: "$0.85", popular: false },
-    { key: "month", name: "1-Month Plan", was: "$13.99", now: "$5.99", perDayWas: "$1.99", perDay: "$0.85", popular: true },
-    { key: "quarter", name: "3-Month Plan", was: "$54.99", now: "$6.99", perDayWas: "$0.61", perDay: "$0.31", popular: false },
+    { key: "month", name: "1-Month Plan", was: "$29.99", now: "$14.99", perDayWas: "$0.99", perDay: "$0.49", popular: true },
+    { key: "quarter", name: "3-Month Plan", was: "$54.99", now: "$27.99", perDayWas: "$0.61", perDay: "$0.31", popular: false },
   ],
   guarantee: {
     title: "30-day money-back guarantee",

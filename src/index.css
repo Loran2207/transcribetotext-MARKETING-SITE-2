@@ -107,18 +107,6 @@
 @keyframes tabProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 
-/* Desktop lock (temporary): freeze all breakpoints to 0 so the desktop layout is
-   used at every viewport width. This hides the tablet/phone adaptives even when a
-   desktop browser window is narrowed (the meta viewport width=1280 only covers real
-   devices). To re-enable adaptives later, delete this @theme block. */
-@theme {
-  --breakpoint-sm: 0rem;
-  --breakpoint-md: 0rem;
-  --breakpoint-lg: 0rem;
-  --breakpoint-xl: 0rem;
-  --breakpoint-2xl: 0rem;
-}
-
 /* App design-system tokens (ported from transcribe2text src/styles/theme.css)
    for the /login page, which renders the SYSTEM components, not the site ones. */
 @theme {

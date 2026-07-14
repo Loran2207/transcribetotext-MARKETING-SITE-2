@@ -20,14 +20,14 @@ export function TranscriptionServices() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden bg-white py-20"
+      className="relative overflow-hidden bg-white py-14 md:py-20"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       <Container>
         <SectionHeading title={S.title} />
 
-        <motion.div variants={stagger(0.06)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-10 flex gap-3">
+        <motion.div variants={stagger(0.06)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-8 grid grid-cols-2 gap-3 lg:mt-10 lg:flex">
           {S.tabs.map((tab, i) => {
             const Icon = ICONS[i];
             const on = i === active;
@@ -38,10 +38,10 @@ export function TranscriptionServices() {
                 variants={fadeUp}
                 aria-pressed={on}
                 onClick={() => setActive(i)}
-                className={`relative flex h-16 flex-1 items-center justify-center gap-2.5 overflow-hidden rounded-2xl border font-medium transition ${on ? "border-accent bg-white text-accent shadow-soft" : "border-transparent bg-surface-soft text-ink-2 hover:text-ink"}`}
+                className={`relative flex min-h-16 flex-1 items-center justify-center gap-2 overflow-hidden rounded-2xl border px-3 py-2 text-sm font-medium transition lg:h-16 lg:gap-2.5 lg:p-0 lg:text-base ${on ? "border-accent bg-white text-accent shadow-soft" : "border-transparent bg-surface-soft text-ink-2 hover:text-ink"}`}
               >
                 <Icon size={18} className="shrink-0" />
-                <span className="leading-tight">{tab.tab}</span>
+                <span className="text-center leading-tight">{tab.tab}</span>
                 <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 bg-accent/10" />
                 {on && !reduce && (
                   <span
@@ -57,7 +57,7 @@ export function TranscriptionServices() {
           })}
         </motion.div>
 
-        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-12 grid min-h-[440px] items-center gap-14 lg:grid-cols-2">
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-10 grid items-center gap-10 lg:mt-12 lg:min-h-[440px] lg:gap-14 lg:grid-cols-2">
           <div className="relative">
             <AnimatePresence mode="wait">
               <motion.div
@@ -67,12 +67,24 @@ export function TranscriptionServices() {
                 exit={{ opacity: 0, x: reduce ? 0 : 20, filter: reduce ? "blur(0px)" : "blur(6px)" }}
                 transition={{ duration: 0.45, ease: EASE_OUT }}
               >
-                <h3 className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight">
-                  <span className="block text-ink">{t.lead}</span>
-                  <span className="block text-accent">{t.accent}</span>
+                {/* One line, trailing word in accent (like the live site). The reserved
+                    height keeps the block still when a heading wraps to two lines. */}
+                <h3 className="flex min-h-[68px] items-start font-display text-3xl font-extrabold leading-[1.08] tracking-tight md:text-4xl lg:min-h-[108px] lg:text-5xl">
+                  <span className="text-balance">
+                    <span className="text-ink">{t.lead}</span>{" "}
+                    <span className="text-accent">{t.accent}</span>
+                  </span>
                 </h3>
-                <p className="mt-6 max-w-md text-pretty text-lg leading-relaxed text-ink-2">{t.desc}</p>
-                <Button size="lg" href="/subscribe" className="mt-8">
+                <p className="mt-4 min-h-[104px] max-w-md text-pretty text-base leading-relaxed text-ink-2 md:text-lg lg:min-h-[112px]">
+                  {t.desc.map((part, i) =>
+                    part.b ? (
+                      <strong key={i} className="font-bold text-ink">{part.t}</strong>
+                    ) : (
+                      <span key={i}>{part.t}</span>
+                    )
+                  )}
+                </p>
+                <Button size="lg" href="/subscribe" className="mt-6">
                   {t.cta} <ArrowRight size={18} />
                 </Button>
               </motion.div>
@@ -88,7 +100,7 @@ export function TranscriptionServices() {
                 transition={{ duration: 0.5, ease: EASE_OUT }}
                 className="rounded-[20px] border border-border bg-white p-3 shadow-lift"
               >
-                <img src={brand.serviceShots[t.key]} alt={t.tab} className="w-full rounded-[12px]" />
+                <img src={brand.serviceShots[t.key]} alt={t.tab} className="h-auto w-full rounded-[12px]" />
               </motion.div>
             </AnimatePresence>
           </div>

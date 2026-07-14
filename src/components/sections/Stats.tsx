@@ -29,14 +29,14 @@ function StatValue({ value }: { value: string }) {
 
 export function Stats() {
   return (
-    <section id="features" className="bg-white py-16">
+    <section id="features" className="bg-white py-14 md:py-16">
       <Container>
         <motion.div
           variants={stagger(0.08)}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          className="mx-auto grid max-w-6xl grid-cols-5 gap-6"
+          className="mx-auto grid max-w-6xl grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-3 lg:grid-cols-5 lg:gap-x-6 lg:gap-y-6"
         >
           {stats.map((s, i) => {
             const Icon = ICONS[i];
@@ -44,7 +44,7 @@ export function Stats() {
               <motion.div
                 key={s.label}
                 variants={scaleIn}
-                className="relative mt-7 rounded-[24px] border border-border-soft bg-surface-soft px-4 pb-6 pt-12 text-center"
+                className={`relative mt-7 rounded-[24px] border border-border-soft bg-surface-soft px-4 pb-6 pt-12 text-center ${i === 4 ? "col-span-2 md:col-span-1" : ""}`}
               >
                 <span className="shadow-blue absolute -top-7 left-1/2 flex size-14 -translate-x-1/2 items-center justify-center rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-white">
                   <Icon size={24} strokeWidth={1.9} />

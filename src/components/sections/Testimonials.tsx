@@ -27,20 +27,20 @@ export function Testimonials() {
   const [showMore, setShowMore] = useState(false);
   const items = showMore ? [...testimonials.items, ...testimonials.more] : testimonials.items;
   return (
-    <section id="reviews" className="bg-white py-20">
+    <section id="reviews" className="bg-white py-14 md:py-20">
       <Container>
         <motion.div variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={viewportOnce} className="text-center">
-          <motion.h2 variants={fadeUp} className="text-balance font-display text-4xl font-extrabold tracking-tight text-ink">
+          <motion.h2 variants={fadeUp} className="text-balance font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
             {testimonials.title}
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-3 flex flex-wrap items-center justify-center gap-2 text-lg text-ink-2">
+          <motion.p variants={fadeUp} className="mt-3 flex flex-wrap items-center justify-center gap-2 text-base text-ink-2 md:text-lg">
             <span>{testimonials.ratingPrefix}</span>
             <b className="font-semibold text-ink">{testimonials.rating}</b>
             <Stars count={5} />
             <span><BoldNumbers text={testimonials.ratingSuffix} /></span>
           </motion.p>
         </motion.div>
-        <motion.div variants={stagger(0.07)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mx-auto mt-12 grid max-w-6xl grid-cols-3 gap-6">
+        <motion.div variants={stagger(0.07)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 md:mt-12 lg:grid-cols-3">
           <AnimatePresence initial={false}>
           {items.map((t) => (
             <motion.figure
@@ -49,7 +49,7 @@ export function Testimonials() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="flex flex-col items-center rounded-[24px] border border-border-soft bg-surface-soft px-7 py-8 text-center transition hover:-translate-y-0.5 hover:shadow-card"
+              className="flex flex-col items-center rounded-[24px] border border-border-soft bg-surface-soft px-6 py-7 text-center transition hover:-translate-y-0.5 hover:shadow-card md:px-7 md:py-8"
             >
               <img src={brand.avatars[t.avatar]} alt="" className="size-20 rounded-full object-cover shadow-soft ring-4 ring-white" />
               <Stars count={5} className="mt-4" />
@@ -60,11 +60,11 @@ export function Testimonials() {
           ))}
           </AnimatePresence>
         </motion.div>
-        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-12 flex justify-center">
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-10 flex justify-center md:mt-12">
           <button
             type="button"
             onClick={() => setShowMore((v) => !v)}
-            className="inline-flex h-14 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-border bg-white px-8 text-base font-medium text-ink shadow-soft transition-all hover:border-accent/40 hover:bg-surface-soft"
+            className="inline-flex h-14 max-w-full items-center justify-center gap-2 whitespace-nowrap rounded-full border border-border bg-white px-6 text-base font-medium text-ink shadow-soft transition-all hover:border-accent/40 hover:bg-surface-soft md:px-8"
           >
             {showMore ? testimonials.ctaLess : testimonials.cta}
           </button>

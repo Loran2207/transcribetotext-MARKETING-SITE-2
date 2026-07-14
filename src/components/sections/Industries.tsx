@@ -16,7 +16,7 @@ export function Industries() {
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="mx-auto mt-12 grid max-w-5xl grid-cols-3 gap-6"
+        className="mx-auto mt-8 grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:mt-10 lg:mt-12 lg:grid-cols-3 lg:gap-6"
       >
         {industries.list.map((name, i) => {
           const Icon = ICONS[i % ICONS.length];
@@ -24,7 +24,7 @@ export function Industries() {
             <motion.div
               key={name}
               variants={fadeUp}
-              className="flex items-center gap-4 rounded-2xl border border-border bg-white px-6 py-5 shadow-soft transition hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-card"
+              className="flex items-center gap-3 rounded-2xl border border-border bg-white px-4 py-4 shadow-soft transition hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-card sm:px-5 lg:gap-4 lg:px-6 lg:py-5"
             >
               <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
                 <Icon size={22} strokeWidth={1.8} />

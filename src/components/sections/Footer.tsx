@@ -19,22 +19,22 @@ const SOCIALS = [
 
 export function Footer() {
   return (
-    <footer className="bg-tint-sky pt-14">
+    <footer className="bg-tint-sky pt-12 md:pt-14">
       <Container>
         <motion.div
           variants={stagger(0.08)}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          className="grid grid-cols-4 gap-10"
+          className="grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4 lg:gap-10"
         >
           {footer.columns.map((col) => (
             <motion.div key={col.title} variants={fadeUp}>
-              <p className="mb-4 font-display font-semibold text-ink">{col.title}</p>
-              <ul className="space-y-2.5">
+              <p className="mb-2 font-display font-semibold text-ink lg:mb-4">{col.title}</p>
+              <ul className="space-y-0.5 lg:space-y-2.5">
                 {col.links.map((link, i) => (
                   <li key={link}>
-                    <a href={hrefFor(col.title, i)} className="text-[15px] text-ink-2 transition-colors hover:text-accent">
+                    <a href={hrefFor(col.title, i)} className="inline-block py-2 text-[15px] text-ink-2 transition-colors hover:text-accent lg:inline lg:py-0">
                       {link}
                     </a>
                   </li>
@@ -44,7 +44,7 @@ export function Footer() {
           ))}
           <motion.div variants={fadeUp}>
             <p className="mb-4 font-display font-semibold text-ink">{footer.followTitle}</p>
-            <div className="flex gap-3">
+            <div className="flex gap-4 lg:gap-3">
               {SOCIALS.map(({ label, href, src, h }) => (
                 <a
                   key={label}
@@ -52,7 +52,7 @@ export function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label}
-                  className="flex h-9 items-center transition hover:-translate-y-0.5 hover:opacity-90"
+                  className="flex h-11 items-center transition hover:-translate-y-0.5 hover:opacity-90 lg:h-9"
                 >
                   <img src={src} alt={label} className={h + " w-auto"} />
                 </a>
@@ -65,7 +65,7 @@ export function Footer() {
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          className="mt-12 flex items-center justify-between gap-6 border-t border-border pb-28 pt-6"
+          className="mt-10 flex flex-col items-center gap-3 border-t border-border pb-28 pt-6 text-center lg:mt-12 lg:flex-row lg:items-center lg:justify-between lg:gap-6 lg:text-left"
         >
           <img src={brand.logo} alt={nav.logo} className="h-6 w-auto" />
           <span className="text-sm text-ink-2">{footer.copyright}</span>

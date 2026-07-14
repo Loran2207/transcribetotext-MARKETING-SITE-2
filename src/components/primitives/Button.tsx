@@ -14,7 +14,7 @@ const variants: Record<Variant, string> = {
 
 const sizes: Record<Size, string> = {
   md: "h-11 px-5 text-sm",
-  lg: "h-14 px-8 text-base",
+  lg: "h-12 px-6 text-base sm:h-14 sm:px-8",
 };
 
 const MotionLink = motion(Link);
@@ -32,7 +32,7 @@ export function Button({
   size?: Size;
   className?: string;
 }) {
-  const cls = `inline-flex items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap transition-all ${variants[variant]} ${sizes[size]} ${className}`;
+  const cls = `inline-flex max-w-full items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap transition-all lg:max-w-none ${variants[variant]} ${sizes[size]} ${className}`;
   if (href.startsWith("/")) {
     return (
       <MotionLink to={href} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} transition={SPRING} className={cls}>

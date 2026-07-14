@@ -20,7 +20,7 @@ export function SectionHeading({
   const dark = tone === "dark";
   const alignClass = align === "center" ? "mx-auto items-center text-center" : "items-start text-left";
   return (
-    <motion.div variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={viewportOnce} className={`flex max-w-2xl flex-col gap-4 ${alignClass} ${className}`}>
+    <motion.div variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={viewportOnce} className={`flex max-w-2xl flex-col gap-3 sm:gap-4 ${alignClass} ${className}`}>
       {eyebrow ? (
         <motion.span variants={fadeUp} className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium ${dark ? "border-white/15 bg-white/5 text-accent-glow" : "border-border bg-white text-accent shadow-soft"}`}>
           {eyebrow}
@@ -30,7 +30,7 @@ export function SectionHeading({
         {title}
       </motion.h2>
       {subtitle ? (
-        <motion.p variants={fadeUp} className={`text-pretty text-lg leading-relaxed ${dark ? "text-muted-invert" : "text-ink-2"}`}>
+        <motion.p variants={fadeUp} className={`text-pretty text-base leading-relaxed sm:text-lg ${dark ? "text-muted-invert" : "text-ink-2"}`}>
           {subtitle}
         </motion.p>
       ) : null}
