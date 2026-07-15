@@ -26,7 +26,7 @@ export function SectionHeading({
           {eyebrow}
         </motion.span>
       ) : null}
-      <motion.h2 variants={fadeUp} className={`text-balance font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl md:text-[44px] md:leading-[1.08] ${dark ? "text-ink-invert" : "text-ink"}`}>
+      <motion.h2 variants={fadeUp} className={`text-balance font-display text-3xl font-extrabold tracking-[-0.02em] sm:text-4xl md:text-[44px] md:leading-[1.08] ${dark ? "text-ink-invert" : "text-ink"}`}>
         {title}
       </motion.h2>
       {subtitle ? (
