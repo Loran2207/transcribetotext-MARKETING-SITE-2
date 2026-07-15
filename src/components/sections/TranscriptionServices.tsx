@@ -69,13 +69,13 @@ export function TranscriptionServices() {
               >
                 {/* One line, trailing word in accent (like the live site). The reserved
                     height keeps the block still when a heading wraps to two lines. */}
-                <h3 className="flex items-start justify-center text-center font-display text-3xl font-extrabold leading-[1.08] tracking-tight md:text-4xl lg:justify-start lg:text-left lg:text-[42px]">
+                <h3 className="flex items-start justify-start text-left font-display text-3xl font-extrabold leading-[1.08] tracking-tight sm:justify-center sm:text-center md:text-4xl lg:justify-start lg:text-left lg:text-[42px]">
                   <span className="text-balance">
                     <span className="text-ink">{t.lead}</span>{" "}
                     <span className="text-accent">{t.accent}</span>
                   </span>
                 </h3>
-                <p className="mx-auto mt-4 max-w-md text-pretty text-center text-base leading-relaxed text-ink-2 md:text-lg lg:mx-0 lg:text-left">
+                <p className="mx-0 mt-4 max-w-md text-pretty text-left text-base leading-relaxed text-ink-2 sm:mx-auto sm:text-center md:text-lg lg:mx-0 lg:text-left">
                   {t.desc.map((part, i) =>
                     part.b ? (
                       <strong key={i} className="font-bold text-ink">{part.t}</strong>
@@ -84,7 +84,7 @@ export function TranscriptionServices() {
                     )
                   )}
                 </p>
-                <div className="mt-6 flex justify-center lg:justify-start">
+                <div className="mt-6 flex justify-start sm:justify-center lg:justify-start">
                   <Button size="lg" href="/subscribe">
                     {t.cta} <ArrowRight size={18} />
                   </Button>

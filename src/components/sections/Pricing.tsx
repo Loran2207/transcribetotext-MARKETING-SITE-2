@@ -37,7 +37,7 @@ export function Pricing() {
   return (
     <section id="pricing" className="bg-white py-14 md:py-20">
       <Container>
-        <motion.h2 variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="text-center font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
+        <motion.h2 variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="text-left font-display text-3xl font-extrabold tracking-tight text-ink sm:text-center md:text-4xl">
           {pricing.title}
         </motion.h2>
         <motion.div variants={stagger(0.12)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mx-auto mt-10 grid max-w-5xl grid-cols-1 items-stretch gap-6 md:mt-12 lg:grid-cols-2 lg:gap-8">

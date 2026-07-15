@@ -1,14 +1,13 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, ChevronRight } from "lucide-react";
 import { subscribe } from "../../data/subscribe";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
 
 // Mirrors the original app paywall cards: white cards, radio top-right, the popular
-// card gets a full-width blue band, the selected card gets the accent border.
-// Below lg the three cards become a snap carousel: the popular plan sits in the
-// middle and its neighbours peek in from both sides, so it reads as a choice of
-// three rather than a stack you have to scroll past.
+// card gets a full-width blue band, the selected card gets the accent border. Prices
+// are grouped as "was > now" like the reference. Below lg the three cards become a
+// snap carousel with the popular plan centered and its neighbours peeking in.
 export function PlanCards({ selected, onSelect }: { selected: number; onSelect: (i: number) => void }) {
   const scroller = useRef<HTMLDivElement>(null);
   const popular = useRef<HTMLButtonElement>(null);
@@ -16,7 +15,6 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
   useEffect(() => {
     const sc = scroller.current, el = popular.current;
     if (!sc || !el || window.innerWidth >= 1024) return;
-    // center the popular card without scrolling the page
     sc.scrollLeft = el.offsetLeft - (sc.clientWidth - el.clientWidth) / 2;
   }, []);
 
@@ -51,16 +49,17 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
             )}
             <div className="flex flex-1 flex-col p-5 pt-4 lg:p-7 lg:pt-4">
               <div className="flex items-start justify-between gap-2">
-                <p className="whitespace-nowrap text-lg font-semibold tracking-tight text-ink lg:whitespace-normal lg:text-xl">{p.name}</p>
-                <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-full border-2 transition-colors ${on ? "border-accent bg-accent text-white" : "border-border text-transparent"}`}><Check size={13} strokeWidth={3} /></span>
+                <p className="text-xl font-bold tracking-tight text-ink sm:text-2xl">{p.name}</p>
+                <span className={`mt-1 grid h-6 w-6 shrink-0 place-items-center rounded-full border-2 transition-colors ${on ? "border-accent bg-accent text-white" : "border-border text-transparent"}`}><Check size={13} strokeWidth={3} /></span>
               </div>
-              <div className="mt-3 flex flex-wrap items-center gap-2">
-                <p className="text-sm text-muted"><span className="line-through">{p.was}</span> <span className="font-semibold text-ink">{p.now}</span></p>
-                <span className="rounded-full bg-deal px-2 py-0.5 text-[10px] font-semibold text-white">50% off</span>
+              <div className="mt-3 flex items-center gap-2 text-base">
+                <span className="text-muted line-through">{p.was}</span>
+                <ChevronRight size={16} className="text-muted" strokeWidth={2.5} />
+                <span className="font-bold text-ink">{p.now}</span>
               </div>
               <div className="mt-5 flex items-end gap-1.5 border-t border-border/70 pt-5 lg:mt-6 lg:pt-6">
                 <span className="mb-1.5 text-sm text-muted line-through">{p.perDayWas}</span>
-                <span className="font-display text-[32px] font-semibold leading-none tracking-tight text-ink lg:text-[42px]">{p.perDay}</span>
+                <span className="font-display text-[34px] font-bold leading-none tracking-tight text-ink lg:text-[44px]">{p.perDay}</span>
                 <span className="mb-1.5 whitespace-nowrap text-sm text-muted">per day</span>
               </div>
             </div>

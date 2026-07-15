@@ -18,7 +18,7 @@ export function SectionHeading({
   className?: string;
 }) {
   const dark = tone === "dark";
-  const alignClass = align === "center" ? "mx-auto items-center text-center" : "items-start text-left";
+  const alignClass = align === "center" ? "items-start text-left sm:mx-auto sm:items-center sm:text-center" : "items-start text-left";
   return (
     <motion.div variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={viewportOnce} className={`flex max-w-2xl flex-col gap-3 sm:gap-4 ${alignClass} ${className}`}>
       {eyebrow ? (

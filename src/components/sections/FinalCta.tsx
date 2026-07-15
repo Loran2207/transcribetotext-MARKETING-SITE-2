@@ -15,7 +15,7 @@ export function FinalCta() {
       <div aria-hidden="true" className="pointer-events-none absolute -top-20 left-1/2 h-72 w-[38rem] -translate-x-1/2 rounded-full bg-accent/25 blur-[130px]" />
       <motion.div aria-hidden="true" initial={{ scaleX: 0, opacity: 0 }} whileInView={{ scaleX: 1, opacity: 1 }} viewport={viewportOnce} transition={{ duration: 1.1, ease: EASE_OUT }} className="pointer-events-none absolute inset-x-0 top-0 h-px origin-center bg-gradient-to-r from-transparent via-white/15 to-transparent" />
       <Container className="relative">
-        <motion.h2 variants={blurIn} initial="hidden" whileInView="show" viewport={viewportOnce} className="text-balance text-center font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+        <motion.h2 variants={blurIn} initial="hidden" whileInView="show" viewport={viewportOnce} className="text-balance text-left font-display text-3xl font-extrabold tracking-tight text-white sm:text-center md:text-4xl">
           {finalCta.title}
         </motion.h2>
         <motion.div variants={stagger(0.09)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-8 sm:grid-cols-2 md:mt-12 md:gap-10 lg:mt-14 lg:grid-cols-4">

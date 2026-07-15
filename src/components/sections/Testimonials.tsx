@@ -29,11 +29,11 @@ export function Testimonials() {
   return (
     <section id="reviews" className="bg-white py-14 md:py-20">
       <Container>
-        <motion.div variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={viewportOnce} className="text-center">
+        <motion.div variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={viewportOnce} className="text-left sm:text-center">
           <motion.h2 variants={fadeUp} className="text-balance font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
             {testimonials.title}
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-3 flex flex-wrap items-center justify-center gap-2 text-base text-ink-2 md:text-lg">
+          <motion.p variants={fadeUp} className="mt-3 flex flex-wrap items-center justify-start gap-2 text-base text-ink-2 sm:justify-center md:text-lg">
             <span>{testimonials.ratingPrefix}</span>
             <b className="font-semibold text-ink">{testimonials.rating}</b>
             <Stars count={5} />

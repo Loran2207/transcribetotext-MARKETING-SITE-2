@@ -11,12 +11,12 @@ export function Hero() {
     <section id="top" className="relative overflow-hidden bg-canvas pt-28 pb-12 md:pt-[120px] md:pb-16">
       <div className="relative mx-auto w-full max-w-[1200px] px-6 md:px-10">
         <motion.div variants={stagger(0.1)} initial="hidden" animate="show" className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
-          <div className="text-center lg:text-left">
+          <div className="text-left sm:text-center lg:text-left">
             <motion.h1 variants={fadeUp} className="font-display tracking-tight">
               <span className="block text-3xl font-extrabold leading-none text-accent md:text-4xl lg:whitespace-nowrap lg:text-[54px]">{hero.titleAccent}</span>
               <span className="mt-3 block text-xl font-bold text-ink md:text-2xl lg:text-3xl">{hero.titleRest}</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-md text-pretty text-base leading-relaxed text-ink-2 md:text-lg lg:mx-0 lg:mt-5">
+            <motion.p variants={fadeUp} className="mx-0 mt-4 max-w-md text-pretty text-base leading-relaxed text-ink-2 sm:mx-auto md:text-lg lg:mx-0 lg:mt-5">
               {hero.subtitle}
             </motion.p>
             <motion.div variants={fadeUp} className="mt-8">

@@ -20,8 +20,7 @@ export function CountdownBar({ onGetPlan }: { onGetPlan: () => void }) {
   return (
     <div className="sticky top-0 z-40 border-b border-border bg-white/85 backdrop-blur-xl">
       {/* Phone and tablet: the original app header. Discount left, timer right, and
-          Skip becomes a round close button. No Get my plan here: the Continue button
-          is pinned to the bottom of the screen instead. */}
+          Skip becomes a round close button that opens the retention offer (/skip). */}
       <div className="flex items-center gap-3 px-4 py-2.5 lg:hidden">
         <div className="min-w-0">
           <p className="truncate text-[11px] font-medium text-muted">{subscribe.discount.label}</p>
@@ -32,7 +31,7 @@ export function CountdownBar({ onGetPlan }: { onGetPlan: () => void }) {
           <p className="font-mono text-[15px] font-bold tabular-nums text-accent">{fmt(left)}</p>
         </div>
         <Link
-          to="/"
+          to="/skip"
           aria-label={subscribe.skip}
           className="grid size-9 shrink-0 place-items-center rounded-full bg-accent-soft text-accent transition-colors hover:text-accent-dark"
         >
@@ -40,8 +39,8 @@ export function CountdownBar({ onGetPlan }: { onGetPlan: () => void }) {
         </Link>
       </div>
 
-      {/* Desktop: the discount block sits in the middle, the spacer column keeps it
-          optically centered, Skip stays a text link away from Get my plan. */}
+      {/* Desktop: the discount block, timer and Get my plan sit together as one
+          centered composition; Skip lives alone in the top-right corner. */}
       <div className="hidden w-full grid-cols-[1fr_auto_1fr] items-center gap-4 px-6 py-2.5 lg:grid">
         <span aria-hidden="true" />
         <div className="flex items-center justify-center gap-5">
@@ -54,10 +53,10 @@ export function CountdownBar({ onGetPlan }: { onGetPlan: () => void }) {
             <p className="text-[11px] font-medium text-muted">Time left</p>
             <p className="font-mono text-sm font-semibold tabular-nums text-accent">{fmt(left)}</p>
           </div>
+          <button onClick={onGetPlan} className={`${cta} ml-1 px-5 py-2.5 text-sm`}>{subscribe.cta}</button>
         </div>
-        <div className="flex items-center justify-end gap-6">
-          <button onClick={onGetPlan} className={`${cta} px-5 py-2.5 text-sm`}>{subscribe.cta}</button>
-          <Link to="/" className="shrink-0 text-sm font-medium text-muted transition-colors hover:text-ink">{subscribe.skip}</Link>
+        <div className="flex items-center justify-end">
+          <Link to="/skip" className="shrink-0 text-sm font-medium text-muted transition-colors hover:text-ink">{subscribe.skip}</Link>
         </div>
       </div>
     </div>

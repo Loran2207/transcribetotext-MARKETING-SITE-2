@@ -1,31 +1,35 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import { CountdownBar } from "../components/subscribe/CountdownBar";
 import { PromoCode } from "../components/subscribe/PromoCode";
 import { PlanCards } from "../components/subscribe/PlanCards";
 import { CheckoutModal } from "../components/subscribe/CheckoutModal";
 import { DarkFeedback } from "../components/subscribe/DarkFeedback";
 import { Guarantee, Benefits, SafeCheckout } from "../components/subscribe/SubscribeSections";
-import { Logo } from "../components/primitives/Logo";
+import { PAYWALL_HEADING } from "../components/subscribe/headings";
 import { subscribe } from "../data/subscribe";
 import { fadeUp, stagger } from "../lib/motion";
 
 export function SubscribePage() {
+  const { search } = useLocation();
+  // ?checkout=open / ?checkout=error open the dialog directly (used for mockups).
+  const initial = useMemo(() => {
+    const p = new URLSearchParams(search).get("checkout");
+    return { open: p === "open" || p === "error", error: p === "error" };
+  }, [search]);
   const [selected, setSelected] = useState(1);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(initial.open);
   const plan = subscribe.plans[selected];
   const legalBody = subscribe.legal.body.replace("{now}", plan.now).replace("{was}", plan.was);
   return (
     <div className="relative min-h-screen bg-canvas">
       <CountdownBar onGetPlan={() => setOpen(true)} />
       <div className="relative z-10 overflow-hidden">
-        <div className="mx-auto w-full max-w-5xl px-4 pt-8 sm:px-6 md:pt-10">
-          <div className="hidden items-center justify-center md:flex">
-            <Logo />
-          </div>
-          <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="mt-8 flex flex-col items-center text-center md:mt-12">
-            <motion.h1 variants={fadeUp} className="text-balance font-display text-3xl font-semibold tracking-[-0.025em] text-ink md:text-4xl lg:text-5xl">{subscribe.heading}</motion.h1>
+        <div className="mx-auto w-full max-w-5xl px-4 pt-8 sm:px-6 md:pt-12">
+          <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="flex flex-col items-center text-center">
+            <motion.h1 variants={fadeUp} className={PAYWALL_HEADING}>{subscribe.heading}</motion.h1>
           </motion.div>
           <PromoCode />
           <PlanCards selected={selected} onSelect={setSelected} />
@@ -62,7 +66,7 @@ export function SubscribePage() {
           </motion.button>
         </div>
       </div>
-      <CheckoutModal open={open} onClose={() => setOpen(false)} planIndex={selected} />
+      <CheckoutModal open={open} onClose={() => setOpen(false)} planIndex={selected} forceError={initial.error} />
     </div>
   );
 }
