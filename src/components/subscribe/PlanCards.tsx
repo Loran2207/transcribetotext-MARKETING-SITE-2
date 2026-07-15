@@ -55,12 +55,14 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
               <div className="mt-3 flex items-center gap-2 text-base">
                 <span className="text-muted line-through">{p.was}</span>
                 <ChevronRight size={16} className="text-muted" strokeWidth={2.5} />
-                <span className="font-bold text-ink">{p.now}</span>
+                <span className="font-semibold text-ink">{p.now}</span>
               </div>
-              <div className="mt-5 flex items-end gap-1.5 border-t border-border/70 pt-5 lg:mt-6 lg:pt-6">
-                <span className="mb-1.5 text-sm text-muted line-through">{p.perDayWas}</span>
-                <span className="font-display text-[34px] font-bold leading-none tracking-tight text-ink lg:text-[44px]">{p.perDay}</span>
-                <span className="mb-1.5 whitespace-nowrap text-sm text-muted">per day</span>
+              <div className="mt-5 border-t border-border/70 pt-5 lg:mt-6 lg:pt-6">
+                <p className="text-sm text-muted line-through">{p.perDayWas}</p>
+                <p className="mt-1 flex items-end gap-1.5">
+                  <span className="font-display text-[34px] font-bold leading-none tracking-tight text-ink lg:text-[44px]">{p.perDay}</span>
+                  <span className="mb-1.5 whitespace-nowrap text-sm text-muted">per day</span>
+                </p>
               </div>
             </div>
           </motion.button>
