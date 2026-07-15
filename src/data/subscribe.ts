@@ -70,10 +70,11 @@ export const subscribe = {
     helpEmail: "support@transcribetotext.ai",
     renewal: "You'll pay {now} today for your 1-month trial. After your trial ends, it will convert into a subscription. Your subscription starts at the end of the trial period and renews at {was} per 1 month subscription unless you cancel. You can cancel anytime in your account settings at least 24 hours before the end of your 1-month subscription. If you don't cancel, your membership will automatically renew at the end of each billing period.",
     error: {
+      title: "Payment error",
+      subtitle: "We couldn't process this payment. Check the details below and try again.",
       card: "Your card number is incomplete.",
       expiry: "Your card's expiry date is incomplete.",
       cvc: "Your card's security code is incomplete.",
-      banner: "Your card number is incomplete.",
     },
     success: { title: "You're all set", body: "Welcome to Premium. Your transcription superpowers are unlocked." },
   },

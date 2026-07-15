@@ -41,7 +41,7 @@ export function Languages() {
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="mt-8 flex flex-col items-center lg:mt-10"
+        className="mt-8 flex flex-col items-start sm:items-center lg:mt-10"
       >
         <button type="button" onClick={() => setShowAll((v) => !v)} className="inline-flex items-center gap-2 font-medium text-accent transition hover:text-accent/80 max-lg:min-h-11 max-lg:px-2">
           <Globe size={16} />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Check, ArrowRight, Info, CreditCard } from "lucide-react";
+import { X, Check, ArrowRight, Info, CreditCard, AlertCircle } from "lucide-react";
 import { subscribe } from "../../data/subscribe";
 import { EASE_OUT } from "../../lib/motion";
 import { SecureCheckout } from "./SecureCheckout";
@@ -48,9 +48,9 @@ export function CheckoutModal({ open, onClose, planIndex, forceError = false }: 
   return (
     <AnimatePresence>
       {open && (
-        <motion.div className="fixed inset-0 z-[60] flex items-center justify-center p-0 sm:p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+        <motion.div className="fixed inset-0 z-[60] flex items-stretch justify-center p-0 sm:items-center sm:p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
           <div className="absolute inset-0 bg-transparent sm:bg-ink/60 sm:backdrop-blur-sm" onClick={onClose} />
-          <motion.div id="checkout-modal" initial={{ opacity: 0, y: 24, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.98 }} transition={{ duration: 0.35, ease: EASE_OUT }} className="relative max-h-[100dvh] w-full max-w-none overflow-y-auto rounded-none bg-white px-4 py-5 shadow-lift sm:max-h-[92vh] sm:max-w-lg sm:rounded-tile sm:p-7">
+          <motion.div id="checkout-modal" initial={{ opacity: 0, y: 24, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.98 }} transition={{ duration: 0.35, ease: EASE_OUT }} className="relative min-h-[100dvh] max-h-[100dvh] w-full max-w-none overflow-y-auto rounded-none bg-white px-4 py-5 shadow-lift sm:min-h-0 sm:max-h-[92vh] sm:max-w-lg sm:rounded-tile sm:p-7">
             <button onClick={onClose} aria-label="Close" className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full bg-accent-soft text-accent transition-colors hover:text-accent-dark sm:h-9 sm:w-9"><X size={18} /></button>
             {done ? (
               <div className="flex flex-col items-center py-6 text-center">
@@ -67,6 +67,15 @@ export function CheckoutModal({ open, onClose, planIndex, forceError = false }: 
                   {c.summary.map((row) => <Row key={row.label} label={row.label} value={fill(row.value)} />)}
                   <Row label={c.totalLabel} value={plan.now} total />
                 </div>
+                {errors && (
+                  <div className="mt-4 flex items-start gap-3 overflow-hidden rounded-2xl border-l-4 border-deal bg-deal-soft px-4 py-3">
+                    <AlertCircle size={18} className="mt-0.5 shrink-0 text-deal" />
+                    <div>
+                      <p className="text-sm font-semibold text-ink">{c.error.title}</p>
+                      <p className="text-sm leading-snug text-ink-2">{c.error.subtitle}</p>
+                    </div>
+                  </div>
+                )}
                 <div className="mt-5 space-y-2.5">
                   <button onClick={submit} className={`${wallet} bg-[#FFC439]`} aria-label="Pay with PayPal">
                     <img src="/brand/pay/paypal-wordmark.svg" alt="PayPal" className="h-5 w-auto" />
@@ -115,7 +124,6 @@ export function CheckoutModal({ open, onClose, planIndex, forceError = false }: 
                     </div>
                   </div>
                 </div>
-                {errors && <p className="mt-3 text-center text-xs font-medium text-deal">{c.error.banner}</p>}
                 <button onClick={submit} className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-sm font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20 transition-[filter] hover:brightness-[1.05]">{c.continue} <ArrowRight size={16} /></button>
                 <div className="mt-5"><SecureCheckout /></div>
                 <p className="mt-4 text-center text-[11px] leading-relaxed text-muted">

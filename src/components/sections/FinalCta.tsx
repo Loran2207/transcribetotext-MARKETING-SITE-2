@@ -23,9 +23,9 @@ export function FinalCta() {
             const Icon = ICONS[i];
             return (
               <motion.div key={it.title} variants={fadeUp}>
-                <Icon strokeWidth={1.5} className="mx-auto size-10 text-accent-glow md:size-12" />
-                <h3 className="mt-4 text-center font-display text-lg font-semibold text-white">{it.title}</h3>
-                <p className="mt-2 text-center text-sm leading-relaxed text-muted-invert">
+                <Icon strokeWidth={1.5} className="size-10 text-accent-glow sm:mx-auto md:size-12" />
+                <h3 className="mt-4 text-left font-display text-lg font-semibold text-white sm:text-center">{it.title}</h3>
+                <p className="mt-2 text-left text-sm leading-relaxed text-muted-invert sm:text-center">
                   {it.body}
                   {it.link ? (
                     <>
@@ -38,8 +38,8 @@ export function FinalCta() {
             );
           })}
         </motion.div>
-        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-10 flex justify-center md:mt-12">
-          <Button size="lg" href="/subscribe" variant="outline" className="w-full border-transparent font-semibold text-accent sm:w-auto">{finalCta.cta}</Button>
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-10 flex justify-start sm:justify-center md:mt-12">
+          <Button size="lg" href="/subscribe" variant="outline" className="border-transparent font-semibold text-accent">{finalCta.cta}</Button>
         </motion.div>
       </Container>
     </section>
