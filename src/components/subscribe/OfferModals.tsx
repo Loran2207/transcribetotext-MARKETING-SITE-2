@@ -36,15 +36,15 @@ function OfferShell({ open, onClose, maxW, children, id }: { open: boolean; onCl
   return (
     <AnimatePresence>
       {open && (
-        <motion.div className="fixed inset-0 z-[70] flex items-stretch justify-center p-0 sm:items-center sm:p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          <div className="absolute inset-0 bg-transparent sm:bg-ink/60 sm:backdrop-blur-sm" onClick={onClose} />
+        <motion.div className="fixed inset-0 z-[70] flex items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <div className="absolute inset-0 bg-ink/60 backdrop-blur-sm" onClick={onClose} />
           <motion.div
             id={id}
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ duration: 0.35, ease: EASE_OUT }}
-            className={`relative min-h-[100dvh] max-h-[100dvh] w-full max-w-none overflow-y-auto rounded-none bg-white px-4 py-6 shadow-lift sm:min-h-0 sm:max-h-[92vh] sm:rounded-tile sm:p-8 ${maxW}`}
+            className={`relative max-h-[92dvh] w-full max-w-none overflow-y-auto rounded-tile bg-white p-6 shadow-lift sm:p-8 ${maxW}`}
           >
             <button onClick={onClose} aria-label="Close" className="absolute right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full bg-accent-soft text-accent transition-colors hover:text-accent-dark sm:h-9 sm:w-9">
               <X size={18} />
@@ -63,6 +63,21 @@ function BenefitRow({ text }: { text: string }) {
       <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-accent-soft text-accent"><Check size={12} strokeWidth={3} /></span>
       <span className="text-sm font-medium text-ink">{text}</span>
     </li>
+  );
+}
+
+// Trustpilot-style rating: five solid green rounded squares, each holding a white star.
+function TrustStars({ big = false, className = "" }: { big?: boolean; className?: string }) {
+  const box = big ? "size-[19px]" : "size-[15px]";
+  const glyph = big ? 12 : 9;
+  return (
+    <span role="img" aria-label="Rated 5 out of 5" className={`flex items-center gap-[3px] ${className}`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <span key={i} className={`grid ${box} shrink-0 place-items-center rounded-[3px] bg-[#00B67A]`}>
+          <Star size={glyph} strokeWidth={0} className="fill-white text-white" />
+        </span>
+      ))}
+    </span>
   );
 }
 
@@ -137,32 +152,36 @@ export function SpecialOfferModal({ open, onClose, onGrab }: { open: boolean; on
   const left = useCountdown(o.startSeconds);
   return (
     <OfferShell open={open} onClose={onClose} maxW="sm:max-w-md" id="offer-special">
-      <h3 className="pr-12 text-center font-display text-2xl font-extrabold tracking-tight text-ink sm:pr-0 sm:text-3xl">{o.title}</h3>
-      <p className="mx-auto mt-2.5 max-w-xs text-center text-sm leading-relaxed text-ink-2">{o.subtitle}</p>
+      <div className="relative mx-auto flex h-[104px] w-[104px] items-center justify-center">
+        <span aria-hidden="true" className="absolute h-[86px] w-[86px] rounded-full bg-rose-500/35 blur-[26px]" />
+        <img src="/images/offer-tag.png" alt="" className="relative h-[104px] w-[104px] object-contain" />
+      </div>
+      <h3 className="mt-4 text-center font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">{o.title}</h3>
+      <p className="mx-auto mt-2 max-w-xs text-center text-sm leading-relaxed text-ink-2">{o.subtitle}</p>
       <div className="mt-4 flex justify-center">
-        <span className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-4 py-2 font-display text-lg font-bold tabular-nums text-accent">
+        <span className="inline-flex items-center gap-2 rounded-full bg-rose-50 px-4 py-2 font-display text-lg font-bold tabular-nums text-rose-600">
           <Clock size={16} /> {fmtMS(left)}
         </span>
       </div>
-      <p className="mt-3 bg-[linear-gradient(180deg,#3B82F6,#2563EB)] bg-clip-text text-center font-display text-6xl font-extrabold uppercase tracking-tight text-transparent">{o.discount}</p>
-      <div className="mt-6 grid grid-cols-2 gap-2.5">
+      <p className="mt-3 bg-[linear-gradient(180deg,#F43F5E,#E11D48)] bg-clip-text text-center font-display text-[3.5rem] font-extrabold leading-[1.05] tracking-tight text-transparent">{o.discount}</p>
+      <div className="mt-5 grid auto-rows-fr grid-cols-2 gap-2">
         {o.features.map((f) => {
           const IconCmp = SPECIAL_ICONS[f.icon as keyof typeof SPECIAL_ICONS] ?? Sparkles;
           return (
-            <div key={f.label} className="flex flex-col gap-2 rounded-2xl border border-border bg-white px-3.5 py-3 shadow-soft">
-              <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent"><IconCmp size={16} /></span>
-              <span className="text-[12.5px] font-medium leading-snug text-ink">{f.label}</span>
+            <div key={f.label} className="flex flex-col gap-2 rounded-2xl border border-border bg-white px-3 py-3 shadow-soft">
+              <span className="grid size-8 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent"><IconCmp size={15} /></span>
+              <span className="mt-auto text-[12.5px] font-medium leading-snug text-ink">{f.label}</span>
             </div>
           );
         })}
       </div>
-      <div className="mt-6 flex items-baseline justify-center gap-2">
-        <span className="text-base text-ink-2">{o.priceLead}</span>
-        <span className="font-medium text-muted line-through">{o.was}</span>
-        <span className="font-display text-2xl font-extrabold text-ink">{o.now}</span>
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2">
+        <span className="text-base font-medium text-muted line-through">{o.was}</span>
+        <span className="font-display text-[1.75rem] font-extrabold leading-none tracking-tight text-ink">{o.now}</span>
+        <span className="rounded-full bg-rose-50 px-2.5 py-1 text-xs font-semibold text-rose-600">{o.saveBadge}</span>
       </div>
-      <p className="mt-1 text-center text-xs font-medium text-accent">{o.perDay}</p>
-      <button onClick={onGrab} className={`mt-6 ${GRADIENT_PILL}`}>{o.cta} <ArrowRight size={16} /></button>
+      <p className="mt-2 text-center text-xs font-medium text-muted">{o.perDay}</p>
+      <button onClick={onGrab} className={`mt-5 ${GRADIENT_PILL}`}>{o.cta} <ArrowRight size={16} /></button>
     </OfferShell>
   );
 }
@@ -191,59 +210,67 @@ export function OfferCheckoutModal({ open, onClose }: { open: boolean; onClose: 
               </div>
             ))}
           </div>
-          <div className="mt-6 rounded-tile border border-border bg-white p-4 shadow-soft">
-            <div className="flex items-center gap-3">
-              <span className="grid size-10 place-items-center rounded-full bg-accent-soft font-display text-sm font-bold text-accent">{o.review.initial}</span>
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-ink">{o.review.name}</p>
-                <p className="text-xs text-muted">{o.review.meta}</p>
-              </div>
-              <span className="ml-auto text-xs text-muted">{o.review.date}</span>
+          <div className="mt-7 rounded-tile border border-border bg-white p-5">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <p className="font-display text-base font-bold text-ink">{o.rating.label}</p>
+              <TrustStars big />
+              <p className="text-xs text-muted">{o.rating.count}</p>
             </div>
-            <div className="mt-3 flex items-center gap-0.5 text-emerald-500">
-              {Array.from({ length: 5 }).map((_, i) => <Star key={i} size={15} className="fill-current" />)}
+            <div className="mt-4 flex flex-col">
+              {o.reviews.map((r) => (
+                <div key={r.name} className="flex items-start gap-3 border-t border-border-soft py-3.5 last:pb-0">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-full bg-accent-soft font-display text-sm font-bold text-accent">{r.initial}</span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <p className="truncate text-sm font-semibold text-ink">{r.name}</p>
+                      <span className="ml-auto shrink-0 text-xs text-muted">{r.date}</span>
+                    </div>
+                    <TrustStars className="mt-1.5" />
+                    <p className="mt-1.5 text-sm leading-relaxed text-ink-2">{r.text}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-            <p className="mt-2.5 text-sm font-medium leading-relaxed text-ink">{o.review.text}</p>
-            <p className="mt-2 text-xs text-muted">{o.review.experience}</p>
           </div>
         </div>
         <div className="order-1 rounded-tile bg-tint-sky p-4 sm:p-5 lg:order-2">
-          <div className="rounded-2xl bg-white p-4 shadow-soft">
+          <div className="rounded-2xl bg-white p-4 shadow-soft sm:p-5">
             <div className="flex items-center justify-between gap-3">
               <p className="text-xs font-medium text-muted">{o.discountCard.label}</p>
               <p className="text-xs font-medium text-muted">{o.discountCard.forLabel}</p>
             </div>
             <div className="mt-2 flex items-center justify-between gap-3">
-              <span className="flex items-center gap-1.5 rounded-xl bg-accent-soft px-3 py-2">
-                <span className="text-sm font-semibold text-ink">{o.discountCard.code}</span>
-                <ChevronsRight size={16} className="text-accent" />
-                <span className="text-sm font-bold text-emerald-600">{o.discountCard.off}</span>
+              <span className="flex items-center gap-1 rounded-xl bg-accent-soft px-2.5 py-2">
+                <span className="whitespace-nowrap text-[13px] font-semibold text-ink sm:text-sm">{o.discountCard.code}</span>
+                <ChevronsRight size={15} className="shrink-0 text-accent" />
+                <span className="whitespace-nowrap text-[13px] font-bold text-emerald-600 sm:text-sm">{o.discountCard.off}</span>
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="rounded-xl border border-border bg-white px-2.5 py-1.5 text-center">
+                <span className="rounded-xl bg-tint-sky px-2 py-1.5 text-center">
                   <span className="block font-display text-base font-bold tabular-nums text-ink">{two(Math.floor(left / 60))}</span>
                   <span className="block text-[10px] text-muted">min</span>
                 </span>
-                <span className="rounded-xl border border-border bg-white px-2.5 py-1.5 text-center">
+                <span className="rounded-xl bg-tint-sky px-2 py-1.5 text-center">
                   <span className="block font-display text-base font-bold tabular-nums text-ink">{two(left % 60)}</span>
                   <span className="block text-[10px] text-muted">sec</span>
                 </span>
               </span>
             </div>
-          </div>
-          <p className="mt-3 text-center text-xs leading-relaxed text-ink-2">{o.welcome}</p>
-          <div className="mt-3 flex items-baseline justify-between gap-3">
-            <p className="font-display text-lg font-bold text-ink">{o.totalLabel}</p>
-            <p className="text-right">
-              <span className="text-sm font-medium text-muted line-through">{o.was}</span>{" "}
-              <span className="font-display text-2xl font-extrabold text-ink">{o.now}</span>
-            </p>
-          </div>
-          <p className="text-right text-xs font-semibold text-emerald-600">{o.save}</p>
-          <div className="mt-4 flex items-center justify-center gap-2 rounded-full bg-accent-soft px-4 py-2.5">
-            <ShieldCheck size={16} className="shrink-0 text-accent" />
-            <p className="text-sm font-medium text-ink">
-              {o.guarantee.pre} <span className="font-semibold text-accent">{o.guarantee.strong}</span> {o.guarantee.post}
+            <div className="my-4 h-px bg-border-soft" />
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="whitespace-nowrap font-display text-[15px] font-bold text-ink sm:text-base">{o.totalLabel}</p>
+              <p className="flex items-baseline gap-1.5 whitespace-nowrap sm:gap-2">
+                <span className="text-xs font-medium text-muted line-through sm:text-sm">{o.was}</span>
+                <span className="font-display text-[24px] font-extrabold tracking-tight text-ink sm:text-3xl">{o.now}</span>
+              </p>
+            </div>
+            <p className="mt-1 text-right text-xs font-semibold text-emerald-600">{o.save}</p>
+            <div className="my-4 h-px bg-border-soft" />
+            <p className="flex items-center gap-2 text-sm font-medium text-ink">
+              <ShieldCheck size={16} className="shrink-0 text-accent" />
+              <span>
+                {o.guarantee.pre} <span className="font-semibold text-accent">{o.guarantee.strong}</span> {o.guarantee.post}
+              </span>
             </p>
           </div>
           <div className="mt-4 grid grid-cols-3 gap-2">
