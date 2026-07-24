@@ -66,12 +66,12 @@ function BenefitRow({ text }: { text: string }) {
   );
 }
 
-function PlanOfferCard({ planKey, badge, per, cta, highlighted, onPick }: { planKey: string; badge: string; per: string; cta: string; highlighted: boolean; onPick: () => void }) {
+function PlanOfferCard({ planKey, badge, per, cta, highlighted, onPick, className = "" }: { planKey: string; badge: string; per: string; cta: string; highlighted: boolean; onPick: () => void; className?: string }) {
   const plan = subscribe.plans.find((p) => p.key === planKey) ?? subscribe.plans[1];
   return (
-    <div className={`relative flex flex-col rounded-tile bg-white p-6 ${highlighted ? "border-2 border-accent shadow-card" : "border border-border shadow-soft"}`}>
+    <div className={`relative flex flex-col rounded-tile bg-white p-6 ${highlighted ? "border-2 border-accent shadow-card" : "border border-border shadow-soft"} ${className}`}>
       {badge ? (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-deal px-3 py-1 text-xs font-semibold text-white">{badge}</span>
+        <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] px-3 py-1 text-xs font-semibold text-white shadow-blue">{badge}</span>
       ) : null}
       <p className="text-center text-sm font-semibold text-ink-2">{plan.name}</p>
       <div className="mt-3 flex items-baseline justify-center gap-2">
@@ -79,27 +79,27 @@ function PlanOfferCard({ planKey, badge, per, cta, highlighted, onPick }: { plan
         <span className="font-display text-4xl font-extrabold tracking-tight text-ink">{plan.now}</span>
         <span className="text-sm text-muted">{per}</span>
       </div>
-      <ul className="mt-5 flex flex-col gap-3">
+      <ul className="mt-4 flex flex-col gap-2.5">
         {offers.limited.benefits.map((b) => <BenefitRow key={b} text={b} />)}
       </ul>
-      <button onClick={onPick} className={`mt-6 ${highlighted ? GRADIENT_PILL : SOFT_PILL}`}>{cta}</button>
+      <button onClick={onPick} className={`mt-5 ${highlighted ? GRADIENT_PILL : SOFT_PILL}`}>{cta}</button>
     </div>
   );
 }
 
-function FreeOfferCard({ onPick }: { onPick: () => void }) {
+function FreeOfferCard({ onPick, className = "" }: { onPick: () => void; className?: string }) {
   const f = offers.limited.freeCard;
   return (
-    <div className="relative flex flex-col rounded-tile border border-border bg-white p-6 shadow-soft">
+    <div className={`relative flex flex-col rounded-tile border border-border bg-white p-6 shadow-soft ${className}`}>
       <p className="text-center text-sm font-semibold text-ink-2">{f.name}</p>
       <div className="mt-3 flex items-baseline justify-center gap-2">
         <span className="font-display text-4xl font-extrabold tracking-tight text-ink">{f.price}</span>
       </div>
       <p className="mt-1 text-center text-sm text-muted">{f.tagline}</p>
-      <ul className="mt-5 flex flex-col gap-3">
+      <ul className="mt-4 flex flex-col gap-2.5">
         {f.features.map((b) => <BenefitRow key={b} text={b} />)}
       </ul>
-      <button onClick={onPick} className={`mt-auto pt-6 ${""}`}>
+      <button onClick={onPick} className="mt-auto pt-5">
         <span className={SOFT_PILL}>{f.cta}</span>
       </button>
     </div>
@@ -117,12 +117,12 @@ export function OfferPlansModal({ open, variant, onClose, onContinue }: { open: 
       <div className="mt-7 grid gap-4 sm:grid-cols-2 sm:gap-5">
         {variant === "trial" ? (
           <>
-            <FreeOfferCard onPick={onClose} />
-            <PlanOfferCard planKey={o.premiumCard.planKey} badge={o.premiumCard.badge} per={o.premiumCard.per} cta={o.premiumCard.cta} highlighted onPick={onContinue} />
+            <FreeOfferCard onPick={onClose} className="order-last sm:order-none" />
+            <PlanOfferCard planKey={o.premiumCard.planKey} badge={o.premiumCard.badge} per={o.premiumCard.per} cta={o.premiumCard.cta} highlighted onPick={onContinue} className="order-first sm:order-none" />
           </>
         ) : (
           o.plansCards.map((c, i) => (
-            <PlanOfferCard key={c.planKey} planKey={c.planKey} badge={c.badge} per={c.per} cta={c.cta} highlighted={i === 1} onPick={onContinue} />
+            <PlanOfferCard key={c.planKey} planKey={c.planKey} badge={c.badge} per={c.per} cta={c.cta} highlighted={i === 1} onPick={onContinue} className={i === 1 ? "order-first sm:order-none" : "order-last sm:order-none"} />
           ))
         )}
       </div>
@@ -137,31 +137,32 @@ export function SpecialOfferModal({ open, onClose, onGrab }: { open: boolean; on
   const left = useCountdown(o.startSeconds);
   return (
     <OfferShell open={open} onClose={onClose} maxW="sm:max-w-md" id="offer-special">
-      <h3 className="pr-12 text-left font-display text-2xl font-extrabold tracking-tight text-ink sm:pr-0 sm:text-center sm:text-3xl">{o.title}</h3>
-      <p className="mt-2.5 text-left text-sm leading-relaxed text-ink-2 sm:text-center">{o.subtitle}</p>
-      <div className="mt-4 flex sm:justify-center">
-        <span className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-4 py-2 font-display text-xl font-bold tabular-nums text-accent">
-          <Clock size={18} /> {fmtMS(left)}
+      <h3 className="pr-12 text-center font-display text-2xl font-extrabold tracking-tight text-ink sm:pr-0 sm:text-3xl">{o.title}</h3>
+      <p className="mx-auto mt-2.5 max-w-xs text-center text-sm leading-relaxed text-ink-2">{o.subtitle}</p>
+      <div className="mt-4 flex justify-center">
+        <span className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-4 py-2 font-display text-lg font-bold tabular-nums text-accent">
+          <Clock size={16} /> {fmtMS(left)}
         </span>
       </div>
-      <p className="mt-3 text-left font-display text-5xl font-extrabold tracking-tight text-accent sm:text-center">{o.discount}</p>
-      <div className="mt-6 grid grid-cols-1 gap-2.5 min-[420px]:grid-cols-2">
+      <p className="mt-3 bg-[linear-gradient(180deg,#3B82F6,#2563EB)] bg-clip-text text-center font-display text-6xl font-extrabold uppercase tracking-tight text-transparent">{o.discount}</p>
+      <div className="mt-6 grid grid-cols-2 gap-2.5">
         {o.features.map((f) => {
           const IconCmp = SPECIAL_ICONS[f.icon as keyof typeof SPECIAL_ICONS] ?? Sparkles;
           return (
-            <div key={f.label} className="flex items-center gap-2.5 rounded-2xl border border-border bg-white px-3.5 py-3 shadow-soft">
+            <div key={f.label} className="flex flex-col gap-2 rounded-2xl border border-border bg-white px-3.5 py-3 shadow-soft">
               <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent"><IconCmp size={16} /></span>
-              <span className="text-[13px] font-medium leading-snug text-ink">{f.label}</span>
+              <span className="text-[12.5px] font-medium leading-snug text-ink">{f.label}</span>
             </div>
           );
         })}
       </div>
-      <p className="mt-6 text-left text-lg text-ink-2 sm:text-center">
-        {o.priceLead} <span className="font-medium text-muted line-through">{o.was}</span>{" "}
+      <div className="mt-6 flex items-baseline justify-center gap-2">
+        <span className="text-base text-ink-2">{o.priceLead}</span>
+        <span className="font-medium text-muted line-through">{o.was}</span>
         <span className="font-display text-2xl font-extrabold text-ink">{o.now}</span>
-      </p>
-      <p className="mt-1 text-left text-xs font-medium text-accent sm:text-center">{o.perDay}</p>
-      <button onClick={onGrab} className={`mt-6 ${GRADIENT_PILL}`}>{o.cta}</button>
+      </div>
+      <p className="mt-1 text-center text-xs font-medium text-accent">{o.perDay}</p>
+      <button onClick={onGrab} className={`mt-6 ${GRADIENT_PILL}`}>{o.cta} <ArrowRight size={16} /></button>
     </OfferShell>
   );
 }
@@ -175,8 +176,11 @@ export function OfferCheckoutModal({ open, onClose }: { open: boolean; onClose: 
   const [name, setName] = useState("");
   return (
     <OfferShell open={open} onClose={onClose} maxW="sm:max-w-5xl" id="offer-checkout">
-      <h3 className="pr-12 text-left font-display text-2xl font-extrabold tracking-tight text-ink sm:pr-0 sm:text-center sm:text-3xl">{o.title}</h3>
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_420px] lg:gap-9">
+      <div className="flex flex-col items-center gap-3">
+        <img src="/brand/logo.svg" alt="TranscribeToText.AI" className="h-7 w-auto" />
+        <h3 className="pr-10 text-center font-display text-2xl font-extrabold tracking-tight text-ink sm:pr-0 sm:text-3xl">{o.title}</h3>
+      </div>
+      <div className="mt-7 grid gap-6 lg:grid-cols-[1fr_420px] lg:gap-9">
         <div className="order-2 lg:order-1">
           <p className="font-display text-lg font-bold text-ink">{o.includesLabel}</p>
           <div className="mt-4 flex flex-col gap-5">
@@ -196,7 +200,7 @@ export function OfferCheckoutModal({ open, onClose }: { open: boolean; onClose: 
               </div>
               <span className="ml-auto text-xs text-muted">{o.review.date}</span>
             </div>
-            <div className="mt-3 flex items-center gap-0.5 text-amber-400">
+            <div className="mt-3 flex items-center gap-0.5 text-emerald-500">
               {Array.from({ length: 5 }).map((_, i) => <Star key={i} size={15} className="fill-current" />)}
             </div>
             <p className="mt-2.5 text-sm font-medium leading-relaxed text-ink">{o.review.text}</p>
@@ -213,7 +217,7 @@ export function OfferCheckoutModal({ open, onClose }: { open: boolean; onClose: 
               <span className="flex items-center gap-1.5 rounded-xl bg-accent-soft px-3 py-2">
                 <span className="text-sm font-semibold text-ink">{o.discountCard.code}</span>
                 <ChevronsRight size={16} className="text-accent" />
-                <span className="text-sm font-bold text-deal">{o.discountCard.off}</span>
+                <span className="text-sm font-bold text-emerald-600">{o.discountCard.off}</span>
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="rounded-xl border border-border bg-white px-2.5 py-1.5 text-center">
@@ -235,7 +239,7 @@ export function OfferCheckoutModal({ open, onClose }: { open: boolean; onClose: 
               <span className="font-display text-2xl font-extrabold text-ink">{o.now}</span>
             </p>
           </div>
-          <p className="text-right text-xs font-semibold text-deal">{o.save}</p>
+          <p className="text-right text-xs font-semibold text-emerald-600">{o.save}</p>
           <div className="mt-4 flex items-center justify-center gap-2 rounded-full bg-accent-soft px-4 py-2.5">
             <ShieldCheck size={16} className="shrink-0 text-accent" />
             <p className="text-sm font-medium text-ink">
