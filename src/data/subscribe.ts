@@ -113,3 +113,80 @@ export const subscribe = {
     ],
   },
 };
+
+// Special offers shown over the paywall + the checkout that follows them.
+// Same design language, our live 50%-off price set. No all-caps, no long dashes.
+export const offers = {
+  limited: {
+    title: "Limited time only!",
+    subtitle: "Get 50% off the world's best AI transcription service before it expires!",
+    startSeconds: 9 * 3600 + 41 * 60 + 8,
+    benefits: ["Unlimited transcription access", "Unlimited file capacity", "Comprehensive features", "Priority processing"],
+    freeCard: {
+      name: "Free plan",
+      price: "$0",
+      tagline: "100% free",
+      features: ["5 uploads daily", "15 minute uploads", "Lower priority"],
+      cta: "Start for free",
+    },
+    premiumCard: { planKey: "month", badge: "Save 50%", per: "/month", cta: "Get my plan" },
+    plansCards: [
+      { planKey: "month", badge: "", per: "/month", cta: "Choose 1-Month" },
+      { planKey: "quarter", badge: "Save 50%", per: "/3 months", cta: "Choose 3-Month" },
+    ],
+  },
+  special: {
+    title: "Special offer",
+    subtitle: "Grab the world's best AI transcription service before the timer runs out!",
+    startSeconds: 9 * 60 + 41,
+    discount: "50% off",
+    features: [
+      { icon: "infinity", label: "Unlimited transcription access" },
+      { icon: "database", label: "Unlimited file capacity" },
+      { icon: "sparkles", label: "Comprehensive features" },
+      { icon: "zap", label: "Priority processing" },
+    ],
+    priceLead: "Just",
+    was: "$29.99",
+    now: "$14.99/month",
+    perDay: "(less than $0.50/day)",
+    cta: "Grab this deal",
+  },
+  offerCheckout: {
+    title: "Transcribe everything. Miss nothing",
+    includesLabel: "The offer includes:",
+    includes: [
+      { name: "Unlimited audio and video transcription", body: "Unlock unlimited transcription with up to 4 hours per conversation. Import audio and video files with no limits and no stress." },
+      { name: "AI meeting agent", body: "Let AI join your Zoom, Google Meet or Teams calls to take notes, record audio and instantly share everything, so you never miss a thing." },
+      { name: "Transcribe from links", body: "Turn YouTube videos, Google Drive and Dropbox files into clear, accurate transcripts in seconds." },
+    ],
+    review: {
+      initial: "K",
+      name: "Kevin S.",
+      meta: "1 review · USA",
+      date: "Jan 21, 2026",
+      text: "Great service! From my favorite videos to a clean text file in just seconds.",
+      experience: "Date of experience: Jan 19, 2026",
+    },
+    discountCard: {
+      label: "Applied limited discount",
+      code: "Newcomer",
+      off: "50% off",
+      forLabel: "Applicable for",
+      startSeconds: 5 * 60 + 29,
+    },
+    welcome: "Welcome! A special 50% discount has been applied for new users. Enjoy!",
+    totalLabel: "Total due today:",
+    was: "$29.99",
+    now: "$14.99",
+    save: "You save 50%",
+    guarantee: { pre: "7-day", strong: "money back", post: "guarantee" },
+    cardPlaceholder: "Credit or Debit card number",
+    expiryPlaceholder: "Expiry date MM/YY",
+    cvcPlaceholder: "CVV/CVC",
+    namePlaceholder: "Name on card",
+    cta: "Start 7-day trial",
+    termsPre: "By proceeding with the purchase of a plan, you agree to our",
+    termsLinks: ["Terms of Service", "Privacy Policy"],
+  },
+};

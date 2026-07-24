@@ -6,6 +6,7 @@ import { CountdownBar } from "../components/subscribe/CountdownBar";
 import { PromoCode } from "../components/subscribe/PromoCode";
 import { PlanCards } from "../components/subscribe/PlanCards";
 import { CheckoutModal } from "../components/subscribe/CheckoutModal";
+import { OfferPlansModal, SpecialOfferModal, OfferCheckoutModal } from "../components/subscribe/OfferModals";
 import { DarkFeedback } from "../components/subscribe/DarkFeedback";
 import { Guarantee, Benefits, SafeCheckout } from "../components/subscribe/SubscribeSections";
 import { PAYWALL_HEADING } from "../components/subscribe/headings";
@@ -16,11 +17,18 @@ export function SubscribePage() {
   const { search } = useLocation();
   // ?checkout=open / ?checkout=error open the dialog directly (used for mockups).
   const initial = useMemo(() => {
-    const p = new URLSearchParams(search).get("checkout");
-    return { open: p === "open" || p === "error", error: p === "error" };
+    const q = new URLSearchParams(search);
+    const p = q.get("checkout");
+    const offer = q.get("offer");
+    return {
+      open: p === "open" || p === "error",
+      error: p === "error",
+      offer: (offer === "plans" || offer === "trial" || offer === "special" || offer === "checkout" ? offer : null) as "plans" | "trial" | "special" | "checkout" | null,
+    };
   }, [search]);
   const [selected, setSelected] = useState(1);
   const [open, setOpen] = useState(initial.open);
+  const [offer, setOffer] = useState<"plans" | "trial" | "special" | "checkout" | null>(initial.offer);
   const plan = subscribe.plans[selected];
   const legalBody = subscribe.legal.body.replace("{now}", plan.now).replace("{was}", plan.was);
   return (
@@ -67,6 +75,9 @@ export function SubscribePage() {
         </div>
       </div>
       <CheckoutModal open={open} onClose={() => setOpen(false)} planIndex={selected} forceError={initial.error} />
+      <OfferPlansModal open={offer === "plans" || offer === "trial"} variant={offer === "trial" ? "trial" : "plans"} onClose={() => setOffer(null)} onContinue={() => { setOffer(null); setOpen(true); }} />
+      <SpecialOfferModal open={offer === "special"} onClose={() => setOffer(null)} onGrab={() => setOffer("checkout")} />
+      <OfferCheckoutModal open={offer === "checkout"} onClose={() => setOffer(null)} />
     </div>
   );
 }
