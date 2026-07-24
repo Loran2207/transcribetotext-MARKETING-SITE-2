@@ -57,18 +57,18 @@ function OauthStack() {
   );
 }
 
-function TitleWithBack({ title, onBack }: { title: string; onBack: () => void }) {
+function BackSlot({ label, onBack }: { label: string; onBack: () => void }) {
+  // Occupies the exact height of the Login/Sign up switcher so the card
+  // composition does not jump between views.
   return (
-    <div className="relative flex items-center justify-center">
+    <div className="flex h-11 w-full max-w-[400px] items-center md:h-10">
       <button
         type="button"
         onClick={onBack}
-        aria-label="Back"
-        className="absolute left-0 flex size-10 items-center justify-center rounded-full text-muted-foreground transition hover:bg-black/5 hover:text-foreground"
+        className="-ml-2 inline-flex min-h-9 items-center gap-1.5 rounded-full px-2 text-sm font-medium text-muted-foreground transition hover:bg-black/5 hover:text-foreground"
       >
-        <ArrowLeft size={18} />
+        <ArrowLeft size={16} /> {label}
       </button>
-      <h1 className="text-center text-2xl font-semibold text-foreground">{title}</h1>
     </div>
   );
 }
@@ -235,8 +235,10 @@ export function LoginPage() {
                 </button>
               ))}
             </motion.div>
-          ) : null}
-          <motion.div variants={fadeUp} className={view === "form" ? "mt-8 w-full max-w-[400px] md:mt-10" : "w-full max-w-[400px]"}>
+          ) : (
+            <BackSlot label={login.reset.back} onBack={backToLogin} />
+          )}
+          <motion.div variants={fadeUp} className="mt-8 w-full max-w-[400px] md:mt-10">
             {view === "form" && (mode === "signin" || signupStep === 1) ? (
               <>
                 <h1 className="text-center text-2xl font-semibold text-foreground">{copy.title}</h1>
@@ -271,9 +273,10 @@ export function LoginPage() {
             ) : null}
             {view === "form" && mode === "signup" && signupStep === 2 ? (
               <>
-                <TitleWithBack title={login.signupPassword.title} onBack={() => { setSignupStep(1); setErr(null); }} />
+                <h1 className="text-center text-2xl font-semibold text-foreground">{login.signupPassword.title}</h1>
                 <p className="mt-2 text-center text-sm text-muted-foreground">
-                  {login.signupPassword.subtitle} <span className="font-medium text-foreground">{email.trim() || "mark@yahoo.com"}</span>
+                  {login.signupPassword.subtitle} <span className="font-medium text-foreground">{email.trim() || "mark@yahoo.com"}</span>{" "}
+                  <button type="button" onClick={() => { setSignupStep(1); setErr(null); }} className="font-medium text-primary hover:underline">Change</button>
                 </p>
                 <form onSubmit={submitSignupPassword} className="mt-6 flex flex-col gap-4">
                   <div className="flex flex-col gap-2">
@@ -289,7 +292,7 @@ export function LoginPage() {
             ) : null}
             {view === "reset" ? (
               <>
-                <TitleWithBack title={login.reset.title} onBack={backToLogin} />
+                <h1 className="text-center text-2xl font-semibold text-foreground">{login.reset.title}</h1>
                 <p className="mt-2 text-center text-sm text-muted-foreground">{login.reset.subtitle}</p>
                 <form onSubmit={submitReset} className="mt-6 flex flex-col gap-4">
                   {emailField("email")}
@@ -301,7 +304,7 @@ export function LoginPage() {
             ) : null}
             {view === "reset-sent" ? (
               <>
-                <TitleWithBack title={login.reset.title} onBack={backToLogin} />
+                <h1 className="text-center text-2xl font-semibold text-foreground">{login.reset.title}</h1>
                 <p className="mt-6 text-center text-sm font-medium text-trust">{login.resetSent.message}</p>
                 <p className="mt-2 text-center text-xs text-muted-foreground">{login.resetSent.hint}</p>
                 <AppButton variant="pill-outline" size="lg" onClick={backToLogin} className="mt-6 w-full min-h-11 lg:min-h-10">
@@ -311,7 +314,7 @@ export function LoginPage() {
             ) : null}
             {view === "newpass" ? (
               <>
-                <TitleWithBack title={login.newPassword.title} onBack={backToLogin} />
+                <h1 className="text-center text-2xl font-semibold text-foreground">{login.newPassword.title}</h1>
                 <p className="mt-2 text-center text-sm text-muted-foreground">{login.newPassword.subtitle}</p>
                 <form onSubmit={submitNewpass} className="mt-6 flex flex-col gap-4">
                   <div className="flex flex-col gap-2">
