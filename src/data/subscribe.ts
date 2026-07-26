@@ -178,6 +178,8 @@ export const offers = {
     now: "$14.99",
     save: "You save 50%",
     guarantee: { pre: "7-day", strong: "money back", post: "guarantee" },
+    expressLabel: "Express checkout",
+    cardDivider: "or pay by card",
     cardPlaceholder: "Credit or Debit card number",
     expiryPlaceholder: "Expiry date MM/YY",
     cvcPlaceholder: "CVV/CVC",

@@ -57,19 +57,26 @@ function OauthStack() {
   );
 }
 
-function BackSlot({ label, onBack }: { label: string; onBack: () => void }) {
-  // Occupies the exact height of the Login/Sign up switcher so the card
-  // composition does not jump between views.
+type BackControl = { label: string; onBack: () => void } | null;
+
+function BackSlot({ back, children }: { back: BackControl; children?: ReactNode }) {
+  // Occupies the exact height of the Login/Sign up switcher on every view so the card
+  // composition never jumps. The back arrow lives on that same line, pinned to the left
+  // edge of the card column, so it lands on identical coordinates on every view.
   return (
-    <div className="flex h-11 w-full max-w-[400px] items-center md:h-10">
-      <button
-        type="button"
-        onClick={onBack}
-        className="-ml-2 inline-flex min-h-9 items-center gap-1.5 rounded-full px-2 text-sm font-medium text-muted-foreground transition hover:bg-black/5 hover:text-foreground"
-      >
-        <ArrowLeft size={16} /> {label}
-      </button>
-    </div>
+    <motion.div variants={fadeUp} className="relative flex h-11 w-full max-w-[400px] items-center justify-center md:h-10">
+      {back ? (
+        <button
+          type="button"
+          onClick={back.onBack}
+          aria-label={back.label}
+          className="absolute -left-3 inline-flex size-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 md:-left-2 md:size-9"
+        >
+          <ArrowLeft size={20} />
+        </button>
+      ) : null}
+      {children}
+    </motion.div>
   );
 }
 
@@ -104,6 +111,10 @@ export function LoginPage() {
   const backToLogin = () => {
     setView("form");
     setMode("signin");
+    setErr(null);
+  };
+  const backToEmailStep = () => {
+    setSignupStep(1);
     setErr(null);
   };
   const switchMode = (m: "signin" | "signup") => {
@@ -211,33 +222,37 @@ export function LoginPage() {
 
   const emptyErrActive = (code: Err, value: string) => err === code && !value.trim();
   const loginDisabled = emptyErrActive("email-empty", email) || emptyErrActive("password-empty", password);
+  const onSignupPasswordStep = view === "form" && mode === "signup" && signupStep === 2;
+  const showTabs = view === "form" && !onSignupPasswordStep;
+  const backControl: BackControl = onSignupPasswordStep
+    ? { label: "Back", onBack: backToEmailStep }
+    : view !== "form"
+      ? { label: login.reset.back, onBack: backToLogin }
+      : null;
 
   return (
     <div className="flex min-h-screen flex-col bg-canvas">
       <Nav />
       <main className="flex flex-1 flex-col items-center px-5 pb-16 pt-24 md:px-4 md:pb-20 md:pt-28">
         <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="flex w-full max-w-[460px] flex-col items-center">
-          {view === "form" ? (
-            <motion.div
-              variants={fadeUp}
-              className="flex h-11 w-full max-w-[400px] items-center justify-center rounded-xl bg-[oklch(0.967_0.001_286.375)] p-[3px] md:inline-flex md:h-10 md:w-auto md:max-w-none"
-            >
-              {(["signin", "signup"] as const).map((m) => (
-                <button
-                  key={m}
-                  type="button"
-                  onClick={() => switchMode(m)}
-                  className={`inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center rounded-xl border border-transparent px-6 text-sm font-medium transition-[color,box-shadow] md:flex-initial ${
-                    mode === m ? "bg-white text-foreground shadow-[0_1px_2px_rgba(16,24,40,0.08)]" : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {m === "signin" ? login.tabs.login : login.tabs.signup}
-                </button>
-              ))}
-            </motion.div>
-          ) : (
-            <BackSlot label={login.reset.back} onBack={backToLogin} />
-          )}
+          <BackSlot back={backControl}>
+            {showTabs ? (
+              <div className="flex h-11 w-full max-w-[400px] items-center justify-center rounded-xl bg-[oklch(0.967_0.001_286.375)] p-[3px] md:inline-flex md:h-10 md:w-auto md:max-w-none">
+                {(["signin", "signup"] as const).map((m) => (
+                  <button
+                    key={m}
+                    type="button"
+                    onClick={() => switchMode(m)}
+                    className={`inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center rounded-xl border border-transparent px-6 text-sm font-medium transition-[color,box-shadow] md:flex-initial ${
+                      mode === m ? "bg-white text-foreground shadow-[0_1px_2px_rgba(16,24,40,0.08)]" : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {m === "signin" ? login.tabs.login : login.tabs.signup}
+                  </button>
+                ))}
+              </div>
+            ) : null}
+          </BackSlot>
           <motion.div variants={fadeUp} className="mt-8 w-full max-w-[400px] md:mt-10">
             {view === "form" && (mode === "signin" || signupStep === 1) ? (
               <>
@@ -276,7 +291,7 @@ export function LoginPage() {
                 <h1 className="text-center text-2xl font-semibold text-foreground">{login.signupPassword.title}</h1>
                 <p className="mt-2 text-center text-sm text-muted-foreground">
                   {login.signupPassword.subtitle} <span className="font-medium text-foreground">{email.trim() || "mark@yahoo.com"}</span>{" "}
-                  <button type="button" onClick={() => { setSignupStep(1); setErr(null); }} className="font-medium text-primary hover:underline">Change</button>
+                  <button type="button" onClick={backToEmailStep} className="font-medium text-primary hover:underline">Change</button>
                 </p>
                 <form onSubmit={submitSignupPassword} className="mt-6 flex flex-col gap-4">
                   <div className="flex flex-col gap-2">
