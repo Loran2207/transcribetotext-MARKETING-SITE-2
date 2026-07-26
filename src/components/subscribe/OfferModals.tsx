@@ -11,13 +11,8 @@ const GRADIENT_PILL =
 const SOFT_PILL =
   "flex h-12 w-full items-center justify-center rounded-full bg-accent-soft text-sm font-semibold text-accent transition-colors hover:bg-accent/15";
 const field = "h-12 w-full rounded-input bg-white px-3 text-sm text-ink outline-none transition-all placeholder:text-muted focus:ring-2 border border-border focus:border-accent focus:ring-accent/15 sm:px-4";
-const wallet = "flex h-10 items-center justify-center rounded-full border border-border bg-white transition-colors hover:bg-surface-soft";
+const wallet = "flex h-11 items-center justify-center rounded-full transition-[filter] hover:brightness-110";
 
-const WALLETS = [
-  { src: "/brand/pay/paypal-wordmark.svg", label: "Pay with PayPal", h: "h-[17px]" },
-  { src: "/brand/pay/applepay.svg", label: "Pay with Apple Pay", h: "h-[18px]" },
-  { src: "/brand/pay/gpay.svg", label: "Pay with Google Pay", h: "h-[18px]" },
-];
 
 function useCountdown(start: number) {
   const [left, setLeft] = useState(start);
@@ -242,14 +237,14 @@ export function OfferCheckoutModal({ open, onClose }: { open: boolean; onClose: 
           </div>
           <div className="mt-2.5 flex items-center justify-between gap-3">
             <span className="flex items-center gap-1.5">
-              <span className="whitespace-nowrap rounded-full border border-border px-2.5 py-1 text-[13px] font-medium text-ink-2">{o.discountCard.code}</span>
-              <ChevronsRight size={14} className="shrink-0 text-muted" />
-              <span className="whitespace-nowrap text-sm font-semibold text-ink">{o.discountCard.off}</span>
+              <span className="whitespace-nowrap rounded-full bg-rose-50 px-2.5 py-1 text-[13px] font-semibold text-rose-700">{o.discountCard.code}</span>
+              <ChevronsRight size={14} className="shrink-0 text-rose-400" />
+              <span className="whitespace-nowrap rounded-full bg-rose-600 px-2.5 py-1 text-[13px] font-semibold text-white">{o.discountCard.off}</span>
             </span>
             <span className="flex items-baseline gap-1 whitespace-nowrap">
-              <span className="font-display text-base font-bold tabular-nums text-ink">{two(Math.floor(left / 60))}</span>
+              <span className="font-display text-base font-bold tabular-nums text-rose-600">{two(Math.floor(left / 60))}</span>
               <span className="text-[11px] text-muted">min</span>
-              <span className="ml-1 font-display text-base font-bold tabular-nums text-ink">{two(left % 60)}</span>
+              <span className="ml-1 font-display text-base font-bold tabular-nums text-rose-600">{two(left % 60)}</span>
               <span className="text-[11px] text-muted">sec</span>
             </span>
           </div>
@@ -278,11 +273,16 @@ export function OfferCheckoutModal({ open, onClose }: { open: boolean; onClose: 
 
           <p className="text-xs font-medium text-muted">{o.expressLabel}</p>
           <div className="mt-2.5 grid grid-cols-3 gap-2">
-            {WALLETS.map((w) => (
-              <button key={w.label} className={wallet} aria-label={w.label}>
-                <img src={w.src} alt="" className={`${w.h} w-auto`} />
-              </button>
-            ))}
+            <button className={`${wallet} bg-[#FFC439]`} aria-label="Pay with PayPal">
+              <img src="/brand/pay/paypal-wordmark.svg" alt="PayPal" className="h-4 w-auto" />
+            </button>
+            <button className={`${wallet} gap-1 bg-black text-[15px] font-semibold text-white`} aria-label="Pay with Apple Pay">
+              <svg width="14" height="17" viewBox="0 0 24 29" aria-hidden="true"><path fill="currentColor" d="M20.06 15.36c-.04-3.1 2.53-4.58 2.65-4.66-1.44-2.11-3.69-2.4-4.49-2.44-1.9-.19-3.72 1.12-4.69 1.12-.96 0-2.46-1.09-4.04-1.06-2.08.03-4 1.21-5.07 3.07-2.16 3.75-.55 9.3 1.55 12.35 1.03 1.49 2.25 3.17 3.85 3.11 1.55-.06 2.13-1 4-1 1.87 0 2.4 1 4.03.97 1.67-.03 2.72-1.52 3.74-3.01 1.18-1.73 1.66-3.4 1.69-3.48-.04-.02-3.24-1.24-3.27-4.92l.05-.05Zm-3.1-8.49c.86-1.04 1.43-2.48 1.27-3.92-1.23.05-2.71.82-3.6 1.86-.79.92-1.48 2.38-1.29 3.79 1.37.11 2.77-.7 3.62-1.73Z" /></svg>
+              Pay
+            </button>
+            <button className={`${wallet} bg-black`} aria-label="Pay with Google Pay">
+              <img src="/brand/pay/gpay-white.svg" alt="Google Pay" className="h-4 w-auto" />
+            </button>
           </div>
 
           <div className="my-5 flex items-center gap-3">

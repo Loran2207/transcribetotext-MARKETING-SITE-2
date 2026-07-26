@@ -60,22 +60,25 @@ function OauthStack() {
 type BackControl = { label: string; onBack: () => void } | null;
 
 function BackSlot({ back, children }: { back: BackControl; children?: ReactNode }) {
-  // Occupies the exact height of the Login/Sign up switcher on every view so the card
-  // composition never jumps. The back arrow lives on that same line, pinned to the left
-  // edge of the card column, so it lands on identical coordinates on every view.
+  // One row for the whole auth card: the back arrow on the left, the Login / Sign up
+  // switcher centred between two equal slots. The arrow keeps its slot even when
+  // there is nowhere to go back to, so the switcher never shifts between views.
   return (
-    <motion.div variants={fadeUp} className="relative flex h-11 w-full max-w-[400px] items-center justify-center md:h-10">
-      {back ? (
-        <button
-          type="button"
-          onClick={back.onBack}
-          aria-label={back.label}
-          className="absolute -left-3 inline-flex size-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 md:-left-2 md:size-9"
-        >
-          <ArrowLeft size={20} />
-        </button>
-      ) : null}
-      {children}
+    <motion.div variants={fadeUp} className="flex h-11 w-full max-w-[400px] items-center gap-2 md:h-10">
+      <span className="flex size-9 shrink-0 items-center justify-center">
+        {back ? (
+          <button
+            type="button"
+            onClick={back.onBack}
+            aria-label={back.label}
+            className="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+          >
+            <ArrowLeft size={20} />
+          </button>
+        ) : null}
+      </span>
+      <span className="flex min-w-0 flex-1 items-center justify-center">{children}</span>
+      <span className="size-9 shrink-0" aria-hidden="true" />
     </motion.div>
   );
 }
@@ -121,6 +124,7 @@ export function LoginPage() {
     setMode(m);
     setSignupStep(1);
     setErr(null);
+    setView("form");
   };
 
   const submitLogin = (e: FormEvent) => {
@@ -223,7 +227,8 @@ export function LoginPage() {
   const emptyErrActive = (code: Err, value: string) => err === code && !value.trim();
   const loginDisabled = emptyErrActive("email-empty", email) || emptyErrActive("password-empty", password);
   const onSignupPasswordStep = view === "form" && mode === "signup" && signupStep === 2;
-  const showTabs = view === "form" && !onSignupPasswordStep;
+  // The reference keeps the Login / Sign up switcher on every screen, so we do too.
+  const showTabs = true;
   const backControl: BackControl = onSignupPasswordStep
     ? { label: "Back", onBack: backToEmailStep }
     : view !== "form"
