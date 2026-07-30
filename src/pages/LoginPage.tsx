@@ -389,16 +389,18 @@ export function LoginPage() {
             ) : null}
             {view === "form" ? (
               <>
-                <p className="mt-5 text-center text-xs leading-relaxed text-muted-foreground">
-                  {login.terms.prefix}{" "}
-                  {login.terms.links.map((l, i) => (
-                    <span key={l}>
-                      <a href="#" className="text-primary hover:underline">{l}</a>
-                      {i < login.terms.links.length - 1 ? (i === login.terms.links.length - 2 ? " and " : ", ") : "."}
-                    </span>
-                  ))}
-                </p>
-                <p className="mt-2 text-center text-xs text-muted-foreground">
+                {mode === "signup" ? (
+                  <p className="mt-5 text-center text-xs leading-relaxed text-muted-foreground">
+                    {login.terms.prefix}{" "}
+                    {login.terms.links.map((l, i) => (
+                      <span key={l}>
+                        <a href="#" className="text-primary hover:underline">{l}</a>
+                        {i < login.terms.links.length - 1 ? (i === login.terms.links.length - 2 ? " and " : ", ") : "."}
+                      </span>
+                    ))}
+                  </p>
+                ) : null}
+                <p className={`${mode === "signup" ? "mt-2" : "mt-5"} text-center text-xs text-muted-foreground`}>
                   {login.help.prefix}{" "}
                   <a href={`mailto:${login.help.email}`} className="break-words text-primary hover:underline">{login.help.email}</a>
                 </p>

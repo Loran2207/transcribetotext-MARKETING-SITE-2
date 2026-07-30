@@ -83,7 +83,15 @@ function PlanOfferCard({ planKey, badge, per, cta, highlighted, onPick, classNam
   return (
     <div className={`relative flex flex-col rounded-tile bg-white p-6 ${highlighted ? "border-2 border-accent shadow-card" : "border border-border shadow-soft"} ${className}`}>
       {badge ? (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] px-3 py-1 text-xs font-semibold text-white shadow-blue">{badge}</span>
+        <span
+          className={`absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold text-white ${
+            /save/i.test(badge)
+              ? "bg-[linear-gradient(180deg,#F43F5E,#E11D48)] shadow-[0_6px_16px_rgba(225,29,72,0.35)]"
+              : "bg-[linear-gradient(180deg,#3B82F6,#2563EB)] shadow-blue"
+          }`}
+        >
+          {badge}
+        </span>
       ) : null}
       <p className="text-center text-sm font-semibold text-ink-2">{plan.name}</p>
       <div className="mt-3 flex items-baseline justify-center gap-2">
@@ -91,6 +99,7 @@ function PlanOfferCard({ planKey, badge, per, cta, highlighted, onPick, classNam
         <span className="font-display text-4xl font-extrabold tracking-tight text-ink">{plan.now}</span>
         <span className="text-sm text-muted">{per}</span>
       </div>
+      <p className="mt-1.5 text-center text-xs font-medium text-muted">{plan.perDay} per day</p>
       <ul className="mt-4 flex flex-col gap-2.5">
         {offers.limited.benefits.map((b) => <BenefitRow key={b} text={b} />)}
       </ul>
@@ -124,8 +133,14 @@ export function OfferPlansModal({ open, variant, onClose, onContinue }: { open: 
   return (
     <OfferShell open={open} onClose={onClose} maxW="sm:max-w-3xl" id="offer-plans">
       <h3 className="pr-12 text-left font-display text-2xl font-extrabold tracking-tight text-ink sm:pr-0 sm:text-center sm:text-3xl">{o.title}</h3>
-      <p className="mt-3 text-left font-display text-3xl font-extrabold tabular-nums tracking-tight text-accent sm:text-center sm:text-4xl">{fmtHMS(left)}</p>
-      <p className="mt-3 max-w-xl text-left text-sm text-ink-2 sm:mx-auto sm:text-center">{o.subtitle}</p>
+      <div className="mt-3 flex justify-start sm:justify-center">
+        <span className="inline-flex items-center gap-2 rounded-full bg-rose-50 px-4 py-2 font-display text-xl font-bold tabular-nums text-rose-600 sm:text-2xl">
+          <Clock size={18} /> {fmtHMS(left)}
+        </span>
+      </div>
+      <p className="mt-3 max-w-xl text-left text-sm text-ink-2 sm:mx-auto sm:text-center">
+        {variant === "trial" ? o.trialSubtitle : o.subtitle}
+      </p>
       <div className="mt-7 grid gap-4 sm:grid-cols-2 sm:gap-5">
         {variant === "trial" ? (
           <>

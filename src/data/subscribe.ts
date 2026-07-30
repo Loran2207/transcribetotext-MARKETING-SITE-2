@@ -114,12 +114,20 @@ export const subscribe = {
   },
 };
 
+// One source of truth for money. Every offer reads the plan's own numbers, so a
+// price change lands on the paywall, the offers and the checkout at once and
+// nothing has to be kept in sync by hand.
+const monthPlan = subscribe.plans.find((p) => p.key === "month") ?? subscribe.plans[1];
+
 // Special offers shown over the paywall + the checkout that follows them.
 // Same design language, our live 50%-off price set. No all-caps, no long dashes.
 export const offers = {
   limited: {
     title: "Limited time only!",
     subtitle: "Get 50% off the world's best AI transcription service before it expires!",
+    // The free-vs-premium variant keeps the client's original line, which leads
+    // with the trial instead of the discount.
+    trialSubtitle: "Get a free trial with the world's best AI transcription service before it expires!",
     startSeconds: 9 * 3600 + 41 * 60 + 8,
     benefits: ["Unlimited transcription access", "Unlimited file capacity", "Comprehensive features", "Priority processing"],
     freeCard: {
@@ -127,9 +135,9 @@ export const offers = {
       price: "$0",
       tagline: "100% free",
       features: ["5 uploads daily", "15 minute uploads", "Lower priority"],
-      cta: "Start for free",
+      cta: "Start now for free",
     },
-    premiumCard: { planKey: "month", badge: "Save 50%", per: "/month", cta: "Get my plan" },
+    premiumCard: { planKey: "month", badge: "Save 50%", per: "/month", cta: "Start now for free" },
     plansCards: [
       { planKey: "month", badge: "", per: "/month", cta: "Choose 1-Month" },
       { planKey: "quarter", badge: "Save 50%", per: "/3 months", cta: "Choose 3-Month" },
@@ -147,9 +155,9 @@ export const offers = {
       { icon: "sparkles", label: "Comprehensive features" },
       { icon: "zap", label: "Priority processing" },
     ],
-    was: "$29.99",
-    now: "$14.99/month",
-    perDay: "(less than $0.50/day)",
+    was: monthPlan.was,
+    now: `${monthPlan.now}/month`,
+    perDay: `(${monthPlan.perDay} per day)`,
     cta: "Grab this deal",
   },
   offerCheckout: {
@@ -174,8 +182,8 @@ export const offers = {
       startSeconds: 5 * 60 + 29,
     },
     totalLabel: "Total due today:",
-    was: "$29.99",
-    now: "$14.99",
+    was: monthPlan.was,
+    now: monthPlan.now,
     save: "You save 50%",
     guarantee: { pre: "7-day", strong: "money back", post: "guarantee" },
     expressLabel: "Express checkout",
