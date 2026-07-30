@@ -309,9 +309,9 @@ export const login = {
     title: "Welcome back",
     subtitle: "Sign in to your TranscribeToText account",
     submit: "Sign in",
-    switchPrompt: "No account?",
-    switchAction: "Create one free",
-    forgot: "Forgot password?",
+    switchPrompt: "Don't have an account?",
+    switchAction: "Sign up",
+    forgot: "Reset your password?",
   },
   reset: {
     title: "Reset password",
