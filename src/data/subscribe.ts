@@ -142,7 +142,7 @@ export const offers = {
     benefits: ["Unlimited transcription access", "Unlimited file capacity", "Comprehensive features", "Priority processing"],
     freeCard: {
       name: "AI Transcriber Free",
-      price: "$0",
+      price: "Free",
       tagline: "100% free",
       features: ["5 uploads daily", "15 minute uploads", "Lower priority"],
       cta: "Start now for free",
@@ -199,6 +199,7 @@ export const offers = {
       startSeconds: 5 * 60 + 29,
     },
     totalLabel: "Total due today:",
+    planLine: "Premium, billed yearly",
     was: billing.offerWas,
     now: billing.offerNow,
     save: "You save 50%",

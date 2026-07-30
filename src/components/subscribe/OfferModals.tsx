@@ -281,7 +281,10 @@ export function OfferCheckoutModal({ open, onClose }: { open: boolean; onClose: 
               <span className="font-display text-[28px] font-extrabold leading-none tracking-tight text-ink sm:text-[32px]">{o.now}</span>
             </p>
           </div>
-          <p className="mt-1.5 text-right text-xs font-semibold text-emerald-600">{o.save}</p>
+          <div className="mt-1.5 flex items-baseline justify-between gap-3">
+            <p className="text-xs text-muted">{o.planLine}</p>
+            <p className="text-xs font-semibold text-emerald-600">{o.save}</p>
+          </div>
 
           <div className="my-5 h-px bg-border-soft" />
 
