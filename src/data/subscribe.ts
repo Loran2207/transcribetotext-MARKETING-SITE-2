@@ -114,10 +114,20 @@ export const subscribe = {
   },
 };
 
-// One source of truth for money. Every offer reads the plan's own numbers, so a
-// price change lands on the paywall, the offers and the checkout at once and
-// nothing has to be kept in sync by hand.
-const monthPlan = subscribe.plans.find((p) => p.key === "month") ?? subscribe.plans[1];
+// One source of truth for money, and none of it invented. These are the prices the
+// product already had: the pricing page sells Basic at $19.99 a month or $119.99 a
+// year, and $119.99 a year is the $9.99 a month the offer modals quote, which is
+// exactly the "save 50%" the reference badges. The 50%-off offer halves the year.
+const billing = {
+  monthly: "$19.99",
+  yearly: "$9.99",
+  yearlyTotal: "$119.99 billed yearly",
+  perMonth: "/month",
+  save: "Save 50%",
+  offerWas: "$119.99",
+  offerNow: "$59.50",
+  offerPerDay: "($0.17 per day)",
+};
 
 // Special offers shown over the paywall + the checkout that follows them.
 // Same design language, our live 50%-off price set. No all-caps, no long dashes.
@@ -131,16 +141,23 @@ export const offers = {
     startSeconds: 9 * 3600 + 41 * 60 + 8,
     benefits: ["Unlimited transcription access", "Unlimited file capacity", "Comprehensive features", "Priority processing"],
     freeCard: {
-      name: "Free plan",
+      name: "AI Transcriber Free",
       price: "$0",
       tagline: "100% free",
       features: ["5 uploads daily", "15 minute uploads", "Lower priority"],
       cta: "Start now for free",
     },
-    premiumCard: { planKey: "month", badge: "Save 50%", per: "/month", cta: "Start now for free" },
+    premiumCard: {
+      name: "AI Transcriber Premium",
+      price: billing.yearly,
+      per: billing.perMonth,
+      note: billing.yearlyTotal,
+      badge: billing.save,
+      cta: "Start now for free",
+    },
     plansCards: [
-      { planKey: "month", badge: "", per: "/month", cta: "Choose 1-Month" },
-      { planKey: "quarter", badge: "Save 50%", per: "/3 months", cta: "Choose 3-Month" },
+      { name: "Billed monthly", price: billing.monthly, per: billing.perMonth, note: "", badge: "", cta: "Start now for free" },
+      { name: "Billed yearly", price: billing.yearly, per: billing.perMonth, note: billing.yearlyTotal, badge: billing.save, cta: "Start now for free" },
     ],
   },
   special: {
@@ -155,9 +172,9 @@ export const offers = {
       { icon: "sparkles", label: "Comprehensive features" },
       { icon: "zap", label: "Priority processing" },
     ],
-    was: monthPlan.was,
-    now: `${monthPlan.now}/month`,
-    perDay: `(${monthPlan.perDay} per day)`,
+    was: billing.offerWas,
+    now: `${billing.offerNow}/year`,
+    perDay: billing.offerPerDay,
     cta: "Grab this deal",
   },
   offerCheckout: {
@@ -182,8 +199,8 @@ export const offers = {
       startSeconds: 5 * 60 + 29,
     },
     totalLabel: "Total due today:",
-    was: monthPlan.was,
-    now: monthPlan.now,
+    was: billing.offerWas,
+    now: billing.offerNow,
     save: "You save 50%",
     guarantee: { pre: "7-day", strong: "money back", post: "guarantee" },
     expressLabel: "Express checkout",

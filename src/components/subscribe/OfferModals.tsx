@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, Clock, ChevronsRight, Infinity as InfinityIcon, Database, Sparkles, Zap, Star, ShieldCheck, ArrowRight, Info } from "lucide-react";
-import { subscribe, offers } from "../../data/subscribe";
+import { offers } from "../../data/subscribe";
 import { EASE_OUT } from "../../lib/motion";
 import { SecureCheckout } from "./SecureCheckout";
 
@@ -78,8 +78,17 @@ function TrustStars({ big = false, className = "" }: { big?: boolean; className?
   );
 }
 
-function PlanOfferCard({ planKey, badge, per, cta, highlighted, onPick, className = "" }: { planKey: string; badge: string; per: string; cta: string; highlighted: boolean; onPick: () => void; className?: string }) {
-  const plan = subscribe.plans.find((p) => p.key === planKey) ?? subscribe.plans[1];
+interface OfferCard {
+  name: string;
+  price: string;
+  per: string;
+  note?: string;
+  badge?: string;
+  cta: string;
+}
+
+function PlanOfferCard({ card, highlighted, onPick, className = "" }: { card: OfferCard; highlighted: boolean; onPick: () => void; className?: string }) {
+  const badge = card.badge ?? "";
   return (
     <div className={`relative flex flex-col rounded-tile bg-white p-6 ${highlighted ? "border-2 border-accent shadow-card" : "border border-border shadow-soft"} ${className}`}>
       {badge ? (
@@ -93,17 +102,16 @@ function PlanOfferCard({ planKey, badge, per, cta, highlighted, onPick, classNam
           {badge}
         </span>
       ) : null}
-      <p className="text-center text-sm font-semibold text-ink-2">{plan.name}</p>
+      <p className="text-center text-sm font-semibold text-ink-2">{card.name}</p>
       <div className="mt-3 flex items-baseline justify-center gap-2">
-        <span className="text-sm font-medium text-muted line-through">{plan.was}</span>
-        <span className="font-display text-4xl font-extrabold tracking-tight text-ink">{plan.now}</span>
-        <span className="text-sm text-muted">{per}</span>
+        <span className="font-display text-4xl font-extrabold tracking-tight text-ink">{card.price}</span>
+        <span className="text-sm text-muted">{card.per}</span>
       </div>
-      <p className="mt-1.5 text-center text-xs font-medium text-muted">{plan.perDay} per day</p>
+      <p className="mt-1.5 min-h-4 text-center text-xs font-medium text-muted">{card.note ?? ""}</p>
       <ul className="mt-4 flex flex-col gap-2.5">
         {offers.limited.benefits.map((b) => <BenefitRow key={b} text={b} />)}
       </ul>
-      <button onClick={onPick} className={`mt-5 ${highlighted ? GRADIENT_PILL : SOFT_PILL}`}>{cta}</button>
+      <button onClick={onPick} className={`mt-5 ${highlighted ? GRADIENT_PILL : SOFT_PILL}`}>{card.cta}</button>
     </div>
   );
 }
@@ -145,11 +153,11 @@ export function OfferPlansModal({ open, variant, onClose, onContinue }: { open: 
         {variant === "trial" ? (
           <>
             <FreeOfferCard onPick={onClose} className="order-last sm:order-none" />
-            <PlanOfferCard planKey={o.premiumCard.planKey} badge={o.premiumCard.badge} per={o.premiumCard.per} cta={o.premiumCard.cta} highlighted onPick={onContinue} className="order-first sm:order-none" />
+            <PlanOfferCard card={o.premiumCard} highlighted onPick={onContinue} className="order-first sm:order-none" />
           </>
         ) : (
           o.plansCards.map((c, i) => (
-            <PlanOfferCard key={c.planKey} planKey={c.planKey} badge={c.badge} per={c.per} cta={c.cta} highlighted={i === 1} onPick={onContinue} className={i === 1 ? "order-first sm:order-none" : "order-last sm:order-none"} />
+            <PlanOfferCard key={c.name} card={c} highlighted={i === 1} onPick={onContinue} className={i === 1 ? "order-first sm:order-none" : "order-last sm:order-none"} />
           ))
         )}
       </div>
