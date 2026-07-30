@@ -400,10 +400,6 @@ export function LoginPage() {
                     ))}
                   </p>
                 ) : null}
-                <p className={`${mode === "signup" ? "mt-2" : "mt-5"} text-center text-xs text-muted-foreground`}>
-                  {login.help.prefix}{" "}
-                  <a href={`mailto:${login.help.email}`} className="break-words text-primary hover:underline">{login.help.email}</a>
-                </p>
                 <p className="mt-4 text-center text-sm text-muted-foreground">
                   {copy.switchPrompt}{" "}
                   <button
