@@ -178,7 +178,7 @@ export const offers = {
     cta: "Grab this deal",
   },
   offerCheckout: {
-    title: "Transcribe everything. Miss nothing",
+    title: "Transcribe everything. Miss nothing",
     includesLabel: "The offer includes:",
     includes: [
       { name: "Unlimited audio and video transcription", body: "Unlock unlimited transcription with up to 4 hours per conversation. Import audio and video files with no limits and no stress." },
