@@ -68,7 +68,7 @@ export function CheckoutModal({ open, onClose, planIndex, forceError = false }: 
                   <Row label={c.totalLabel} value={plan.now} total />
                 </div>
                 {errors && (
-                  <div className="mt-4 flex items-start gap-3 rounded-2xl border border-deal/25 bg-deal-soft px-4 py-3.5">
+                  <div className="mt-4 flex items-start gap-3 rounded-2xl border border-deal/25 bg-error-wash px-4 py-3.5">
                     <AlertCircle size={18} className="mt-0.5 shrink-0 text-deal" />
                     <div>
                       <p className="text-sm font-semibold text-ink">{c.error.title}</p>
