@@ -55,13 +55,13 @@ export function CheckoutModal({ open, onClose, planIndex, forceError = false }: 
             {done ? (
               <div className="flex flex-col items-center py-6 text-center">
                 <span className="grid h-16 w-16 place-items-center rounded-full bg-accent-soft text-accent"><Check size={30} /></span>
-                <h3 className="mt-5 font-display text-2xl font-semibold text-ink">{c.success.title}</h3>
+                <h3 className="mt-5 font-display text-2xl font-extrabold tracking-tight text-ink">{c.success.title}</h3>
                 <p className="mt-2 max-w-xs text-sm leading-relaxed text-ink-2">{c.success.body}</p>
                 <button onClick={onClose} className="mt-7 inline-flex h-12 items-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] px-7 text-sm font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20">Done</button>
               </div>
             ) : (
               <>
-                <h3 className="pr-12 text-left font-display text-xl font-bold text-ink sm:pr-0 sm:text-center sm:text-2xl">{c.title}</h3>
+                <h3 className="pr-12 text-left font-display text-xl font-extrabold tracking-tight text-ink sm:pr-0 sm:text-center sm:text-2xl">{c.title}</h3>
                 <p className="mt-5 text-xs font-medium text-muted">{c.summaryLabel}</p>
                 <div className="mt-2 space-y-1.5">
                   {c.summary.map((row) => <Row key={row.label} label={row.label} value={fill(row.value)} />)}
