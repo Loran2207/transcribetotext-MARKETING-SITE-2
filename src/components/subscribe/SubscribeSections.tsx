@@ -23,9 +23,8 @@ export function Benefits() {
   return (
     <div className="mt-14 md:mt-16 lg:mt-20">
       <h2 className={`text-center ${PAYWALL_HEADING}`}>
-        {subscribe.benefitsTitle}
-        <br />
-        <span className="text-accent">{subscribe.benefitsBrand}</span>
+        <span className="block">{subscribe.benefitsTitle}</span>
+        <span className="block text-accent">{subscribe.benefitsBrand}</span>
       </h2>
       <motion.div variants={stagger(0.05)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-8 grid gap-x-6 gap-y-5 sm:mt-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-6 lg:gap-x-12">
         {subscribe.benefits.map((b) => {
