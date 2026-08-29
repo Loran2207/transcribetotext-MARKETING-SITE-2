@@ -20,10 +20,9 @@ export function PromoCode() {
   return (
     <div className="mx-auto mt-8 w-full max-w-xl">
       <div
-        className={`relative rounded-tile border-2 p-3 transition-colors sm:p-4 ${
-          applied ? "border-accent/40 bg-accent-soft" : "border-border bg-surface-soft"
+        className={`relative overflow-hidden rounded-tile p-3 transition-colors sm:p-4 ${
+          applied ? "bg-accent-soft" : "bg-surface-soft"
         }`}
-        style={applied ? { boxShadow: "0 10px 30px rgba(37,99,235,.14)" } : undefined}
       >
         {applied && (
           <div className="mb-3 px-1 sm:mb-3.5">
@@ -33,13 +32,15 @@ export function PromoCode() {
               </span>
               <p className="text-sm font-semibold text-accent-dark sm:text-[15px]">{subscribe.promo.label}</p>
             </div>
-            {/* The coupon perforation from the app's own 10.08 revision - and
-                the two ticket notches that make the line read as a tear-off:
-                page-colored half-circles biting into the card's own border. */}
-            <div aria-hidden className="relative mt-3">
-              <div className="border-t-2 border-dashed border-accent/30" />
-              <span className="absolute -left-[27px] top-1/2 size-[18px] -translate-y-1/2 rounded-full border-2 border-accent/40 bg-canvas sm:-left-[31px]" />
-              <span className="absolute -right-[27px] top-1/2 size-[18px] -translate-y-1/2 rounded-full border-2 border-accent/40 bg-canvas sm:-right-[31px]" />
+            {/* The coupon perforation, built the way the app's own 10.08 promo
+                draws it: the card is a quiet borderless tint, the row spans it
+                edge to edge, and the notches are page-colored circles centered
+                on the card's edges - overflow-hidden clips their outer halves,
+                so the page genuinely bites INTO the ticket. */}
+            <div aria-hidden className="relative -mx-3 mt-3 sm:-mx-4">
+              <div className="border-t-2 border-dashed border-accent/25" />
+              <span className="absolute left-0 top-1/2 size-[22px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-canvas" />
+              <span className="absolute right-0 top-1/2 size-[22px] -translate-y-1/2 translate-x-1/2 rounded-full bg-canvas" />
             </div>
           </div>
         )}

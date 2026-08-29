@@ -14,6 +14,11 @@ const d = hero.demo;
 
 const TINTS = ["bg-accent-soft text-accent", "bg-trust-soft text-trust", "bg-[#FFF4E5] text-[#B45309]"];
 
+/* Deeper than the window's shadow-lift: a tight contact layer plus a long
+   soft drop, so the hanging cards read as the highest layer of the collage. */
+const FLOAT_SHADOW =
+  "shadow-[0_3px_6px_rgba(16,24,40,0.05),0_14px_28px_-8px_rgba(16,24,40,0.12),0_34px_68px_-14px_rgba(16,24,40,0.28)]";
+
 function initials(name: string) {
   return name.split(" ").map((w) => w[0]).join("").slice(0, 2);
 }
@@ -56,9 +61,12 @@ function Eq() {
   );
 }
 
+/* The two result cards carry no shadow of their own: each mount decides.
+   Hanging off the window's corners they get the deep float shadow; in the
+   flattened <lg stack they are plain rows inside the window. */
 function SummaryCard({ className = "" }: { className?: string }) {
   return (
-    <div className={`rounded-2xl bg-white p-4 shadow-lift ring-1 ring-black/[0.07] ${className}`}>
+    <div className={`rounded-2xl bg-white p-4 ring-1 ring-black/[0.07] ${className}`}>
       <p className="mb-2.5 flex items-center gap-1.5 text-[12px] font-semibold text-ink">
         <Sparkles size={13} className="text-accent" />
         {d.summaryTitle}
@@ -77,7 +85,7 @@ function SummaryCard({ className = "" }: { className?: string }) {
 
 function ActionsCard({ className = "" }: { className?: string }) {
   return (
-    <div className={`rounded-2xl bg-white p-4 shadow-lift ring-1 ring-black/[0.07] ${className}`}>
+    <div className={`rounded-2xl bg-white p-4 ring-1 ring-black/[0.07] ${className}`}>
       <p className="mb-2.5 flex items-center gap-1.5 text-[12px] font-semibold text-ink">
         <ListChecks size={13} className="text-accent" />
         {d.actionsTitle}
@@ -123,8 +131,8 @@ export function MeetingHeroMock() {
   const [a, b] = d.participants;
   return (
     /* Room for the overhang: tiles past the right edge, cards past the bottom.
-       The bottom reserve is sized so the hanging cards overlap the window by
-       only ~30px - a bitten edge, not a covered footer. */
+       The hanging cards bite ~40-50px into the window's 64px foot band and
+       never reach the chips above it; the reserve below holds their hang. */
     <div className="relative lg:pb-32 lg:pr-14">
       <div className="relative overflow-hidden rounded-[22px] bg-white shadow-lift ring-1 ring-black/[0.07]">
         <div className="flex items-center gap-3 border-b border-border-soft px-4 py-3">
@@ -196,17 +204,33 @@ export function MeetingHeroMock() {
         <Chips />
         {/* An empty band at the window's foot, lg only: the hanging cards bite
             into THIS, never into the chips above it. */}
-        <div aria-hidden className="hidden h-10 lg:block" />
+        <div aria-hidden className="hidden h-16 lg:block" />
       </div>
 
       {/* The satellites, lg and up: the call over the right edge, the two
-          results hanging off the bottom corners - each its own layer. */}
+          results hanging off the bottom corners - each its own layer. The
+          cards cross the window's boundary on BOTH axes, bite the foot band
+          deeply, sit on staggered baselines, cast a shadow visibly deeper
+          than the window's, and drift a few pixels - so they read as layers
+          floating over the window, not panels parked under it. */}
       <div className="absolute right-0 top-12 hidden w-[164px] flex-col gap-3 lg:flex">
         <Tile p={a} live />
         <Tile p={b} />
       </div>
-      <ActionsCard className="absolute bottom-0 left-5 hidden w-[262px] lg:block" />
-      <SummaryCard className="absolute bottom-1 right-16 hidden w-[240px] lg:block" />
+      <motion.div
+        className="absolute -left-3 bottom-7 hidden w-[262px] lg:block"
+        animate={reduce ? undefined : { y: [0, -5, 0] }}
+        transition={reduce ? undefined : { duration: 7, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <ActionsCard className={FLOAT_SHADOW} />
+      </motion.div>
+      <motion.div
+        className="absolute bottom-6 right-10 hidden w-[240px] lg:block"
+        animate={reduce ? undefined : { y: [0, -6, 0] }}
+        transition={reduce ? undefined : { duration: 8.5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+      >
+        <SummaryCard className={FLOAT_SHADOW} />
+      </motion.div>
     </div>
   );
 }

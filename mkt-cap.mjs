@@ -32,6 +32,10 @@ const ctx = await b.newContext({
 });
 const p = await ctx.newPage();
 
+/* The hero satellites drift a few px under framer-motion; reduced motion pins
+ * them at their base position so the frame matches the code exactly. */
+await p.emulateMedia({ reducedMotion: "reduce" });
+
 /* The consent banner is its own frame elsewhere; on every other frame it is a
  * bar over the footer. Seeded before the first paint so it never flashes. */
 await p.addInitScript(() => {
