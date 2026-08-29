@@ -16,7 +16,10 @@ import { chromium } from "playwright";
 
 const CAP = "https://mcp.figma.com/mcp/html-to-design/capture.js";
 
-const [routeArg, widthArg, cid, target] = process.argv.slice(2);
+const [routeArg, widthArg, cid, target, selArg] = process.argv.slice(2);
+/* Optional 5th arg: a CSS selector to capture one section as its own frame
+   (used for the feature-tab state frames). Defaults to the whole page. */
+const SEL = selArg || "body";
 const PORT = process.env.MKT_PORT || "4600";
 const BASE = `http://localhost:${PORT}`;
 const width = +widthArg;
@@ -227,8 +230,8 @@ if (preview) {
     .waitForResponse((r) => r.url().includes("/submit") && r.request().method() === "POST", { timeout: 240000 })
     .catch(() => null);
   await p.evaluate(
-    ([c, ep]) => { window.figma.captureForDesign({ captureId: c, endpoint: ep, selector: "body" }); },
-    [cid, target]
+    ([c, ep, sel]) => { window.figma.captureForDesign({ captureId: c, endpoint: ep, selector: sel }); },
+    [cid, target, SEL]
   );
   const res = await posted;
   console.log("submitted", res ? res.status() : "no POST seen in 240s");

@@ -1,7 +1,7 @@
 import { Nav } from "../components/sections/Nav";
 import { Hero } from "../components/sections/Hero";
 import { Trust } from "../components/sections/Trust";
-import { FeatureBlocks } from "../components/sections/FeatureBlocks";
+import { FeatureTabs } from "../components/sections/FeatureTabs";
 import { Reviews } from "../components/sections/Reviews";
 import { ProductValue } from "../components/sections/ProductValue";
 import { HowItWorks } from "../components/sections/HowItWorks";
@@ -23,7 +23,7 @@ export function Landing() {
       <main>
         <Hero />
         <Trust />
-        <FeatureBlocks />
+        <FeatureTabs />
         <Reviews />
         <ProductValue />
         <HowItWorks />

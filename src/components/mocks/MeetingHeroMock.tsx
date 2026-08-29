@@ -14,10 +14,9 @@ const d = hero.demo;
 
 const TINTS = ["bg-accent-soft text-accent", "bg-trust-soft text-trust", "bg-[#FFF4E5] text-[#B45309]"];
 
-/* The soft elevation pair: the window sits low and wide, the floating tiles a
-   touch higher - both diffuse, so the composition reads calm, not pasted. */
-const WINDOW_SHADOW =
-  "shadow-[0_1px_2px_rgba(16,24,40,0.04),0_12px_32px_-12px_rgba(16,24,40,0.07),0_40px_80px_-32px_rgba(16,24,40,0.10)]";
+/* The soft elevation pair: the window wears the shared shadow-window token,
+   the floating tiles sit a touch higher - both diffuse, so the composition
+   reads calm, not pasted. */
 const TILE_SHADOW =
   "shadow-[0_2px_6px_rgba(16,24,40,0.05),0_14px_32px_-12px_rgba(16,24,40,0.14)]";
 
@@ -133,7 +132,7 @@ export function MeetingHeroMock() {
   return (
     /* lg:pr-10 reserves exactly the tiles' overhang past the right edge. */
     <div className="relative lg:pr-10">
-      <div className={`relative overflow-hidden rounded-[22px] bg-white ring-1 ring-black/[0.06] ${WINDOW_SHADOW}`}>
+      <div className="shadow-window relative overflow-hidden rounded-[22px] bg-white ring-1 ring-black/[0.06]">
         <div className="flex items-center gap-3 border-b border-border-soft px-4 py-3">
           <span className="flex items-center gap-1.5" aria-hidden>
             <span className="size-[11px] rounded-full bg-[#FF5F57]" />

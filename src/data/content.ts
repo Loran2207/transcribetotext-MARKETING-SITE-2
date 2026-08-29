@@ -84,56 +84,77 @@ export const trust = {
   ],
 };
 
-// 3. FEATURES - meeting transcription first, and the largest block on the page.
-export const featureMeeting = {
-  label: "MEETING TRANSCRIPTION",
-  title: "Never Take Meeting Notes Again",
-  body: [
-    "Record and transcribe your Zoom, Google Meet and Microsoft Teams calls automatically.",
-    "Get a complete searchable transcript with speakers, summaries and key action items, ready as soon as your meeting ends.",
+// 3. FEATURES - the site's own "Our Transcription Services" block: four
+// services as four tab states, meeting transcription first and preselected
+// (Kirill, round 7: "Покажи 4 фич, как мы их видим. Надо четыре состояния").
+// Each state pairs the brief's copy with a generated editorial photo.
+export const services = {
+  title: "Our Transcription Services",
+  items: [
+    {
+      key: "meeting",
+      tab: "Meeting Transcription",
+      titlePre: "Never Take",
+      titleAccent: "Meeting Notes",
+      titlePost: "Again",
+      body: [
+        "Record and transcribe your Zoom, Google Meet and Microsoft Teams calls automatically.",
+        "Get a complete searchable transcript with speakers, summaries and key action items, ready as soon as your meeting ends.",
+      ],
+      benefits: [
+        "Automatic meeting transcription",
+        "Speaker recognition",
+        "AI-generated summaries",
+        "Key points & action items",
+      ],
+      cta: "Transcribe My Meeting",
+      photo: "/brand/features/meeting.jpg",
+    },
+    {
+      key: "audio",
+      tab: "Audio to Text",
+      titlePre: "Audio to",
+      titleAccent: "Text",
+      titlePost: "",
+      body: ["Upload any audio file, interviews, lectures, podcasts, and get instant, accurate transcripts powered by AI."],
+      benefits: [
+        "MP3, M4A, WAV & more",
+        "Speaker recognition",
+        "Files up to 10 hours / 5GB",
+        "DOCX, PDF & TXT export",
+      ],
+      cta: "Transcribe an Audio File",
+      photo: "/brand/features/audio.jpg",
+    },
+    {
+      key: "video",
+      tab: "Video to Text",
+      titlePre: "Video to",
+      titleAccent: "Text",
+      titlePost: "",
+      body: ["Upload any video and get the full transcript with every speaker separated, ready for subtitles, articles or notes."],
+      benefits: [
+        "MP4, MOV, MPEG & more",
+        "SRT & VTT subtitles",
+        "Speaker recognition",
+        "117+ languages",
+      ],
+      cta: "Transcribe a Video",
+      photo: "/brand/features/video.jpg",
+    },
+    {
+      key: "cloud",
+      tab: "Cloud File Transcription",
+      titlePre: "Your Content",
+      titleAccent: "Wherever It Lives",
+      titlePost: "",
+      body: ["Import content directly from your favorite platforms and turn it into searchable text."],
+      benefits: [],
+      cta: "Transcribe From the Cloud",
+      photo: "/brand/features/cloud.jpg",
+      platforms: ["YouTube", "Google Drive", "Dropbox", "Zoom", "Google Meet", "Microsoft Teams"],
+    },
   ],
-  benefits: [
-    "Automatic meeting transcription",
-    "Speaker recognition",
-    "AI-generated summaries",
-    "Key points & action items",
-    "Searchable meeting history",
-  ],
-  cta: "Transcribe My Meeting",
-};
-
-export const featureFiles = {
-  label: "AUDIO & VIDEO TRANSCRIPTION",
-  title: "Turn Any Audio or Video Into Text in Seconds",
-  body: "Upload interviews, podcasts, lectures, voice recordings or videos and get an accurate transcript automatically.",
-  benefits: [
-    "MP3, MP4, M4A, WAV and more",
-    "Speaker recognition",
-    "Files up to 10 hours / 5GB",
-    "117+ languages",
-    "DOCX, PDF, TXT, SRT & VTT export",
-  ],
-  cta: "Transcribe a File",
-  // The three states the visual walks through: file, processing, transcript.
-  demo: {
-    file: { name: "Founder interview.mp4", size: "412 MB", length: "1 hr 08 min" },
-    stages: ["Uploaded", "Transcribing", "Transcript ready"],
-    progress: "Transcribing, 68%",
-    lines: [
-      { who: "Interviewer", at: "04:02", text: "What made you start the company in the first place?" },
-      { who: "Guest", at: "04:09", text: "We were losing a full day a week to writing up calls by hand." },
-    ],
-    exports: ["DOCX", "PDF", "TXT", "SRT", "VTT"],
-  },
-};
-
-export const featureImport = {
-  label: "TRANSCRIBE FROM ANYWHERE",
-  // The brief's two beats survive as two lines instead of two full stops.
-  titleLine1: "Your Content",
-  titleLine2: "Wherever It Lives",
-  body: "Import content directly from your favorite platforms and turn it into searchable text.",
-  platforms: ["YouTube", "Google Drive", "Dropbox", "Zoom", "Google Meet", "Microsoft Teams"],
 };
 
 // 4. SOCIAL PROOF - Trustpilot format, straight after the features.
@@ -253,9 +274,11 @@ export const pricing = {
   },
 };
 
-// 9. INDUSTRIES - one tool, six kinds of conversation.
+// 9. INDUSTRIES - one tool, six kinds of conversation, each card carrying a
+// miniature of the product doing that job (the brief's reference layout).
 export const industries = {
   title: "One Tool for Every Conversation",
+  popularTag: "Most popular",
   subtitle:
     "Record meetings, transcribe content and turn hours of audio into searchable, actionable text.",
   cards: [
