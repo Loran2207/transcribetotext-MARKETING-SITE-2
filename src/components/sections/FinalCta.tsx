@@ -2,13 +2,17 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Container } from "../primitives/Container";
 import { Button } from "../primitives/Button";
+import { SectionCutout } from "../primitives/SectionCutout";
+import { StarField } from "../mocks/StarField";
 import { finalCta } from "../../data/content";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
 
 export function FinalCta() {
   return (
-    <section className="bg-dark-atmosphere py-16 md:py-24">
-      <Container>
+    <section className="relative overflow-hidden bg-dark-atmosphere py-16 md:py-24">
+      <SectionCutout />
+      <StarField />
+      <Container className="relative">
         <motion.div
           variants={stagger(0.1)}
           initial="hidden"
@@ -18,7 +22,7 @@ export function FinalCta() {
         >
           <motion.h2
             variants={fadeUp}
-            className="text-balance font-display text-3xl font-extrabold leading-[1.1] tracking-[-0.025em] text-ink-invert sm:text-4xl md:text-[46px]"
+            className="text-balance font-display text-3xl font-semibold leading-[1.1] tracking-[-0.025em] text-ink-invert sm:text-4xl md:text-[46px]"
           >
             {finalCta.title}
           </motion.h2>

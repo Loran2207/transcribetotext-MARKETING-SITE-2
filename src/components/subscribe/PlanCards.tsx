@@ -14,10 +14,14 @@ import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
    Below lg the three cards stay the snap carousel the build already had, with
    the popular plan centred and its neighbours peeking in. */
 
+/* Three tags, two voices: the recommended plan wears the brand blue, the value
+   plan wears deep ink, the trial stays quiet. The amber version of Best value
+   was rejected on sight - a third loud color on a three-card row made the row
+   argue with itself. */
 const TAG: Record<string, string> = {
   neutral: "border-border bg-white text-ink-2",
-  accent: "border-transparent bg-accent text-white",
-  gold: "border-transparent bg-[#FEF3C7] text-[#92400E]",
+  accent: "border-transparent bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-white shadow-blue",
+  gold: "border-transparent bg-ink text-white",
 };
 
 export function PlanCards({ selected, onSelect }: { selected: number; onSelect: (i: number) => void }) {
@@ -90,8 +94,9 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
 
               {/* Two lines are reserved on every card: one of the three notes
                   wraps, and without the reserve its card grew and its choice
-                  control stopped lining up with the other two. */}
-              <p className="mt-3 flex min-h-[52px] items-center justify-center rounded-xl bg-surface-soft px-3 py-2 text-center text-[12px] font-medium leading-snug text-ink-2">
+                  control stopped lining up with the other two. Plain words over
+                  a hairline - not a gray plate inside a white card. */}
+              <p className="mt-3 flex min-h-[52px] items-center justify-center border-t border-border-soft px-2 pt-3 text-center text-[12px] font-medium leading-snug text-ink-2">
                 {p.note}
               </p>
 

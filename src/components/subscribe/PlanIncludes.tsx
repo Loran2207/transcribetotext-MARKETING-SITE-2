@@ -34,7 +34,7 @@ export function PlanIncludes() {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="mt-8 rounded-[20px] border border-border-soft bg-surface-soft px-4 py-5 sm:px-6"
+      className="mt-8 rounded-[20px] border border-border bg-white px-4 py-5 shadow-soft sm:px-6"
     >
       <motion.p variants={fadeUp} className="text-center text-sm font-bold text-ink">
         {subscribe.includesTitle}
@@ -44,7 +44,7 @@ export function PlanIncludes() {
           const Icon = ICONS[it.icon];
           return (
             <motion.li key={it.label} variants={fadeUp} className="flex items-center gap-2 lg:flex-col lg:gap-1.5 lg:text-center">
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-white text-accent shadow-soft">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent">
                 <Icon size={15} strokeWidth={1.9} />
               </span>
               <span className="text-[11px] font-medium leading-tight text-ink-2 lg:text-[11px]">{it.label}</span>

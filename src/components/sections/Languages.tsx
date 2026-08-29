@@ -16,7 +16,7 @@ export function Languages() {
   const shown = all ? [...languages.list, ...languages.extra] : languages.list;
 
   return (
-    <section id="languages" className="bg-tint-sky py-12 md:py-16">
+    <section id="languages" className="border-t border-border-soft bg-white py-12 md:py-16">
       <Container>
         <motion.div
           variants={stagger(0.08)}
@@ -27,7 +27,7 @@ export function Languages() {
         >
           <motion.h2
             variants={fadeUp}
-            className="font-display text-2xl font-extrabold tracking-[-0.02em] text-ink sm:text-3xl"
+            className="font-display text-2xl font-semibold tracking-[-0.025em] text-ink sm:text-3xl"
           >
             {languages.title}
           </motion.h2>
@@ -48,7 +48,7 @@ export function Languages() {
               <img
                 src={brand.langFlags[name]}
                 alt={name}
-                className="size-9 rounded-full border border-white bg-white object-cover shadow-soft sm:size-10"
+                className="size-10 rounded-full bg-white object-cover shadow-card ring-2 ring-white sm:size-11"
               />
             </motion.li>
           ))}

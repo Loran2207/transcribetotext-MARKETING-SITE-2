@@ -30,13 +30,21 @@ export const hero = {
   ctaNote: "No credit card required",
   chips: ["Speaker detection", "AI Summary", "Action Items", "117+ languages", "Export"],
   // What the mockup inside the hero shows. Kept as data so the frame and the
-  // copy can never drift apart.
+  // copy can never drift apart. The participant photos are cropped from the
+  // meeting scene Kirill generated himself for V2 (service-meeting-v2.jpg) -
+  // his own approved asset, with our captions drawn over the baked-in ones.
   demo: {
     meeting: "Weekly product sync",
     platform: "Google Meet",
     recording: "Recording",
     elapsed: "24:18",
     live: "Live transcript",
+    participants: [
+      { name: "Sarah Chen", photo: "/brand/people/p1.jpg" },
+      { name: "Marcus Webb", photo: "/brand/people/p2.jpg" },
+      { name: "Elena Petrova", photo: "/brand/people/p3.jpg" },
+      { name: "You", photo: "/brand/people/p4.jpg" },
+    ],
     lines: [
       { who: "Sarah Chen", at: "00:12", text: "Let's start with the onboarding numbers from last week." },
       { who: "Marcus Webb", at: "00:26", text: "Sign-ups are up eleven percent, and the drop-off moved to the upload step." },
@@ -52,7 +60,7 @@ export const hero = {
     actions: [
       { who: "Marcus", text: "Ship the shorter upload flow", done: true },
       { who: "Sarah", text: "Re-measure drop-off on Friday", done: false },
-      { who: "Priya", text: "Share the sign-up chart with support", done: false },
+      { who: "Elena", text: "Share the sign-up chart with support", done: false },
     ],
   },
 };

@@ -49,7 +49,7 @@ export function Reviews() {
   const shown = reviews.items.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE);
 
   return (
-    <Section id="reviews" tone="soft">
+    <Section id="reviews" tone="white">
       <motion.div
         variants={stagger(0.08)}
         initial="hidden"
@@ -59,12 +59,13 @@ export function Reviews() {
       >
         <motion.h2
           variants={fadeUp}
-          className="text-balance font-display text-3xl font-extrabold tracking-[-0.02em] text-ink sm:text-4xl md:text-[42px]"
+          className="text-balance font-display text-3xl font-semibold tracking-[-0.025em] text-ink sm:text-4xl md:text-[42px]"
         >
           {reviews.title}
         </motion.h2>
-        <motion.p variants={fadeUp} className="flex flex-wrap items-center gap-2 text-sm text-ink-2">
+        <motion.p variants={fadeUp} className="flex flex-wrap items-center gap-2.5 text-sm text-ink-2">
           <Stars />
+          <span className="font-semibold text-ink">Excellent</span>
           {reviews.ratingLabel}
         </motion.p>
       </motion.div>
@@ -84,7 +85,7 @@ export function Reviews() {
             <motion.li
               key={r.name}
               variants={fadeUp}
-              className="flex flex-col rounded-[20px] border border-border bg-white p-5 shadow-soft"
+              className="flex flex-col rounded-[20px] border border-border bg-white p-6 shadow-card"
             >
               <Stars n={r.stars} />
               <p className="mt-3.5 flex-1 text-pretty text-sm leading-relaxed text-ink-2">{r.quote}</p>
