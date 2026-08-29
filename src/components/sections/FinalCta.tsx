@@ -24,7 +24,8 @@ export function FinalCta() {
             variants={fadeUp}
             className="text-balance font-display text-3xl font-semibold leading-[1.1] tracking-[-0.025em] text-ink-invert sm:text-4xl md:text-[46px]"
           >
-            {finalCta.title}
+            {finalCta.titleLine1}
+            <span className="block">{finalCta.titleLine2}</span>
           </motion.h2>
           <motion.p variants={fadeUp} className="text-pretty text-base leading-relaxed text-muted-invert md:text-lg">
             {finalCta.subtitle}

@@ -2,12 +2,13 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Check, Languages, ListChecks, Share2, Sparkles, Users } from "lucide-react";
 import { hero } from "../../data/content";
 
-/* The hero visual, composed the way the brief's own references compose it
-   (Granola, Rev): the product window carries the live transcript with the
-   summary and the action items, and the call itself floats over the window's
-   edge as a small column of video tiles. The faces are generated on Kirill's
-   Higgsfield account for this exact use; the captions are drawn by us and
-   match the transcript's speakers. */
+/* The hero visual as the Amberscript reference in the brief composes it: one
+   main window (the live transcript) with satellite cards overlapping its
+   edges - the call tiles over the right edge, the AI Summary and the Action
+   Items hanging off the bottom corners. Every piece is its own surface with
+   its own shadow, so the collage reads as deliberate layers, not a pile.
+   Faces generated on Kirill's Higgsfield account; captions are ours and match
+   the transcript's speakers. */
 
 const d = hero.demo;
 
@@ -55,14 +56,76 @@ function Eq() {
   );
 }
 
+function SummaryCard({ className = "" }: { className?: string }) {
+  return (
+    <div className={`rounded-2xl bg-white p-4 shadow-lift ring-1 ring-black/[0.07] ${className}`}>
+      <p className="mb-2.5 flex items-center gap-1.5 text-[12px] font-semibold text-ink">
+        <Sparkles size={13} className="text-accent" />
+        {d.summaryTitle}
+      </p>
+      <ul className="space-y-1.5">
+        {d.summary.map((s) => (
+          <li key={s} className="flex gap-2 text-[12px] leading-[1.5] text-ink-2">
+            <span className="mt-[6px] size-1 shrink-0 rounded-full bg-accent" />
+            {s}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ActionsCard({ className = "" }: { className?: string }) {
+  return (
+    <div className={`rounded-2xl bg-white p-4 shadow-lift ring-1 ring-black/[0.07] ${className}`}>
+      <p className="mb-2.5 flex items-center gap-1.5 text-[12px] font-semibold text-ink">
+        <ListChecks size={13} className="text-accent" />
+        {d.actionsTitle}
+      </p>
+      <ul className="space-y-2">
+        {d.actions.map((it) => (
+          <li key={it.text} className="flex items-start gap-2">
+            <span
+              className={`mt-[1px] flex size-[15px] shrink-0 items-center justify-center rounded-full ${
+                it.done ? "bg-accent text-white" : "border border-border bg-white"
+              }`}
+            >
+              {it.done ? <Check size={9} strokeWidth={3.5} /> : null}
+            </span>
+            <span className="text-[12px] leading-[1.45] text-ink-2">{it.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 const CHIP_ICON = [Users, Sparkles, ListChecks, Languages, Share2];
+
+function Chips() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 border-t border-border-soft px-5 py-3">
+      {hero.chips.map((c, i) => {
+        const Ico = CHIP_ICON[i % CHIP_ICON.length];
+        return (
+          <span key={c} className="inline-flex items-center gap-1 whitespace-nowrap text-[10px] font-medium text-ink-2">
+            <Ico size={11} className="text-accent" />
+            {c}
+          </span>
+        );
+      })}
+    </div>
+  );
+}
 
 export function MeetingHeroMock() {
   const reduce = useReducedMotion();
   const [a, b] = d.participants;
   return (
-    /* Room on the right for the tiles that overhang the window edge. */
-    <div className="relative lg:pr-16">
+    /* Room for the overhang: tiles past the right edge, cards past the bottom.
+       The bottom reserve is sized so the hanging cards overlap the window by
+       only ~30px - a bitten edge, not a covered footer. */
+    <div className="relative lg:pb-32 lg:pr-14">
       <div className="relative overflow-hidden rounded-[22px] bg-white shadow-lift ring-1 ring-black/[0.07]">
         <div className="flex items-center gap-3 border-b border-border-soft px-4 py-3">
           <span className="flex items-center gap-1.5" aria-hidden>
@@ -85,16 +148,14 @@ export function MeetingHeroMock() {
           <span className="shrink-0 text-[11px] font-medium tabular-nums text-muted">{d.elapsed}</span>
         </div>
 
-        {/* Below lg the call tiles sit as their own strip inside the window;
-            from lg they leave this strip and float over the right edge. */}
+        {/* Below lg the collage flattens into a stack: tile strip, transcript,
+            then the two result cards side by side, then the chips. */}
         <div className="grid grid-cols-2 gap-2 border-b border-border-soft p-3 lg:hidden">
           <Tile p={a} live className="shadow-none ring-black/5" />
           <Tile p={b} className="shadow-none ring-black/5" />
         </div>
 
-        {/* pr clears the overhanging tiles: they reach ~104px into the window,
-            so the transcript keeps 128px and no line runs underneath a face. */}
-        <div className="p-4 sm:p-5 lg:pr-32">
+        <div className="p-4 sm:p-5 lg:pb-6 lg:pr-32">
           <div className="mb-3.5 flex items-center gap-2">
             <span className="text-[11px] font-semibold tracking-[0.02em] text-muted">{d.live}</span>
             <Eq />
@@ -121,67 +182,31 @@ export function MeetingHeroMock() {
           </ul>
         </div>
 
-        <div className="grid border-t border-border-soft sm:grid-cols-2 sm:divide-x sm:divide-border-soft">
-          <div className="border-b border-border-soft p-4 sm:border-b-0 sm:p-5">
-            <p className="mb-2.5 flex items-center gap-1.5 text-[12px] font-semibold text-ink">
-              <Sparkles size={13} className="text-accent" />
-              {d.summaryTitle}
-            </p>
-            <ul className="space-y-1.5">
-              {d.summary.map((s) => (
-                <li key={s} className="flex gap-2 text-[12px] leading-[1.5] text-ink-2">
-                  <span className="mt-[6px] size-1 shrink-0 rounded-full bg-accent" />
-                  {s}
-                </li>
-              ))}
-            </ul>
+        <div className="grid border-t border-border-soft sm:grid-cols-2 sm:divide-x sm:divide-border-soft lg:hidden">
+          <div className="border-b border-border-soft p-4 sm:border-b-0">
+            <SummaryCard className="!p-0 !shadow-none !ring-0" />
           </div>
-          <div className="p-4 sm:p-5">
-            <p className="mb-2.5 flex items-center gap-1.5 text-[12px] font-semibold text-ink">
-              <ListChecks size={13} className="text-accent" />
-              {d.actionsTitle}
-            </p>
-            <ul className="space-y-2">
-              {d.actions.map((it) => (
-                <li key={it.text} className="flex items-start gap-2">
-                  <span
-                    className={`mt-[1px] flex size-[15px] shrink-0 items-center justify-center rounded-[5px] border ${
-                      it.done ? "border-accent bg-accent text-white" : "border-border bg-white"
-                    }`}
-                  >
-                    {it.done ? <Check size={10} strokeWidth={3} /> : null}
-                  </span>
-                  <span className="text-[12px] leading-[1.45] text-ink-2">
-                    {it.text}
-                    <span className="ml-1.5 rounded bg-surface-soft px-1.5 py-[1px] text-[10px] font-medium text-muted">{it.who}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
+          <div className="p-4">
+            <ActionsCard className="!p-0 !shadow-none !ring-0" />
           </div>
         </div>
 
-        {/* The brief's chips, inside the visual, as the window's own footer.
-            Sized so all five share one line at this window's width - a lone
-            chip on a second line is the orphan defect again. */}
-        <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-2 border-t border-border-soft px-4 py-3">
-          {hero.chips.map((c, i) => {
-            const Ico = CHIP_ICON[i % CHIP_ICON.length];
-            return (
-              <span key={c} className="inline-flex items-center gap-1 text-[10px] font-medium text-ink-2">
-                <Ico size={11} className="text-accent" />
-                {c}
-              </span>
-            );
-          })}
-        </div>
+        {/* The brief's chips, centered so the hanging cards below only ever
+            cover the footer's empty corners. */}
+        <Chips />
+        {/* An empty band at the window's foot, lg only: the hanging cards bite
+            into THIS, never into the chips above it. */}
+        <div aria-hidden className="hidden h-10 lg:block" />
       </div>
 
-      {/* The call, overhanging the window the way Granola draws it. */}
-      <div className="absolute -right-0 top-16 hidden w-[168px] flex-col gap-3 lg:flex">
+      {/* The satellites, lg and up: the call over the right edge, the two
+          results hanging off the bottom corners - each its own layer. */}
+      <div className="absolute right-0 top-12 hidden w-[164px] flex-col gap-3 lg:flex">
         <Tile p={a} live />
         <Tile p={b} />
       </div>
+      <ActionsCard className="absolute bottom-0 left-5 hidden w-[262px] lg:block" />
+      <SummaryCard className="absolute bottom-1 right-16 hidden w-[240px] lg:block" />
     </div>
   );
 }

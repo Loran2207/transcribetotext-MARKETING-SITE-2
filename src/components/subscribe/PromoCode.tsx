@@ -20,7 +20,7 @@ export function PromoCode() {
   return (
     <div className="mx-auto mt-8 w-full max-w-xl">
       <div
-        className={`rounded-tile border-2 p-3 transition-colors sm:p-4 ${
+        className={`relative rounded-tile border-2 p-3 transition-colors sm:p-4 ${
           applied ? "border-accent/40 bg-accent-soft" : "border-border bg-surface-soft"
         }`}
         style={applied ? { boxShadow: "0 10px 30px rgba(37,99,235,.14)" } : undefined}
@@ -33,9 +33,14 @@ export function PromoCode() {
               </span>
               <p className="text-sm font-semibold text-accent-dark sm:text-[15px]">{subscribe.promo.label}</p>
             </div>
-            {/* The coupon perforation from the app's own 10.08 revision: the
-                offer above the line, the code below it, like a tear-off stub. */}
-            <div aria-hidden className="mt-3 border-t-2 border-dashed border-accent/30" />
+            {/* The coupon perforation from the app's own 10.08 revision - and
+                the two ticket notches that make the line read as a tear-off:
+                page-colored half-circles biting into the card's own border. */}
+            <div aria-hidden className="relative mt-3">
+              <div className="border-t-2 border-dashed border-accent/30" />
+              <span className="absolute -left-[27px] top-1/2 size-[18px] -translate-y-1/2 rounded-full border-2 border-accent/40 bg-canvas sm:-left-[31px]" />
+              <span className="absolute -right-[27px] top-1/2 size-[18px] -translate-y-1/2 rounded-full border-2 border-accent/40 bg-canvas sm:-right-[31px]" />
+            </div>
           </div>
         )}
         <div className="flex items-stretch gap-2.5 sm:items-center">

@@ -14,15 +14,15 @@ import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
    Below lg the three cards stay the snap carousel the build already had, with
    the popular plan centred and its neighbours peeking in. */
 
-/* The reference's three voices, translated into our palette: the trial stays
-   quiet gray, the recommended plan wears the brand blue, and the value plan
-   wears our own rose - Kirill's "наш алый" - where the reference used amber.
-   The tag, the save badge and the note all inherit the card's voice, exactly
-   as the reference draws them. */
+/* Three voices in our palette: quiet gray for the trial, brand blue for the
+   recommended plan, and the house rose - loud, filled, "наш алый" - for the
+   value plan. All three tags sit ON the border (Kirill, 29 Aug: "best value
+   должен быть тоже там же сверху... таким ярким, красным"); the save badge
+   and the note inherit the card's voice. */
 const TAG: Record<string, string> = {
-  neutral: "border-border bg-surface-soft text-ink-2",
+  neutral: "border-border bg-white text-ink-2 shadow-soft",
   accent: "border-transparent bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-white shadow-blue",
-  gold: "border-transparent bg-deal/10 text-deal",
+  gold: "border-transparent bg-[linear-gradient(180deg,#FB7185,#F43F5E)] text-white shadow-[0_10px_26px_rgba(244,63,94,.32)]",
 };
 const SAVE: Record<string, string> = {
   accent: "bg-accent-soft text-accent",
@@ -67,27 +67,14 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
               on ? "border-accent shadow-card ring-2 ring-accent/20" : "border-border shadow-soft hover:border-accent/40"
             }`}
           >
-            {/* Only the recommended plan's tag sits on the border - that is
-                what singles it out in the reference. The other two carry their
-                tags inside, at the top of the card. */}
-            {p.popular ? (
-              <span
-                className={`absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border px-3.5 py-1 text-[10px] font-bold tracking-[0.07em] ${TAG[p.tone]}`}
-              >
-                {p.tag}
-              </span>
-            ) : null}
+            {/* All three tags ride the top border, one shape, three voices. */}
+            <span
+              className={`absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border px-3.5 py-1 text-[10px] font-bold tracking-[0.07em] ${TAG[p.tone]}`}
+            >
+              {p.tag}
+            </span>
 
-            <div className="flex flex-1 flex-col p-5 pt-5 lg:p-6 lg:pt-5">
-              {!p.popular ? (
-                <span
-                  className={`mb-3 self-center whitespace-nowrap rounded-full border border-transparent px-3 py-1 text-[10px] font-bold tracking-[0.07em] ${TAG[p.tone]}`}
-                >
-                  {p.tag}
-                </span>
-              ) : (
-                <span aria-hidden className="mb-3 block h-[26px]" />
-              )}
+            <div className="flex flex-1 flex-col p-5 pt-7 lg:p-6 lg:pt-8">
               <p className="text-xl font-bold tracking-tight text-ink sm:text-[22px]">{p.name}</p>
 
               <div className="mt-2 flex items-center gap-2 text-[15px]">

@@ -36,7 +36,8 @@ export function Hero() {
               variants={fadeUp}
               className="mt-6 text-balance font-display text-[34px] font-semibold leading-[1.07] tracking-[-0.025em] text-ink sm:text-[42px] lg:text-[46px]"
             >
-              {hero.title}
+              <span className="block">{hero.titleLine1}</span>
+              {hero.titleLine2}
             </motion.h1>
             <motion.p variants={fadeUp} className="mt-5 max-w-[520px] text-pretty text-lg leading-relaxed text-ink-2">
               {hero.subtitle}

@@ -27,9 +27,11 @@ const MEETING = {
     "Three-month plan won the pricing test.",
     "Numbers go to finance before Thursday.",
   ],
+  /* No assignee badges: a name chip beside every checkbox read as clutter, and
+     the transcript above already names the people. */
   actions: [
-    { who: "Elena", text: "Send the pricing numbers to finance", done: true },
-    { who: "Tom", text: "Make the 3-month plan the default", done: false },
+    { text: "Send the pricing numbers to finance", done: true },
+    { text: "Make the 3-month plan the default", done: false },
   ],
 };
 
@@ -103,16 +105,13 @@ export function MeetingResultMock() {
               {MEETING.actions.map((a) => (
                 <li key={a.text} className="flex items-start gap-2">
                   <span
-                    className={`mt-[1px] flex size-[14px] shrink-0 items-center justify-center rounded-[4px] border ${
-                      a.done ? "border-accent bg-accent text-white" : "border-white/25 bg-transparent"
+                    className={`mt-[2px] flex size-[15px] shrink-0 items-center justify-center rounded-full ${
+                      a.done ? "bg-accent/25 text-accent-glow" : "border border-white/25"
                     }`}
                   >
-                    {a.done ? <Check size={9} strokeWidth={3} /> : null}
+                    {a.done ? <Check size={9} strokeWidth={3.5} /> : null}
                   </span>
-                  <span className="text-[12px] leading-[1.4] text-muted-invert">
-                    {a.text}
-                    <span className="ml-1.5 rounded bg-white/10 px-1.5 py-[1px] text-[9px] font-medium text-ink-invert/70">{a.who}</span>
-                  </span>
+                  <span className="text-[12px] leading-[1.4] text-muted-invert">{a.text}</span>
                 </li>
               ))}
             </ul>

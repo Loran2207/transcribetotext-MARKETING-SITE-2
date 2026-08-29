@@ -43,7 +43,15 @@ export function Pricing() {
         className="pointer-events-none absolute inset-x-0 top-0 h-px origin-center bg-gradient-to-r from-transparent via-white/12 to-transparent"
       />
       <Container className="relative">
-        <SectionHeading title={pricing.title} tone="dark" />
+        <SectionHeading
+          title={
+            <>
+              <span className="block">{pricing.titleLine1}</span>
+              {pricing.titleLine2}
+            </>
+          }
+          tone="dark"
+        />
 
         <div className="mx-auto mt-12 grid max-w-4xl items-stretch gap-6 md:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)]">
           {/* Premium leads: the glow frame is what says "this is the one". */}

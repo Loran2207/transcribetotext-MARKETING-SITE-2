@@ -126,7 +126,8 @@ export function FeatureBlocks() {
                 variants={fadeUp}
                 className="mt-5 text-balance font-display text-3xl font-semibold leading-[1.1] tracking-[-0.025em] text-ink sm:text-[34px]"
               >
-                {featureImport.title}
+                <span className="block">{featureImport.titleLine1}</span>
+                {featureImport.titleLine2}
               </motion.h2>
               <motion.p variants={fadeUp} className="mt-4 text-pretty text-[15px] leading-relaxed text-ink-2 md:text-base">
                 {featureImport.body}

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ChevronDown, Globe } from "lucide-react";
 import { Container } from "../primitives/Container";
 import { Button } from "../primitives/Button";
+import { Globe3D } from "../mocks/Globe3D";
 import { languages } from "../../data/content";
 import { brand } from "../../data/assets";
 import { fadeUp, scaleIn, stagger, viewportOnce } from "../../lib/motion";
@@ -16,8 +17,21 @@ export function Languages() {
   const shown = all ? [...languages.list, ...languages.extra] : languages.list;
 
   return (
-    <section id="languages" className="border-t border-border-soft bg-white py-12 md:py-16">
-      <Container>
+    <section id="languages" className="relative overflow-hidden border-t border-border-soft bg-white py-12 pb-24 md:py-16 md:pb-32">
+      {/* V1's dotted globe, rising from below the block - the one piece of the
+          first version this section always carried. Masked so it fades before
+          it can compete with the flags. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-[-420px] left-1/2 w-[820px] -translate-x-1/2 opacity-70"
+        style={{
+          WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 26%, black 60%, transparent 78%)",
+          maskImage: "linear-gradient(to bottom, transparent 0%, black 26%, black 60%, transparent 78%)",
+        }}
+      >
+        <Globe3D />
+      </div>
+      <Container className="relative">
         {/* "Make the block smaller" meant the block, not its voice: the names
             under the flags are gone, but the heading and the button keep the
             same scale as every other section - a heading one size down read

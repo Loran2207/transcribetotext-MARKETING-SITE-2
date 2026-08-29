@@ -82,6 +82,28 @@ await p.addStyleTag({
   content: "*{animation:none!important;transition:none!important}",
 }).catch(() => {});
 
+/* html-to-design cannot serialise a canvas - it lands in Figma as an empty
+ * box. Bake every painted canvas into an img wearing the same geometry. */
+const baked = await p.evaluate(() => {
+  let n = 0;
+  document.querySelectorAll("canvas").forEach((c) => {
+    try {
+      const url = c.toDataURL("image/png");
+      const img = document.createElement("img");
+      img.src = url;
+      const cs = getComputedStyle(c);
+      img.style.cssText = c.style.cssText;
+      img.style.width = cs.width;
+      img.style.height = cs.height;
+      img.style.opacity = "1";
+      c.replaceWith(img);
+      n++;
+    } catch {}
+  });
+  return n;
+});
+if (baked) console.log("baked canvases:", baked);
+
 /* html-to-design serialises the DOM without any scroll offset, so a carousel
  * centred by JS arrives showing its first card. Bake the offset into a margin. */
 const flattened = await p.evaluate(() => {

@@ -23,7 +23,11 @@ export const nav = {
 // 1. HERO - the meeting use case, shown as the product rather than described.
 export const hero = {
   eyebrow: "AI MEETING & TRANSCRIPTION ASSISTANT",
-  title: "Record Meetings. Get Transcripts, Summaries & Action Items Automatically.",
+  // Two deliberate lines, so "Get" opens the second one beside "Transcripts"
+  // instead of dangling at the end of the first. No full stops in headings
+  // (Kirill, 29 Aug: "во всех заголовках уберём точки").
+  titleLine1: "Record Meetings",
+  titleLine2: "Get Transcripts, Summaries & Action Items Automatically",
   subtitle:
     "Record meetings or upload any audio or video file and turn it into accurate, searchable text in seconds.",
   primaryCta: "Start for Free",
@@ -57,10 +61,12 @@ export const hero = {
       "Shorter upload flow goes first.",
     ],
     actionsTitle: "Action Items",
+    // No assignee badges: a name chip beside every checkbox read as clutter,
+    // and the transcript above already names the people.
     actions: [
-      { who: "Marcus", text: "Ship the shorter upload flow", done: true },
-      { who: "Sarah", text: "Re-measure drop-off on Friday", done: false },
-      { who: "Elena", text: "Share the sign-up chart with support", done: false },
+      { text: "Ship the shorter upload flow", done: true },
+      { text: "Re-measure drop-off on Friday", done: false },
+      { text: "Share the sign-up chart with support", done: false },
     ],
   },
 };
@@ -68,8 +74,8 @@ export const hero = {
 // 2. TRUST
 export const trust = {
   eyebrow: "Trusted by thousands of professionals",
-  title: "Powerful transcription.",
-  subtitle: "Built for fast, effortless transcription.",
+  title: "Powerful transcription",
+  subtitle: "Built for fast, effortless transcription",
   cards: [
     { value: "55K+", label: "Users", body: "Join thousands of happy users worldwide" },
     { value: "117+", label: "Languages", body: "Transcribe and translate in 117+ languages" },
@@ -123,7 +129,9 @@ export const featureFiles = {
 
 export const featureImport = {
   label: "TRANSCRIBE FROM ANYWHERE",
-  title: "Your Content. Wherever It Lives.",
+  // The brief's two beats survive as two lines instead of two full stops.
+  titleLine1: "Your Content",
+  titleLine2: "Wherever It Lives",
   body: "Import content directly from your favorite platforms and turn it into searchable text.",
   platforms: ["YouTube", "Google Drive", "Dropbox", "Zoom", "Google Meet", "Microsoft Teams"],
 };
@@ -156,12 +164,12 @@ export const reviews = {
 export const productValue = {
   title: "Everything You Need After Transcription",
   cards: [
-    { key: "summary", name: "AI Summaries", claim: "Skip the rewatch. Get the important parts instantly.", body: "Turn long recordings into concise summaries." },
-    { key: "speakers", name: "Speaker Recognition", claim: "Know exactly who said what.", body: "Automatically identify different speakers in meetings, interviews and conversations." },
-    { key: "actions", name: "Action Items", claim: "Turn conversations into next steps.", body: "Automatically extract decisions, tasks and follow-ups from meetings." },
-    { key: "translate", name: "Translate", claim: "117+ languages. One workflow.", body: "Transcribe and translate recordings without switching tools." },
-    { key: "search", name: "Search", claim: "Find any moment instantly.", body: "Search your transcripts instead of replaying recordings." },
-    { key: "export", name: "Export", claim: "Use your transcript anywhere.", body: "Export to DOCX, PDF, TXT, SRT and VTT." },
+    { key: "summary", name: "AI Summaries", claim: "Skip the rewatch. Get the important parts instantly", body: "Turn long recordings into concise summaries." },
+    { key: "speakers", name: "Speaker Recognition", claim: "Know exactly who said what", body: "Automatically identify different speakers in meetings, interviews and conversations." },
+    { key: "actions", name: "Action Items", claim: "Turn conversations into next steps", body: "Automatically extract decisions, tasks and follow-ups from meetings." },
+    { key: "translate", name: "Translate", claim: "117+ languages. One workflow", body: "Transcribe and translate recordings without switching tools." },
+    { key: "search", name: "Search", claim: "Find any moment instantly", body: "Search your transcripts instead of replaying recordings." },
+    { key: "export", name: "Export", claim: "Use your transcript anywhere", body: "Export to DOCX, PDF, TXT, SRT and VTT." },
   ],
 };
 
@@ -211,7 +219,8 @@ export const languages = {
 
 // 8. PRICING - matches the paywall, no monthly/yearly switch.
 export const pricing = {
-  title: "Simple Pricing. Unlimited Transcription.",
+  titleLine1: "Simple Pricing",
+  titleLine2: "Unlimited Transcription",
   premium: {
     badge: "Premium",
     priceFrom: "FROM",
@@ -262,7 +271,8 @@ export const industries = {
 
 // 10. FINAL CTA
 export const finalCta = {
-  title: "Stop Rewatching. Start Reading.",
+  titleLine1: "Stop Rewatching",
+  titleLine2: "Start Reading",
   subtitle:
     "Turn your meetings, recordings and videos into accurate transcripts, summaries and action items.",
   cta: "Start for Free",
