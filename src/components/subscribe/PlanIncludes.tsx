@@ -39,15 +39,17 @@ export function PlanIncludes() {
       <motion.p variants={fadeUp} className="text-center text-sm font-bold text-ink">
         {subscribe.includesTitle}
       </motion.p>
-      <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3.5 sm:grid-cols-4 lg:grid-cols-8 lg:gap-x-2">
+      {/* The reference draws the eight as ONE row, icon beside a two-line
+          label, thin dividers between them. Below lg they fall back to a grid. */}
+      <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3.5 sm:grid-cols-4 lg:flex lg:items-stretch lg:gap-0 lg:divide-x lg:divide-border-soft">
         {subscribe.includes.map((it) => {
           const Icon = ICONS[it.icon];
           return (
-            <motion.li key={it.label} variants={fadeUp} className="flex items-center gap-2 lg:flex-col lg:gap-1.5 lg:text-center">
+            <motion.li key={it.label} variants={fadeUp} className="flex items-center gap-2 lg:flex-1 lg:justify-center lg:px-2">
               <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent">
                 <Icon size={15} strokeWidth={1.9} />
               </span>
-              <span className="text-[11px] font-medium leading-tight text-ink-2 lg:text-[11px]">{it.label}</span>
+              <span className="min-w-0 text-[11px] font-medium leading-tight text-ink-2">{it.label}</span>
             </motion.li>
           );
         })}

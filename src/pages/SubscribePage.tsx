@@ -6,6 +6,7 @@ import { CountdownBar } from "../components/subscribe/CountdownBar";
 import { PromoCode } from "../components/subscribe/PromoCode";
 import { PlanCards } from "../components/subscribe/PlanCards";
 import { PlanIncludes } from "../components/subscribe/PlanIncludes";
+import { SocialPill } from "../components/subscribe/SocialPill";
 import { CheckoutModal } from "../components/subscribe/CheckoutModal";
 import { OfferPlansModal, SpecialOfferModal, OfferCheckoutModal } from "../components/subscribe/OfferModals";
 import { DarkFeedback } from "../components/subscribe/DarkFeedback";
@@ -50,6 +51,7 @@ export function SubscribePage() {
             </motion.p>
           </motion.div>
           <PromoCode />
+          <SocialPill />
           <PlanCards selected={selected} onSelect={setSelected} />
           <PlanIncludes />
           <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-muted">

@@ -26,11 +26,16 @@ export function PromoCode() {
         style={applied ? { boxShadow: "0 10px 30px rgba(37,99,235,.14)" } : undefined}
       >
         {applied && (
-          <div className="mb-2.5 flex flex-wrap items-center gap-2 px-1 sm:mb-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">
-              <Tag size={13} /> {subscribe.promo.discount}
-            </span>
-            <p className="text-sm font-semibold text-accent-dark sm:text-[15px]">{subscribe.promo.label}</p>
+          <div className="mb-3 px-1 sm:mb-3.5">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">
+                <Tag size={13} /> {subscribe.promo.discount}
+              </span>
+              <p className="text-sm font-semibold text-accent-dark sm:text-[15px]">{subscribe.promo.label}</p>
+            </div>
+            {/* The coupon perforation from the app's own 10.08 revision: the
+                offer above the line, the code below it, like a tear-off stub. */}
+            <div aria-hidden className="mt-3 border-t-2 border-dashed border-accent/30" />
           </div>
         )}
         <div className="flex items-stretch gap-2.5 sm:items-center">

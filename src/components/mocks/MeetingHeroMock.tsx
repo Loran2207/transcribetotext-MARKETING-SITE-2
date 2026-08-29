@@ -2,12 +2,12 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Check, Languages, ListChecks, Share2, Sparkles, Users } from "lucide-react";
 import { hero } from "../../data/content";
 
-/* The hero visual is the product, drawn at V1's dashboard grade: one wide app
-   window under the centered headline, carrying everything the brief names at
-   once - the call (real participant tiles), the live transcript, the AI
-   summary and the action items. The tiles are cropped from the meeting scene
-   Kirill generated for V2; our captions cover the baked-in ones, so the names
-   on the picture and the names in the transcript are the same names. */
+/* The hero visual, composed the way the brief's own references compose it
+   (Granola, Rev): the product window carries the live transcript with the
+   summary and the action items, and the call itself floats over the window's
+   edge as a small column of video tiles. The faces are generated on Kirill's
+   Higgsfield account for this exact use; the captions are drawn by us and
+   match the transcript's speakers. */
 
 const d = hero.demo;
 
@@ -17,22 +17,17 @@ function initials(name: string) {
   return name.split(" ").map((w) => w[0]).join("").slice(0, 2);
 }
 
-function Tile({ p, live }: { p: { name: string; photo: string }; live?: boolean }) {
-  /* The photos are trimmed above their baked-in captions, so the only name on
-     a tile is the one we draw - and it matches the transcript. */
+function Tile({ p, live, className = "" }: { p: { name: string; photo: string }; live?: boolean; className?: string }) {
   return (
-    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[10px] bg-ink/5">
+    <div className={`relative aspect-[16/10] overflow-hidden rounded-xl bg-ink/5 shadow-lift ring-1 ring-black/10 ${className}`}>
       <img src={p.photo} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
       <span
         aria-hidden
-        className="absolute inset-x-0 bottom-0 h-8"
-        style={{ background: "linear-gradient(180deg, rgba(6,10,20,0) 0%, rgba(6,10,20,0.72) 100%)" }}
+        className="absolute inset-x-0 bottom-0 h-9"
+        style={{ background: "linear-gradient(180deg, rgba(6,10,20,0) 0%, rgba(6,10,20,0.66) 100%)" }}
       />
-      {/* At 390 a tile is ~80px wide and a full name wrapped onto the face;
-          below sm the caption is the first name alone. */}
       <span className="absolute bottom-1.5 left-2 max-w-[calc(100%-12px)] truncate text-[10px] font-semibold text-white drop-shadow-sm">
-        <span className="sm:hidden">{p.name.split(" ")[0]}</span>
-        <span className="hidden sm:inline">{p.name}</span>
+        {p.name}
       </span>
       {live ? (
         <span className="absolute right-1.5 top-1.5 flex size-4 items-center justify-center rounded-full bg-black/35">
@@ -64,41 +59,42 @@ const CHIP_ICON = [Users, Sparkles, ListChecks, Languages, Share2];
 
 export function MeetingHeroMock() {
   const reduce = useReducedMotion();
+  const [a, b] = d.participants;
   return (
-    <div className="relative overflow-hidden rounded-[22px] bg-white shadow-lift ring-1 ring-black/[0.07]">
-      {/* Window chrome: the traffic lights say "this is the app", the header
-          names the meeting, and the recording pill says it is happening now. */}
-      <div className="flex items-center gap-3 border-b border-border-soft px-4 py-3 sm:px-5">
-        <span className="hidden items-center gap-1.5 sm:flex" aria-hidden>
-          <span className="size-[11px] rounded-full bg-[#FF5F57]" />
-          <span className="size-[11px] rounded-full bg-[#FEBC2E]" />
-          <span className="size-[11px] rounded-full bg-[#28C840]" />
-        </span>
-        <span className="min-w-0 truncate text-[13px] font-semibold text-ink sm:ml-2">{d.meeting}</span>
-        <span className="hidden shrink-0 rounded-md bg-surface-soft px-2 py-0.5 text-[11px] font-medium text-ink-2 sm:inline">{d.platform}</span>
-        <span className="ml-auto flex shrink-0 items-center gap-1.5 rounded-full bg-deal/10 px-2.5 py-1 text-[11px] font-semibold text-deal">
-          <motion.span
-            className="size-1.5 rounded-full bg-deal"
-            animate={reduce ? undefined : { opacity: [1, 0.25, 1] }}
-            transition={reduce ? undefined : { duration: 1.6, repeat: Infinity }}
-          />
-          {d.recording}
-        </span>
-        <span className="shrink-0 text-[11px] font-medium tabular-nums text-muted">{d.elapsed}</span>
-      </div>
+    /* Room on the right for the tiles that overhang the window edge. */
+    <div className="relative lg:pr-16">
+      <div className="relative overflow-hidden rounded-[22px] bg-white shadow-lift ring-1 ring-black/[0.07]">
+        <div className="flex items-center gap-3 border-b border-border-soft px-4 py-3">
+          <span className="flex items-center gap-1.5" aria-hidden>
+            <span className="size-[11px] rounded-full bg-[#FF5F57]" />
+            <span className="size-[11px] rounded-full bg-[#FEBC2E]" />
+            <span className="size-[11px] rounded-full bg-[#28C840]" />
+          </span>
+          <span className="ml-1 min-w-0 truncate text-[13px] font-semibold text-ink">{d.meeting}</span>
+          <span className="hidden shrink-0 rounded-md bg-surface-soft px-2 py-0.5 text-[11px] font-medium text-ink-2 sm:inline">
+            {d.platform}
+          </span>
+          <span className="ml-auto flex shrink-0 items-center gap-1.5 rounded-full bg-deal/10 px-2.5 py-1 text-[11px] font-semibold text-deal">
+            <motion.span
+              className="size-1.5 rounded-full bg-deal"
+              animate={reduce ? undefined : { opacity: [1, 0.25, 1] }}
+              transition={reduce ? undefined : { duration: 1.6, repeat: Infinity }}
+            />
+            {d.recording}
+          </span>
+          <span className="shrink-0 text-[11px] font-medium tabular-nums text-muted">{d.elapsed}</span>
+        </div>
 
-      {/* The call itself: a strip of real faces across the top, the way the
-          call apps draw it, which also keeps the columns below the same
-          height - a tall side rail left the results column half empty. */}
-      <div className="grid grid-cols-4 gap-2 border-b border-border-soft p-3 sm:gap-2.5 sm:px-4">
-        {d.participants.map((p, i) => (
-          <Tile key={p.name} p={p} live={i === 0} />
-        ))}
-      </div>
+        {/* Below lg the call tiles sit as their own strip inside the window;
+            from lg they leave this strip and float over the right edge. */}
+        <div className="grid grid-cols-2 gap-2 border-b border-border-soft p-3 lg:hidden">
+          <Tile p={a} live className="shadow-none ring-black/5" />
+          <Tile p={b} className="shadow-none ring-black/5" />
+        </div>
 
-      <div className="grid md:grid-cols-[minmax(0,1.16fr)_minmax(0,1fr)]">
-        {/* The words, as they are being said. */}
-        <div className="border-b border-border-soft p-4 sm:p-5 md:border-b-0 md:border-r">
+        {/* pr clears the overhanging tiles: they reach ~104px into the window,
+            so the transcript keeps 128px and no line runs underneath a face. */}
+        <div className="p-4 sm:p-5 lg:pr-32">
           <div className="mb-3.5 flex items-center gap-2">
             <span className="text-[11px] font-semibold tracking-[0.02em] text-muted">{d.live}</span>
             <Eq />
@@ -125,9 +121,8 @@ export function MeetingHeroMock() {
           </ul>
         </div>
 
-        {/* What the product hands back, while the call is still running. */}
-        <div className="divide-y divide-border-soft">
-          <div className="p-4 sm:p-5">
+        <div className="grid border-t border-border-soft sm:grid-cols-2 sm:divide-x sm:divide-border-soft">
+          <div className="border-b border-border-soft p-4 sm:border-b-0 sm:p-5">
             <p className="mb-2.5 flex items-center gap-1.5 text-[12px] font-semibold text-ink">
               <Sparkles size={13} className="text-accent" />
               {d.summaryTitle}
@@ -147,38 +142,45 @@ export function MeetingHeroMock() {
               {d.actionsTitle}
             </p>
             <ul className="space-y-2">
-              {d.actions.map((a) => (
-                <li key={a.text} className="flex items-start gap-2">
+              {d.actions.map((it) => (
+                <li key={it.text} className="flex items-start gap-2">
                   <span
                     className={`mt-[1px] flex size-[15px] shrink-0 items-center justify-center rounded-[5px] border ${
-                      a.done ? "border-accent bg-accent text-white" : "border-border bg-white"
+                      it.done ? "border-accent bg-accent text-white" : "border-border bg-white"
                     }`}
                   >
-                    {a.done ? <Check size={10} strokeWidth={3} /> : null}
+                    {it.done ? <Check size={10} strokeWidth={3} /> : null}
                   </span>
                   <span className="text-[12px] leading-[1.45] text-ink-2">
-                    {a.text}
-                    <span className="ml-1.5 rounded bg-surface-soft px-1.5 py-[1px] text-[10px] font-medium text-muted">{a.who}</span>
+                    {it.text}
+                    <span className="ml-1.5 rounded bg-surface-soft px-1.5 py-[1px] text-[10px] font-medium text-muted">{it.who}</span>
                   </span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
+
+        {/* The brief's chips, inside the visual, as the window's own footer.
+            Sized so all five share one line at this window's width - a lone
+            chip on a second line is the orphan defect again. */}
+        <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-2 border-t border-border-soft px-4 py-3">
+          {hero.chips.map((c, i) => {
+            const Ico = CHIP_ICON[i % CHIP_ICON.length];
+            return (
+              <span key={c} className="inline-flex items-center gap-1 text-[10px] font-medium text-ink-2">
+                <Ico size={11} className="text-accent" />
+                {c}
+              </span>
+            );
+          })}
+        </div>
       </div>
 
-      {/* The brief's chips live INSIDE the visual, as its own footer strip -
-          words over a hairline, not a gray plate. */}
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border-soft px-4 py-3 sm:px-5">
-        {hero.chips.map((c, i) => {
-          const Ico = CHIP_ICON[i % CHIP_ICON.length];
-          return (
-            <span key={c} className="inline-flex items-center gap-1.5 text-[11px] font-medium text-ink-2">
-              <Ico size={12} className="text-accent" />
-              {c}
-            </span>
-          );
-        })}
+      {/* The call, overhanging the window the way Granola draws it. */}
+      <div className="absolute -right-0 top-16 hidden w-[168px] flex-col gap-3 lg:flex">
+        <Tile p={a} live />
+        <Tile p={b} />
       </div>
     </div>
   );

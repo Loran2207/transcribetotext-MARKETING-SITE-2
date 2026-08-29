@@ -18,20 +18,24 @@ export function Languages() {
   return (
     <section id="languages" className="border-t border-border-soft bg-white py-12 md:py-16">
       <Container>
+        {/* "Make the block smaller" meant the block, not its voice: the names
+            under the flags are gone, but the heading and the button keep the
+            same scale as every other section - a heading one size down read
+            as a lesser section, and it is not one. */}
         <motion.div
           variants={stagger(0.08)}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          className="flex flex-col items-start gap-2.5 text-left sm:items-center sm:text-center"
+          className="flex flex-col items-start gap-3 text-left sm:items-center sm:text-center"
         >
           <motion.h2
             variants={fadeUp}
-            className="font-display text-2xl font-semibold tracking-[-0.025em] text-ink sm:text-3xl"
+            className="text-balance font-display text-3xl font-semibold tracking-[-0.025em] text-ink sm:text-4xl md:text-[40px]"
           >
             {languages.title}
           </motion.h2>
-          <motion.p variants={fadeUp} className="max-w-xl text-pretty text-sm leading-relaxed text-ink-2">
+          <motion.p variants={fadeUp} className="max-w-xl text-pretty text-[15px] leading-relaxed text-ink-2">
             {languages.subtitle}
           </motion.p>
         </motion.div>
@@ -64,7 +68,7 @@ export function Languages() {
             {all ? languages.seeFewer : languages.seeAll}
             <ChevronDown size={14} className={all ? "rotate-180 transition" : "transition"} />
           </button>
-          <Button href="/subscribe">{languages.cta}</Button>
+          <Button href="/subscribe" size="lg">{languages.cta}</Button>
         </div>
       </Container>
     </section>
