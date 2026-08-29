@@ -2,22 +2,24 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Check, Languages, ListChecks, Share2, Sparkles, Users } from "lucide-react";
 import { hero } from "../../data/content";
 
-/* The hero visual as the Amberscript reference in the brief composes it: one
-   main window (the live transcript) with satellite cards overlapping its
-   edges - the call tiles over the right edge, the AI Summary and the Action
-   Items hanging off the bottom corners. Every piece is its own surface with
-   its own shadow, so the collage reads as deliberate layers, not a pile.
-   Faces generated on Kirill's Higgsfield account; captions are ours and match
-   the transcript's speakers. */
+/* One product window, the way the brief's own references draw theirs
+   (Granola, Amberscript): the meeting, the live transcript, the AI Summary
+   and the Action Items all live INSIDE the app, and there is exactly one
+   quiet overlap - the call tiles over the window's right edge. Depth comes
+   from hairlines and airy low-alpha shadows, never from dark blobs.
+   Faces generated on Kirill's Higgsfield account; captions are ours and
+   match the transcript's speakers. */
 
 const d = hero.demo;
 
 const TINTS = ["bg-accent-soft text-accent", "bg-trust-soft text-trust", "bg-[#FFF4E5] text-[#B45309]"];
 
-/* Deeper than the window's shadow-lift: a tight contact layer plus a long
-   soft drop, so the hanging cards read as the highest layer of the collage. */
-const FLOAT_SHADOW =
-  "shadow-[0_3px_6px_rgba(16,24,40,0.05),0_14px_28px_-8px_rgba(16,24,40,0.12),0_34px_68px_-14px_rgba(16,24,40,0.28)]";
+/* The soft elevation pair: the window sits low and wide, the floating tiles a
+   touch higher - both diffuse, so the composition reads calm, not pasted. */
+const WINDOW_SHADOW =
+  "shadow-[0_1px_2px_rgba(16,24,40,0.04),0_12px_32px_-12px_rgba(16,24,40,0.07),0_40px_80px_-32px_rgba(16,24,40,0.10)]";
+const TILE_SHADOW =
+  "shadow-[0_2px_6px_rgba(16,24,40,0.05),0_14px_32px_-12px_rgba(16,24,40,0.14)]";
 
 function initials(name: string) {
   return name.split(" ").map((w) => w[0]).join("").slice(0, 2);
@@ -25,12 +27,12 @@ function initials(name: string) {
 
 function Tile({ p, live, className = "" }: { p: { name: string; photo: string }; live?: boolean; className?: string }) {
   return (
-    <div className={`relative aspect-[16/10] overflow-hidden rounded-xl bg-ink/5 shadow-lift ring-1 ring-black/10 ${className}`}>
+    <div className={`relative aspect-[16/10] overflow-hidden rounded-xl bg-ink/5 ring-1 ring-black/[0.06] ${className}`}>
       <img src={p.photo} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
       <span
         aria-hidden
         className="absolute inset-x-0 bottom-0 h-9"
-        style={{ background: "linear-gradient(180deg, rgba(6,10,20,0) 0%, rgba(6,10,20,0.66) 100%)" }}
+        style={{ background: "linear-gradient(180deg, rgba(6,10,20,0) 0%, rgba(6,10,20,0.6) 100%)" }}
       />
       <span className="absolute bottom-1.5 left-2 max-w-[calc(100%-12px)] truncate text-[10px] font-semibold text-white drop-shadow-sm">
         {p.name}
@@ -61,12 +63,11 @@ function Eq() {
   );
 }
 
-/* The two result cards carry no shadow of their own: each mount decides.
-   Hanging off the window's corners they get the deep float shadow; in the
-   flattened <lg stack they are plain rows inside the window. */
-function SummaryCard({ className = "" }: { className?: string }) {
+/* The two results are quiet panels of the window itself - titled, hairline
+   separated, no card chrome of their own. */
+function SummaryPanel() {
   return (
-    <div className={`rounded-2xl bg-white p-4 ring-1 ring-black/[0.07] ${className}`}>
+    <div>
       <p className="mb-2.5 flex items-center gap-1.5 text-[12px] font-semibold text-ink">
         <Sparkles size={13} className="text-accent" />
         {d.summaryTitle}
@@ -83,9 +84,9 @@ function SummaryCard({ className = "" }: { className?: string }) {
   );
 }
 
-function ActionsCard({ className = "" }: { className?: string }) {
+function ActionsPanel() {
   return (
-    <div className={`rounded-2xl bg-white p-4 ring-1 ring-black/[0.07] ${className}`}>
+    <div>
       <p className="mb-2.5 flex items-center gap-1.5 text-[12px] font-semibold text-ink">
         <ListChecks size={13} className="text-accent" />
         {d.actionsTitle}
@@ -130,11 +131,9 @@ export function MeetingHeroMock() {
   const reduce = useReducedMotion();
   const [a, b] = d.participants;
   return (
-    /* Room for the overhang: tiles past the right edge, cards past the bottom.
-       The hanging cards bite ~40-50px into the window's 64px foot band and
-       never reach the chips above it; the reserve below holds their hang. */
-    <div className="relative lg:pb-32 lg:pr-14">
-      <div className="relative overflow-hidden rounded-[22px] bg-white shadow-lift ring-1 ring-black/[0.07]">
+    /* lg:pr-10 reserves exactly the tiles' overhang past the right edge. */
+    <div className="relative lg:pr-10">
+      <div className={`relative overflow-hidden rounded-[22px] bg-white ring-1 ring-black/[0.06] ${WINDOW_SHADOW}`}>
         <div className="flex items-center gap-3 border-b border-border-soft px-4 py-3">
           <span className="flex items-center gap-1.5" aria-hidden>
             <span className="size-[11px] rounded-full bg-[#FF5F57]" />
@@ -156,14 +155,13 @@ export function MeetingHeroMock() {
           <span className="shrink-0 text-[11px] font-medium tabular-nums text-muted">{d.elapsed}</span>
         </div>
 
-        {/* Below lg the collage flattens into a stack: tile strip, transcript,
-            then the two result cards side by side, then the chips. */}
+        {/* Below lg the call joins the flow as a strip; at lg it floats. */}
         <div className="grid grid-cols-2 gap-2 border-b border-border-soft p-3 lg:hidden">
-          <Tile p={a} live className="shadow-none ring-black/5" />
-          <Tile p={b} className="shadow-none ring-black/5" />
+          <Tile p={a} live />
+          <Tile p={b} />
         </div>
 
-        <div className="p-4 sm:p-5 lg:pb-6 lg:pr-32">
+        <div className="p-4 sm:p-5 lg:pr-36">
           <div className="mb-3.5 flex items-center gap-2">
             <span className="text-[11px] font-semibold tracking-[0.02em] text-muted">{d.live}</span>
             <Eq />
@@ -190,47 +188,25 @@ export function MeetingHeroMock() {
           </ul>
         </div>
 
-        <div className="grid border-t border-border-soft sm:grid-cols-2 sm:divide-x sm:divide-border-soft lg:hidden">
-          <div className="border-b border-border-soft p-4 sm:border-b-0">
-            <SummaryCard className="!p-0 !shadow-none !ring-0" />
+        {/* What the meeting turns into, inside the same app - the brief's
+            "one product UI where all four are visible at once". */}
+        <div className="grid border-t border-border-soft sm:grid-cols-2 sm:divide-x sm:divide-border-soft">
+          <div className="border-b border-border-soft p-4 sm:border-b-0 sm:p-5">
+            <SummaryPanel />
           </div>
-          <div className="p-4">
-            <ActionsCard className="!p-0 !shadow-none !ring-0" />
+          <div className="p-4 sm:p-5">
+            <ActionsPanel />
           </div>
         </div>
 
-        {/* The brief's chips, centered so the hanging cards below only ever
-            cover the footer's empty corners. */}
         <Chips />
-        {/* An empty band at the window's foot, lg only: the hanging cards bite
-            into THIS, never into the chips above it. */}
-        <div aria-hidden className="hidden h-16 lg:block" />
       </div>
 
-      {/* The satellites, lg and up: the call over the right edge, the two
-          results hanging off the bottom corners - each its own layer. The
-          cards cross the window's boundary on BOTH axes, bite the foot band
-          deeply, sit on staggered baselines, cast a shadow visibly deeper
-          than the window's, and drift a few pixels - so they read as layers
-          floating over the window, not panels parked under it. */}
+      {/* The one overlap: the live call floating over the window's right edge. */}
       <div className="absolute right-0 top-12 hidden w-[164px] flex-col gap-3 lg:flex">
-        <Tile p={a} live />
-        <Tile p={b} />
+        <Tile p={a} live className={TILE_SHADOW} />
+        <Tile p={b} className={TILE_SHADOW} />
       </div>
-      <motion.div
-        className="absolute -left-3 bottom-7 hidden w-[262px] lg:block"
-        animate={reduce ? undefined : { y: [0, -5, 0] }}
-        transition={reduce ? undefined : { duration: 7, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <ActionsCard className={FLOAT_SHADOW} />
-      </motion.div>
-      <motion.div
-        className="absolute bottom-6 right-10 hidden w-[240px] lg:block"
-        animate={reduce ? undefined : { y: [0, -6, 0] }}
-        transition={reduce ? undefined : { duration: 8.5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
-      >
-        <SummaryCard className={FLOAT_SHADOW} />
-      </motion.div>
     </div>
   );
 }

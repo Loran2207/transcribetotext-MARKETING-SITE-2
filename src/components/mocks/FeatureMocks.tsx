@@ -128,7 +128,7 @@ export function FileFlowMock() {
   const reduce = useReducedMotion();
   const f = featureFiles.demo;
   return (
-    <div className="overflow-hidden rounded-[22px] bg-white shadow-lift ring-1 ring-black/[0.07]">
+    <div className="overflow-hidden rounded-[22px] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04),0_12px_32px_-12px_rgba(16,24,40,0.07),0_40px_80px_-32px_rgba(16,24,40,0.10)] ring-1 ring-black/[0.06]">
       <div className="flex items-center gap-3 border-b border-border-soft px-4 py-3">
         <span className="hidden items-center gap-1.5 sm:flex" aria-hidden>
           <span className="size-[11px] rounded-full bg-[#FF5F57]" />
