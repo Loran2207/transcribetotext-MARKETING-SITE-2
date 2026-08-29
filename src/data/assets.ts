@@ -1,6 +1,17 @@
 // Real brand assets pulled from the live site, served from public/brand/.
 const B = "/brand/";
 
+/* Real marks for the places a file can come from. Keyed by the name the copy
+   itself uses, so a platform can never end up under the wrong logo. */
+export const platform: Record<string, string> = {
+  YouTube: B + "platform/youtube-icon.svg",
+  "Google Drive": B + "platform/google-drive.svg",
+  Dropbox: B + "platform/dropbox.svg",
+  Zoom: B + "platform/zoom-icon.svg",
+  "Google Meet": B + "platform/google-meet.svg",
+  "Microsoft Teams": B + "platform/microsoft-teams.svg",
+};
+
 export const brand = {
   logo: B + "logo.svg",
   heroShot: B + "audio_upload_ui_1b66ce2e3d.png",

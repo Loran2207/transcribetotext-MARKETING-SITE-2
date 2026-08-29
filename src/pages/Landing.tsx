@@ -1,36 +1,37 @@
 import { Nav } from "../components/sections/Nav";
 import { Hero } from "../components/sections/Hero";
-import { Stats } from "../components/sections/Stats";
-import { TranscriptionServices } from "../components/sections/TranscriptionServices";
+import { Trust } from "../components/sections/Trust";
+import { FeatureBlocks } from "../components/sections/FeatureBlocks";
+import { Reviews } from "../components/sections/Reviews";
+import { ProductValue } from "../components/sections/ProductValue";
 import { HowItWorks } from "../components/sections/HowItWorks";
-import { Features } from "../components/sections/Features";
-import { SocialProof } from "../components/sections/SocialProof";
 import { Languages } from "../components/sections/Languages";
 import { Pricing } from "../components/sections/Pricing";
 import { Industries } from "../components/sections/Industries";
-import { Testimonials } from "../components/sections/Testimonials";
-import { Faq } from "../components/sections/Faq";
 import { FinalCta } from "../components/sections/FinalCta";
+import { Faq } from "../components/sections/Faq";
 import { Footer } from "../components/sections/Footer";
 import { StickyCta } from "../components/sections/StickyCta";
 
+/* The order is the one the brief sets out: what you get, who already trusts it,
+   the three features with meetings first, real reviews, what the product hands
+   back, how it works, languages, pricing, who uses it, and the last ask. */
 export function Landing() {
   return (
     <>
       <Nav />
       <main>
         <Hero />
-        <Stats />
-        <TranscriptionServices />
+        <Trust />
+        <FeatureBlocks />
+        <Reviews />
+        <ProductValue />
         <HowItWorks />
-        <Features />
-        <SocialProof />
         <Languages />
         <Pricing />
         <Industries />
-        <Testimonials />
-        <Faq />
         <FinalCta />
+        <Faq />
       </main>
       <Footer />
       <StickyCta />

@@ -1,55 +1,157 @@
-// All marketing copy, verbatim from transcribetotext.ai.
-// Long dashes -> hyphen/comma. All-caps -> Title/sentence case. Single source of truth.
+// All marketing copy. Single source of truth.
+//
+// Landing v2 follows the client brief "Landing v2 / Hypotheses 1-5". Two house
+// conventions from the first version still hold and are applied to the brief's
+// own wording: long dashes become a hyphen or a comma, and all-caps labels
+// become Title case. The words are the brief's; only the shouting is dropped.
 
 export const nav = {
   logo: "TranscribeToText.AI",
   links: [
-    { label: "Features", href: "#services" },
-    { label: "Premium", href: "#premium" },
+    { label: "Features", href: "#features" },
     { label: "How it works", href: "#how" },
+    { label: "Reviews", href: "#reviews" },
     { label: "Languages", href: "#languages" },
     { label: "Pricing", href: "#pricing" },
-    { label: "Reviews", href: "#reviews" },
     { label: "FAQs", href: "#faq" },
   ],
   login: "Log in",
   cta: "Try it for free",
 };
 
+// 1. HERO - the meeting use case, shown as the product rather than described.
 export const hero = {
-  titleAccent: "Whisper AI-Powered",
-  titleRest: "Audio & Video Transcription",
+  eyebrow: "AI Meeting & Transcription Assistant",
+  title: "Record Meetings. Get Transcripts, Summaries & Action Items Automatically.",
   subtitle:
-    "Convert any audio, video, or meeting into text with 99% accuracy, in seconds!",
-  primaryCta: "Start for free",
+    "Record meetings or upload any audio or video file and turn it into accurate, searchable text in seconds.",
+  primaryCta: "Start for Free",
+  ctaNote: "No credit card required",
+  chips: ["Speaker detection", "AI Summary", "Action Items", "117+ languages", "Export"],
+  // What the mockup inside the hero shows. Kept as data so the frame and the
+  // copy can never drift apart.
+  demo: {
+    meeting: "Weekly product sync",
+    platform: "Google Meet",
+    recording: "Recording",
+    elapsed: "24:18",
+    live: "Live transcript",
+    lines: [
+      { who: "Sarah Chen", at: "00:12", text: "Let's start with the onboarding numbers from last week." },
+      { who: "Marcus Webb", at: "00:26", text: "Sign-ups are up eleven percent, and the drop-off moved to the upload step." },
+      { who: "Sarah Chen", at: "00:41", text: "Then we ship the shorter upload flow first and measure again on Friday." },
+    ],
+    summaryTitle: "AI Summary",
+    summary: [
+      "Sign-ups up 11% week over week.",
+      "Drop-off has moved to the upload step.",
+      "Shorter upload flow goes first.",
+    ],
+    actionsTitle: "Action Items",
+    actions: [
+      { who: "Marcus", text: "Ship the shorter upload flow", done: true },
+      { who: "Sarah", text: "Re-measure drop-off on Friday", done: false },
+      { who: "Priya", text: "Share the sign-up chart with support", done: false },
+    ],
+  },
 };
 
-export const stats = [
-  { value: "99%", label: "Accuracy" },
-  { value: "100%", label: "Satisfaction guarantee" },
-  { value: "117", label: "Languages supported" },
-  { value: "100%", label: "Privacy guarantee" },
-  { value: "55k+", label: "Satisfied users" },
-];
-
-export const serviceQuickLinks = [
-  "Audio to Text",
-  "Video to Text",
-  "Meeting Transcription",
-  "Cloud File Transcription",
-  "Voice Memos to Text",
-  "Transcribe Youtube Video to Text",
-  "TikTok Transcription",
-  "Lyrics Transcriber",
-];
-
-export const audioToText = {
-  heading: "Audio to Text",
-  description:
-    "Upload any audio file, interviews, lectures, podcasts, and get instant, accurate transcripts powered by AI.",
-  formats: ["MP3 to Text", "M4A to Text", "AAC to Text", "WAV to Text", "WMA to Text", "OGG to Text"],
+// 2. TRUST
+export const trust = {
+  eyebrow: "Trusted by thousands of professionals",
+  title: "Powerful transcription.",
+  subtitle: "Built for fast, effortless transcription.",
+  cards: [
+    { value: "55K+", label: "Users", body: "Join thousands of happy users worldwide" },
+    { value: "117+", label: "Languages", body: "Transcribe and translate in 117+ languages" },
+    { value: "10 hrs / 5GB", label: "Max file size", body: "Upload files up to 10 hours or 5GB per file" },
+    { value: "Zoom · Meet · Teams", label: "Meeting transcription", body: "Record and transcribe your meetings automatically" },
+  ],
 };
 
+// 3. FEATURES - meeting transcription first, and the largest block on the page.
+export const featureMeeting = {
+  label: "Meeting Transcription",
+  title: "Never Take Meeting Notes Again",
+  body: [
+    "Record and transcribe your Zoom, Google Meet and Microsoft Teams calls automatically.",
+    "Get a complete searchable transcript with speakers, summaries and key action items, ready as soon as your meeting ends.",
+  ],
+  benefits: [
+    "Automatic meeting transcription",
+    "Speaker recognition",
+    "AI-generated summaries",
+    "Key points & action items",
+    "Searchable meeting history",
+  ],
+  cta: "Transcribe My Meeting",
+};
+
+export const featureFiles = {
+  label: "Audio & Video Transcription",
+  title: "Turn Any Audio or Video Into Text in Seconds",
+  body: "Upload interviews, podcasts, lectures, voice recordings or videos and get an accurate transcript automatically.",
+  benefits: [
+    "MP3, MP4, M4A, WAV and more",
+    "Speaker recognition",
+    "Files up to 10 hours / 5GB",
+    "117+ languages",
+    "DOCX, PDF, TXT, SRT & VTT export",
+  ],
+  cta: "Transcribe a File",
+  // The three states the visual walks through: file, processing, transcript.
+  demo: {
+    file: { name: "Founder interview.mp4", size: "412 MB", length: "1 hr 08 min" },
+    stages: ["Uploaded", "Transcribing", "Transcript ready"],
+    progress: "Transcribing, 68%",
+    lines: [
+      { who: "Interviewer", at: "04:02", text: "What made you start the company in the first place?" },
+      { who: "Guest", at: "04:09", text: "We were losing a full day a week to writing up calls by hand." },
+    ],
+    exports: ["DOCX", "PDF", "TXT", "SRT", "VTT"],
+  },
+};
+
+export const featureImport = {
+  label: "Transcribe From Anywhere",
+  title: "Your Content. Wherever It Lives.",
+  body: "Import content directly from your favorite platforms and turn it into searchable text.",
+  platforms: ["YouTube", "Google Drive", "Dropbox", "Zoom", "Google Meet", "Microsoft Teams"],
+};
+
+// 4. SOCIAL PROOF - Trustpilot format, straight after the features.
+//
+// HONESTY: these are written in the shape of a real Trustpilot review, not
+// pulled from the Trustpilot API. Replace with real reviews before launch.
+export const reviews = {
+  title: "Trusted by Thousands of Users",
+  source: "Trustpilot",
+  rating: "4.9",
+  ratingLabel: "Rated 4.9 out of 5 based on 300+ reviews",
+  items: [
+    { stars: 5, title: "Saved me hours of work", quote: "I run four client calls a day. The transcript and the summary are waiting for me before I have even closed the tab.", name: "Katie M.", date: "November 27" },
+    { stars: 5, title: "The speaker labels are the thing", quote: "Interviews used to take me an evening to write up. It splits the speakers correctly and I just read it.", name: "Nick C.", date: "November 25" },
+    { stars: 5, title: "Meetings finally have a record", quote: "It joins the call, writes everything down and hands back the action items. Nobody takes notes any more.", name: "Shiela P.", date: "November 20" },
+    { stars: 5, title: "Accurate with accents", quote: "Our team is spread over five countries and it still gets the names and the technical words right.", name: "Ewa N.", date: "November 15" },
+    { stars: 5, title: "Exports into everything", quote: "SRT for the videos, DOCX for the report. I stopped paying for the second tool I was using for subtitles.", name: "Amanda O.", date: "November 14" },
+    { stars: 5, title: "Search is what sold me", quote: "Two hundred recordings and I can find the one sentence I half remember in a couple of seconds.", name: "Daniel R.", date: "November 9" },
+  ],
+};
+
+// 5. PRODUCT VALUE - what you get after the transcript exists.
+export const productValue = {
+  title: "Everything You Need After Transcription",
+  cards: [
+    { key: "summary", name: "AI Summaries", claim: "Skip the rewatch. Get the important parts instantly.", body: "Turn long recordings into concise summaries." },
+    { key: "speakers", name: "Speaker Recognition", claim: "Know exactly who said what.", body: "Automatically identify different speakers in meetings, interviews and conversations." },
+    { key: "actions", name: "Action Items", claim: "Turn conversations into next steps.", body: "Automatically extract decisions, tasks and follow-ups from meetings." },
+    { key: "translate", name: "Translate", claim: "117+ languages. One workflow.", body: "Transcribe and translate recordings without switching tools." },
+    { key: "search", name: "Search", claim: "Find any moment instantly.", body: "Search your transcripts instead of replaying recordings." },
+    { key: "export", name: "Export", claim: "Use your transcript anywhere.", body: "Export to DOCX, PDF, TXT, SRT and VTT." },
+  ],
+};
+
+// 6. THREE STEPS - unchanged by the brief.
 export const howItWorks = {
   title: "Just 3 easy steps to transcribe you audio or video to text!",
   subtitle: "Experience the fastest and most accurate transcription service available.",
@@ -73,25 +175,7 @@ export const howItWorks = {
   cta: "Start now for free",
 };
 
-export const premiumFeatures = {
-  title: "Unlock AI-Powered, Unlimited Transcription!",
-  items: [
-    { title: "Unlimited Transcription, No Limits, No Restrictions", body: "Transcribe as much content as you need, with support for files up to 10 hours long or 5GB each. Perfect for media professionals, researchers, and power users." },
-    { title: "Transcribe in Seconds, Not Hours", body: "No more waiting. Quickly transcribe your audio and video into accurate text. Fast, seamless, and hassle-free." },
-    { title: "Your Satisfaction, Guaranteed and Risk-Free", body: "Not happy with your transcript? We'll fix it or give you a refund. Plus, your data is 100% secure and protected with end-to-end encryption." },
-    { title: "Transcribe Directly from Links and Online Meetings", body: "Transcribe YouTube videos by URL, process files from Google Drive and Dropbox, and record and transcribe meetings in Google Meet, Zoom, and Microsoft Teams, all in one place." },
-    { title: "Works with Any Audio or Video Format", body: "We support all major formats, including MP3, MP4, M4A, MOV, AAC, WAV, OGG, OPUS, MPEG, WMA, and WMV, so you can focus on your content, we'll handle the rest." },
-    { title: "Multiple Export Formats, Ready for Any Use", body: "Save transcripts as DOCX, PDF, TXT or create subtitles in SRT and VTT, optimized for writing, editing, and video production." },
-  ],
-};
-
-export const socialProof = {
-  quote:
-    "TranscribeToText.AI is the fast, reliable transcription tool I've been looking for, an absolute game-changer!",
-  rating: "4.9",
-  ratingLabel: "average from 300+ reviews",
-};
-
+// 7. LANGUAGES - same words, smaller block, flags without their names.
 export const languages = {
   title: "Supported Languages",
   subtitle:
@@ -108,63 +192,68 @@ export const languages = {
   ],
   seeAll: "See all languages",
   seeFewer: "Close all languages",
-  cta: "Start now for free",
+  cta: "Try now",
 };
 
+// 8. PRICING - matches the paywall, no monthly/yearly switch.
 export const pricing = {
-  title: "Pricing",
+  title: "Simple Pricing. Unlimited Transcription.",
   premium: {
-    badge: "Premium Plan - Unlock Full AI Transcription Power",
-    price: "From $14.99/month",
-    note: "Cancel anytime",
+    badge: "Premium",
+    priceFrom: "From",
+    price: "$0.31",
+    priceUnit: "/ day",
+    note: "Billed as a 3-month plan. Cancel anytime.",
     features: [
-      { title: "Unlimited Transcriptions", body: "No daily limits, transcribe as much as you need." },
-      { title: "Extended File Uploads", body: "Upload files up to 10 hours or 5GB and process 20 files at once." },
-      { title: "Advanced AI Features", body: "Translate into 117+ languages, bulk exports, speaker recognition and more." },
-      { title: "Priority Processing", body: "Get lightning-fast transcriptions, always at the front of the queue." },
+      "Unlimited transcriptions",
+      "Extended uploads",
+      "Meeting transcription",
+      "AI summaries",
+      "Speaker recognition",
+      "117+ languages",
+      "Priority processing",
+      "All export formats",
     ],
-    cta: "Upgrade to Premium - start now",
+    cta: "Upgrade now",
   },
   free: {
-    name: "Free Plan",
-    price: "100%",
-    priceNote: "Free",
+    badge: "Free",
+    price: "Absolutely free",
     features: [
       { title: "1 Free Upload Daily", body: "One file per day, up to 10 minutes max." },
       { title: "100% Free Access", body: "Try AI transcription with basic limits." },
       { title: "Slower Processing", body: "Free users have lower priority, so transcription may take longer." },
     ],
-    cta: "Try for free - start transcription",
+    cta: "Try for free",
   },
 };
 
+// 9. INDUSTRIES - one tool, six kinds of conversation.
 export const industries = {
-  title: "Industries Using Our Service",
+  title: "One Tool for Every Conversation",
   subtitle:
-    "Experience the fastest, most accurate speech-to-text service designed for everyone.",
-  list: ["Education", "Broadcasting", "Government", "Healthcare", "Journalism", "Law", "Marketing", "Podcasting", "Research"],
+    "Record meetings, transcribe content and turn hours of audio into searchable, actionable text.",
+  cards: [
+    { key: "meetings", name: "Meetings", body: "Record Zoom, Google Meet & Teams calls automatically." },
+    { key: "interviews", name: "Interviews", body: "Get accurate transcripts with speaker recognition." },
+    { key: "podcasts", name: "Podcasts & Videos", body: "Turn long-form content into transcripts and summaries." },
+    { key: "research", name: "Research", body: "Search, organize and analyze recorded conversations." },
+    { key: "education", name: "Education", body: "Transcribe lectures, classes and study materials." },
+    { key: "content", name: "Content Creation", body: "Create subtitles, articles and repurpose recorded content." },
+  ],
+  footnote: ["Works with 117+ languages", "Your data is safe and secure"],
 };
 
-export const testimonials = {
-  title: "Customers Reviews",
-  ratingPrefix: "Rated",
-  rating: "4.9",
-  ratingSuffix: "based on 300+ reviews",
-  items: [
-    { user: "sovvin01", avatar: 3, title: "Finally", quote: "The effective and easy-to-use transcription service I needed has finally arrived, and it's fantastic!" },
-    { user: "Jacob", avatar: 0, title: "really works!", quote: "This service has nailed it, simple to use with exceptional performance. It's everything I've been looking for in transcription." },
-    { user: "johny45", avatar: 1, title: "Great solution", quote: "A simple, yet robust transcription service that has revolutionized how we handle our audio files." },
-    { user: "Quang", avatar: 4, title: "nice nice", quote: "Absolutely what I needed, a transcription service that's both powerful and straightforward." },
-    { user: "tbrman", avatar: 5, title: "omg, the best transcriber", quote: "The high-quality, easy-to-use transcription solution I've long been searching for has finally arrived!" },
-    { user: "amarizzz01", avatar: 2, title: "Really good", quote: "I've found my go-to for reliable, high-quality transcriptions. It's just so simple and effective!" },
-  ],
-  more: [
-    { user: "Princess", avatar: 6, title: "wow!", quote: "Exactly the effortless, yet powerful transcription tool our team needed to streamline our workflows." },
-  ],
-  cta: "See more reviews",
-  ctaLess: "Close all reviews",
+// 10. FINAL CTA
+export const finalCta = {
+  title: "Stop Rewatching. Start Reading.",
+  subtitle:
+    "Turn your meetings, recordings and videos into accurate transcripts, summaries and action items.",
+  cta: "Start for Free",
+  ctaNote: "Get started in seconds",
 };
 
+// 11. FAQ - unchanged by the brief.
 export const faq = {
   title: "Frequently Asked Questions",
   items: [
@@ -179,17 +268,6 @@ export const faq = {
   supportTitle: "More questions?",
   support: "Contact us by email for prompt support and any further inquiries. We are here to assist you!",
   supportEmail: "support@transcribetotext.ai",
-};
-
-export const finalCta = {
-  title: "Ready to start transcription?",
-  items: [
-    { title: "Unlimited Transcriptions", body: "Transcribe as much as you need, no limits, no restrictions. Perfect for content creators, businesses, and professionals." },
-    { title: "Blazing-Fast Transcriptions", body: "Convert audio and video to text in seconds, saving hours of manual work." },
-    { title: "Risk-Free Satisfaction Guarantee", body: "Try it worry-free! If you experience technical issues that prevent you from using the service, you may be eligible for a full refund within 7 days.", link: "Learn more about our refund policy" },
-    { title: "99% AI-Powered Accuracy", body: "Advanced AI ensures crystal-clear speech recognition, even with accents and background noise." },
-  ],
-  cta: "Start for free",
 };
 
 export const footer = {
@@ -212,81 +290,37 @@ export const footer = {
   companyDetails: "Mithrilmobile OU, Tallinn, J. Vilmsi 47, 10115, info@transcribetotext.ai",
 };
 
-export const transcriptionServices = {
-  title: "Our Transcription Services",
-  autoMs: 6000,
-  // Heading renders on one line, the trailing word in accent blue (like the live site).
-  // desc is a run of segments; b: true marks the phrases the live site sets in bold.
-  tabs: [
-    {
-      key: "audio",
-      tab: "Audio to Text",
-      lead: "Audio to",
-      accent: "Text",
-      desc: [
-        { t: "Upload any audio file", b: true },
-        { t: ", interviews, lectures, podcasts, and get instant, accurate transcripts " },
-        { t: "powered by AI", b: true },
-        { t: "." },
-      ],
-      cta: "Start transcribing audio",
-    },
-    {
-      key: "video",
-      tab: "Video to Text",
-      lead: "Video to",
-      accent: "Text",
-      desc: [
-        { t: "Transcribe videos with audio in " },
-        { t: "125+ languages. Extract subtitles or full transcripts", b: true },
-        { t: " while preserving clarity and speaker separation." },
-      ],
-      cta: "Start transcribing video",
-    },
-    {
-      key: "meeting",
-      tab: "Meeting Transcription",
-      lead: "Meeting",
-      accent: "Transcription",
-      desc: [
-        { t: "Record and transcribe meetings from " },
-        { t: "Zoom, Google Meet, and Teams.", b: true },
-        { t: " Capture every word and generate " },
-        { t: "accurate summaries automatically", b: true },
-        { t: "." },
-      ],
-      cta: "Start transcribing meeting",
-    },
-    {
-      key: "cloud",
-      tab: "Cloud File Transcription",
-      lead: "Cloud File",
-      accent: "Transcription",
-      desc: [
-        { t: "Connect " },
-        { t: "Google Drive, Dropbox, or OneDrive", b: true },
-        { t: " and transcribe audio or video directly from the cloud, " },
-        { t: "no uploads needed", b: true },
-        { t: "." },
-      ],
-      cta: "Transcribe cloud file",
-    },
-  ],
-};
+export const serviceQuickLinks = [
+  "Audio to Text",
+  "Video to Text",
+  "Meeting Transcription",
+  "Cloud File Transcription",
+  "Voice Memos to Text",
+  "Transcribe Youtube Video to Text",
+  "TikTok Transcription",
+  "Lyrics Transcriber",
+];
 
 export const stickyCta = { label: "Continue", href: "/subscribe" };
 
 // Features mega-menu: one entry per service (live-site dropdown).
 export const navServices = [
+  { key: "meeting", label: "Meeting Transcription", desc: "Record and transcribe meetings from Zoom, Google Meet, and Teams. Capture every word and generate accurate summaries automatically." },
   { key: "audio", label: "Audio to Text", desc: "Upload any audio file, interviews, lectures, podcasts, and get instant, accurate transcripts powered by AI.", formats: true },
   { key: "video", label: "Video to Text", desc: "Transcribe videos with audio in 125+ languages. Extract subtitles or full transcripts while preserving clarity and speaker separation." },
-  { key: "meeting", label: "Meeting Transcription", desc: "Record and transcribe meetings from Zoom, Google Meet, and Teams. Capture every word and generate accurate summaries automatically." },
   { key: "cloud", label: "Cloud File Transcription", desc: "Connect Google Drive, Dropbox, or OneDrive and transcribe audio or video directly from the cloud, no uploads needed." },
   { key: "memos", label: "Voice Memos to Text", desc: "Turn iPhone and Android voice memos into clean, searchable text in seconds." },
   { key: "youtube", label: "Transcribe Youtube Video to Text", desc: "Paste a YouTube link and get the full video transcript, no download needed." },
   { key: "tiktok", label: "TikTok Transcription", desc: "Transcribe TikTok videos to text for captions, subtitles, and content ideas." },
   { key: "lyrics", label: "Lyrics Transcriber", desc: "Extract accurate song lyrics from any audio or music video track." },
 ];
+
+export const audioToText = {
+  heading: "Audio to Text",
+  description:
+    "Upload any audio file, interviews, lectures, podcasts, and get instant, accurate transcripts powered by AI.",
+  formats: ["MP3 to Text", "M4A to Text", "AAC to Text", "WAV to Text", "WMA to Text", "OGG to Text"],
+};
 
 // /login page copy (mirrors app.transcribetotext.ai/login, system-component version).
 export const login = {
