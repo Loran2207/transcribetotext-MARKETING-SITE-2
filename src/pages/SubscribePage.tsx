@@ -40,7 +40,7 @@ export function SubscribePage() {
           <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="flex flex-col items-center text-center">
             <motion.span
               variants={fadeUp}
-              className="inline-flex items-center rounded-full border border-border bg-white px-3 py-1 text-xs font-semibold text-accent shadow-soft"
+              className="inline-flex items-center rounded-full border border-border bg-white px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-accent shadow-soft"
             >
               {subscribe.offerLabel}
             </motion.span>

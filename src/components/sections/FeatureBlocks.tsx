@@ -11,7 +11,7 @@ function Label({ children }: { children: ReactNode }) {
   return (
     <motion.span
       variants={fadeUp}
-      className="inline-flex items-center rounded-full border border-border bg-white px-3 py-1 text-xs font-semibold tracking-[0.01em] text-accent shadow-soft"
+      className="inline-flex items-center rounded-full border border-border bg-white px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-accent shadow-soft"
     >
       {children}
     </motion.span>

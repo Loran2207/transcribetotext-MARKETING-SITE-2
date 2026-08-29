@@ -77,20 +77,19 @@ export function Reviews() {
           animate="show"
           className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
         >
+          {/* The brief's card is stars, the review, the name and the Trustpilot
+              attribution. No headline: the headlines the site had ("Finally",
+              "nice nice") are exactly what it asks to remove. */}
           {shown.map((r) => (
             <motion.li
-              key={r.title}
+              key={r.name}
               variants={fadeUp}
               className="flex flex-col rounded-[20px] border border-border bg-white p-5 shadow-soft"
             >
               <Stars n={r.stars} />
-              <p className="mt-3.5 font-display text-base font-bold leading-snug text-ink">{r.title}</p>
-              <p className="mt-2 flex-1 text-pretty text-sm leading-relaxed text-ink-2">{r.quote}</p>
+              <p className="mt-3.5 flex-1 text-pretty text-sm leading-relaxed text-ink-2">{r.quote}</p>
               <div className="mt-5 flex items-center justify-between gap-3 border-t border-border-soft pt-3.5">
-                <span className="min-w-0 truncate text-[13px] font-semibold text-ink">
-                  {r.name}
-                  <span className="ml-1.5 font-normal text-muted">{r.date}</span>
-                </span>
+                <span className="min-w-0 truncate text-[13px] font-semibold text-ink">{r.name}</span>
                 <TrustpilotMark />
               </div>
             </motion.li>

@@ -56,7 +56,7 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
             {/* The tag sits on the card's own top edge, so it names the card
                 rather than floating above a stack of three identical boxes. */}
             <span
-              className={`absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-semibold shadow-soft ${TAG[p.tone]}`}
+              className={`absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border px-3 py-1 text-[10px] font-bold tracking-[0.07em] shadow-soft ${TAG[p.tone]}`}
             >
               {p.tag}
             </span>

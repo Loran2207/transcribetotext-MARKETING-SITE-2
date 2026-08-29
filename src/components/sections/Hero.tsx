@@ -18,7 +18,7 @@ export function Hero() {
           <div className="text-left">
             <motion.span
               variants={fadeUp}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3 py-1 text-xs font-medium text-accent shadow-soft"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-accent shadow-soft"
             >
               {hero.eyebrow}
             </motion.span>

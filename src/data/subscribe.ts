@@ -8,7 +8,7 @@ export const subscribe = {
   cta: "Get my plan",
   // Paywall v2 (hypothesis 8): the offer says what it unlocks before it says
   // "choose", and the cards below carry the whole comparison.
-  offerLabel: "Welcome offer",
+  offerLabel: "WELCOME OFFER",
   heading: "Unlock Unlimited Transcription",
   subheading: "Transcribe more, save time and get access to all premium features.",
   promo: { label: "Your promo code is applied", code: "welcome50", discount: "50% off" },
@@ -21,9 +21,9 @@ export const subscribe = {
      the saving where there is one, and one plain line naming who the plan suits.
      The 1-Month plan stays preselected. */
   plans: [
-    { key: "week", tag: "Flexible", tone: "neutral", name: "1-Week Trial", was: "$13.99", now: "$5.99", perDayWas: "$1.99", perDay: "$0.85", save: "", note: "Best for trying Premium with a short commitment", popular: false },
-    { key: "month", tag: "Most popular", tone: "accent", name: "1-Month Plan", was: "$29.99", now: "$14.99", perDayWas: "$0.99", perDay: "$0.49", save: "Save 50%", note: "Best balance of price and flexibility", popular: true },
-    { key: "quarter", tag: "Best value", tone: "gold", name: "3-Month Plan", was: "$54.99", now: "$27.99", perDayWas: "$0.61", perDay: "$0.31", save: "Save 49%", note: "Lowest price per day", popular: false },
+    { key: "week", tag: "FLEXIBLE", tone: "neutral", name: "1-Week Trial", was: "$13.99", now: "$5.99", perDayWas: "$1.99", perDay: "$0.85", save: "", note: "Best for trying Premium with a short commitment", popular: false },
+    { key: "month", tag: "MOST POPULAR", tone: "accent", name: "1-Month Plan", was: "$29.99", now: "$14.99", perDayWas: "$0.99", perDay: "$0.49", save: "SAVE 50%", note: "Best balance of price and flexibility", popular: true },
+    { key: "quarter", tag: "BEST VALUE", tone: "gold", name: "3-Month Plan", was: "$54.99", now: "$27.99", perDayWas: "$0.61", perDay: "$0.31", save: "SAVE 49%", note: "Lowest price per day", popular: false },
   ],
   // Said once, under the three cards, instead of eight times inside them.
   includesTitle: "Every Premium Plan Includes",

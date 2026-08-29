@@ -1,9 +1,10 @@
 // All marketing copy. Single source of truth.
 //
-// Landing v2 follows the client brief "Landing v2 / Hypotheses 1-5". Two house
-// conventions from the first version still hold and are applied to the brief's
-// own wording: long dashes become a hyphen or a comma, and all-caps labels
-// become Title case. The words are the brief's; only the shouting is dropped.
+// Landing v2 follows the client brief "Landing v2 / Hypotheses 1-5", and it
+// follows it to the letter: where the brief writes a label in capitals, the
+// label is in capitals here. (Kirill, 29 Aug 2026: "делай, как в ТЗ сказано".)
+// The one house convention still applied is the long dash, which becomes a
+// comma - the same rule the first version was written under.
 
 export const nav = {
   logo: "TranscribeToText.AI",
@@ -21,7 +22,7 @@ export const nav = {
 
 // 1. HERO - the meeting use case, shown as the product rather than described.
 export const hero = {
-  eyebrow: "AI Meeting & Transcription Assistant",
+  eyebrow: "AI MEETING & TRANSCRIPTION ASSISTANT",
   title: "Record Meetings. Get Transcripts, Summaries & Action Items Automatically.",
   subtitle:
     "Record meetings or upload any audio or video file and turn it into accurate, searchable text in seconds.",
@@ -71,7 +72,7 @@ export const trust = {
 
 // 3. FEATURES - meeting transcription first, and the largest block on the page.
 export const featureMeeting = {
-  label: "Meeting Transcription",
+  label: "MEETING TRANSCRIPTION",
   title: "Never Take Meeting Notes Again",
   body: [
     "Record and transcribe your Zoom, Google Meet and Microsoft Teams calls automatically.",
@@ -88,7 +89,7 @@ export const featureMeeting = {
 };
 
 export const featureFiles = {
-  label: "Audio & Video Transcription",
+  label: "AUDIO & VIDEO TRANSCRIPTION",
   title: "Turn Any Audio or Video Into Text in Seconds",
   body: "Upload interviews, podcasts, lectures, voice recordings or videos and get an accurate transcript automatically.",
   benefits: [
@@ -113,7 +114,7 @@ export const featureFiles = {
 };
 
 export const featureImport = {
-  label: "Transcribe From Anywhere",
+  label: "TRANSCRIBE FROM ANYWHERE",
   title: "Your Content. Wherever It Lives.",
   body: "Import content directly from your favorite platforms and turn it into searchable text.",
   platforms: ["YouTube", "Google Drive", "Dropbox", "Zoom", "Google Meet", "Microsoft Teams"],
@@ -121,20 +122,25 @@ export const featureImport = {
 
 // 4. SOCIAL PROOF - Trustpilot format, straight after the features.
 //
-// HONESTY: these are written in the shape of a real Trustpilot review, not
-// pulled from the Trustpilot API. Replace with real reviews before launch.
+// The reviews are the ones the site already carried; nothing here is written
+// for the mockup (Kirill, 29 Aug 2026: "оставь наши те же отзывы"). What the
+// brief asks to drop is the generic headline over each one - "Finally", "really
+// works!", "nice nice" - and those are gone: the brief's own card is stars, the
+// review, the name and the Trustpilot attribution, with no headline at all.
 export const reviews = {
   title: "Trusted by Thousands of Users",
   source: "Trustpilot",
-  rating: "4.9",
-  ratingLabel: "Rated 4.9 out of 5 based on 300+ reviews",
+  ratingLabel: "Rated 4.9 based on 300+ reviews",
   items: [
-    { stars: 5, title: "Saved me hours of work", quote: "I run four client calls a day. The transcript and the summary are waiting for me before I have even closed the tab.", name: "Katie M.", date: "November 27" },
-    { stars: 5, title: "The speaker labels are the thing", quote: "Interviews used to take me an evening to write up. It splits the speakers correctly and I just read it.", name: "Nick C.", date: "November 25" },
-    { stars: 5, title: "Meetings finally have a record", quote: "It joins the call, writes everything down and hands back the action items. Nobody takes notes any more.", name: "Shiela P.", date: "November 20" },
-    { stars: 5, title: "Accurate with accents", quote: "Our team is spread over five countries and it still gets the names and the technical words right.", name: "Ewa N.", date: "November 15" },
-    { stars: 5, title: "Exports into everything", quote: "SRT for the videos, DOCX for the report. I stopped paying for the second tool I was using for subtitles.", name: "Amanda O.", date: "November 14" },
-    { stars: 5, title: "Search is what sold me", quote: "Two hundred recordings and I can find the one sentence I half remember in a couple of seconds.", name: "Daniel R.", date: "November 9" },
+    { stars: 5, quote: "The effective and easy-to-use transcription service I needed has finally arrived, and it's fantastic!", name: "sovvin01" },
+    { stars: 5, quote: "This service has nailed it, simple to use with exceptional performance. It's everything I've been looking for in transcription.", name: "Jacob" },
+    { stars: 5, quote: "A simple, yet robust transcription service that has revolutionized how we handle our audio files.", name: "johny45" },
+    { stars: 5, quote: "Absolutely what I needed, a transcription service that's both powerful and straightforward.", name: "Quang" },
+    { stars: 5, quote: "The high-quality, easy-to-use transcription solution I've long been searching for has finally arrived!", name: "tbrman" },
+    { stars: 5, quote: "I've found my go-to for reliable, high-quality transcriptions. It's just so simple and effective!", name: "amarizzz01" },
+    { stars: 5, quote: "Really impressed with this online transcription tool. It handles multiple speakers and background noise like a pro. Affordable pricing and great customer support. Saved me hours of work!", name: "Mike" },
+    { stars: 5, quote: "This transcription service is a game-changer! Super fast turnaround and the accuracy is spot-on, even with tricky audio. The interface is clean and easy to use.", name: "Kate" },
+    { stars: 5, quote: "Solid service! The transcripts are accurate, and delivery is always on time. I love how user-friendly the platform is, uploading files is a breeze.", name: "Peter" },
   ],
 };
 
@@ -192,7 +198,7 @@ export const languages = {
   ],
   seeAll: "See all languages",
   seeFewer: "Close all languages",
-  cta: "Try now",
+  cta: "TRY NOW",
 };
 
 // 8. PRICING - matches the paywall, no monthly/yearly switch.
@@ -200,9 +206,9 @@ export const pricing = {
   title: "Simple Pricing. Unlimited Transcription.",
   premium: {
     badge: "Premium",
-    priceFrom: "From",
+    priceFrom: "FROM",
     price: "$0.31",
-    priceUnit: "/ day",
+    priceUnit: "/Day",
     note: "Billed as a 3-month plan. Cancel anytime.",
     features: [
       "Unlimited transcriptions",
@@ -214,7 +220,9 @@ export const pricing = {
       "Priority processing",
       "All export formats",
     ],
-    cta: "Upgrade now",
+    // The brief writes "Upgrate NOW"; that is a typo for Upgrade, and a
+    // misspelt word on the paying button is not something to ship on purpose.
+    cta: "UPGRADE NOW",
   },
   free: {
     badge: "Free",
@@ -224,7 +232,7 @@ export const pricing = {
       { title: "100% Free Access", body: "Try AI transcription with basic limits." },
       { title: "Slower Processing", body: "Free users have lower priority, so transcription may take longer." },
     ],
-    cta: "Try for free",
+    cta: "TRY FOR FREE",
   },
 };
 
