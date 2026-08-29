@@ -28,7 +28,12 @@ function Tile({ p, live }: { p: { name: string; photo: string }; live?: boolean 
         className="absolute inset-x-0 bottom-0 h-8"
         style={{ background: "linear-gradient(180deg, rgba(6,10,20,0) 0%, rgba(6,10,20,0.72) 100%)" }}
       />
-      <span className="absolute bottom-1.5 left-2 text-[10px] font-semibold text-white drop-shadow-sm">{p.name}</span>
+      {/* At 390 a tile is ~80px wide and a full name wrapped onto the face;
+          below sm the caption is the first name alone. */}
+      <span className="absolute bottom-1.5 left-2 max-w-[calc(100%-12px)] truncate text-[10px] font-semibold text-white drop-shadow-sm">
+        <span className="sm:hidden">{p.name.split(" ")[0]}</span>
+        <span className="hidden sm:inline">{p.name}</span>
+      </span>
       {live ? (
         <span className="absolute right-1.5 top-1.5 flex size-4 items-center justify-center rounded-full bg-black/35">
           <span className="size-1.5 rounded-full bg-trust" />
