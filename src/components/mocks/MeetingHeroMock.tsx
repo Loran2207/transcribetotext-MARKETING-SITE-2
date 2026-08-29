@@ -33,18 +33,24 @@ export function MeetingHeroMock() {
         />
 
         <div className="relative overflow-hidden rounded-[20px] border border-border bg-white shadow-lift">
-          <div className="flex items-center gap-3 border-b border-border-soft px-4 py-3">
-            <span className="truncate text-sm font-semibold text-ink">{d.meeting}</span>
-            <span className="shrink-0 rounded-md bg-surface-soft px-2 py-0.5 text-[11px] font-medium text-ink-2">{d.platform}</span>
-            <span className="ml-auto flex shrink-0 items-center gap-1.5 rounded-full bg-deal/10 px-2.5 py-1 text-[11px] font-semibold text-deal">
-              <motion.span
-                className="size-1.5 rounded-full bg-deal"
-                animate={reduce ? undefined : { opacity: [1, 0.25, 1] }}
-                transition={reduce ? undefined : { duration: 1.6, repeat: Infinity }}
-              />
-              {d.recording}
-            </span>
-            <span className="shrink-0 text-[11px] font-medium tabular-nums text-muted">{d.elapsed}</span>
+          {/* On a phone the meeting name, the platform, the recording pill and
+              the clock cannot share 320px, and the name was the thing that got
+              cut. So the name takes its own line there and the rest sits under
+              it; from sm up they go back on one row. */}
+          <div className="flex flex-col gap-2 border-b border-border-soft px-4 py-3 sm:flex-row sm:items-center sm:gap-3">
+            <span className="min-w-0 text-sm font-semibold text-ink sm:truncate">{d.meeting}</span>
+            <div className="flex items-center gap-2 sm:contents">
+              <span className="shrink-0 rounded-md bg-surface-soft px-2 py-0.5 text-[11px] font-medium text-ink-2">{d.platform}</span>
+              <span className="ml-auto flex shrink-0 items-center gap-1.5 rounded-full bg-deal/10 px-2.5 py-1 text-[11px] font-semibold text-deal">
+                <motion.span
+                  className="size-1.5 rounded-full bg-deal"
+                  animate={reduce ? undefined : { opacity: [1, 0.25, 1] }}
+                  transition={reduce ? undefined : { duration: 1.6, repeat: Infinity }}
+                />
+                {d.recording}
+              </span>
+              <span className="shrink-0 text-[11px] font-medium tabular-nums text-muted">{d.elapsed}</span>
+            </div>
           </div>
 
           <div className="grid sm:grid-cols-[minmax(0,1.22fr)_minmax(0,1fr)]">
