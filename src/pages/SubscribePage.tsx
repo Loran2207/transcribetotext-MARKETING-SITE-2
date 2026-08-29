@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { Lock } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { CountdownBar } from "../components/subscribe/CountdownBar";
 import { PromoCode } from "../components/subscribe/PromoCode";
 import { PlanCards } from "../components/subscribe/PlanCards";
+import { PlanIncludes } from "../components/subscribe/PlanIncludes";
 import { CheckoutModal } from "../components/subscribe/CheckoutModal";
 import { OfferPlansModal, SpecialOfferModal, OfferCheckoutModal } from "../components/subscribe/OfferModals";
 import { DarkFeedback } from "../components/subscribe/DarkFeedback";
@@ -37,10 +38,20 @@ export function SubscribePage() {
       <div className="relative z-10 overflow-hidden">
         <div className="mx-auto w-full max-w-5xl px-4 pt-8 sm:px-6 md:pt-12">
           <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="flex flex-col items-center text-center">
-            <motion.h1 variants={fadeUp} className={PAYWALL_HEADING}>{subscribe.heading}</motion.h1>
+            <motion.span
+              variants={fadeUp}
+              className="inline-flex items-center rounded-full border border-border bg-white px-3 py-1 text-xs font-semibold text-accent shadow-soft"
+            >
+              {subscribe.offerLabel}
+            </motion.span>
+            <motion.h1 variants={fadeUp} className={`mt-3 ${PAYWALL_HEADING}`}>{subscribe.heading}</motion.h1>
+            <motion.p variants={fadeUp} className="mt-3 max-w-xl text-pretty text-[15px] leading-relaxed text-ink-2">
+              {subscribe.subheading}
+            </motion.p>
           </motion.div>
           <PromoCode />
           <PlanCards selected={selected} onSelect={setSelected} />
+          <PlanIncludes />
           <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-muted">
             {subscribe.legal.pre}{" "}
             {subscribe.legal.links.map((l, i) => (
@@ -58,20 +69,25 @@ export function SubscribePage() {
       </div>
       <DarkFeedback />
       <div className="bg-canvas">
-        {/* pb clears the fixed Continue bar (h-14 button + py-4 = 89px tall). */}
-        <div className="mx-auto w-full max-w-5xl px-4 pb-32 pt-2 sm:px-6 md:pb-40">
+        {/* pb clears the fixed Continue bar, which is now the button plus the
+            line under it (h-14 + gap + 16px + py-4). */}
+        <div className="mx-auto w-full max-w-5xl px-4 pb-36 pt-2 sm:px-6 md:pb-44">
           <SafeCheckout />
         </div>
       </div>
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 px-4 py-3 backdrop-blur md:py-4" style={{ boxShadow: "0 -10px 34px rgba(16,24,40,.10)" }}>
-        <div className="flex justify-center">
+        {/* The lock is not a second way of saying "continue": it says the step
+            behind the button is a payment, which is the one thing a reader
+            hesitates over here. */}
+        <div className="flex flex-col items-center gap-1.5">
           <motion.button
             onClick={() => setOpen(true)}
             whileTap={{ scale: 0.985 }}
             className="flex h-14 w-full max-w-2xl items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-base font-semibold text-white shadow-blue ring-1 ring-inset ring-white/25 transition-[filter] hover:brightness-[1.05]"
           >
-            {subscribe.continueCta} <ArrowRight size={18} />
+            <Lock size={16} /> {subscribe.continueCta}
           </motion.button>
+          <span className="text-[12px] text-muted">{subscribe.continueNote}</span>
         </div>
       </div>
       <CheckoutModal open={open} onClose={() => setOpen(false)} planIndex={selected} forceError={initial.error} />

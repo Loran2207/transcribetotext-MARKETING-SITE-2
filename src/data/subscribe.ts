@@ -6,19 +6,38 @@ export const subscribe = {
   skip: "Skip",
   countdownSeconds: 8 * 60 + 39, // 08:39
   cta: "Get my plan",
-  heading: "Choose your plan",
-  subheading: "Unlock unlimited, high-accuracy transcription. Cancel anytime.",
+  // Paywall v2 (hypothesis 8): the offer says what it unlocks before it says
+  // "choose", and the cards below carry the whole comparison.
+  offerLabel: "Welcome offer",
+  heading: "Unlock Unlimited Transcription",
+  subheading: "Transcribe more, save time and get access to all premium features.",
   promo: { label: "Your promo code is applied", code: "welcome50", discount: "50% off" },
   legal: {
     pre: "By clicking Get my plan or Continue, I agree to the",
     links: ["Terms of Service", "Privacy Policy", "Subscription Policy"],
     body: "I authorize Transcribetotext.ai to charge {now} for the introductory plan. If I do not cancel before the end of the trial period, my subscription will automatically renew at {was} per billing period until I cancel. I can cancel anytime in my account settings at least 24 hours before the end of my subscription to avoid being charged for the next billing cycle. All prices include applicable taxes.",
   },
+  /* Each card now says what it is FOR, not only what it costs: a tag at the top,
+     the saving where there is one, and one plain line naming who the plan suits.
+     The 1-Month plan stays preselected. */
   plans: [
-    { key: "week", name: "1-Week Trial", was: "$13.99", now: "$5.99", perDayWas: "$1.99", perDay: "$0.85", popular: false },
-    { key: "month", name: "1-Month Plan", was: "$29.99", now: "$14.99", perDayWas: "$0.99", perDay: "$0.49", popular: true },
-    { key: "quarter", name: "3-Month Plan", was: "$54.99", now: "$27.99", perDayWas: "$0.61", perDay: "$0.31", popular: false },
+    { key: "week", tag: "Flexible", tone: "neutral", name: "1-Week Trial", was: "$13.99", now: "$5.99", perDayWas: "$1.99", perDay: "$0.85", save: "", note: "Best for trying Premium with a short commitment", popular: false },
+    { key: "month", tag: "Most popular", tone: "accent", name: "1-Month Plan", was: "$29.99", now: "$14.99", perDayWas: "$0.99", perDay: "$0.49", save: "Save 50%", note: "Best balance of price and flexibility", popular: true },
+    { key: "quarter", tag: "Best value", tone: "gold", name: "3-Month Plan", was: "$54.99", now: "$27.99", perDayWas: "$0.61", perDay: "$0.31", save: "Save 49%", note: "Lowest price per day", popular: false },
   ],
+  // Said once, under the three cards, instead of eight times inside them.
+  includesTitle: "Every Premium Plan Includes",
+  includes: [
+    { icon: "infinity", label: "Unlimited transcriptions" },
+    { icon: "video", label: "Meeting transcription" },
+    { icon: "sparkles", label: "AI summaries" },
+    { icon: "users", label: "Speaker recognition" },
+    { icon: "upload", label: "Extended uploads" },
+    { icon: "globe", label: "117+ languages" },
+    { icon: "download", label: "All export formats" },
+    { icon: "zap", label: "Priority processing" },
+  ],
+  continueNote: "Unlock Premium instantly",
   guarantee: {
     title: "30-day money-back guarantee",
     body: "We believe our transcription tool will help you work faster, smarter and with more clarity. If you are not satisfied with the results, we will give you a full refund, no questions asked.",
