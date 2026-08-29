@@ -11,7 +11,12 @@ export const subscribe = {
   offerLabel: "WELCOME OFFER",
   heading: "Unlock Unlimited Transcription",
   subheading: "Transcribe more, save time and get access to all premium features.",
-  promo: { label: "Your promo code is applied", code: "welcome50", discount: "50% off" },
+  promo: {
+    label: "Your promo code is applied",
+    sub: "Special pricing reserved for you",
+    code: "welcome50",
+    discount: "50% off",
+  },
   legal: {
     pre: "By clicking Get my plan or Continue, I agree to the",
     links: ["Terms of Service", "Privacy Policy", "Subscription Policy"],

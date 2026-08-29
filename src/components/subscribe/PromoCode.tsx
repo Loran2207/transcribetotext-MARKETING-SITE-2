@@ -26,11 +26,18 @@ export function PromoCode() {
       >
         {applied && (
           <div className="mb-3 px-1 sm:mb-3.5">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">
+            {/* The reference's offer band: the gift leads, the promise beside
+                it, the discount pill at the far end - ours in blue. The gift
+                render sits on the card's own tint, so it needs no box. */}
+            <div className="flex items-center gap-3">
+              <img src="/brand/subscribe/gift.png" alt="" aria-hidden className="size-12 shrink-0 sm:size-14" />
+              <div className="min-w-0">
+                <p className="text-sm font-bold text-ink sm:text-[15px]">{subscribe.promo.label}</p>
+                <p className="text-xs leading-snug text-ink-2 sm:text-[13px]">{subscribe.promo.sub}</p>
+              </div>
+              <span className="ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">
                 <Tag size={13} /> {subscribe.promo.discount}
               </span>
-              <p className="text-sm font-semibold text-accent-dark sm:text-[15px]">{subscribe.promo.label}</p>
             </div>
             {/* The coupon perforation, built the way the app's own 10.08 promo
                 draws it: the card is a quiet borderless tint, the row spans it
