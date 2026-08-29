@@ -14,16 +14,17 @@ import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
    Below lg the three cards stay the snap carousel the build already had, with
    the popular plan centred and its neighbours peeking in. */
 
-/* Three voices in our palette: quiet gray for the trial, brand blue for the
-   recommended plan, and the house rose - loud, filled, "наш алый" - for the
-   value plan. All three tags sit ON the border (Kirill, 29 Aug: "best value
-   должен быть тоже там же сверху... таким ярким, красным"); the save badge
-   and the note inherit the card's voice. */
-const TAG: Record<string, string> = {
-  neutral: "border-border bg-white text-ink-2 shadow-soft",
-  accent: "border-transparent bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-white shadow-blue",
-  gold: "border-transparent bg-[linear-gradient(180deg,#FB7185,#F43F5E)] text-white shadow-[0_10px_26px_rgba(244,63,94,.32)]",
+/* The reference's card grammar, centered throughout: the side tags are quiet
+   pills INSIDE the card at the top, only MOST POPULAR rides the border, and
+   every line below - name, prices, saving, note, radio - is centered. Our
+   voices stay: brand blue for the recommended plan, the house rose - loud,
+   filled, "наш алый" - for the value one. */
+const TAG_IN: Record<string, string> = {
+  neutral: "bg-surface-soft text-ink-2",
+  gold: "bg-[linear-gradient(180deg,#FB7185,#F43F5E)] text-white shadow-[0_8px_20px_rgba(244,63,94,.30)]",
 };
+const TAG_TOP =
+  "border-transparent bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-white shadow-blue";
 const SAVE: Record<string, string> = {
   accent: "bg-accent-soft text-accent",
   gold: "bg-deal/10 text-deal",
@@ -63,29 +64,42 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
             whileHover={{ y: -4 }}
             onClick={() => onSelect(i)}
             aria-pressed={on}
-            className={`relative flex w-[280px] shrink-0 snap-center flex-col rounded-tile border bg-white text-left transition-all md:w-[360px] lg:w-auto lg:shrink ${
+            className={`relative flex w-[280px] shrink-0 snap-center flex-col rounded-tile border bg-white text-center transition-all md:w-[360px] lg:w-auto lg:shrink ${
               on ? "border-accent shadow-card ring-2 ring-accent/20" : "border-border shadow-soft hover:border-accent/40"
             }`}
           >
-            {/* All three tags ride the top border, one shape, three voices. */}
-            <span
-              className={`absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border px-3.5 py-1 text-[10px] font-bold tracking-[0.07em] ${TAG[p.tone]}`}
-            >
-              {p.tag}
-            </span>
+            {/* Only the recommended plan's tag rides the border, as in the
+                reference; the side tags are pills inside the card. */}
+            {p.tone === "accent" ? (
+              <span
+                className={`absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border px-3.5 py-1 text-[10px] font-bold tracking-[0.07em] ${TAG_TOP}`}
+              >
+                {p.tag}
+              </span>
+            ) : null}
 
-            <div className="flex flex-1 flex-col p-5 pt-7 lg:p-6 lg:pt-8">
-              <p className="text-xl font-bold tracking-tight text-ink sm:text-[22px]">{p.name}</p>
+            <div className="flex flex-1 flex-col items-center p-5 pt-6 text-center lg:p-6 lg:pt-7">
+              {/* One tag zone on every card so the three names share a line:
+                  the side cards show their pill here, the middle reserves it. */}
+              <div className="flex h-7 items-center">
+                {p.tone !== "accent" ? (
+                  <span className={`inline-flex items-center whitespace-nowrap rounded-full px-3.5 py-1 text-[10px] font-bold tracking-[0.07em] ${TAG_IN[p.tone]}`}>
+                    {p.tag}
+                  </span>
+                ) : null}
+              </div>
 
-              <div className="mt-2 flex items-center gap-2 text-[15px]">
+              <p className="mt-2 text-xl font-bold tracking-tight text-ink sm:text-[22px]">{p.name}</p>
+
+              <div className="mt-2 flex items-center justify-center gap-2 text-[15px]">
                 <span className="text-muted line-through">{p.was}</span>
                 <ChevronRight size={15} className="text-muted" strokeWidth={2.5} />
                 <span className="font-semibold text-ink">{p.now}</span>
               </div>
 
-              <div className="mt-4 border-t border-border/70 pt-4">
+              <div className="mt-4 w-full border-t border-border/70 pt-4">
                 <p className="text-[13px] text-muted line-through">{p.perDayWas}</p>
-                <p className="mt-0.5 flex items-end gap-1.5">
+                <p className="mt-0.5 flex items-end justify-center gap-1.5">
                   <span className="font-display text-[36px] font-bold leading-none tracking-tight text-ink lg:text-[42px]">{p.perDay}</span>
                   <span className="mb-1 whitespace-nowrap text-sm text-muted">per day</span>
                 </p>
@@ -94,7 +108,7 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
               {/* Reserved on every card, so the three stay aligned whether or not
                   the plan carries a saving. The badge speaks the card's voice:
                   blue on the recommended plan, rose on the value one. */}
-              <div className="mt-3 h-[26px]">
+              <div className="mt-3 flex h-[26px] items-center">
                 {p.save ? (
                   <span className={`inline-flex items-center rounded-md px-2 py-1 text-[12px] font-bold ${SAVE[p.tone] ?? "bg-trust-soft text-trust"}`}>
                     {p.save}
@@ -105,7 +119,7 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
               {/* The reference draws the note as a soft tinted pill in the
                   card's own tone; two lines stay reserved so the three choice
                   controls keep one baseline. */}
-              <p className={`mt-3 flex min-h-[52px] items-center justify-center rounded-xl px-3 py-2 text-center text-[12px] font-medium leading-snug ${NOTE[p.tone]}`}>
+              <p className={`mt-3 flex min-h-[52px] w-full items-center justify-center rounded-xl px-3 py-2 text-center text-[12px] font-medium leading-snug ${NOTE[p.tone]}`}>
                 {p.note}
               </p>
 
