@@ -9,15 +9,17 @@ import { platform } from "../../data/assets";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
 
 /* The site's own "Our Transcription Services" block, kept as the four tabs a
-   visitor already knows - reordered so Meeting Transcription comes first and
-   opens preselected. Each state's visual is a COMPOSITION, not one baked
-   picture (Kirill, round 9: "одна фотка это галимо, это нужно комбинировать"):
-   a generated scene photo as its own layer, and crisp code-drawn UI pieces
-   floating over its edges with soft shadows - the Granola / Rev grammar the
-   hero already speaks. */
+   visitor already knows, Meeting Transcription first and preselected.
 
-const FLOAT =
-  "bg-white ring-1 ring-black/[0.06] shadow-[0_2px_6px_rgba(16,24,40,0.06),0_16px_36px_-12px_rgba(16,24,40,0.18)]";
+   The visual follows the grammar the strongest marketing pages use for
+   photography (Langdock, V7): the PHOTOGRAPH IS THE ENVIRONMENT and it stays
+   soft; the product panel is the ONE sharp thing in the frame, sitting in the
+   photo's own space with a real drop shadow. Every glow is the light inside
+   the picture - no colored blur behind the card, which is exactly the move
+   that reads as generated slop. Round 10, after three rejected attempts. */
+
+const PANEL =
+  "rounded-2xl bg-white shadow-[0_2px_8px_rgba(16,24,40,0.10),0_28px_56px_-20px_rgba(16,24,40,0.42)] ring-1 ring-black/[0.05]";
 
 const TINTS = ["bg-accent-soft text-accent", "bg-trust-soft text-trust"];
 
@@ -25,145 +27,134 @@ function initials(name: string) {
   return name.split(" ").map((w) => w[0]).join("").slice(0, 2);
 }
 
-function MiniLine({ who, at, text, i }: { who: string; at: string; text: string; i: number }) {
+function PanelLine({ who, at, text, i }: { who: string; at: string; text: string; i: number }) {
   return (
     <li className="flex gap-2">
-      <span className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[9px] font-semibold ${TINTS[i % TINTS.length]}`}>
+      <span className={`flex size-[22px] shrink-0 items-center justify-center rounded-full text-[9.5px] font-semibold ${TINTS[i % TINTS.length]}`}>
         {initials(who)}
       </span>
       <div className="min-w-0">
-        <p className="text-[9px] font-medium text-muted">
+        <p className="text-[9.5px] font-medium text-muted">
           {who} <span className="tabular-nums">{at}</span>
         </p>
-        <p className="text-[10.5px] leading-[1.4] text-ink-2">{text}</p>
+        <p className="text-[11.5px] leading-[1.4] text-ink-2">{text}</p>
       </div>
     </li>
   );
 }
 
-function VisualMeeting() {
+function PanelMeeting() {
   return (
-    <>
-      <div className={`absolute -right-2 top-8 w-[190px] rounded-2xl p-3.5 sm:-right-4 sm:w-[210px] ${FLOAT}`}>
-        <p className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold text-ink">
-          <Sparkles size={12} className="text-accent" /> AI Summary
-        </p>
-        <ul className="space-y-1.5">
-          {["Launch locked for Monday", "Marketing assets are ready"].map((b) => (
-            <li key={b} className="flex gap-1.5 text-[10.5px] leading-[1.4] text-ink-2">
-              <span className="mt-[5px] size-1 shrink-0 rounded-full bg-accent" />
-              {b}
-            </li>
-          ))}
-        </ul>
+    <div className={`${PANEL} p-4`}>
+      <div className="mb-2.5 flex items-center gap-2 border-b border-border-soft pb-2.5">
+        <span className="min-w-0 truncate text-[11.5px] font-semibold text-ink">Weekly product sync</span>
+        <span className="hidden shrink-0 rounded bg-surface-soft px-1.5 py-0.5 text-[9.5px] font-medium text-ink-2 sm:inline">
+          Google Meet
+        </span>
+        <span className="ml-auto flex shrink-0 items-center gap-1 text-[9.5px] font-semibold text-deal">
+          <span className="size-1.5 rounded-full bg-deal" /> 24:18
+        </span>
       </div>
-      <div className={`absolute -bottom-8 -left-2 w-[230px] rounded-2xl p-3.5 sm:-left-4 sm:w-[250px] ${FLOAT}`}>
-        <p className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold text-ink">
-          <span className="size-1.5 rounded-full bg-deal" /> Live transcript
+      <ul className="space-y-2">
+        <PanelLine who="Anna Ruiz" at="00:12" text="Let's lock the launch date today." i={0} />
+        <PanelLine who="Leo Park" at="00:26" text="Marketing is ready for Monday." i={1} />
+      </ul>
+      <div className="mt-2.5 flex items-start gap-1.5 border-t border-border-soft pt-2.5">
+        <Sparkles size={12} className="mt-[1px] shrink-0 text-accent" />
+        <p className="text-[11px] leading-[1.4] text-ink-2">
+          <span className="font-semibold text-ink">AI Summary</span> Launch locked for Monday, marketing assets ready.
         </p>
-        <ul className="space-y-2">
-          <MiniLine who="Anna Ruiz" at="00:12" text="Let's lock the launch date today." i={0} />
-          <MiniLine who="Leo Park" at="00:26" text="Marketing is ready for Monday." i={1} />
-        </ul>
       </div>
-    </>
+    </div>
   );
 }
 
-function VisualAudio() {
+function PanelAudio() {
   return (
-    <>
-      <div className={`absolute -right-2 top-9 rounded-full px-3 py-1.5 sm:-right-4 ${FLOAT}`}>
-        <p className="flex items-center gap-1.5 text-[10.5px] font-semibold text-ink">
-          <Users size={12} className="text-accent" /> Speaker recognition
-        </p>
+    <div className={`${PANEL} p-4`}>
+      <div className="mb-2.5 flex items-center gap-2">
+        <AudioLines size={13} className="shrink-0 text-accent" />
+        <span className="text-[11.5px] font-semibold text-ink">Founder interview.mp3</span>
+        <span className="ml-auto shrink-0 text-[9.5px] font-medium tabular-nums text-muted">1 hr 08 min</span>
       </div>
-      <div className={`absolute -bottom-8 -left-2 w-[240px] rounded-2xl p-3.5 sm:-left-4 sm:w-[256px] ${FLOAT}`}>
-        <p className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold text-ink">
-          <AudioLines size={12} className="text-accent" /> Transcript
-        </p>
-        <div className="mb-2 flex items-end gap-[2px]" aria-hidden>
-          {[5, 10, 7, 13, 8, 14, 6, 11, 9, 13, 5, 8, 12, 6, 10, 7, 12, 5, 9, 6].map((h, i) => (
-            <span key={i} className="w-[3px] rounded-full bg-accent/55" style={{ height: h }} />
-          ))}
-        </div>
-        <ul className="space-y-2">
-          <MiniLine who="Guest" at="04:09" text="We were losing a day a week to write-ups." i={1} />
-        </ul>
+      <div className="mb-2.5 flex items-end gap-[3px]" aria-hidden>
+        {[6, 12, 8, 15, 10, 17, 7, 13, 11, 16, 6, 10, 14, 8, 12, 9, 15, 7, 11, 8, 13, 6, 10, 12].map((h, i) => (
+          <span key={i} className="w-[3px] shrink-0 rounded-full bg-accent/50" style={{ height: h }} />
+        ))}
       </div>
-    </>
+      <ul className="space-y-2 border-t border-border-soft pt-2.5">
+        <PanelLine who="Interviewer" at="04:02" text="What made you start the company?" i={0} />
+        <PanelLine who="Guest" at="04:09" text="We were losing a day a week to write-ups." i={1} />
+      </ul>
+    </div>
   );
 }
 
-function VisualVideo() {
+function PanelVideo() {
   return (
-    <>
-      <div className={`absolute -right-2 top-9 rounded-2xl p-3 sm:-right-4 ${FLOAT}`}>
-        <p className="mb-1.5 text-[10.5px] font-semibold text-ink">Export</p>
-        <div className="flex gap-1.5">
+    <div className={`${PANEL} p-4`}>
+      <div className="mb-2.5 flex items-center gap-2">
+        <Video size={13} className="shrink-0 text-accent" />
+        <span className="text-[11.5px] font-semibold text-ink">Subtitles</span>
+        <span className="ml-auto flex shrink-0 gap-1">
           {["SRT", "VTT"].map((f) => (
-            <span key={f} className="rounded-md border border-border bg-white px-2 py-[3px] text-[9.5px] font-semibold text-ink-2">
+            <span key={f} className="rounded border border-border px-1.5 py-[2px] text-[9px] font-semibold text-ink-2">
               {f}
             </span>
           ))}
-        </div>
+        </span>
       </div>
-      <div className={`absolute -bottom-8 -left-2 w-[240px] rounded-2xl p-3.5 sm:-left-4 sm:w-[256px] ${FLOAT}`}>
-        <p className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold text-ink">
-          <Video size={12} className="text-accent" /> Subtitles
-        </p>
-        <ul className="space-y-1.5">
-          {[
-            { at: "00:01", text: "Welcome back to the show." },
-            { at: "00:05", text: "Today we talk about growth." },
-          ].map((l) => (
-            <li key={l.at} className="flex gap-2 text-[10.5px] leading-[1.4]">
-              <span className="shrink-0 font-medium tabular-nums text-muted">{l.at}</span>
-              <span className="text-ink-2">{l.text}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
+      <ul className="space-y-1.5 border-t border-border-soft pt-2.5">
+        {[
+          { at: "00:01", text: "Welcome back to the show." },
+          { at: "00:05", text: "Today we talk about growth." },
+          { at: "00:11", text: "Our first hire changed everything." },
+        ].map((l) => (
+          <li key={l.at} className="flex gap-2 text-[11.5px] leading-[1.4]">
+            <span className="shrink-0 font-medium tabular-nums text-muted">{l.at}</span>
+            <span className="text-ink-2">{l.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
-function VisualCloud() {
+function PanelCloud() {
   return (
-    <>
-      <div className={`absolute -right-2 top-8 w-[210px] rounded-2xl p-3.5 sm:-right-4 sm:w-[224px] ${FLOAT}`}>
-        <p className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold text-ink">
-          <CloudUpload size={12} className="text-accent" /> Import
-        </p>
-        <div className="mb-2 flex items-center gap-1.5">
+    <div className={`${PANEL} p-4`}>
+      <div className="mb-2.5 flex items-center gap-2">
+        <CloudUpload size={13} className="shrink-0 text-accent" />
+        <span className="text-[11.5px] font-semibold text-ink">Import</span>
+        <span className="ml-auto flex shrink-0 items-center gap-1">
           {["YouTube", "Google Drive", "Dropbox"].map((n) => (
-            <span key={n} className="flex size-6 items-center justify-center rounded-full bg-white shadow-soft ring-1 ring-black/[0.06]">
-              <img src={platform[n]} alt={n} className="h-3 w-auto" />
+            <span key={n} className="flex size-[22px] items-center justify-center rounded-full bg-white shadow-soft ring-1 ring-black/[0.06]">
+              <img src={platform[n]} alt={n} className="h-[11px] w-auto" />
             </span>
           ))}
-        </div>
-        <div className="h-1.5 overflow-hidden rounded-full bg-surface-soft">
-          <span className="block h-full w-[68%] rounded-full bg-[linear-gradient(90deg,#3B82F6,#2563EB)]" />
-        </div>
-        <p className="mt-1.5 text-[9.5px] font-medium text-muted">Importing from Google Drive</p>
+        </span>
       </div>
-      <div className={`absolute -bottom-8 -left-2 rounded-full px-3 py-1.5 sm:-left-4 ${FLOAT}`}>
-        <p className="flex items-center gap-1.5 text-[10.5px] font-semibold text-ink">
+      <div className="border-t border-border-soft pt-2.5">
+        <p className="mb-1.5 text-[11px] font-medium text-ink-2">Q3 strategy call.mp4</p>
+        <div className="h-1.5 overflow-hidden rounded-full bg-surface-soft">
+          <span className="block h-full w-[72%] rounded-full bg-[linear-gradient(90deg,#3B82F6,#2563EB)]" />
+        </div>
+        <p className="mt-2 flex items-center gap-1.5 text-[10.5px] font-medium text-ink-2">
           <span className="flex size-4 items-center justify-center rounded-full bg-trust text-white">
             <Check size={9} strokeWidth={3.5} />
           </span>
-          Transcript ready
+          Transcript ready in seconds
         </p>
       </div>
-    </>
+    </div>
   );
 }
 
-const VISUAL: Record<string, () => React.ReactElement> = {
-  meeting: VisualMeeting,
-  audio: VisualAudio,
-  video: VisualVideo,
-  cloud: VisualCloud,
+const PANELS: Record<string, () => React.ReactElement> = {
+  meeting: PanelMeeting,
+  audio: PanelAudio,
+  video: PanelVideo,
+  cloud: PanelCloud,
 };
 
 const TAB_ICON: Record<string, typeof Users> = {
@@ -182,6 +173,7 @@ export function FeatureTabs() {
   }, []);
   const [active, setActive] = useState(initial);
   const s = services.items[active];
+  const Panel = PANELS[s.key];
 
   return (
     <section id="features" className="border-t border-border-soft bg-white py-16 md:py-24">
@@ -260,17 +252,19 @@ export function FeatureTabs() {
               </div>
             </div>
 
-            {(() => {
-              const Pieces = VISUAL[s.key];
-              return (
-                <div className="relative mx-2 pb-8 sm:mx-4">
-                  <div className="shadow-window overflow-hidden rounded-tile ring-1 ring-black/[0.06]">
-                    <img src={s.photo} alt="" aria-hidden className="aspect-[4/3] w-full object-cover" />
-                  </div>
-                  <Pieces />
-                </div>
-              );
-            })()}
+            {/* The photograph carries the light and the depth; the panel is the
+                only sharp object in it, standing on the picture's own floor. */}
+            <div className="relative overflow-hidden rounded-tile shadow-window ring-1 ring-black/[0.06]">
+              <img src={s.photo} alt="" aria-hidden className="aspect-[4/3] w-full object-cover" />
+              <span
+                aria-hidden
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(180deg, rgba(10,15,30,0) 38%, rgba(10,15,30,0.18) 100%)" }}
+              />
+              <div className="absolute inset-x-4 bottom-4 sm:inset-x-5 sm:bottom-5">
+                <Panel />
+              </div>
+            </div>
           </motion.div>
         </AnimatePresence>
       </Container>
