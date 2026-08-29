@@ -149,7 +149,7 @@ function SceneAudio() {
 function SceneVideo() {
   return (
     <>
-      <Meta>Growth interview.mp4 · 117 languages</Meta>
+      <Meta>Growth interview.mp4</Meta>
       {/* Subtitles genuinely live on the frame, so this is the one state where
           the naked type sits centred at the bottom, exactly as a viewer meets it. */}
       <div className="mt-auto">
