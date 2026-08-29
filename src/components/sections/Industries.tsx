@@ -121,17 +121,25 @@ function WidgetResearch() {
         <span className="min-w-0 flex-1 truncate text-[10.5px] font-medium text-ink">marketing strategy</span>
         <X size={11} className="shrink-0 text-muted" />
       </div>
-      <p className="mt-2.5 text-[10px] font-medium text-muted">3 results found</p>
-      <div className="mt-1.5 space-y-2">
-        <p className="text-[10.5px] leading-[1.45] text-ink-2">
-          <span className="tabular-nums text-muted">12:03</span> ...our {hit} focuses on retention first.
-        </p>
-        <p className="text-[10.5px] leading-[1.45] text-ink-2">
-          <span className="tabular-nums text-muted">18:47</span> we should test a new {hit} in Q4.
-        </p>
-        <p className="text-[10.5px] leading-[1.45] text-ink-2">
-          <span className="tabular-nums text-muted">32:11</span> the {hit} showed great results.
-        </p>
+      <p className="mt-3 text-[10px] font-medium text-muted">3 results found</p>
+      {/* Each hit is a flex row, not one wrapped paragraph with inline spans:
+          the DOM-to-Figma converter mis-measures the wrapped case and the
+          lines land on top of each other in the mockup. */}
+      <div className="mt-2 space-y-2.5">
+        {[
+          { at: "12:03", pre: "...our ", post: " focuses on retention first." },
+          { at: "18:47", pre: "we should test a new ", post: " in Q4." },
+          { at: "32:11", pre: "the ", post: " showed great results." },
+        ].map((r) => (
+          <div key={r.at} className="flex gap-1.5 text-[10.5px] leading-[1.5]">
+            <span className="shrink-0 tabular-nums text-muted">{r.at}</span>
+            <span className="text-ink-2">
+              {r.pre}
+              {hit}
+              {r.post}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
