@@ -88,18 +88,21 @@ function WidgetResearch() {
         <X size={11} className="shrink-0 text-muted" />
       </div>
       <p className="mt-3 text-[10px] font-medium text-muted">3 results found</p>
-      {/* Each hit is a flex row, not one wrapped paragraph with inline spans:
-          the DOM-to-Figma converter mis-measures the wrapped case and the
-          lines land on top of each other in the mockup. */}
+      {/* One LINE per hit, never a wrapping paragraph. A wrapped run that
+          carries an inline highlight is the known DOM-to-Figma failure: the
+          converter mis-measures it and the lines land on top of each other in
+          the mockup while the browser renders them cleanly. `truncate` keeps
+          each hit on a single line at every width, and the capture harness
+          already resolves an ellipsis correctly. */}
       <div className="mt-2 space-y-2.5">
         {[
-          { at: "12:03", pre: "...our ", post: " focuses on retention first." },
-          { at: "18:47", pre: "we should test a new ", post: " in Q4." },
-          { at: "32:11", pre: "the ", post: " showed great results." },
+          { at: "12:03", pre: "...our ", post: " next quarter." },
+          { at: "18:47", pre: "test a new ", post: " in Q4." },
+          { at: "32:11", pre: "the ", post: " worked well." },
         ].map((r) => (
-          <div key={r.at} className="flex gap-1.5 text-[10.5px] leading-[1.5]">
+          <div key={r.at} className="flex items-baseline gap-1.5 text-[10.5px] leading-[1.5]">
             <span className="shrink-0 tabular-nums text-muted">{r.at}</span>
-            <span className="text-ink-2">
+            <span className="min-w-0 flex-1 truncate whitespace-nowrap text-ink-2">
               {r.pre}
               {hit}
               {r.post}
