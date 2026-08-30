@@ -286,7 +286,7 @@ export const industries = {
     { key: "interviews", name: "Interviews", body: "Get accurate transcripts with speaker recognition." },
     { key: "podcasts", name: "Podcasts & Videos", body: "Turn long-form content into transcripts and summaries." },
     { key: "research", name: "Research", body: "Search, organize and analyze recorded conversations." },
-    { key: "education", name: "Education", body: "Transcribe lectures, classes and study materials." },
+    { key: "education", name: "Education", body: "Transcribe lectures, classes and study materials.", short: "Lectures, classes and study notes" },
     { key: "content", name: "Content Creation", body: "Create subtitles, articles and repurpose recorded content." },
   ],
   footnote: ["Works with 117+ languages", "Your data is safe and secure"],

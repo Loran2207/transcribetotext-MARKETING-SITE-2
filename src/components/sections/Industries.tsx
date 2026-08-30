@@ -228,25 +228,31 @@ export function Industries() {
             <WidgetPodcasts />
           </BentoCell>
 
-          {/* The quiet cell. Deep ink, one glyph, no widget - the rhythm break
-              that stops six loud cells reading as noise. */}
-          <motion.div
-            variants={fadeUp}
-            className={`${CELL} surface-dark flex flex-col p-5 lg:col-span-2`}
-          >
-            <div className="flex items-center gap-2.5">
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-[10px] bg-white/10 text-accent-glow ring-1 ring-white/15">
+          {/* The second photographic cell, narrow and portrait. The skeleton
+              lines that stood here before read as content that had failed to
+              load; a real frame of a lecture hall says the same thing and says
+              it truthfully. Same treatment as the lead - a short scrim, the
+              label written on the picture - so the two read as one pair. */}
+          <motion.div variants={fadeUp} data-shot="edu-cell" className={`${CELL} min-h-[300px] bg-dark lg:col-span-2 lg:min-h-0`}>
+            <img
+              src="/brand/features/bento-education.jpg"
+              alt=""
+              aria-hidden
+              className="absolute inset-0 size-full object-cover"
+            />
+            <span
+              aria-hidden
+              className="absolute inset-x-0 bottom-0 h-[52%]"
+              style={{ background: "linear-gradient(0deg, rgba(6,12,30,0.90) 0%, rgba(6,12,30,0.58) 45%, rgba(6,12,30,0) 100%)" }}
+            />
+            <div className="absolute inset-x-0 top-0 p-5">
+              <span className="flex size-8 items-center justify-center rounded-[10px] bg-white/10 text-accent-glow ring-1 ring-white/15">
                 <BookOpen size={16} strokeWidth={1.9} />
               </span>
-              <p className="font-display text-[16px] font-semibold tracking-[-0.01em] text-ink-invert">{c[4].name}</p>
             </div>
-            <p className="mt-2 text-pretty text-[12.5px] leading-relaxed text-muted-invert">{c[4].body}</p>
-            {/* Hairline graphic, not a widget: the quiet cell stays quiet, and
-                the lines read as a page of notes without drawing a panel. */}
-            <div aria-hidden className="mt-5 space-y-3">
-              {[100, 82, 92, 68, 88, 54, 76, 84, 62].map((w, i) => (
-                <span key={i} className="block h-px rounded-full bg-white/15" style={{ width: `${w}%` }} />
-              ))}
+            <div className="absolute inset-x-0 bottom-0 p-5">
+              <p className="font-display text-[16px] font-semibold tracking-[-0.01em] text-white">{c[4].name}</p>
+              <p className="mt-1.5 text-pretty text-[12.5px] leading-relaxed text-white/70">{c[4].short ?? c[4].body}</p>
             </div>
           </motion.div>
 
@@ -254,23 +260,27 @@ export function Industries() {
             <WidgetResearch />
           </BentoCell>
 
-          {/* The base bar: one outer radius, and 1px gutters INSIDE showing the
-              tray through - the hairline made of geometry rather than borders. */}
+          {/* The base bar. The pink plate was the one surface in the section
+              that belonged to another palette - the rose is the pricing accent,
+              and at this size it read as a stray block. It is ink now, which
+              closes the composition against the dark lead cell diagonally
+              opposite it, and the formats become white chips that carry their
+              own colour. The 1px gutter survives, drawn in white at 8%. */}
           <motion.div
             variants={fadeUp}
-            className="overflow-hidden rounded-[20px] bg-deal/[0.15] sm:col-span-2 lg:col-span-12 lg:row-auto"
+            className="surface-dark overflow-hidden rounded-[20px] sm:col-span-2 lg:col-span-12 lg:row-auto"
           >
-            <div className="flex flex-col gap-px sm:flex-row">
-              <div className="flex items-center gap-3 bg-deal/[0.05] p-5 sm:min-w-[340px]">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-[10px] bg-white text-deal">
+            <div className="flex flex-col gap-px bg-white/[0.08] sm:flex-row">
+              <div className="surface-dark flex items-center gap-3 p-5 sm:min-w-[340px]">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-[10px] bg-white/10 text-accent-glow ring-1 ring-white/15">
                   <FileText size={16} strokeWidth={1.9} />
                 </span>
                 <div>
-                  <p className="font-display text-[16px] font-semibold tracking-[-0.01em] text-ink">{c[5].name}</p>
-                  <p className="text-[12.5px] leading-relaxed text-ink-2">{c[5].body}</p>
+                  <p className="font-display text-[16px] font-semibold tracking-[-0.01em] text-ink-invert">{c[5].name}</p>
+                  <p className="text-[12.5px] leading-relaxed text-muted-invert">{c[5].body}</p>
                 </div>
               </div>
-              <div className="flex flex-1 flex-wrap items-center gap-2 bg-deal/[0.05] p-5 sm:justify-end">
+              <div className="surface-dark flex flex-1 flex-wrap items-center gap-2 p-5 sm:justify-end">
                 {EXPORTS.map((e) => (
                   <span key={e.name} className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5">
                     <span className={`flex size-4 items-center justify-center rounded-[5px] ${e.tint}`}>

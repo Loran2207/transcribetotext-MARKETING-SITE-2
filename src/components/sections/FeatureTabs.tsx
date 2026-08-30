@@ -72,6 +72,25 @@ function Foot({ children }: { children: React.ReactNode }) {
   return <div className="mt-auto flex justify-center pt-5">{children}</div>;
 }
 
+/* The site's own notch, taken off SectionCutout and bitten into the frame
+   itself, top and bottom (Kirill, round 11b). It is the page colour laid over
+   the photograph, exactly as the section transition is drawn - so it survives
+   the DOM-to-Figma export, which a CSS mask would not. */
+function FrameNotch({ side }: { side: "top" | "bottom" }) {
+  return (
+    <div
+      aria-hidden
+      className={`pointer-events-none absolute inset-x-0 z-10 flex justify-center ${
+        side === "top" ? "top-0" : "bottom-0 rotate-180"
+      }`}
+    >
+      <svg className="block h-auto w-[46%]" viewBox="0 0 248 30" fill="none" preserveAspectRatio="xMidYMin meet">
+        <path d="M44 0 C74 0 74 30 104 30 H144 C174 30 174 0 204 0 Z" fill="#FFFFFF" />
+      </svg>
+    </div>
+  );
+}
+
 function SceneMeeting() {
   return (
     <>
@@ -343,7 +362,9 @@ export function FeatureTabs() {
             >
               <img src={s.photo} alt="" aria-hidden className="absolute inset-0 size-full object-cover" />
               <span aria-hidden className="absolute inset-x-0 bottom-0 h-1/3" style={{ background: FOOT_WASH }} />
-              <div className="absolute inset-0 flex flex-col p-6 sm:p-7">
+              <FrameNotch side="top" />
+              <FrameNotch side="bottom" />
+              <div className="absolute inset-0 z-20 flex flex-col px-6 pb-12 pt-11 sm:px-7">
                 <Scene />
               </div>
             </div>
