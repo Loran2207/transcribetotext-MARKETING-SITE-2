@@ -37,7 +37,7 @@ const NOTE: Record<string, string> = {
 
 export function PlanCards({ selected, onSelect }: { selected: number; onSelect: (i: number) => void }) {
   const scroller = useRef<HTMLDivElement>(null);
-  const popular = useRef<HTMLButtonElement>(null);
+  const popular = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const sc = scroller.current, el = popular.current;
@@ -57,27 +57,34 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
       {subscribe.plans.map((p, i) => {
         const on = i === selected;
         return (
-          <motion.button
+          <motion.div
             key={p.key}
             ref={p.popular ? popular : undefined}
             variants={fadeUp}
             whileHover={{ y: -4 }}
-            onClick={() => onSelect(i)}
-            aria-pressed={on}
-            className={`relative flex w-[280px] shrink-0 snap-center flex-col rounded-tile border bg-white text-center transition-all md:w-[360px] lg:w-auto lg:shrink ${
-              on ? "border-accent shadow-card ring-2 ring-accent/20" : "border-border shadow-soft hover:border-accent/40"
-            }`}
+            className="relative flex w-[280px] shrink-0 snap-center md:w-[360px] lg:w-auto lg:shrink"
           >
-            {/* Only the recommended plan's tag rides the border, as in the
-                reference; the side tags are pills inside the card. */}
+            {/* The recommended plan's tag rides the card's top edge, as in the
+                reference - but it is a SIBLING of the card, not a child of it.
+                The DOM-to-Figma converter marks any rounded box as clipping, so
+                a badge nested inside the card lost its top half in every
+                exported mockup while the browser drew it whole. */}
             {p.tone === "accent" ? (
               <span
-                className={`absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border px-3.5 py-1 text-[10px] font-bold tracking-[0.07em] ${TAG_TOP}`}
+                className={`absolute -top-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full border px-3.5 py-1 text-[10px] font-bold tracking-[0.07em] ${TAG_TOP}`}
               >
                 {p.tag}
               </span>
             ) : null}
 
+            <button
+              type="button"
+              onClick={() => onSelect(i)}
+              aria-pressed={on}
+              className={`flex w-full flex-col rounded-tile border bg-white text-center transition-all ${
+                on ? "border-accent shadow-card ring-2 ring-accent/20" : "border-border shadow-soft hover:border-accent/40"
+              }`}
+            >
             <div className="flex flex-1 flex-col items-center p-4 pt-5 text-center lg:p-5 lg:pt-6">
               {/* One tag zone on every card so the three names share a line:
                   the side cards show their pill here, the middle reserves it. */}
@@ -131,8 +138,9 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
               >
                 <Check size={13} strokeWidth={3} />
               </span>
-            </div>
-          </motion.button>
+              </div>
+            </button>
+          </motion.div>
         );
       })}
     </motion.div>
