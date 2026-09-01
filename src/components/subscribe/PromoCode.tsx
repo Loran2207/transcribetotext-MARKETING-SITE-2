@@ -22,29 +22,28 @@ export function PromoCode() {
   const [applied, setApplied] = useState(true);
 
   return (
-    <div className="mx-auto mt-6 w-full max-w-2xl">
+    <div className="mx-auto mt-5 w-full max-w-2xl">
       <div className={`rounded-2xl p-3 transition-colors sm:p-3.5 ${applied ? "bg-accent-soft" : "bg-surface-soft"}`}>
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5">
-          <img src="/brand/subscribe/gift.png" alt="" aria-hidden className="size-10 shrink-0 sm:size-12" />
+        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2.5 sm:gap-x-3">
+          <img src="/brand/subscribe/gift.png" alt="" aria-hidden className="size-9 shrink-0 sm:size-12" />
 
-          {/* DOM order is the PHONE order - gift and pill share the top line,
-              the promise takes the next full-width line, the field comes last.
-              From sm up `order` puts them back into the reference's single row:
-              gift, promise, field, pill. */}
-          <span className="ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold text-white sm:order-4">
+          {/* Measured for the phone: 334px of usable width, minus the gift and
+              the pill, leaves 202px - which both lines clear at these sizes, so
+              the band is two rows on a phone and one from sm up. */}
+          <div className="min-w-0 flex-1 sm:order-2">
+            <p className="text-[12.5px] font-bold leading-tight text-ink sm:text-[15px]">{subscribe.promo.label}</p>
+            <p className="mt-0.5 text-[11px] leading-tight text-ink-2 sm:text-[12.5px]">{subscribe.promo.sub}</p>
+          </div>
+
+          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold text-white sm:order-4 sm:gap-1.5">
             <Tag size={12} /> {subscribe.promo.discount}
           </span>
 
-          <div className="w-full min-w-0 sm:order-2 sm:w-auto sm:flex-1">
-            <p className="text-[13.5px] font-bold leading-tight text-ink sm:text-[15px]">{subscribe.promo.label}</p>
-            <p className="mt-0.5 text-[12px] leading-snug text-ink-2 sm:text-[12.5px]">{subscribe.promo.sub}</p>
-          </div>
-
-          <div className="flex w-full min-w-0 items-center gap-2 rounded-xl bg-white px-3 py-2 shadow-soft sm:order-3 sm:w-auto sm:min-w-[190px]">
+          <div className="flex w-full min-w-0 items-center gap-2 rounded-xl bg-white px-3 py-1.5 shadow-soft sm:order-3 sm:w-auto sm:min-w-[190px] sm:py-2">
             {applied ? (
-              <Check size={16} className="shrink-0 text-accent" strokeWidth={3} />
+              <Check size={15} className="shrink-0 text-accent" strokeWidth={3} />
             ) : (
-              <Tag size={16} className="shrink-0 text-muted" />
+              <Tag size={15} className="shrink-0 text-muted" />
             )}
             <input
               value={code}
@@ -54,7 +53,7 @@ export function PromoCode() {
               }}
               placeholder="Enter promo code"
               aria-label="Promo code"
-              className="min-w-0 flex-1 bg-transparent text-[14px] font-bold tracking-wide text-ink outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-muted"
+              className="min-w-0 flex-1 bg-transparent text-[13.5px] font-bold tracking-wide text-ink outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-muted sm:text-[14px]"
             />
             {!applied ? (
               <button

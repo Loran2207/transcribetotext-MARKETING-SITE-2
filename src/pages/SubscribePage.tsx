@@ -36,7 +36,7 @@ export function SubscribePage() {
     <div className="relative min-h-screen bg-canvas">
       <CountdownBar onGetPlan={() => setOpen(true)} />
       <div className="relative z-10 overflow-hidden">
-        <div className="mx-auto w-full max-w-5xl px-4 pt-6 sm:px-6 md:pt-9">
+        <div className="mx-auto w-full max-w-5xl px-5 pt-6 sm:px-6 md:pt-9">
           <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="flex flex-col items-center text-center">
             <motion.span
               variants={fadeUp}
@@ -46,7 +46,7 @@ export function SubscribePage() {
             </motion.span>
             <motion.h1
               variants={fadeUp}
-              className="mt-2.5 text-balance font-display text-[26px] font-extrabold tracking-tight text-ink sm:text-[32px]"
+              className="mt-2.5 text-balance font-display text-[23px] font-extrabold leading-[1.15] tracking-tight text-ink sm:text-[32px]"
             >
               {subscribe.heading}
             </motion.h1>
