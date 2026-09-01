@@ -279,7 +279,7 @@ export function FeatureTabs() {
         <motion.div variants={stagger(0.07)} initial="hidden" whileInView="show" viewport={viewportOnce}>
           <motion.h2
             variants={fadeUp}
-            className="text-center font-display text-3xl font-semibold tracking-[-0.025em] text-ink sm:text-4xl md:text-[40px]"
+            className="text-center font-display text-3xl font-bold tracking-[-0.025em] text-ink sm:text-4xl md:text-[40px]"
           >
             {services.title}
           </motion.h2>
@@ -322,7 +322,7 @@ export function FeatureTabs() {
             className="mx-auto mt-10 grid max-w-5xl items-center gap-10 md:mt-14 lg:grid-cols-2 lg:gap-14"
           >
             <div>
-              <h3 className="text-balance font-display text-[28px] font-semibold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[32px]">
+              <h3 className="text-balance font-display text-[28px] font-bold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[32px]">
                 {s.titlePre} <span className="text-accent">{s.titleAccent}</span>
                 {s.titlePost ? ` ${s.titlePost}` : ""}
               </h3>

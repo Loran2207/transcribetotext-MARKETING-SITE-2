@@ -34,7 +34,7 @@ export function Hero() {
             </motion.span>
             <motion.h1
               variants={fadeUp}
-              className="mt-6 text-balance font-display text-[34px] font-semibold leading-[1.07] tracking-[-0.025em] text-ink sm:text-[42px] lg:text-[46px]"
+              className="mt-6 text-balance font-display text-[34px] font-bold leading-[1.07] tracking-[-0.025em] text-ink sm:text-[42px] lg:text-[46px]"
             >
               <span className="block">{hero.titleLine1}</span>
               {hero.titleLine2}

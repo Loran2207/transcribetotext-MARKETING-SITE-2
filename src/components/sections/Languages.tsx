@@ -45,7 +45,7 @@ export function Languages() {
         >
           <motion.h2
             variants={fadeUp}
-            className="text-balance font-display text-3xl font-semibold tracking-[-0.025em] text-ink sm:text-4xl md:text-[40px]"
+            className="text-balance font-display text-3xl font-bold tracking-[-0.025em] text-ink sm:text-4xl md:text-[40px]"
           >
             {languages.title}
           </motion.h2>

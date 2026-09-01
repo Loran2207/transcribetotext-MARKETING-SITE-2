@@ -29,7 +29,7 @@ function StatValue({ value }: { value: string }) {
     return () => c.stop();
   }, [inView, reduce, target]);
   return (
-    <span className="font-display text-4xl font-semibold tracking-tight text-ink md:text-[40px]">
+    <span className="font-display text-4xl font-bold tracking-tight text-ink md:text-[40px]">
       <span ref={ref}>{m ? n : value}</span>
       {shortSuffix ? (
         <span className="text-accent">{suffix}</span>
@@ -65,7 +65,7 @@ export function Trust() {
           </motion.span>
           <motion.h2
             variants={fadeUp}
-            className="text-balance font-display text-3xl font-semibold tracking-[-0.025em] text-ink sm:text-4xl md:text-[40px] md:leading-[1.1]"
+            className="text-balance font-display text-3xl font-bold tracking-[-0.025em] text-ink sm:text-4xl md:text-[40px] md:leading-[1.1]"
           >
             {trust.title}
             <span className="block text-ink-2">{trust.subtitle}</span>

@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
@@ -15,13 +14,18 @@ import { EASE_OUT, viewportOnce } from "../../lib/motion";
    quiet beside it. This is the block Kirill said he did not want to buy from
    in the flat version - V1's is the one he called beautiful. */
 
-function Feature({ children }: { children: ReactNode }) {
+/* The reference's premium card lists four lines, each with its own icon, a
+   title and one sentence of what it means - which is why it reads in three
+   seconds where eight ticked words do not. The icons are rendered art, in the
+   same glossy cobalt as the paywall's gift. */
+function Highlight({ icon, title, body }: { icon: string; title: string; body: string }) {
   return (
-    <li className="flex items-start gap-3 text-sm text-muted-invert">
-      <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-accent/20">
-        <Check size={13} className="text-accent-glow" />
-      </span>
-      <span>{children}</span>
+    <li className="flex items-start gap-3">
+      <img src={`/brand/pricing/${icon}.png`} alt="" aria-hidden className="mt-[1px] size-8 shrink-0" />
+      <div className="min-w-0">
+        <p className="text-[14.5px] font-semibold leading-tight text-ink-invert">{title}</p>
+        <p className="mt-1 text-[13px] leading-relaxed text-muted-invert">{body}</p>
+      </div>
     </li>
   );
 }
@@ -53,14 +57,46 @@ export function Pricing() {
           tone="dark"
         />
 
-        <div className="mx-auto mt-12 grid max-w-4xl items-stretch gap-6 md:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)]">
+        <div className="mx-auto mt-12 grid max-w-5xl items-center gap-6 md:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]">
+          {/* Free: present, honest, quiet. */}
+          <motion.div
+            initial={{ opacity: 0, x: -40, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            viewport={viewportOnce}
+            transition={{ duration: 0.8, ease: EASE_OUT, delay: 0.08 }}
+            className="order-2 flex flex-col rounded-tile border border-white/10 surface-dark p-7 md:order-1"
+          >
+            <p className="text-sm font-semibold text-muted-invert">{f.badge}</p>
+            <div className="mt-3 flex items-end">
+              <p className="font-display text-4xl font-bold tracking-tight text-ink-invert">{f.price}</p>
+            </div>
+            <div className="mt-6 space-y-5 border-t border-white/10 pt-6">
+              {f.features.map((b) => (
+                <div key={b.title} className="flex items-start gap-3">
+                  <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-white/10">
+                    <Check size={13} className="text-muted-invert" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-ink-invert">{b.title}</p>
+                    <p className="mt-1 text-[13px] leading-relaxed text-muted-invert">{b.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <Link
+              to="/subscribe"
+              className="mt-7 inline-flex h-13 items-center justify-center rounded-full border border-white/15 bg-white/5 text-base font-medium tracking-[0.04em] text-ink-invert transition-colors hover:bg-white/10"
+            >
+              {f.cta}
+            </Link>
+          </motion.div>
           {/* Premium leads: the glow frame is what says "this is the one". */}
           <motion.div
-            initial={{ opacity: 0, x: -50, filter: "blur(10px)" }}
+            initial={{ opacity: 0, x: 40, filter: "blur(10px)" }}
             whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             viewport={viewportOnce}
             transition={{ duration: 0.8, ease: EASE_OUT }}
-            className="relative h-full"
+            className="relative order-1 h-full md:order-2"
           >
             <div
               aria-hidden
@@ -85,13 +121,13 @@ export function Pricing() {
                 </div>
                 <div className="relative mt-4 flex items-end gap-2">
                   <span className="mb-2 text-[11px] font-bold tracking-[0.08em] text-muted-invert">{p.priceFrom}</span>
-                  <span className="font-display text-[52px] font-semibold leading-none tracking-tight text-ink-invert">{p.price}</span>
+                  <span className="font-display text-[52px] font-bold leading-none tracking-tight text-ink-invert">{p.price}</span>
                   <span className="mb-1.5 text-sm font-medium text-muted-invert">{p.priceUnit}</span>
                 </div>
                 <p className="relative mt-2.5 text-[13px] text-muted-invert">{p.note}</p>
-                <ul className="relative mt-7 grid flex-1 gap-x-6 gap-y-3.5 border-t border-white/10 pt-7 sm:grid-cols-2">
-                  {p.features.map((b) => (
-                    <Feature key={b}>{b}</Feature>
+                <ul className="relative mt-6 flex-1 space-y-4 border-t border-white/10 pt-6">
+                  {p.highlights.map((h) => (
+                    <Highlight key={h.title} icon={h.icon} title={h.title} body={h.body} />
                   ))}
                 </ul>
                 <Link
@@ -104,38 +140,6 @@ export function Pricing() {
             </div>
           </motion.div>
 
-          {/* Free: present, honest, quiet. */}
-          <motion.div
-            initial={{ opacity: 0, x: 50, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-            viewport={viewportOnce}
-            transition={{ duration: 0.8, ease: EASE_OUT, delay: 0.08 }}
-            className="flex h-full flex-col rounded-tile border border-white/10 surface-dark p-8"
-          >
-            <p className="text-sm font-semibold text-muted-invert">{f.badge}</p>
-            <div className="mt-4 flex min-h-[52px] items-end">
-              <p className="font-display text-4xl font-semibold tracking-tight text-ink-invert">{f.price}</p>
-            </div>
-            <div className="mt-7 flex-1 space-y-5 border-t border-white/10 pt-7">
-              {f.features.map((b) => (
-                <div key={b.title} className="flex items-start gap-3">
-                  <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-white/10">
-                    <Check size={13} className="text-muted-invert" />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-ink-invert">{b.title}</p>
-                    <p className="mt-1 text-[13px] leading-relaxed text-muted-invert">{b.body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <Link
-              to="/subscribe"
-              className="mt-8 inline-flex h-14 items-center justify-center rounded-full border border-white/15 bg-white/5 text-base font-medium tracking-[0.04em] text-ink-invert transition-colors hover:bg-white/10"
-            >
-              {f.cta}
-            </Link>
-          </motion.div>
         </div>
       </Container>
     </section>

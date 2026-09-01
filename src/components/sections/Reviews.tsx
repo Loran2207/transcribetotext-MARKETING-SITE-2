@@ -59,7 +59,7 @@ export function Reviews() {
       >
         <motion.h2
           variants={fadeUp}
-          className="text-balance font-display text-3xl font-semibold tracking-[-0.025em] text-ink sm:text-4xl md:text-[42px]"
+          className="text-balance font-display text-3xl font-bold tracking-[-0.025em] text-ink sm:text-4xl md:text-[42px]"
         >
           {reviews.title}
         </motion.h2>
