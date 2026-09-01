@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
+import { SECTION_TITLE } from "../../lib/typography";
 
 export function SectionHeading({
   eyebrow,
@@ -28,7 +29,7 @@ export function SectionHeading({
       ) : null}
       {/* V1's typographic voice: large semibold with tight tracking, the weight
           the owner pointed back to when he asked for the first version's grade. */}
-      <motion.h2 variants={fadeUp} className={`text-balance font-display text-3xl font-bold tracking-[-0.025em] sm:text-4xl md:text-[44px] md:leading-[1.08] ${dark ? "text-ink-invert" : "text-ink"}`}>
+      <motion.h2 variants={fadeUp} className={`${SECTION_TITLE} ${dark ? "text-ink-invert" : "text-ink"}`}>
         {title}
       </motion.h2>
       {subtitle ? (

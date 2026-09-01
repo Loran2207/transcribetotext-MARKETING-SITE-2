@@ -53,7 +53,7 @@ export function PromoCode() {
             <Tag size={12} /> {subscribe.promo.discount}
           </span>
 
-          <div className="flex min-w-0 basis-[58%] grow items-center gap-2 rounded-xl bg-white px-3 py-1.5 shadow-soft sm:order-3 sm:w-auto sm:min-w-[168px] sm:grow-0 sm:basis-auto sm:py-2">
+          <div className="flex min-w-0 basis-[58%] grow items-center gap-1.5 rounded-lg bg-white px-2.5 py-1.5 shadow-soft sm:order-3 sm:grow-0 sm:basis-auto">
             {applied ? (
               <Check size={15} className="shrink-0 text-accent" strokeWidth={3} />
             ) : (
@@ -67,7 +67,8 @@ export function PromoCode() {
               }}
               placeholder="Enter promo code"
               aria-label="Promo code"
-              className="min-w-0 flex-1 bg-transparent text-[13.5px] font-bold tracking-wide text-ink outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-muted sm:text-[14px]"
+              size={11}
+              className="min-w-0 flex-1 bg-transparent text-[13px] font-bold tracking-wide text-ink outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-muted sm:w-[92px] sm:flex-none"
             />
             {!applied ? (
               <button
@@ -79,16 +80,14 @@ export function PromoCode() {
             ) : null}
           </div>
 
-          {/* The brief's own far-end element: "Offer ends in" over the units. */}
-          <div className="flex shrink-0 items-center gap-2 sm:order-5">
-            <p className="hidden text-[10px] font-semibold leading-tight text-ink-2 lg:block">
-              Offer
-              <br />
-              ends in
-            </p>
+          {/* The reference stacks this: the label on its own line, the units
+              centred under it. Ours had the label beside the boxes on two
+              cramped lines, which is what read as clumsy. */}
+          <div className="flex shrink-0 flex-col items-center gap-1 sm:order-5">
+            <p className="text-[10px] font-semibold leading-none text-ink-2">Offer ends in</p>
             <div className="flex items-start gap-1">
               <Unit value={pad(mm)} label="MIN" />
-              <span className="pt-1 font-mono text-[15px] font-bold text-accent">:</span>
+              <span className="pt-[3px] font-mono text-[14px] font-bold text-accent">:</span>
               <Unit value={pad(ss)} label="SEC" />
             </div>
           </div>

@@ -1,4 +1,3 @@
-// One heading style for the whole paywall so every section title matches:
-// big, bold, same size (Choose your plan / What you get with / Our users' feedback).
-export const PAYWALL_HEADING =
-  "text-balance font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl";
+// The paywall's section titles use the site-wide section size, so a reader
+// never sees two large headings at two different sizes in one screen.
+export { SECTION_TITLE as PAYWALL_HEADING } from "../../lib/typography";

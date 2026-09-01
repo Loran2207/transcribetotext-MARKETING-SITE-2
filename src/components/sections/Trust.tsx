@@ -5,6 +5,7 @@ import { Container } from "../primitives/Container";
 import { trust } from "../../data/content";
 import { platform } from "../../data/assets";
 import { fadeUp, scaleIn, stagger, viewportOnce } from "../../lib/motion";
+import { SECTION_TITLE } from "../../lib/typography";
 
 /* V1's stat band: no boxes, no plates - big numbers with the accent on the
    suffix, hairline top and bottom on plain white. The fourth column is not a
@@ -65,7 +66,7 @@ export function Trust() {
           </motion.span>
           <motion.h2
             variants={fadeUp}
-            className="text-balance font-display text-3xl font-bold tracking-[-0.025em] text-ink sm:text-4xl md:text-[40px] md:leading-[1.1]"
+            className={`text-ink ${SECTION_TITLE}`}
           >
             {trust.title}
             <span className="block text-ink-2">{trust.subtitle}</span>

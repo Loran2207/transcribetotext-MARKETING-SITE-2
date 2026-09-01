@@ -7,6 +7,7 @@ import { Globe3D } from "../mocks/Globe3D";
 import { languages } from "../../data/content";
 import { brand } from "../../data/assets";
 import { fadeUp, scaleIn, stagger, viewportOnce } from "../../lib/motion";
+import { SECTION_TITLE } from "../../lib/typography";
 
 /* The brief asks for this block to take less room: the language names go and
    the flags stay. A flag on its own is a puzzle for anyone who does not know it,
@@ -45,7 +46,7 @@ export function Languages() {
         >
           <motion.h2
             variants={fadeUp}
-            className="text-balance font-display text-3xl font-bold tracking-[-0.025em] text-ink sm:text-4xl md:text-[40px]"
+            className={`text-ink ${SECTION_TITLE}`}
           >
             {languages.title}
           </motion.h2>

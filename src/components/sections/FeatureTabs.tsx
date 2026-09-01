@@ -7,6 +7,7 @@ import { PlatformPills } from "../mocks/FeatureMocks";
 import { services } from "../../data/content";
 import { platform } from "../../data/assets";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
+import { SECTION_TITLE } from "../../lib/typography";
 
 /* The site's own "Our Transcription Services" block, kept as the four tabs a
    visitor already knows, Meeting Transcription first and preselected.
@@ -279,7 +280,7 @@ export function FeatureTabs() {
         <motion.div variants={stagger(0.07)} initial="hidden" whileInView="show" viewport={viewportOnce}>
           <motion.h2
             variants={fadeUp}
-            className="text-center font-display text-3xl font-bold tracking-[-0.025em] text-ink sm:text-4xl md:text-[40px]"
+            className={`text-center text-ink ${SECTION_TITLE}`}
           >
             {services.title}
           </motion.h2>

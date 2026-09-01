@@ -250,11 +250,12 @@ export const pricing = {
     note: "Billed as a 3-month plan. Cancel anytime.",
     /* The brief lists eight benefits; the reference groups them into four lines
        that each carry a title and what it means, which is what a reader can
-       actually take in. All eight facts survive inside these four. */
+       actually take in. Every one of the brief's eight words survives here -
+       four as titles, the other four inside the third line's sentence. */
     highlights: [
       { icon: "infinity", title: "Unlimited transcriptions", body: "Transcribe as much as you need, every day." },
       { icon: "upload", title: "Extended uploads", body: "Files up to 10 hours or 5 GB each." },
-      { icon: "sparkle", title: "Every premium feature", body: "Meeting transcription, AI summaries, speaker recognition, 117+ languages and all export formats." },
+      { icon: "sparkle", title: "Meeting transcription", body: "Plus AI summaries, speaker recognition, 117+ languages and all export formats." },
       { icon: "bolt", title: "Priority processing", body: "Your files are transcribed first, always." },
     ],
     // The brief writes "Upgrate NOW"; that is a typo for Upgrade, and a

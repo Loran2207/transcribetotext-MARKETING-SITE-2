@@ -13,6 +13,7 @@ import { DarkFeedback } from "../components/subscribe/DarkFeedback";
 import { Guarantee, Benefits, SafeCheckout } from "../components/subscribe/SubscribeSections";
 import { subscribe } from "../data/subscribe";
 import { fadeUp, stagger } from "../lib/motion";
+import { PAGE_TITLE } from "../lib/typography";
 
 export function SubscribePage() {
   const { search } = useLocation();
@@ -46,7 +47,7 @@ export function SubscribePage() {
             </motion.span>
             <motion.h1
               variants={fadeUp}
-              className="mt-2.5 text-balance font-display text-[23px] font-extrabold leading-[1.15] tracking-tight text-ink sm:text-[32px]"
+              className={`mt-2.5 text-ink ${PAGE_TITLE}`}
             >
               {subscribe.heading}
             </motion.h1>

@@ -64,11 +64,11 @@ export function Pricing() {
             whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             viewport={viewportOnce}
             transition={{ duration: 0.8, ease: EASE_OUT, delay: 0.08 }}
-            className="order-2 flex flex-col rounded-tile border border-white/10 surface-dark p-7 md:order-1"
+            className="order-2 flex flex-col rounded-tile border border-white/[0.07] bg-white/[0.02] p-7 md:order-1"
           >
-            <p className="text-sm font-semibold text-muted-invert">{f.badge}</p>
+            <p className="text-sm font-medium text-muted-invert/80">{f.badge}</p>
             <div className="mt-3 flex items-end">
-              <p className="font-display text-4xl font-bold tracking-tight text-ink-invert">{f.price}</p>
+              <p className="font-display text-[30px] font-bold tracking-tight text-ink-invert/90">{f.price}</p>
             </div>
             <div className="mt-6 space-y-5 border-t border-white/10 pt-6">
               {f.features.map((b) => (
@@ -77,8 +77,8 @@ export function Pricing() {
                     <Check size={13} className="text-muted-invert" />
                   </span>
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold text-ink-invert">{b.title}</p>
-                    <p className="mt-1 text-[13px] leading-relaxed text-muted-invert">{b.body}</p>
+                    <p className="text-sm font-semibold text-ink-invert/85">{b.title}</p>
+                    <p className="mt-1 text-[13px] leading-relaxed text-muted-invert/75">{b.body}</p>
                   </div>
                 </div>
               ))}

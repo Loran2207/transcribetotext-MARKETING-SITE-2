@@ -6,6 +6,7 @@ import { SectionCutout } from "../primitives/SectionCutout";
 import { StarField } from "../mocks/StarField";
 import { finalCta } from "../../data/content";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
+import { SECTION_TITLE } from "../../lib/typography";
 
 export function FinalCta() {
   return (
@@ -22,7 +23,7 @@ export function FinalCta() {
         >
           <motion.h2
             variants={fadeUp}
-            className="text-balance font-display text-3xl font-bold leading-[1.1] tracking-[-0.025em] text-ink-invert sm:text-4xl md:text-[46px]"
+            className={`text-ink-invert ${SECTION_TITLE}`}
           >
             {finalCta.titleLine1}
             <span className="block">{finalCta.titleLine2}</span>

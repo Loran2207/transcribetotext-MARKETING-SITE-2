@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Section } from "../primitives/Section";
 import { reviews } from "../../data/content";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
+import { SECTION_TITLE } from "../../lib/typography";
 
 /* Trustpilot's own review widget is a row of filled green squares, each holding
    a white star - that shape is what makes a review card read as Trustpilot at a
@@ -59,7 +60,7 @@ export function Reviews() {
       >
         <motion.h2
           variants={fadeUp}
-          className="text-balance font-display text-3xl font-bold tracking-[-0.025em] text-ink sm:text-4xl md:text-[42px]"
+          className={`text-ink ${SECTION_TITLE}`}
         >
           {reviews.title}
         </motion.h2>
