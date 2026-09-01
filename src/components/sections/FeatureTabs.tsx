@@ -285,11 +285,15 @@ export function FeatureTabs() {
             {services.title}
           </motion.h2>
 
-          {/* Two even columns on a phone: four pills wrapping 2-1-1 is the
-              ragged grid the law forbids. */}
+          {/* A real grid rather than four pills of four different lengths: two
+              even columns below lg, four even ones above, every cell the same
+              height so a two-line label (Cloud File Transcription) sits in the
+              same box as a one-line one instead of stretching its capsule.
+              Radius comes down from a full capsule to a card corner - at this
+              size a pill reads as loose, a rounded cell reads as a control. */}
           <motion.div
             variants={fadeUp}
-            className="mt-8 grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:justify-center sm:gap-3"
+            className="mx-auto mt-8 grid max-w-xl grid-cols-2 gap-2.5 lg:max-w-5xl lg:grid-cols-4 lg:gap-3"
           >
             {services.items.map((it, i) => {
               const Ico = TAB_ICON[it.key];
@@ -299,14 +303,20 @@ export function FeatureTabs() {
                   key={it.key}
                   type="button"
                   onClick={() => setActive(i)}
-                  className={`inline-flex items-center justify-center gap-2 rounded-full border px-3 py-2.5 text-[12.5px] font-semibold transition sm:px-5 sm:text-[13px] ${
+                  className={`flex min-h-[54px] items-center gap-2.5 rounded-2xl border px-3.5 py-2.5 text-left text-[12.5px] font-semibold leading-tight transition sm:text-[13px] ${
                     on
-                      ? "border-accent bg-white text-accent shadow-soft"
+                      ? "border-accent bg-accent-soft/60 text-accent"
                       : "border-border bg-white text-ink-2 hover:border-accent/40 hover:text-ink"
                   }`}
                 >
-                  <Ico size={15} className={on ? "text-accent" : "text-muted"} />
-                  {it.tab}
+                  <span
+                    className={`flex size-7 shrink-0 items-center justify-center rounded-lg ${
+                      on ? "bg-accent text-white" : "bg-surface-soft text-muted"
+                    }`}
+                  >
+                    <Ico size={14} />
+                  </span>
+                  <span className="min-w-0">{it.tab}</span>
                 </button>
               );
             })}

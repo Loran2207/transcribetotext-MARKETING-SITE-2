@@ -27,19 +27,22 @@ export function HowItWorks() {
             className={`pointer-events-none absolute top-8 hidden origin-left border-t-2 border-dashed border-accent/50 md:block ${pos}`}
           />
         ))}
-        <motion.div variants={stagger(0.14)} initial="hidden" whileInView="show" viewport={viewportOnce} className="grid grid-cols-1 gap-10 md:grid-cols-3">
+        <motion.div variants={stagger(0.14)} initial="hidden" whileInView="show" viewport={viewportOnce} className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10">
           {howItWorks.steps.map((s) => (
             <motion.div key={s.n} variants={fadeUp} className="flex flex-col">
-              <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-accent-soft font-display text-2xl font-bold text-accent">
+              {/* Left-aligned on a phone, centred from md: on a narrow screen the
+                  rest of this page reads from the left edge, and a centred column
+                  of long paragraphs is what makes it feel loose. */}
+              <div className="flex size-14 items-center justify-center rounded-full bg-accent-soft font-display text-2xl font-bold text-accent md:mx-auto md:size-16">
                 {s.n}
               </div>
-              <h3 className="mt-6 text-center font-display text-xl font-semibold text-ink">{s.title}</h3>
-              <p className="mt-3 text-center text-base leading-relaxed text-ink-2 md:text-[15px]">{s.body}</p>
+              <h3 className="mt-4 font-display text-xl font-bold text-ink md:mt-6 md:text-center">{s.title}</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-ink-2 md:mt-3 md:text-center md:text-[15px]">{s.body}</p>
             </motion.div>
           ))}
         </motion.div>
       </div>
-      <motion.div initial={{ opacity: 0, y: 20, filter: "blur(6px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={viewportOnce} transition={{ duration: 0.6, ease: EASE_OUT }} className="mt-10 flex justify-center md:mt-12">
+      <motion.div initial={{ opacity: 0, y: 20, filter: "blur(6px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={viewportOnce} transition={{ duration: 0.6, ease: EASE_OUT }} className="mt-9 flex md:mt-12 md:justify-center">
         <Button href="/subscribe" size="lg">
           {howItWorks.cta}
           <ArrowRight size={18} />
