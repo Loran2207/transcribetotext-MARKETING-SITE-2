@@ -78,10 +78,10 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
               </span>
             ) : null}
 
-            <div className="flex flex-1 flex-col items-center p-5 pt-6 text-center lg:p-6 lg:pt-7">
+            <div className="flex flex-1 flex-col items-center p-4 pt-5 text-center lg:p-5 lg:pt-6">
               {/* One tag zone on every card so the three names share a line:
                   the side cards show their pill here, the middle reserves it. */}
-              <div className="flex h-7 items-center">
+              <div className="flex h-6 items-center">
                 {p.tone !== "accent" ? (
                   <span className={`inline-flex items-center whitespace-nowrap rounded-full px-3.5 py-1 text-[10px] font-bold tracking-[0.07em] ${TAG_IN[p.tone]}`}>
                     {p.tag}
@@ -89,18 +89,18 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
                 ) : null}
               </div>
 
-              <p className="mt-2 text-xl font-bold tracking-tight text-ink sm:text-[22px]">{p.name}</p>
+              <p className="mt-1.5 text-[19px] font-bold tracking-tight text-ink sm:text-[21px]">{p.name}</p>
 
-              <div className="mt-2 flex items-center justify-center gap-2 text-[15px]">
+              <div className="mt-1.5 flex items-center justify-center gap-2 text-[14.5px]">
                 <span className="text-muted line-through">{p.was}</span>
                 <ChevronRight size={15} className="text-muted" strokeWidth={2.5} />
                 <span className="font-semibold text-ink">{p.now}</span>
               </div>
 
-              <div className="mt-4 w-full border-t border-border/70 pt-4">
-                <p className="text-[13px] text-muted line-through">{p.perDayWas}</p>
+              <div className="mt-3 w-full border-t border-border/70 pt-3">
+                <p className="text-[12px] text-muted line-through">{p.perDayWas}</p>
                 <p className="mt-0.5 flex items-end justify-center gap-1.5">
-                  <span className="font-display text-[36px] font-bold leading-none tracking-tight text-ink lg:text-[42px]">{p.perDay}</span>
+                  <span className="font-display text-[34px] font-bold leading-none tracking-tight text-ink lg:text-[38px]">{p.perDay}</span>
                   <span className="mb-1 whitespace-nowrap text-sm text-muted">per day</span>
                 </p>
               </div>
@@ -108,7 +108,7 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
               {/* Reserved on every card, so the three stay aligned whether or not
                   the plan carries a saving. The badge speaks the card's voice:
                   blue on the recommended plan, rose on the value one. */}
-              <div className="mt-3 flex h-[26px] items-center">
+              <div className="mt-2 flex h-[24px] items-center">
                 {p.save ? (
                   <span className={`inline-flex items-center rounded-md px-2 py-1 text-[12px] font-bold ${SAVE[p.tone] ?? "bg-trust-soft text-trust"}`}>
                     {p.save}
@@ -119,17 +119,17 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
               {/* The reference draws the note as a soft tinted pill in the
                   card's own tone; two lines stay reserved so the three choice
                   controls keep one baseline. */}
-              <p className={`mt-3 flex min-h-[52px] w-full items-center justify-center rounded-xl px-3 py-2 text-center text-[12px] font-medium leading-snug ${NOTE[p.tone]}`}>
+              <p className={`mt-2.5 flex min-h-[38px] w-full items-center justify-center rounded-xl px-3 py-1.5 text-center text-[12px] font-medium leading-snug ${NOTE[p.tone]}`}>
                 {p.note}
               </p>
 
               <span
                 aria-hidden
-                className={`mx-auto mt-5 grid size-7 shrink-0 place-items-center rounded-full border-2 transition-colors ${
+                className={`mx-auto mt-3.5 grid size-6 shrink-0 place-items-center rounded-full border-2 transition-colors ${
                   on ? "border-accent bg-accent text-white" : "border-border text-transparent"
                 }`}
               >
-                <Check size={14} strokeWidth={3} />
+                <Check size={13} strokeWidth={3} />
               </span>
             </div>
           </motion.button>

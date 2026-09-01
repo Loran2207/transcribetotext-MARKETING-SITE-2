@@ -29,9 +29,13 @@ export function PromoCode() {
             {/* The reference's offer band: the gift leads, the promise beside
                 it, the discount pill at the far end - ours in blue. The gift
                 render sits on the card's own tint, so it needs no box. */}
-            <div className="flex items-center gap-3">
-              <img src="/brand/subscribe/gift.png" alt="" aria-hidden className="size-12 shrink-0 sm:size-14" />
-              <div className="min-w-0">
+            {/* On a phone the discount pill sat in the same row as the copy and
+                squeezed both lines into two each. It now rides the top row
+                beside the gift and the copy takes the full width below; from sm
+                up the reference's single row returns. */}
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <img src="/brand/subscribe/gift.png" alt="" aria-hidden className="size-11 shrink-0 sm:size-14" />
+              <div className="order-last w-full min-w-0 sm:order-none sm:w-auto sm:flex-1">
                 <p className="text-sm font-bold text-ink sm:text-[15px]">{subscribe.promo.label}</p>
                 <p className="text-xs leading-snug text-ink-2 sm:text-[13px]">{subscribe.promo.sub}</p>
               </div>
