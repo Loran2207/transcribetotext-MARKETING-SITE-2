@@ -1,93 +1,70 @@
-import { useEffect, useState } from "react";
-import { Tag, Check, Clock } from "lucide-react";
+import { useState } from "react";
+import { Tag, Check } from "lucide-react";
 import { subscribe } from "../../data/subscribe";
 
-const pad = (n: number) => String(n).padStart(2, "0");
+/* The offer band, rebuilt to the reference's shape (Kirill, round 12): ONE row -
+   the gift leads, the promise sits beside it, and the thing that expires sits at
+   the far end. In the reference that far end is a countdown; ours is the promo
+   code, on his instruction.
 
-// Loud on purpose: the promo is the reason the paywall converts, so it gets an
-// accent card, a deal badge and a live countdown instead of a quiet input row.
-// On phones the code and the timer sit on one line, and the timer collapses to a
-// single inline clock so the block stays two tidy rows.
+   What went away and why:
+   - The two-storey coupon (band, perforation, code row) cost ~230px of height
+     for the same three facts. The perforation existed to separate two storeys;
+     with one storey it separates nothing.
+   - The second countdown. The same clock already runs in the bar pinned to the
+     top of the page, so this one was the same fact told twice.
+
+   On a phone the row wraps in reading order: gift and discount pill on top, the
+   promise across the full width, the code field last. The pill never shares a
+   line with the copy, which is what squeezed both lines into two each. */
 export function PromoCode() {
   const [code, setCode] = useState(subscribe.promo.code);
   const [applied, setApplied] = useState(true);
-  const [left, setLeft] = useState(4 * 60 + 56);
-  useEffect(() => {
-    const id = setInterval(() => setLeft((s) => (s <= 0 ? 0 : s - 1)), 1000);
-    return () => clearInterval(id);
-  }, []);
-  const mm = Math.floor(left / 60), ss = left % 60;
+
   return (
-    <div className="mx-auto mt-8 w-full max-w-xl">
-      <div
-        className={`relative overflow-hidden rounded-tile p-3 transition-colors sm:p-4 ${
-          applied ? "bg-accent-soft" : "bg-surface-soft"
-        }`}
-      >
-        {applied && (
-          <div className="mb-3 px-1 sm:mb-3.5">
-            {/* The reference's offer band: the gift leads, the promise beside
-                it, the discount pill at the far end - ours in blue. The gift
-                render sits on the card's own tint, so it needs no box. */}
-            {/* On a phone the discount pill sat in the same row as the copy and
-                squeezed both lines into two each. It now rides the top row
-                beside the gift and the copy takes the full width below; from sm
-                up the reference's single row returns. */}
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-              <img src="/brand/subscribe/gift.png" alt="" aria-hidden className="size-11 shrink-0 sm:size-14" />
-              <div className="order-last w-full min-w-0 sm:order-none sm:w-auto sm:flex-1">
-                <p className="text-sm font-bold text-ink sm:text-[15px]">{subscribe.promo.label}</p>
-                <p className="text-xs leading-snug text-ink-2 sm:text-[13px]">{subscribe.promo.sub}</p>
-              </div>
-              <span className="ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">
-                <Tag size={13} /> {subscribe.promo.discount}
-              </span>
-            </div>
-            {/* The coupon perforation, built the way the app's own 10.08 promo
-                draws it: the card is a quiet borderless tint, the row spans it
-                edge to edge, and the notches are page-colored circles centered
-                on the card's edges - overflow-hidden clips their outer halves,
-                so the page genuinely bites INTO the ticket. */}
-            <div aria-hidden className="relative -mx-3 mt-3 sm:-mx-4">
-              <div className="border-t-2 border-dashed border-accent/25" />
-              <span className="absolute left-0 top-1/2 size-[22px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-canvas" />
-              <span className="absolute right-0 top-1/2 size-[22px] -translate-y-1/2 translate-x-1/2 rounded-full bg-canvas" />
-            </div>
+    <div className="mx-auto mt-6 w-full max-w-2xl">
+      <div className={`rounded-2xl p-3 transition-colors sm:p-3.5 ${applied ? "bg-accent-soft" : "bg-surface-soft"}`}>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5">
+          <img src="/brand/subscribe/gift.png" alt="" aria-hidden className="size-10 shrink-0 sm:size-12" />
+
+          {/* DOM order is the PHONE order - gift and pill share the top line,
+              the promise takes the next full-width line, the field comes last.
+              From sm up `order` puts them back into the reference's single row:
+              gift, promise, field, pill. */}
+          <span className="ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold text-white sm:order-4">
+            <Tag size={12} /> {subscribe.promo.discount}
+          </span>
+
+          <div className="w-full min-w-0 sm:order-2 sm:w-auto sm:flex-1">
+            <p className="text-[13.5px] font-bold leading-tight text-ink sm:text-[15px]">{subscribe.promo.label}</p>
+            <p className="mt-0.5 text-[12px] leading-snug text-ink-2 sm:text-[12.5px]">{subscribe.promo.sub}</p>
           </div>
-        )}
-        <div className="flex items-stretch gap-2.5 sm:items-center">
-          <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-2xl bg-white px-3.5 py-3 shadow-soft sm:px-4">
-            {applied ? <Check size={18} className="shrink-0 text-accent" strokeWidth={3} /> : <Tag size={18} className="shrink-0 text-muted" />}
+
+          <div className="flex w-full min-w-0 items-center gap-2 rounded-xl bg-white px-3 py-2 shadow-soft sm:order-3 sm:w-auto sm:min-w-[190px]">
+            {applied ? (
+              <Check size={16} className="shrink-0 text-accent" strokeWidth={3} />
+            ) : (
+              <Tag size={16} className="shrink-0 text-muted" />
+            )}
             <input
               value={code}
-              onChange={(e) => { setCode(e.target.value); setApplied(false); }}
+              onChange={(e) => {
+                setCode(e.target.value);
+                setApplied(false);
+              }}
               placeholder="Enter promo code"
-              className="min-w-0 flex-1 bg-transparent text-base font-bold tracking-wide text-ink outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-muted"
+              aria-label="Promo code"
+              className="min-w-0 flex-1 bg-transparent text-[14px] font-bold tracking-wide text-ink outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-muted"
             />
+            {!applied ? (
+              <button
+                onClick={() => setApplied(true)}
+                className="shrink-0 rounded-lg bg-[linear-gradient(180deg,#3B82F6,#2563EB)] px-3 py-1 text-[12px] font-semibold text-white"
+              >
+                Apply
+              </button>
+            ) : null}
           </div>
-          {applied ? (
-            <>
-              {/* phone: one compact clock */}
-              <span className="flex shrink-0 items-center justify-center gap-1.5 rounded-2xl bg-white px-3.5 font-mono text-base font-bold tabular-nums text-accent shadow-soft sm:hidden">
-                <Clock size={15} />
-                {pad(mm)}:{pad(ss)}
-              </span>
-              {/* tablet and up: the min / sec blocks */}
-              <div className="hidden shrink-0 items-center justify-center gap-2 rounded-2xl bg-white px-4 py-2 shadow-soft sm:flex">
-                <div className="text-center">
-                  <p className="font-mono text-xl font-bold leading-none tabular-nums text-accent">{pad(mm)}</p>
-                  <p className="mt-1 text-[9px] font-medium text-muted">min</p>
-                </div>
-                <span className="pb-3 font-mono text-lg font-bold text-accent">:</span>
-                <div className="text-center">
-                  <p className="font-mono text-xl font-bold leading-none tabular-nums text-accent">{pad(ss)}</p>
-                  <p className="mt-1 text-[9px] font-medium text-muted">sec</p>
-                </div>
-              </div>
-            </>
-          ) : (
-            <button onClick={() => setApplied(true)} className="shrink-0 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] px-5 py-3 text-sm font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20 transition-[filter] hover:brightness-[1.05] sm:px-6">Apply</button>
-          )}
         </div>
       </div>
     </div>

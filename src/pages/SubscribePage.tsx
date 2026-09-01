@@ -11,7 +11,6 @@ import { CheckoutModal } from "../components/subscribe/CheckoutModal";
 import { OfferPlansModal, SpecialOfferModal, OfferCheckoutModal } from "../components/subscribe/OfferModals";
 import { DarkFeedback } from "../components/subscribe/DarkFeedback";
 import { Guarantee, Benefits, SafeCheckout } from "../components/subscribe/SubscribeSections";
-import { PAYWALL_HEADING } from "../components/subscribe/headings";
 import { subscribe } from "../data/subscribe";
 import { fadeUp, stagger } from "../lib/motion";
 
@@ -37,7 +36,7 @@ export function SubscribePage() {
     <div className="relative min-h-screen bg-canvas">
       <CountdownBar onGetPlan={() => setOpen(true)} />
       <div className="relative z-10 overflow-hidden">
-        <div className="mx-auto w-full max-w-5xl px-4 pt-8 sm:px-6 md:pt-12">
+        <div className="mx-auto w-full max-w-5xl px-4 pt-6 sm:px-6 md:pt-9">
           <motion.div variants={stagger(0.08)} initial="hidden" animate="show" className="flex flex-col items-center text-center">
             <motion.span
               variants={fadeUp}
@@ -45,8 +44,13 @@ export function SubscribePage() {
             >
               {subscribe.offerLabel}
             </motion.span>
-            <motion.h1 variants={fadeUp} className={`mt-3 ${PAYWALL_HEADING}`}>{subscribe.heading}</motion.h1>
-            <motion.p variants={fadeUp} className="mt-3 max-w-xl text-pretty text-[15px] leading-relaxed text-ink-2">
+            <motion.h1
+              variants={fadeUp}
+              className="mt-2.5 text-balance font-display text-[26px] font-extrabold tracking-tight text-ink sm:text-[32px]"
+            >
+              {subscribe.heading}
+            </motion.h1>
+            <motion.p variants={fadeUp} className="mt-2.5 max-w-xl text-pretty text-[14.5px] leading-relaxed text-ink-2">
               {subscribe.subheading}
             </motion.p>
           </motion.div>

@@ -52,7 +52,7 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="mt-10 -mx-4 flex snap-x snap-mandatory items-stretch gap-3 overflow-x-auto px-[calc(50%-140px)] pb-3 pt-3 [scrollbar-width:none] sm:-mx-6 md:px-[calc(50%-180px)] lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden"
+      className="mt-10 -mx-4 flex snap-x snap-mandatory items-stretch gap-3 overflow-x-auto px-[calc(50%-140px)] pb-3 pt-6 [scrollbar-width:none] sm:-mx-6 md:px-[calc(50%-180px)] lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0 lg:pt-3 [&::-webkit-scrollbar]:hidden"
     >
       {subscribe.plans.map((p, i) => {
         const on = i === selected;
