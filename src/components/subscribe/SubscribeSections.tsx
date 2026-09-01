@@ -22,7 +22,7 @@ export function Guarantee() {
 export function Benefits() {
   return (
     <div className="mt-14 md:mt-16 lg:mt-20">
-      <h2 className={`text-center ${PAYWALL_HEADING}`}>
+      <h2 className={`text-center text-ink ${PAYWALL_HEADING}`}>
         {subscribe.benefitsTitle}{" "}
         <span className="whitespace-nowrap text-accent">{subscribe.benefitsBrand}</span>
       </h2>

@@ -11,7 +11,7 @@ export function DarkFeedback() {
     <section className="bg-white py-14 md:py-16">
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
         <motion.div variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={viewportOnce} className="flex flex-col items-center gap-3 text-center">
-          <motion.h2 variants={fadeUp} className={PAYWALL_HEADING}>{subscribe.feedbacksTitle}</motion.h2>
+          <motion.h2 variants={fadeUp} className={`text-ink ${PAYWALL_HEADING}`}>{subscribe.feedbacksTitle}</motion.h2>
           <motion.p variants={fadeUp} className="max-w-xl text-pretty text-sm leading-relaxed text-ink-2">{subscribe.feedbacksSub}</motion.p>
         </motion.div>
         <motion.div variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-8 grid items-stretch gap-4 sm:mt-10 sm:gap-5 md:grid-cols-3">
