@@ -16,7 +16,7 @@ import { chromium } from "playwright";
 
 const CAP = "https://mcp.figma.com/mcp/html-to-design/capture.js";
 
-const [routeArg, widthArg, cid, target, selArg] = process.argv.slice(2);
+const [routeArg, widthArg, cid, target, selArg, tabArg] = process.argv.slice(2);
 /* Optional 5th arg: a CSS selector to capture one section as its own frame
    (used for the feature-tab state frames). Defaults to the whole page. */
 const SEL = selArg || "body";
@@ -195,6 +195,17 @@ await p.evaluate(() => {
   });
 });
 await p.waitForTimeout(250);
+
+/* Optional 6th arg: which feature tab to open before capturing, so each of the
+   four states can be its own frame. The tabs are the buttons in the grid that
+   opens the section; index 0 is the one the page loads with. */
+if (tabArg !== undefined) {
+  await p.evaluate((n) => {
+    const tabs = document.querySelectorAll("#features button");
+    if (tabs[n]) tabs[n].click();
+  }, +tabArg);
+  await p.waitForTimeout(700);
+}
 
 const shell = await p.evaluate(() => {
   const root = document.getElementById("root");
