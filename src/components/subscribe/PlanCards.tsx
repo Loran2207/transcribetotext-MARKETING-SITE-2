@@ -14,17 +14,17 @@ import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
    Below lg the three cards stay the snap carousel the build already had, with
    the popular plan centred and its neighbours peeking in. */
 
-/* The reference's card grammar, centered throughout: the side tags are quiet
-   pills INSIDE the card at the top, only MOST POPULAR rides the border, and
-   every line below - name, prices, saving, note, radio - is centered. Our
-   voices stay: brand blue for the recommended plan, the house rose - loud,
-   filled, "наш алый" - for the value one. */
-const TAG_IN: Record<string, string> = {
-  neutral: "bg-surface-soft text-ink-2",
+/* The reference's card grammar, centered throughout: every line - name, prices,
+   saving, note, radio - is centered, and our voices stay: brand blue for the
+   recommended plan, the house rose - loud, filled, "наш алый" - for the value one.
+   All three tags ride the card's top edge (Kirill, round 19). They used to sit
+   inside the card, which cost every card a reserved tag row above the plan name;
+   on the border they cost nothing and the three cards read shorter. */
+const TAG_TOP: Record<string, string> = {
+  neutral: "bg-white text-ink-2 ring-1 ring-border shadow-soft",
+  accent: "bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-white shadow-blue",
   gold: "bg-[linear-gradient(180deg,#FB7185,#F43F5E)] text-white shadow-[0_8px_20px_rgba(244,63,94,.30)]",
 };
-const TAG_TOP =
-  "border-transparent bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-white shadow-blue";
 const SAVE: Record<string, string> = {
   accent: "bg-accent-soft text-accent",
   gold: "bg-deal/10 text-deal",
@@ -69,13 +69,11 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
                 The DOM-to-Figma converter marks any rounded box as clipping, so
                 a badge nested inside the card lost its top half in every
                 exported mockup while the browser drew it whole. */}
-            {p.tone === "accent" ? (
-              <span
-                className={`absolute -top-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full border px-3.5 py-1 text-[10px] font-bold tracking-[0.07em] ${TAG_TOP}`}
-              >
-                {p.tag}
-              </span>
-            ) : null}
+            <span
+              className={`absolute -top-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full px-3.5 py-1 text-[10px] font-bold tracking-[0.07em] ${TAG_TOP[p.tone] ?? TAG_TOP.neutral}`}
+            >
+              {p.tag}
+            </span>
 
             <button
               type="button"
@@ -85,18 +83,8 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
                 on ? "border-accent shadow-card ring-2 ring-accent/20" : "border-border shadow-soft hover:border-accent/40"
               }`}
             >
-            <div className="flex flex-1 flex-col items-center p-4 pt-5 text-center lg:p-5 lg:pt-6">
-              {/* One tag zone on every card so the three names share a line:
-                  the side cards show their pill here, the middle reserves it. */}
-              <div className="flex h-6 items-center">
-                {p.tone !== "accent" ? (
-                  <span className={`inline-flex items-center whitespace-nowrap rounded-full px-3.5 py-1 text-[10px] font-bold tracking-[0.07em] ${TAG_IN[p.tone]}`}>
-                    {p.tag}
-                  </span>
-                ) : null}
-              </div>
-
-              <p className="mt-1.5 text-[19px] font-bold tracking-tight text-ink sm:text-[21px]">{p.name}</p>
+            <div className="flex flex-1 flex-col items-center p-4 pt-6 text-center lg:p-5 lg:pt-7">
+              <p className="text-[19px] font-bold tracking-tight text-ink sm:text-[21px]">{p.name}</p>
 
               <div className="mt-1.5 flex items-center justify-center gap-2 text-[14.5px]">
                 <span className="text-muted line-through">{p.was}</span>
@@ -104,9 +92,12 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
                 <span className="font-semibold text-ink">{p.now}</span>
               </div>
 
-              <div className="mt-3 w-full border-t border-border/70 pt-3">
-                <p className="text-[12px] text-muted line-through">{p.perDayWas}</p>
-                <p className="mt-0.5 flex items-end justify-center gap-1.5">
+              {/* The day rate reads on ONE line: what it was, struck through, to
+                  the left of what it is now (Kirill, round 19). Stacked, the old
+                  figure spent a whole line on a number nobody reads twice. */}
+              <div className="mt-2.5 w-full border-t border-border/70 pt-2.5">
+                <p className="flex items-end justify-center gap-1.5">
+                  <span className="mb-1 text-[13px] text-muted line-through">{p.perDayWas}</span>
                   <span className="font-display text-[34px] font-bold leading-none tracking-tight text-ink lg:text-[38px]">{p.perDay}</span>
                   <span className="mb-1 whitespace-nowrap text-sm text-muted">per day</span>
                 </p>
@@ -115,7 +106,7 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
               {/* Reserved on every card, so the three stay aligned whether or not
                   the plan carries a saving. The badge speaks the card's voice:
                   blue on the recommended plan, rose on the value one. */}
-              <div className="mt-2 flex h-[24px] items-center">
+              <div className="mt-1.5 flex h-[24px] items-center">
                 {p.save ? (
                   <span className={`inline-flex items-center rounded-md px-2 py-1 text-[12px] font-bold ${SAVE[p.tone] ?? "bg-trust-soft text-trust"}`}>
                     {p.save}
@@ -126,13 +117,13 @@ export function PlanCards({ selected, onSelect }: { selected: number; onSelect: 
               {/* The reference draws the note as a soft tinted pill in the
                   card's own tone; two lines stay reserved so the three choice
                   controls keep one baseline. */}
-              <p className={`mt-2.5 flex min-h-[38px] w-full items-center justify-center rounded-xl px-3 py-1.5 text-center text-[12px] font-medium leading-snug ${NOTE[p.tone]}`}>
+              <p className={`mt-2 flex min-h-[34px] w-full items-center justify-center rounded-xl px-3 py-1.5 text-center text-[12px] font-medium leading-snug ${NOTE[p.tone]}`}>
                 {p.note}
               </p>
 
               <span
                 aria-hidden
-                className={`mx-auto mt-3.5 grid size-6 shrink-0 place-items-center rounded-full border-2 transition-colors ${
+                className={`mx-auto mt-3 grid size-6 shrink-0 place-items-center rounded-full border-2 transition-colors ${
                   on ? "border-accent bg-accent text-white" : "border-border text-transparent"
                 }`}
               >

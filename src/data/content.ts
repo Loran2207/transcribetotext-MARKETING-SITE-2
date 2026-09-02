@@ -25,8 +25,10 @@ export const hero = {
   eyebrow: "AI MEETING & TRANSCRIPTION ASSISTANT",
   // Two deliberate lines, so "Get" opens the second one beside "Transcripts"
   // instead of dangling at the end of the first. No full stops in headings
-  // (Kirill, 29 Aug: "во всех заголовках уберём точки").
-  titleLine1: "Record Meetings",
+  // (Kirill, 29 Aug: "во всех заголовках уберём точки"), so the two halves are
+  // joined with a comma - the client asked for a mark between them and a comma
+  // is the one that does not break that rule.
+  titleLine1: "Record Meetings,",
   titleLine2: "Get Transcripts, Summaries & Action Items Automatically",
   subtitle:
     "Record meetings or upload any audio or video file and turn it into accurate, searchable text in seconds.",
