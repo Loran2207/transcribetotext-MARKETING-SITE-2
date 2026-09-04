@@ -58,12 +58,9 @@ export function Trust() {
           viewport={viewportOnce}
           className="mx-auto flex max-w-2xl flex-col items-center gap-3 text-center"
         >
-          <motion.span
-            variants={fadeUp}
-            className="inline-flex items-center rounded-full border border-border bg-white px-3 py-1 text-xs font-medium text-accent shadow-soft"
-          >
-            {trust.eyebrow}
-          </motion.span>
+          {/* The "trusted by thousands" pill used to open this section; it sat
+              directly under the hero banner and read as a second eyebrow in a
+              row, so it is gone (client, round 20). */}
           <motion.h2
             variants={fadeUp}
             className={`text-ink ${SECTION_TITLE}`}

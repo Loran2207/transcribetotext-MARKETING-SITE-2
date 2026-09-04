@@ -75,7 +75,6 @@ export const hero = {
 
 // 2. TRUST
 export const trust = {
-  eyebrow: "Trusted by thousands of professionals",
   title: "Powerful transcription",
   subtitle: "Built for fast, effortless transcription",
   cards: [
@@ -169,7 +168,9 @@ export const services = {
 export const reviews = {
   title: "Trusted by Thousands of Users",
   source: "Trustpilot",
-  ratingLabel: "Rated 4.9 based on 300+ reviews",
+  // 4.8, not 4.9: the client asked for a figure that reads as real rather than
+  // rounded up, and named 4.8 as the ceiling (round 20).
+  ratingLabel: "Rated 4.8 based on 300+ reviews",
   items: [
     { stars: 5, quote: "The effective and easy-to-use transcription service I needed has finally arrived, and it's fantastic!", name: "sovvin01" },
     { stars: 5, quote: "This service has nailed it, simple to use with exceptional performance. It's everything I've been looking for in transcription.", name: "Jacob" },

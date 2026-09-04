@@ -43,7 +43,11 @@ export function Hero() {
             <motion.p variants={fadeUp} className="mt-5 max-w-[520px] text-pretty text-lg leading-relaxed text-ink-2">
               {hero.subtitle}
             </motion.p>
-            <motion.div variants={fadeUp} className="mt-8 flex flex-col items-start gap-2.5">
+            {/* The note is centred UNDER the button, not left-aligned with the
+                column: the button is wider than the line, so aligning both to
+                the left edge left the note hanging off to one side (client,
+                round 20). w-max sizes the pair to the button. */}
+            <motion.div variants={fadeUp} className="mt-8 flex w-max flex-col items-center gap-2.5">
               <Button href="/subscribe" size="lg">
                 {hero.primaryCta} <ArrowRight size={18} />
               </Button>
