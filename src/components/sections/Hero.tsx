@@ -43,15 +43,14 @@ export function Hero() {
             <motion.p variants={fadeUp} className="mt-5 max-w-[520px] text-pretty text-lg leading-relaxed text-ink-2">
               {hero.subtitle}
             </motion.p>
-            {/* The note is centred UNDER the button, not left-aligned with the
-                column: the button is wider than the line, so aligning both to
-                the left edge left the note hanging off to one side (client,
-                round 20). w-max sizes the pair to the button. */}
-            <motion.div variants={fadeUp} className="mt-8 flex w-max flex-col items-center gap-2.5">
+            {/* "No credit card required" used to sit under the button. It was
+                answering a question the button already answers - it says Start
+                for Free - so the line is gone and the call to action stands on
+                its own (Kirill, round 20). */}
+            <motion.div variants={fadeUp} className="mt-8 flex w-max">
               <Button href="/subscribe" size="lg">
                 {hero.primaryCta} <ArrowRight size={18} />
               </Button>
-              <span className="text-[13px] text-muted">{hero.ctaNote}</span>
             </motion.div>
           </motion.div>
 

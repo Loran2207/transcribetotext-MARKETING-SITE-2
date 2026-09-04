@@ -33,7 +33,6 @@ export const hero = {
   subtitle:
     "Record meetings or upload any audio or video file and turn it into accurate, searchable text in seconds.",
   primaryCta: "Start for Free",
-  ctaNote: "No credit card required",
   chips: ["Speaker detection", "AI Summary", "Action Items", "117+ languages", "Export"],
   // What the mockup inside the hero shows. Kept as data so the frame and the
   // copy can never drift apart. The participant photos are cropped from the
