@@ -164,7 +164,7 @@ export function Nav() {
     <motion.header initial={{ y: -64, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5, ease: EASE_OUT }} className="fixed inset-x-0 top-0 z-50">
       <motion.div style={{ opacity: bg }} className="absolute inset-0 -z-10 bg-white/85 backdrop-blur-xl" />
       <motion.div style={{ opacity: shadow }} className="absolute inset-x-0 bottom-0 h-px bg-border" />
-      <nav className="mx-auto grid h-16 w-full max-w-[1200px] grid-cols-[auto_1fr_auto] items-center px-5 sm:px-6 md:px-10 lg:flex lg:gap-6">
+      <nav className="mx-auto grid h-16 w-full max-w-[1200px] grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-6 md:px-10 lg:flex lg:gap-6">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -174,13 +174,13 @@ export function Nav() {
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
-        <div className="flex justify-center lg:justify-start">
+        <div className="flex shrink-0 justify-center lg:justify-start">
           <Logo />
         </div>
         {/* The language sits beside the account icon on phones, the same as on
             the new landing, so the pair of screens matches. */}
         <div className="flex items-center justify-end gap-1 lg:hidden">
-          <LanguageSwitcher compact />
+          <LanguageSwitcher />
           <a
             href="/login"
             aria-label={nav.login}
@@ -213,7 +213,7 @@ export function Nav() {
               language keeps the flag alone here: with the code beside it the row
               ran out of width and "How it works" and "Log in" broke onto two
               lines. */}
-          <LanguageSwitcher compact />
+          <LanguageSwitcher />
           <a href="/login" className="inline-flex h-10 items-center gap-2 whitespace-nowrap rounded-full bg-surface-soft px-4 text-sm font-medium text-ink-2 transition-colors hover:text-ink">
             <UserRound size={16} />
             {nav.login}

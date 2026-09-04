@@ -14,9 +14,11 @@ export const LANGUAGES = [
   { code: "RU", name: "Русский", flag: "Russian" },
 ] as const;
 
-/* Closed it is a flag, two letters and a chevron - the smallest thing that
-   still says which language you are reading and that it can be changed. */
-export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
+/* Closed it is a flag and a chevron - nothing else. The two-letter code was
+   there first, but it fitted in one header and not the other, and a control
+   that changes shape between two screens of the same site reads as a mistake
+   (Kirill, round 21c). The flag alone says which language you are reading. */
+export function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState(0);
   const box = useRef<HTMLDivElement>(null);
@@ -45,15 +47,9 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
         aria-expanded={open}
         aria-haspopup="listbox"
         aria-label={`Language: ${lang.name}`}
-        className={`inline-flex items-center gap-2 rounded-full font-medium text-ink-2 transition-colors hover:text-ink ${
-          compact ? "h-11 px-3 text-sm" : "h-10 px-3 text-sm"
-        }`}
+        className="inline-flex h-10 items-center gap-1.5 rounded-full px-2.5 text-sm font-medium text-ink-2 transition-colors hover:text-ink"
       >
         <img src={brand.langFlags[lang.flag]} alt="" className="size-5 shrink-0 rounded-full object-cover" />
-        {/* On a phone the header already carries a menu, a logo and an account
-            icon; the two letters are what gives way, since the flag says the
-            same thing in less room. */}
-        {compact ? null : <span>{lang.code}</span>}
         <ChevronDown size={14} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
 
