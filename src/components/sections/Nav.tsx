@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Logo } from "../primitives/Logo";
 import { Button } from "../primitives/Button";
+import { LanguageSwitcher } from "../primitives/LanguageSwitcher";
 import { audioToText, nav, navServices } from "../../data/content";
 import { EASE_OUT } from "../../lib/motion";
 
@@ -178,13 +179,18 @@ export function Nav() {
         <div className="flex justify-center lg:justify-start">
           <Logo />
         </div>
-        <a
-          href="/login"
-          aria-label={nav.login}
-          className="grid size-11 shrink-0 place-items-center rounded-full bg-surface-soft text-ink-2 transition-colors hover:text-ink lg:hidden"
-        >
-          <UserRound size={19} />
-        </a>
+        {/* On phones the language keeps its place beside the account icon,
+            so the setting is reachable without opening the menu. */}
+        <div className="flex items-center justify-end gap-1 lg:hidden">
+          <LanguageSwitcher compact />
+          <a
+            href="/login"
+            aria-label={nav.login}
+            className="grid size-11 shrink-0 place-items-center rounded-full bg-surface-soft text-ink-2 transition-colors hover:text-ink"
+          >
+            <UserRound size={19} />
+          </a>
+        </div>
         <ul className="ml-2 hidden items-center gap-7 lg:flex">
           {nav.links.map((l) =>
             l.label === "Features" ? (
@@ -205,6 +211,10 @@ export function Nav() {
           )}
         </ul>
         <div className="ml-auto hidden items-center gap-3 lg:flex">
+          {/* The language sits before Log in, the way it does on the sites we
+              looked at: it is a setting for the page you are on, not an account
+              action, so it stays outside the pair of account buttons. */}
+          <LanguageSwitcher />
           <a href="/login" className="inline-flex h-10 items-center gap-2 rounded-full bg-surface-soft px-4 text-sm font-medium text-ink-2 transition-colors hover:text-ink">
             <UserRound size={16} />
             {nav.login}
