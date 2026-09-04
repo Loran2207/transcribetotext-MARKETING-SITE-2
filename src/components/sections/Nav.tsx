@@ -189,11 +189,11 @@ export function Nav() {
             <UserRound size={19} />
           </a>
         </div>
-        <ul className="ml-2 hidden items-center gap-7 lg:flex">
+        <ul className="ml-2 hidden items-center gap-5 lg:flex xl:gap-7">
           {nav.links.map((l) =>
             l.label === "Features" ? (
               <li key={l.href} className="group relative">
-                <a href={l.href} className="inline-flex items-center gap-1 py-5 text-sm font-medium text-ink-2 transition-colors hover:text-ink">
+                <a href={l.href} className="inline-flex items-center gap-1 whitespace-nowrap py-5 text-sm font-medium text-ink-2 transition-colors hover:text-ink">
                   {l.label}
                   <ChevronDown size={14} className="transition-transform duration-200 group-hover:rotate-180" />
                 </a>
@@ -201,16 +201,20 @@ export function Nav() {
               </li>
             ) : (
               <li key={l.href}>
-                <a href={l.href} className="text-sm font-medium text-ink-2 transition-colors hover:text-ink">
+                <a href={l.href} className="whitespace-nowrap text-sm font-medium text-ink-2 transition-colors hover:text-ink">
                   {l.label}
                 </a>
               </li>
             )
           )}
         </ul>
-        <div className="ml-auto hidden items-center gap-3 lg:flex">
-          <LanguageSwitcher />
-          <a href="/login" className="inline-flex h-10 items-center gap-2 rounded-full bg-surface-soft px-4 text-sm font-medium text-ink-2 transition-colors hover:text-ink">
+        <div className="ml-auto hidden items-center gap-2.5 lg:flex xl:gap-3">
+          {/* This header carries seven links, one more than the redesign, so the
+              language keeps the flag alone here: with the code beside it the row
+              ran out of width and "How it works" and "Log in" broke onto two
+              lines. */}
+          <LanguageSwitcher compact />
+          <a href="/login" className="inline-flex h-10 items-center gap-2 whitespace-nowrap rounded-full bg-surface-soft px-4 text-sm font-medium text-ink-2 transition-colors hover:text-ink">
             <UserRound size={16} />
             {nav.login}
           </a>
