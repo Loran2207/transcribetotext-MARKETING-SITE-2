@@ -166,7 +166,7 @@ export function Nav() {
           the top half of the bar (Kirill, round 11b). */}
       <div className="absolute inset-0 -z-10 bg-white" />
       <motion.div style={{ opacity: shadow }} className="absolute inset-x-0 bottom-0 h-px bg-border" />
-      <nav className="mx-auto grid h-16 w-full max-w-[1200px] grid-cols-[auto_1fr_auto] items-center px-5 sm:px-6 md:px-10 lg:flex lg:gap-6">
+      <nav className="mx-auto grid h-16 w-full max-w-[1200px] grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-6 md:px-10 lg:flex lg:gap-6">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -176,13 +176,13 @@ export function Nav() {
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
-        <div className="flex justify-center lg:justify-start">
+        <div className="flex shrink-0 justify-center lg:justify-start">
           <Logo />
         </div>
         {/* On phones the language keeps its place beside the account icon,
             so the setting is reachable without opening the menu. */}
         <div className="flex items-center justify-end gap-1 lg:hidden">
-          <LanguageSwitcher compact />
+          <LanguageSwitcher />
           <a
             href="/login"
             aria-label={nav.login}
