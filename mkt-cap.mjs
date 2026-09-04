@@ -199,7 +199,19 @@ await p.waitForTimeout(250);
 /* Optional 6th arg: which feature tab to open before capturing, so each of the
    four states can be its own frame. The tabs are the buttons in the grid that
    opens the section; index 0 is the one the page loads with. */
-if (tabArg !== undefined) {
+if (tabArg === "lang") {
+  /* "lang" opens the language menu, so the open state can be a frame of its
+     own; anything else is a feature-tab index. */
+  await p.evaluate(() => {
+    /* The header renders the switcher twice - one for phones, one for desktop -
+       and only one of them is visible at a given width. Clicking the hidden one
+       opens nothing, so pick the one that is actually laid out. */
+    const btns = [...document.querySelectorAll('[aria-haspopup="listbox"]')];
+    const shown = btns.find((b) => b.offsetParent !== null) || btns[0];
+    if (shown) shown.click();
+  });
+  await p.waitForTimeout(400);
+} else if (tabArg !== undefined) {
   await p.evaluate((n) => {
     const tabs = document.querySelectorAll("#features button");
     if (tabs[n]) tabs[n].click();
