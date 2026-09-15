@@ -116,12 +116,12 @@
    a pseudo-element, because a negative z-index pseudo would paint over the
    button's own gradient. Reduced motion stops all of it via the global rule. */
 @keyframes ctaPulse {
-  0%, 100% { box-shadow: 0 10px 30px rgba(37,99,235,.32), 0 0 0 0 rgba(59,130,246,0); }
-  50% { box-shadow: 0 14px 40px rgba(37,99,235,.50), 0 0 0 7px rgba(59,130,246,.10); }
+  0%, 100% { box-shadow: 0 10px 30px rgba(37,99,235,.30), 0 0 0 0 rgba(59,130,246,.35); }
+  50% { box-shadow: 0 16px 48px rgba(37,99,235,.62), 0 0 0 14px rgba(59,130,246,0); }
 }
 @keyframes ctaAura {
-  0%, 100% { opacity: .45; transform: scale(.98); }
-  50% { opacity: .95; transform: scale(1.03); }
+  0%, 100% { opacity: .25; transform: scale(.96); }
+  50% { opacity: 1; transform: scale(1.08); }
 }
 @keyframes ctaSheen { from { background-position: 130% 0; } to { background-position: -30% 0; } }
 @layer components {
@@ -136,13 +136,13 @@
   }
   .cta-sheen:hover { transform: translateY(-1px); filter: brightness(1.06); }
   .cta-sheen:hover::after { animation: ctaSheen .8s ease-out forwards; }
-  .cta-glow { animation: ctaPulse 2.6s ease-in-out infinite; }
+  .cta-glow { animation: ctaPulse 2.2s ease-in-out infinite; }
   .cta-glow:hover { transform: translateY(-2px); }
   .cta-aura {
-    position: absolute; inset: -10px -14px; border-radius: 9999px; pointer-events: none;
-    background: radial-gradient(70% 140% at 50% 50%, rgba(59,130,246,.62) 0%, rgba(59,130,246,.22) 45%, rgba(59,130,246,0) 72%);
-    filter: blur(14px);
-    animation: ctaAura 2.6s ease-in-out infinite;
+    position: absolute; inset: -18px -26px; border-radius: 9999px; pointer-events: none;
+    background: radial-gradient(70% 140% at 50% 50%, rgba(59,130,246,.85) 0%, rgba(59,130,246,.35) 45%, rgba(59,130,246,0) 72%);
+    filter: blur(18px);
+    animation: ctaAura 2.2s ease-in-out infinite;
   }
   .cta-wrap:hover .cta-aura { opacity: 1; animation-play-state: paused; transform: scale(1.06); }
 }
