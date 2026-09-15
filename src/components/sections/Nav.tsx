@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Logo } from "../primitives/Logo";
 import { Button } from "../primitives/Button";
+import { LanguageSwitcher } from "../primitives/LanguageSwitcher";
 import { audioToText, nav, navServices } from "../../data/content";
 import { EASE_OUT } from "../../lib/motion";
 
@@ -156,14 +157,16 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
 export function Nav() {
   const { scrollY } = useScroll();
   const shadow = useTransform(scrollY, [0, 80], [0, 1]);
-  const bg = useTransform(scrollY, [0, 80], [0.6, 1]);
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
   return (
     <motion.header initial={{ y: -64, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5, ease: EASE_OUT }} className="fixed inset-x-0 top-0 z-50">
-      <motion.div style={{ opacity: bg }} className="absolute inset-0 -z-10 bg-white/85 backdrop-blur-xl" />
+      {/* Solid white, always. It used to be 85% white behind a blur, fading in
+          from 60% opacity on scroll, so the hero's moving waves showed through
+          the top half of the bar (Kirill, round 11b). */}
+      <div className="absolute inset-0 -z-10 bg-white" />
       <motion.div style={{ opacity: shadow }} className="absolute inset-x-0 bottom-0 h-px bg-border" />
-      <nav className="mx-auto grid h-16 w-full max-w-[1200px] grid-cols-[auto_1fr_auto] items-center px-5 sm:px-6 md:px-10 lg:flex lg:gap-6">
+      <nav className="mx-auto flex h-16 w-full max-w-[1200px] items-center gap-2.5 px-5 sm:px-6 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-0 md:px-10 lg:flex lg:gap-6">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -173,16 +176,25 @@ export function Nav() {
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
-        <div className="flex justify-center lg:justify-start">
+        {/* On a phone the logo sits next to the menu button, as one group on the
+            left: centred between two icon buttons at 390 it had no room either
+            side and the row read as crowded (Kirill, round 22). From the tablet
+            up the bar is wide enough and the logo keeps its centre. */}
+        <div className="flex shrink-0 justify-start md:justify-center lg:justify-start">
           <Logo />
         </div>
-        <a
-          href="/login"
-          aria-label={nav.login}
-          className="grid size-11 shrink-0 place-items-center rounded-full bg-surface-soft text-ink-2 transition-colors hover:text-ink lg:hidden"
-        >
-          <UserRound size={19} />
-        </a>
+        {/* On phones the language keeps its place beside the account icon,
+            so the setting is reachable without opening the menu. */}
+        <div className="ml-auto flex items-center justify-end gap-1 md:ml-0 lg:hidden">
+          <LanguageSwitcher />
+          <a
+            href="/login"
+            aria-label={nav.login}
+            className="grid size-11 shrink-0 place-items-center rounded-full bg-surface-soft text-ink-2 transition-colors hover:text-ink"
+          >
+            <UserRound size={19} />
+          </a>
+        </div>
         <ul className="ml-2 hidden items-center gap-7 lg:flex">
           {nav.links.map((l) =>
             l.label === "Features" ? (
@@ -203,6 +215,10 @@ export function Nav() {
           )}
         </ul>
         <div className="ml-auto hidden items-center gap-3 lg:flex">
+          {/* The language sits before Log in, the way it does on the sites we
+              looked at: it is a setting for the page you are on, not an account
+              action, so it stays outside the pair of account buttons. */}
+          <LanguageSwitcher />
           <a href="/login" className="inline-flex h-10 items-center gap-2 rounded-full bg-surface-soft px-4 text-sm font-medium text-ink-2 transition-colors hover:text-ink">
             <UserRound size={16} />
             {nav.login}

@@ -1,81 +1,146 @@
 import { motion } from "framer-motion";
-import {
-  CalendarCheck,
-  FilePlus2,
-  Flame,
-  Gauge,
-  Hourglass,
-  Infinity as InfinityIcon,
-  Sparkles,
-  Zap,
-  type LucideIcon,
-} from "lucide-react";
+import { Link } from "react-router-dom";
+import { Check } from "lucide-react";
 import { Container } from "../primitives/Container";
-import { Button } from "../primitives/Button";
+import { SectionHeading } from "../primitives/SectionHeading";
+import { SectionCutout } from "../primitives/SectionCutout";
+import { StarField } from "../mocks/StarField";
+import { CosmicGlow } from "../mocks/CosmicGlow";
 import { pricing } from "../../data/content";
-import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
+import { EASE_OUT, viewportOnce } from "../../lib/motion";
 
-const premiumIcons: LucideIcon[] = [InfinityIcon, FilePlus2, Sparkles, Zap];
-const freeIcons: LucideIcon[] = [CalendarCheck, Gauge, Hourglass];
+/* V1's pricing surface, carrying the brief's content: the dark band with the
+   starfield, the Premium card wrapped in the blue glow frame, the Free card
+   quiet beside it. This is the block Kirill said he did not want to buy from
+   in the flat version - V1's is the one he called beautiful. */
 
-function FeatureRow({ icon: Icon, title, body }: { icon: LucideIcon; title: string; body: string }) {
+/* The reference's premium card lists four lines, each with its own icon, a
+   title and one sentence of what it means - which is why it reads in three
+   seconds where eight ticked words do not. The icons are rendered art, in the
+   same glossy cobalt as the paywall's gift. */
+function Highlight({ icon, title, body }: { icon: string; title: string; body: string }) {
   return (
-    <div className="flex items-start gap-4">
-      <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
-        <Icon size={22} />
-      </span>
+    <li className="flex items-start gap-3">
+      <img src={`/brand/pricing/${icon}.png`} alt="" aria-hidden className="mt-[1px] size-8 shrink-0" />
       <div className="min-w-0">
-        <p className="font-display text-lg font-semibold text-ink">{title}</p>
-        <p className="mt-1 text-sm text-ink-2">{body}</p>
+        <p className="text-[14.5px] font-semibold leading-tight text-ink-invert">{title}</p>
+        <p className="mt-1 text-[13px] leading-relaxed text-muted-invert">{body}</p>
       </div>
-    </div>
+    </li>
   );
 }
 
 export function Pricing() {
   const p = pricing.premium;
+  const f = pricing.free;
   return (
-    <section id="pricing" className="bg-white py-14 md:py-20">
-      <Container>
-        <motion.h2 variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="text-center font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
-          {pricing.title}
-        </motion.h2>
-        <motion.div variants={stagger(0.12)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mx-auto mt-10 grid max-w-5xl grid-cols-1 items-stretch gap-6 md:mt-12 lg:grid-cols-2 lg:gap-8">
-          <motion.div variants={fadeUp} className="flex flex-col overflow-hidden rounded-[24px] border border-accent/25 bg-white shadow-card">
-            <div className="relative overflow-hidden bg-[linear-gradient(135deg,#3B82F6_0%,#1D4ED8_100%)] px-6 py-8 text-center text-white md:px-8 md:py-9">
-              <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,0.10), transparent 62%)" }} />
-              <p className="relative text-center text-sm font-semibold text-white/90">
-                <Flame size={15} className="mr-1.5 inline-block align-[-2px]" />
-                {p.badge}
-              </p>
-              <p className="relative mt-3 font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-[42px]">{p.price}</p>
-              <p className="relative mt-3 text-sm font-medium text-white/85">{p.note}</p>
+    <section id="pricing" className="relative overflow-hidden bg-dark-atmosphere py-20 md:py-28">
+      <SectionCutout />
+      <StarField />
+      <CosmicGlow variant="orbit" className="top-[-120px] opacity-70" />
+      <motion.div
+        aria-hidden
+        initial={{ scaleX: 0, opacity: 0 }}
+        whileInView={{ scaleX: 1, opacity: 1 }}
+        viewport={viewportOnce}
+        transition={{ duration: 1.1, ease: EASE_OUT }}
+        className="pointer-events-none absolute inset-x-0 top-0 h-px origin-center bg-gradient-to-r from-transparent via-white/12 to-transparent"
+      />
+      <Container className="relative">
+        <SectionHeading
+          title={
+            <>
+              <span className="block">{pricing.titleLine1}</span>
+              {pricing.titleLine2}
+            </>
+          }
+          tone="dark"
+        />
+
+        <div className="mx-auto mt-12 grid max-w-5xl items-center gap-6 md:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]">
+          {/* Free: present, honest, quiet. */}
+          <motion.div
+            initial={{ opacity: 0, x: -40, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            viewport={viewportOnce}
+            transition={{ duration: 0.8, ease: EASE_OUT, delay: 0.08 }}
+            className="order-2 flex flex-col rounded-tile border border-white/[0.07] bg-white/[0.02] p-7 md:order-1"
+          >
+            <p className="text-sm font-medium text-muted-invert/80">{f.badge}</p>
+            <div className="mt-3 flex items-end">
+              <p className="font-display text-[30px] font-bold tracking-tight text-ink-invert/90">{f.price}</p>
             </div>
-            <div className="flex-1 space-y-6 p-6 md:space-y-7 md:p-8">
-              {p.features.map((f, i) => (
-                <FeatureRow key={f.title} icon={premiumIcons[i]} title={f.title} body={f.body} />
+            <div className="mt-6 space-y-5 border-t border-white/10 pt-6">
+              {f.features.map((b) => (
+                <div key={b.title} className="flex items-start gap-3">
+                  <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-white/10">
+                    <Check size={13} className="text-muted-invert" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-ink-invert/85">{b.title}</p>
+                    <p className="mt-1 text-[13px] leading-relaxed text-muted-invert/75">{b.body}</p>
+                  </div>
+                </div>
               ))}
             </div>
-            <div className="px-6 pb-6 md:px-8 md:pb-8">
-              <Button size="lg" href="/subscribe" className="w-full">{p.cta}</Button>
+            <Link
+              to="/subscribe"
+              className="mt-7 inline-flex h-13 items-center justify-center rounded-full border border-white/15 bg-white/5 text-base font-medium tracking-[0.04em] text-ink-invert transition-colors hover:bg-white/10"
+            >
+              {f.cta}
+            </Link>
+          </motion.div>
+          {/* Premium leads: the glow frame is what says "this is the one". */}
+          <motion.div
+            initial={{ opacity: 0, x: 40, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            viewport={viewportOnce}
+            transition={{ duration: 0.8, ease: EASE_OUT }}
+            className="relative order-1 h-full md:order-2"
+          >
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -inset-3 -z-10 rounded-[38px] opacity-80 blur-2xl"
+              style={{ background: "radial-gradient(closest-side, rgba(37,99,235,0.4), transparent)" }}
+            />
+            <div className="h-full rounded-tile p-[1.5px] shadow-blue" style={{ background: "linear-gradient(180deg,#3B82F6,#2563EB)" }}>
+              <div className="relative flex h-full flex-col overflow-hidden rounded-[26px] surface-dark p-8">
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 top-0 h-44"
+                  style={{ background: "linear-gradient(180deg, rgba(76,155,255,0.12), transparent)" }}
+                />
+                <div className="relative flex items-center justify-between">
+                  <p className="text-sm font-semibold text-ink-invert">{p.badge}</p>
+                  <span
+                    className="rounded-full px-3 py-1 text-xs font-semibold text-white"
+                    style={{ background: "linear-gradient(180deg,#3B82F6,#2563EB)" }}
+                  >
+                    Most popular
+                  </span>
+                </div>
+                <div className="relative mt-4 flex items-end gap-2">
+                  <span className="mb-2 text-[11px] font-bold tracking-[0.08em] text-muted-invert">{p.priceFrom}</span>
+                  <span className="font-display text-[52px] font-bold leading-none tracking-tight text-ink-invert">{p.price}</span>
+                  <span className="mb-1.5 text-sm font-medium text-muted-invert">{p.priceUnit}</span>
+                </div>
+                <p className="relative mt-2.5 text-[13px] text-muted-invert">{p.note}</p>
+                <ul className="relative mt-6 flex-1 space-y-4 border-t border-white/10 pt-6">
+                  {p.highlights.map((h) => (
+                    <Highlight key={h.title} icon={h.icon} title={h.title} body={h.body} />
+                  ))}
+                </ul>
+                <Link
+                  to="/subscribe"
+                  className="cta-sheen relative mt-8 inline-flex h-14 items-center justify-center rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-base font-semibold tracking-[0.04em] text-white shadow-blue ring-1 ring-inset ring-white/20 transition-all hover:brightness-[1.05]"
+                >
+                  {p.cta}
+                </Link>
+              </div>
             </div>
           </motion.div>
-          <motion.div variants={fadeUp} className="flex flex-col overflow-hidden rounded-[24px] border border-border bg-white shadow-soft">
-            <div className="bg-surface-soft px-6 py-8 text-center md:px-8 md:py-9">
-              <p className="font-semibold text-ink-2">{pricing.free.name}</p>
-              <p className="mt-2 font-display text-4xl font-extrabold tracking-tight text-ink md:text-5xl">{pricing.free.price}</p>
-              <p className="mt-1 font-medium text-ink-2">{pricing.free.priceNote}</p>
-            </div>
-            <div className="flex-1 space-y-6 p-6 md:space-y-7 md:p-8">
-              {pricing.free.features.map((f, i) => (
-                <FeatureRow key={f.title} icon={freeIcons[i]} title={f.title} body={f.body} />
-              ))}
-            </div>
-            <div className="px-6 pb-6 md:px-8 md:pb-8">
-              <Button variant="outline" size="lg" href="/subscribe" className="w-full">{pricing.free.cta}</Button>
-            </div>
-          </motion.div>
-        </motion.div>
+
+        </div>
       </Container>
     </section>
   );

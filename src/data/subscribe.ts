@@ -6,24 +6,49 @@ export const subscribe = {
   skip: "Skip",
   countdownSeconds: 8 * 60 + 39, // 08:39
   cta: "Get my plan",
-  heading: "Choose your plan",
-  subheading: "Unlock unlimited, high-accuracy transcription. Cancel anytime.",
-  promo: { label: "Your promo code is applied", code: "welcome50", discount: "50% off" },
+  // Paywall v2 (hypothesis 8): the offer says what it unlocks before it says
+  // "choose", and the cards below carry the whole comparison.
+  offerLabel: "WELCOME OFFER",
+  heading: "Unlock Unlimited Transcription",
+  subheading: "Transcribe more, save time and get access to all premium features.",
+  promo: {
+    label: "Your promo code is applied",
+    sub: "Special pricing reserved for you",
+    code: "welcome50",
+    discount: "50% off",
+  },
   legal: {
     pre: "By clicking Get my plan or Continue, I agree to the",
     links: ["Terms of Service", "Privacy Policy", "Subscription Policy"],
     body: "I authorize Transcribetotext.ai to charge {now} for the introductory plan. If I do not cancel before the end of the trial period, my subscription will automatically renew at {was} per billing period until I cancel. I can cancel anytime in my account settings at least 24 hours before the end of my subscription to avoid being charged for the next billing cycle. All prices include applicable taxes.",
   },
+  /* Each card now says what it is FOR, not only what it costs: a tag at the top,
+     the saving where there is one, and one plain line naming who the plan suits.
+     The 1-Month plan stays preselected. */
   plans: [
-    { key: "week", name: "1-Week Trial", was: "$13.99", now: "$5.99", perDayWas: "$1.99", perDay: "$0.85", popular: false },
-    { key: "month", name: "1-Month Plan", was: "$29.99", now: "$14.99", perDayWas: "$0.99", perDay: "$0.49", popular: true },
-    { key: "quarter", name: "3-Month Plan", was: "$54.99", now: "$27.99", perDayWas: "$0.61", perDay: "$0.31", popular: false },
+    { key: "week", tag: "FLEXIBLE", tone: "neutral", name: "1-Week Trial", was: "$13.99", now: "$5.99", perDayWas: "$1.99", perDay: "$0.85", save: "", note: "Good for trying Premium first", popular: false },
+    { key: "month", tag: "MOST POPULAR", tone: "accent", name: "1-Month Plan", was: "$29.99", now: "$14.99", perDayWas: "$0.99", perDay: "$0.49", save: "SAVE 50%", note: "Best balance of price and flexibility", popular: true },
+    { key: "quarter", tag: "BEST VALUE", tone: "gold", name: "3-Month Plan", was: "$54.99", now: "$27.99", perDayWas: "$0.61", perDay: "$0.31", save: "SAVE 49%", note: "Lowest price per day", popular: false },
   ],
+  // Said once, under the three cards, instead of eight times inside them.
+  includesTitle: "Every Premium Plan Includes",
+  includes: [
+    { icon: "infinity", label: "Unlimited transcriptions" },
+    { icon: "video", label: "Meeting transcription" },
+    { icon: "sparkles", label: "AI summaries" },
+    { icon: "users", label: "Speaker recognition" },
+    { icon: "upload", label: "Extended uploads" },
+    { icon: "globe", label: "117+ languages" },
+    { icon: "download", label: "All export formats" },
+    { icon: "zap", label: "Priority processing" },
+  ],
+  continueNote: "Unlock Premium instantly",
   guarantee: {
     title: "30-day money-back guarantee",
     body: "We believe our transcription tool will help you work faster, smarter and with more clarity. If you are not satisfied with the results, we will give you a full refund, no questions asked.",
   },
-  benefitsTitle: "What you get with TranscribeToText.AI",
+  benefitsTitle: "What you get with",
+  benefitsBrand: "TranscribeToText.AI",
   benefits: [
     { icon: "zap", title: "Automatic transcription of audio and video", body: "Turn recordings into text in minutes, no manual work or delays." },
     { icon: "users", title: "Speaker recognition", body: "Easily identify who said what in interviews, meetings, or group discussions." },
@@ -39,11 +64,11 @@ export const subscribe = {
   feedbacksTitle: "Our users' feedback",
   feedbacksSub: "These users have long-term plans to use the service and shared their feedback to help us improve the experience.",
   feedbacks: [
-    { name: "Mike", avatar: 0, quote: "Really impressed with this online transcription tool. It handles multiple speakers and background noise like a pro. Affordable pricing and great customer support. Saved me hours of work!" },
-    { name: "Kate", avatar: 3, quote: "This transcription service is a game-changer! Super fast turnaround and the accuracy is spot-on, even with tricky audio. The interface is clean and easy to use. Definitely recommend it for anyone needing quick, reliable transcripts." },
-    { name: "Peter", avatar: 1, quote: "Solid service! The transcripts are accurate, and delivery is always on time. I love how user-friendly the platform is, uploading files is a breeze. Perfect for professionals or students needing quality transcription." },
+    { name: "Mike", quote: "Really impressed with this online transcription tool. It handles multiple speakers and background noise like a pro. Affordable pricing and great customer support. Saved me hours of work!" },
+    { name: "Kate", quote: "This transcription service is a game-changer! Super fast turnaround and the accuracy is spot-on, even with tricky audio. The interface is clean and easy to use. Definitely recommend it for anyone needing quick, reliable transcripts." },
+    { name: "Peter", quote: "Solid service! The transcripts are accurate, and delivery is always on time. I love how user-friendly the platform is, uploading files is a breeze. Perfect for professionals or students needing quality transcription." },
   ],
-  safeCheckout: "Guaranteed safe and secure checkout",
+  secure: { pre: "Guaranteed ", strong: "safe & secure", post: " checkout" },
   help: { title: "Need help?", prefix: "Send us an email:", email: "support@transcribetotext.ai" },
   publisher: { title: "Publisher", name: "Mithrilmobile OU", address: "Address: Tallinn, J. Vilmsi 47, 10115" },
   legalLinks: ["Terms of use", "Privacy policy", "Subscription Policy"],
@@ -61,12 +86,156 @@ export const subscribe = {
     cardPlaceholder: "Credit or Debit card number",
     expiryPlaceholder: "Expiry date MM/YY",
     cvcPlaceholder: "CVV/CVC",
+    dividerText: "or with card",
     continue: "Continue",
     termsPre: "By proceeding with the purchase, you agree to our",
     termsLinks: ["Terms of Service", "Privacy Policy", "Subscription Policy"],
     helpPrefix: "Need help? Contact us at",
     helpEmail: "support@transcribetotext.ai",
     renewal: "You'll pay {now} today for your 1-month trial. After your trial ends, it will convert into a subscription. Your subscription starts at the end of the trial period and renews at {was} per 1 month subscription unless you cancel. You can cancel anytime in your account settings at least 24 hours before the end of your 1-month subscription. If you don't cancel, your membership will automatically renew at the end of each billing period.",
+    error: {
+      title: "Payment error",
+      subtitle: "We couldn't process this payment. Check the details below and try again.",
+      card: "Your card number is incomplete.",
+      expiry: "Your card's expiry date is incomplete.",
+      cvc: "Your card's security code is incomplete.",
+    },
     success: { title: "You're all set", body: "Welcome to Premium. Your transcription superpowers are unlocked." },
+  },
+  skipOffer: {
+    heading: "Get more done with",
+    headingAccent: "smarter transcription,",
+    headingRest: "starting today!",
+    body: "Manual work slows you down. Searching through recordings wastes hours. We believe your time is too valuable for that. That's why we built a tool that helps you transcribe audio, video, and calls in minutes, not hours.",
+    bodyDeal: "That's why we're offering you an exclusive 50% discount, so you can experience it yourself.",
+    listTitle: "What our users experience",
+    list: [
+      "Meetings turned into clear notes",
+      "Interviews ready for publishing",
+      "Subtitles done in one click",
+      "And hours of time saved, every week",
+    ],
+    urgency: "But act fast, this offer won't last long.",
+    cta: "Continue",
+    dismiss: "No thanks",
+  },
+  cookie: {
+    title: "We value your privacy",
+    body: "We use cookies to improve your experience, serve relevant content, and analyze traffic. Choose which cookies we can use, or accept them all.",
+    customise: "Customise",
+    acceptAll: "Accept all",
+    rejectAll: "Reject all",
+    save: "Save my preferences",
+    prefsTitle: "Cookie preferences",
+    prefsIntro: "We use cookies to help you navigate the site and unlock certain features. Pick a category to see what each one does.",
+    alwaysActive: "Always active",
+    categories: [
+      { key: "necessary", title: "Necessary", always: true, body: "Required for the basic features of the site, like secure sign-in and remembering your consent. These never store personal data." },
+      { key: "functional", title: "Functional", body: "Help with sharing content on social platforms, collecting feedback, and other third-party features." },
+      { key: "analytics", title: "Analytics", body: "Show us how visitors use the site, so we can improve it. Metrics like visits, bounce rate and traffic source." },
+      { key: "advertising", title: "Advertising", body: "Used to show you more relevant ads and to measure how our campaigns perform." },
+    ],
+  },
+};
+
+// One source of truth for money, and none of it invented. These are the prices the
+// product already had: the pricing page sells Basic at $19.99 a month or $119.99 a
+// year, and $119.99 a year is the $9.99 a month the offer modals quote, which is
+// exactly the "save 50%" the reference badges. The 50%-off offer halves the year.
+const billing = {
+  monthly: "$19.99",
+  yearly: "$9.99",
+  yearlyTotal: "$119.99 billed yearly",
+  perMonth: "/month",
+  save: "Save 50%",
+  offerWas: "$119.99",
+  offerNow: "$59.50",
+  offerPerDay: "($0.17 per day)",
+};
+
+// Special offers shown over the paywall + the checkout that follows them.
+// Same design language, our live 50%-off price set. No all-caps, no long dashes.
+export const offers = {
+  limited: {
+    title: "Limited time only!",
+    subtitle: "Get 50% off the world's best AI transcription service before it expires!",
+    // The free-vs-premium variant keeps the client's original line, which leads
+    // with the trial instead of the discount.
+    trialSubtitle: "Get a free trial with the world's best AI transcription service before it expires!",
+    startSeconds: 9 * 3600 + 41 * 60 + 8,
+    benefits: ["Unlimited transcription access", "Unlimited file capacity", "Comprehensive features", "Priority processing"],
+    freeCard: {
+      name: "AI Transcriber Free",
+      price: "Free",
+      tagline: "100% free",
+      features: ["5 uploads daily", "15 minute uploads", "Lower priority"],
+      cta: "Start now for free",
+    },
+    premiumCard: {
+      name: "AI Transcriber Premium",
+      price: billing.yearly,
+      per: billing.perMonth,
+      note: billing.yearlyTotal,
+      badge: billing.save,
+      cta: "Start now for free",
+    },
+    plansCards: [
+      { name: "Billed monthly", price: billing.monthly, per: billing.perMonth, note: "", badge: "", cta: "Start now for free" },
+      { name: "Billed yearly", price: billing.yearly, per: billing.perMonth, note: billing.yearlyTotal, badge: billing.save, cta: "Start now for free" },
+    ],
+  },
+  special: {
+    title: "Special offer",
+    subtitle: "Grab the world's best AI transcription service before the timer runs out!",
+    startSeconds: 9 * 60 + 41,
+    discount: "50% off",
+    saveBadge: "Save 50%",
+    features: [
+      { icon: "infinity", label: "Unlimited transcription access" },
+      { icon: "database", label: "Unlimited file capacity" },
+      { icon: "sparkles", label: "Comprehensive features" },
+      { icon: "zap", label: "Priority processing" },
+    ],
+    was: billing.offerWas,
+    now: `${billing.offerNow}/year`,
+    perDay: billing.offerPerDay,
+    cta: "Grab this deal",
+  },
+  offerCheckout: {
+    title: "Transcribe everything. Miss nothing",
+    includesLabel: "The offer includes:",
+    includes: [
+      { name: "Unlimited audio and video transcription", body: "Unlock unlimited transcription with up to 4 hours per conversation. Import audio and video files with no limits and no stress." },
+      { name: "AI meeting agent", body: "Let AI join your Zoom, Google Meet or Teams calls to take notes, record audio and instantly share everything, so you never miss a thing." },
+      { name: "Transcribe from links", body: "Turn YouTube videos, Google Drive and Dropbox files into clear, accurate transcripts in seconds." },
+    ],
+    rating: { label: "Excellent", count: "Based on 1,240 reviews" },
+    reviews: [
+      { initial: "K", name: "Kevin S.", date: "Jan 21, 2026", text: "Great service! From my favorite videos to a clean text file in just seconds." },
+      { initial: "M", name: "Megan T.", date: "Feb 9, 2026", text: "Two hours of interviews came back clean, with every speaker in the right place." },
+      { initial: "D", name: "Daniel R.", date: "Mar 3, 2026", text: "I run every client call through it now. The summaries alone pay for the plan." },
+    ],
+    discountCard: {
+      label: "Applied limited discount",
+      code: "Newcomer",
+      off: "50% off",
+      forLabel: "Applicable for",
+      startSeconds: 5 * 60 + 29,
+    },
+    totalLabel: "Total due today:",
+    planLine: "Premium, billed monthly",
+    was: billing.monthly,
+    now: billing.yearly,
+    save: "You save 50%",
+    guarantee: { pre: "7-day", strong: "money back", post: "guarantee" },
+    expressLabel: "Express checkout",
+    cardDivider: "or pay by card",
+    cardPlaceholder: "Credit or Debit card number",
+    expiryPlaceholder: "Expiry date MM/YY",
+    cvcPlaceholder: "CVV/CVC",
+    namePlaceholder: "Name on card",
+    cta: "Start 7-day trial",
+    termsPre: "By proceeding with the purchase of a plan, you agree to our",
+    termsLinks: ["Terms of Service", "Privacy Policy"],
   },
 };

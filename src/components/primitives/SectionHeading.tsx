@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
+import { SECTION_TITLE } from "../../lib/typography";
 
 export function SectionHeading({
   eyebrow,
@@ -18,7 +19,7 @@ export function SectionHeading({
   className?: string;
 }) {
   const dark = tone === "dark";
-  const alignClass = align === "center" ? "mx-auto items-center text-center" : "items-start text-left";
+  const alignClass = align === "center" ? "items-start text-left sm:mx-auto sm:items-center sm:text-center" : "items-start text-left";
   return (
     <motion.div variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={viewportOnce} className={`flex max-w-2xl flex-col gap-3 sm:gap-4 ${alignClass} ${className}`}>
       {eyebrow ? (
@@ -26,7 +27,9 @@ export function SectionHeading({
           {eyebrow}
         </motion.span>
       ) : null}
-      <motion.h2 variants={fadeUp} className={`text-balance font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl md:text-[44px] md:leading-[1.08] ${dark ? "text-ink-invert" : "text-ink"}`}>
+      {/* V1's typographic voice: large semibold with tight tracking, the weight
+          the owner pointed back to when he asked for the first version's grade. */}
+      <motion.h2 variants={fadeUp} className={`${SECTION_TITLE} ${dark ? "text-ink-invert" : "text-ink"}`}>
         {title}
       </motion.h2>
       {subtitle ? (

@@ -1,6 +1,17 @@
 // Real brand assets pulled from the live site, served from public/brand/.
 const B = "/brand/";
 
+/* Real marks for the places a file can come from. Keyed by the name the copy
+   itself uses, so a platform can never end up under the wrong logo. */
+export const platform: Record<string, string> = {
+  YouTube: B + "platform/youtube-icon.svg",
+  "Google Drive": B + "platform/google-drive.svg",
+  Dropbox: B + "platform/dropbox.svg",
+  Zoom: B + "platform/zoom-icon.svg",
+  "Google Meet": B + "platform/google-meet.svg",
+  "Microsoft Teams": B + "platform/microsoft-teams.svg",
+};
+
 export const brand = {
   logo: B + "logo.svg",
   heroShot: B + "audio_upload_ui_1b66ce2e3d.png",
@@ -77,6 +88,11 @@ export const brand = {
     Japanese: B + "1e3e8de5_icon_lang_ja_c2c7a8a914.svg",
     Turkish: B + "8c1edd45_icon_lang_tr_642f7e226c.svg",
     Portuguese: B + "11d627bd_icon_lang_pt_9c0faf1e69.svg",
+    // The delivered set carries no Russian flag. The file's own flag library is
+    // the Apple emoji set - waving and shaded - which does not sit with the flat
+    // discs already on the page, so this one is drawn to the same circle and
+    // palette as its neighbours.
+    Russian: B + "icon_lang_ru.svg",
     Arabic: B + "384a19c8_icon_lang_ar_47d519a95a.svg",
     Greek: B + "0675f4f4_icon_lang_el_24d364001f.svg",
     Swedish: B + "802971fc_se_1_ed070449e6.svg",

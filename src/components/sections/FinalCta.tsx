@@ -1,45 +1,42 @@
 import { motion } from "framer-motion";
-import { BadgeCheck, Crown, Rocket, Smile } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container } from "../primitives/Container";
 import { Button } from "../primitives/Button";
+import { SectionCutout } from "../primitives/SectionCutout";
 import { StarField } from "../mocks/StarField";
 import { finalCta } from "../../data/content";
-import { EASE_OUT, blurIn, fadeUp, stagger, viewportOnce } from "../../lib/motion";
-
-const ICONS = [Crown, Rocket, Smile, BadgeCheck];
+import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
+import { SECTION_TITLE } from "../../lib/typography";
 
 export function FinalCta() {
   return (
-    <section className="relative overflow-hidden bg-dark-atmosphere py-14 md:py-20">
+    <section className="relative overflow-hidden bg-dark-atmosphere py-16 md:py-24">
+      <SectionCutout />
       <StarField />
-      <div aria-hidden="true" className="pointer-events-none absolute -top-20 left-1/2 h-72 w-[38rem] -translate-x-1/2 rounded-full bg-accent/25 blur-[130px]" />
-      <motion.div aria-hidden="true" initial={{ scaleX: 0, opacity: 0 }} whileInView={{ scaleX: 1, opacity: 1 }} viewport={viewportOnce} transition={{ duration: 1.1, ease: EASE_OUT }} className="pointer-events-none absolute inset-x-0 top-0 h-px origin-center bg-gradient-to-r from-transparent via-white/15 to-transparent" />
       <Container className="relative">
-        <motion.h2 variants={blurIn} initial="hidden" whileInView="show" viewport={viewportOnce} className="text-balance text-center font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-          {finalCta.title}
-        </motion.h2>
-        <motion.div variants={stagger(0.09)} initial="hidden" whileInView="show" viewport={viewportOnce} className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-8 sm:grid-cols-2 md:mt-12 md:gap-10 lg:mt-14 lg:grid-cols-4">
-          {finalCta.items.map((it, i) => {
-            const Icon = ICONS[i];
-            return (
-              <motion.div key={it.title} variants={fadeUp}>
-                <Icon strokeWidth={1.5} className="mx-auto size-10 text-accent-glow md:size-12" />
-                <h3 className="mt-4 text-center font-display text-lg font-semibold text-white">{it.title}</h3>
-                <p className="mt-2 text-center text-sm leading-relaxed text-muted-invert">
-                  {it.body}
-                  {it.link ? (
-                    <>
-                      {" "}
-                      <a href="#" className="text-accent-glow underline transition-colors hover:text-white">{it.link}</a>
-                    </>
-                  ) : null}
-                </p>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-10 flex justify-center md:mt-12">
-          <Button size="lg" href="/subscribe" variant="outline" className="w-full border-transparent font-semibold text-accent sm:w-auto">{finalCta.cta}</Button>
+        <motion.div
+          variants={stagger(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+          className="mx-auto flex max-w-2xl flex-col items-start gap-4 text-left sm:items-center sm:text-center"
+        >
+          <motion.h2
+            variants={fadeUp}
+            className={`text-ink-invert ${SECTION_TITLE}`}
+          >
+            {finalCta.titleLine1}
+            <span className="block">{finalCta.titleLine2}</span>
+          </motion.h2>
+          <motion.p variants={fadeUp} className="text-pretty text-base leading-relaxed text-muted-invert md:text-lg">
+            {finalCta.subtitle}
+          </motion.p>
+          <motion.div variants={fadeUp} className="mt-3 flex flex-col items-start gap-2.5 sm:items-center">
+            <Button href="/subscribe" size="lg">
+              {finalCta.cta} <ArrowRight size={18} />
+            </Button>
+            <span className="text-[13px] text-muted-invert">{finalCta.ctaNote}</span>
+          </motion.div>
         </motion.div>
       </Container>
     </section>
