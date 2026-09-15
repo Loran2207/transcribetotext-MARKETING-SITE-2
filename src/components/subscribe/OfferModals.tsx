@@ -7,7 +7,7 @@ import { EASE_OUT } from "../../lib/motion";
 import { SecureCheckout } from "./SecureCheckout";
 
 const GRADIENT_PILL =
-  "flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-sm font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20 transition-[filter] hover:brightness-[1.05]";
+  "cta-sheen flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-sm font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20 transition-[filter] hover:brightness-[1.05]";
 const SOFT_PILL =
   "flex h-12 w-full items-center justify-center rounded-full bg-accent-soft text-sm font-semibold text-accent transition-colors hover:bg-accent/15";
 const field = "h-12 w-full rounded-input bg-white px-3 text-sm text-ink outline-none transition-all placeholder:text-muted focus:ring-2 border border-border focus:border-accent focus:ring-accent/15 sm:px-4";

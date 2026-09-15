@@ -57,7 +57,7 @@ export function CheckoutModal({ open, onClose, planIndex, forceError = false }: 
                 <span className="grid h-16 w-16 place-items-center rounded-full bg-accent-soft text-accent"><Check size={30} /></span>
                 <h3 className="mt-5 font-display text-2xl font-extrabold tracking-tight text-ink">{c.success.title}</h3>
                 <p className="mt-2 max-w-xs text-sm leading-relaxed text-ink-2">{c.success.body}</p>
-                <button onClick={onClose} className="mt-7 inline-flex h-12 items-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] px-7 text-sm font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20">Done</button>
+                <button onClick={onClose} className="cta-sheen mt-7 inline-flex h-12 items-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] px-7 text-sm font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20">Done</button>
               </div>
             ) : (
               <>
@@ -124,7 +124,7 @@ export function CheckoutModal({ open, onClose, planIndex, forceError = false }: 
                     </div>
                   </div>
                 </div>
-                <button onClick={submit} className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-sm font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20 transition-[filter] hover:brightness-[1.05]">{c.continue} <ArrowRight size={16} /></button>
+                <button onClick={submit} className="cta-sheen mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] text-sm font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20 transition-[filter] hover:brightness-[1.05]">{c.continue} <ArrowRight size={16} /></button>
                 <div className="mt-5"><SecureCheckout /></div>
                 <p className="mt-4 text-center text-[11px] leading-relaxed text-muted">
                   {c.termsPre}{" "}

@@ -8,7 +8,7 @@ const STORAGE_KEY = "ttt_cookie_consent";
 const c = subscribe.cookie;
 
 const primaryPill =
-  "inline-flex h-11 items-center justify-center rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] px-5 text-sm font-medium text-white shadow-blue ring-1 ring-inset ring-white/20 transition hover:brightness-[1.05]";
+  "cta-sheen inline-flex h-11 items-center justify-center rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] px-5 text-sm font-medium text-white shadow-blue ring-1 ring-inset ring-white/20 transition hover:brightness-[1.05]";
 const outlinePill =
   "inline-flex h-11 items-center justify-center rounded-full border border-border bg-white px-5 text-sm font-medium text-ink shadow-soft transition hover:border-accent/40 hover:bg-surface-soft";
 const ghostPill =

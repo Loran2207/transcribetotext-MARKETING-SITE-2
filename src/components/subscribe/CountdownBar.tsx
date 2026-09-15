@@ -9,7 +9,7 @@ function fmt(s: number) {
   return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
 }
 
-const cta = "shrink-0 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20 transition-[filter] hover:brightness-[1.05]";
+const cta = "cta-sheen shrink-0 rounded-full bg-[linear-gradient(180deg,#3B82F6,#2563EB)] font-semibold text-white shadow-blue ring-1 ring-inset ring-white/20 transition-[filter] hover:brightness-[1.05]";
 
 export function CountdownBar({ onGetPlan }: { onGetPlan: () => void }) {
   const [left, setLeft] = useState(subscribe.countdownSeconds);

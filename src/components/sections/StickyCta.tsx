@@ -15,13 +15,18 @@ export function StickyCta() {
       style={{ boxShadow: "0 -10px 34px rgba(16,24,40,.10)" }}
     >
       <div className="flex justify-center">
-        <MotionLink
-          to={stickyCta.href}
-          whileTap={reduce ? undefined : { scale: 0.985 }}
-          className="flex h-12 w-full max-w-2xl items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-base font-semibold text-white shadow-blue ring-1 ring-inset ring-white/25 transition hover:brightness-[1.05] md:h-14"
-        >
-          {stickyCta.label} <ArrowRight size={18} />
-        </MotionLink>
+        {/* The halo sits behind the button as its own layer, so the button's
+            gradient stays crisp while the glow breathes around it. */}
+        <div className="cta-wrap relative w-full max-w-2xl">
+          <span aria-hidden className="cta-aura" />
+          <MotionLink
+            to={stickyCta.href}
+            whileTap={reduce ? undefined : { scale: 0.985 }}
+            className="cta-glow cta-sheen flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-base font-semibold text-white ring-1 ring-inset ring-white/25 md:h-14"
+          >
+            {stickyCta.label} <ArrowRight size={18} />
+          </MotionLink>
+        </div>
       </div>
     </div>
   );

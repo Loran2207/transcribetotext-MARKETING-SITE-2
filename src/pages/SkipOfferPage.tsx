@@ -83,7 +83,7 @@ export function SkipOfferPage() {
           <motion.button
             onClick={() => navigate("/subscribe")}
             whileTap={{ scale: 0.985 }}
-            className="flex h-14 w-full max-w-2xl items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-base font-semibold text-white shadow-blue ring-1 ring-inset ring-white/25 transition-[filter] hover:brightness-[1.05]"
+            className="cta-sheen flex h-14 w-full max-w-2xl items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-base font-semibold text-white shadow-blue ring-1 ring-inset ring-white/25 transition-[filter] hover:brightness-[1.05]"
           >
             {offer.cta}
             <ArrowRight className="size-5" />

@@ -132,7 +132,7 @@ export function Pricing() {
                 </ul>
                 <Link
                   to="/subscribe"
-                  className="relative mt-8 inline-flex h-14 items-center justify-center rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-base font-semibold tracking-[0.04em] text-white shadow-blue ring-1 ring-inset ring-white/20 transition-all hover:brightness-[1.05]"
+                  className="cta-sheen relative mt-8 inline-flex h-14 items-center justify-center rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-base font-semibold tracking-[0.04em] text-white shadow-blue ring-1 ring-inset ring-white/20 transition-all hover:brightness-[1.05]"
                 >
                   {p.cta}
                 </Link>

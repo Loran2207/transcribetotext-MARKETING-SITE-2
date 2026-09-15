@@ -87,13 +87,16 @@ export function SubscribePage() {
             behind the button is a payment, which is the one thing a reader
             hesitates over here. */}
         <div className="flex flex-col items-center gap-1.5">
-          <motion.button
-            onClick={() => setOpen(true)}
-            whileTap={{ scale: 0.985 }}
-            className="flex h-14 w-full max-w-2xl items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-base font-semibold text-white shadow-blue ring-1 ring-inset ring-white/25 transition-[filter] hover:brightness-[1.05]"
-          >
-            <Lock size={16} /> {subscribe.continueCta}
-          </motion.button>
+          <div className="cta-wrap relative w-full max-w-2xl">
+            <span aria-hidden className="cta-aura" />
+            <motion.button
+              onClick={() => setOpen(true)}
+              whileTap={{ scale: 0.985 }}
+              className="cta-glow cta-sheen flex h-14 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-base font-semibold text-white ring-1 ring-inset ring-white/25"
+            >
+              <Lock size={16} /> {subscribe.continueCta}
+            </motion.button>
+          </div>
           <span className="text-[12px] text-muted">{subscribe.continueNote}</span>
         </div>
       </div>

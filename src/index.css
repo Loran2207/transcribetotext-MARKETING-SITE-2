@@ -110,6 +110,43 @@
 
 @keyframes tabProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
+/* Primary buttons share one hover: a slight lift and a white streak that
+   crosses the pill left to right. The bottom Continue buttons add a breathing
+   halo behind them and a slow pulse in their shadow. The halo is a sibling, not
+   a pseudo-element, because a negative z-index pseudo would paint over the
+   button's own gradient. Reduced motion stops all of it via the global rule. */
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 10px 30px rgba(37,99,235,.32), 0 0 0 0 rgba(59,130,246,0); }
+  50% { box-shadow: 0 14px 40px rgba(37,99,235,.50), 0 0 0 7px rgba(59,130,246,.10); }
+}
+@keyframes ctaAura {
+  0%, 100% { opacity: .45; transform: scale(.98); }
+  50% { opacity: .95; transform: scale(1.03); }
+}
+@keyframes ctaSheen { from { background-position: 130% 0; } to { background-position: -30% 0; } }
+@layer components {
+  .cta-sheen {
+    position: relative;
+    transition: transform .25s ease, filter .25s ease;
+  }
+  .cta-sheen::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    background: linear-gradient(115deg, rgba(255,255,255,0) 38%, rgba(255,255,255,.45) 50%, rgba(255,255,255,0) 62%);
+    background-size: 220% 100%; background-position: 130% 0; background-repeat: no-repeat;
+  }
+  .cta-sheen:hover { transform: translateY(-1px); filter: brightness(1.06); }
+  .cta-sheen:hover::after { animation: ctaSheen .8s ease-out forwards; }
+  .cta-glow { animation: ctaPulse 2.6s ease-in-out infinite; }
+  .cta-glow:hover { transform: translateY(-2px); }
+  .cta-aura {
+    position: absolute; inset: -10px -14px; border-radius: 9999px; pointer-events: none;
+    background: radial-gradient(70% 140% at 50% 50%, rgba(59,130,246,.62) 0%, rgba(59,130,246,.22) 45%, rgba(59,130,246,0) 72%);
+    filter: blur(14px);
+    animation: ctaAura 2.6s ease-in-out infinite;
+  }
+  .cta-wrap:hover .cta-aura { opacity: 1; animation-play-state: paused; transform: scale(1.06); }
+}
+
 
 /* App design-system tokens (ported from transcribe2text src/styles/theme.css)
    for the /login page, which renders the SYSTEM components, not the site ones. */

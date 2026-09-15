@@ -7,7 +7,7 @@ type Variant = "primary" | "ghost" | "outline";
 type Size = "md" | "lg";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-white shadow-blue ring-1 ring-inset ring-white/20 hover:brightness-[1.05]",
+  primary: "cta-sheen bg-[linear-gradient(180deg,#3B82F6_0%,#2563EB_100%)] text-white shadow-blue ring-1 ring-inset ring-white/20 hover:brightness-[1.05]",
   outline: "border border-border bg-white text-ink shadow-soft hover:border-accent/40 hover:bg-surface-soft",
   ghost: "text-ink-2 hover:bg-ink/5 hover:text-ink",
 };
