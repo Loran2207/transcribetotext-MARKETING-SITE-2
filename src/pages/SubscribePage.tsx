@@ -82,7 +82,7 @@ export function SubscribePage() {
           <SafeCheckout />
         </div>
       </div>
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 px-4 py-3 backdrop-blur md:py-4" style={{ boxShadow: "0 -10px 34px rgba(16,24,40,.10)" }}>
+      <div className="fixed inset-x-0 bottom-0 z-40 overflow-x-clip border-t border-border bg-white/95 px-4 py-3 backdrop-blur md:py-4" style={{ boxShadow: "0 -10px 34px rgba(16,24,40,.10)" }}>
         {/* The lock is not a second way of saying "continue": it says the step
             behind the button is a payment, which is the one thing a reader
             hesitates over here. */}

@@ -11,7 +11,7 @@ export function StickyCta() {
   const reduce = useReducedMotion();
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 px-4 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] backdrop-blur md:py-4 md:pb-4"
+      className="fixed inset-x-0 bottom-0 z-40 overflow-x-clip border-t border-border bg-white/95 px-4 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] backdrop-blur md:py-4 md:pb-4"
       style={{ boxShadow: "0 -10px 34px rgba(16,24,40,.10)" }}
     >
       <div className="flex justify-center">

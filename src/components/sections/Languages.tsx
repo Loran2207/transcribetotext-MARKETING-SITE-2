@@ -6,7 +6,7 @@ import { Button } from "../primitives/Button";
 import { Globe3D } from "../mocks/Globe3D";
 import { languages } from "../../data/content";
 import { brand } from "../../data/assets";
-import { fadeUp, scaleIn, stagger, viewportOnce } from "../../lib/motion";
+import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
 import { SECTION_TITLE } from "../../lib/typography";
 
 /* The brief asks for this block to take less room: the language names go and
@@ -63,7 +63,7 @@ export function Languages() {
           className="mt-7 flex flex-wrap items-center justify-start gap-2.5 sm:justify-center sm:gap-3"
         >
           {shown.map((name) => (
-            <motion.li key={name} variants={scaleIn} title={name}>
+            <motion.li key={name} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} title={name}>
               <img
                 src={brand.langFlags[name]}
                 alt={name}

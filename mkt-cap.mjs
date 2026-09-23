@@ -211,6 +211,16 @@ if (tabArg === "lang") {
     if (shown) shown.click();
   });
   await p.waitForTimeout(400);
+} else if (tabArg === "langs") {
+  /* "langs" opens every language list on the page, so the expanded state of
+     the languages sections can be captured as a frame. */
+  await p.evaluate(() => {
+    document.querySelectorAll("#languages button, #languages-cards button").forEach((b) => {
+      if (/see all/i.test(b.textContent || "")) b.click();
+    });
+  });
+  await p.waitForTimeout(800);
+  console.log("language cards:", await p.evaluate(() => document.querySelectorAll("#languages-cards li").length));
 } else if (tabArg !== undefined) {
   await p.evaluate((n) => {
     const tabs = document.querySelectorAll("#features button");
@@ -243,7 +253,8 @@ if (shell.w > width + 1) {
 }
 
 if (preview) {
-  await p.screenshot({ path: target, fullPage: true });
+  if (SEL === "body") await p.screenshot({ path: target, fullPage: true });
+  else await p.locator(SEL).first().screenshot({ path: target });
   console.log("saved", target);
 } else {
   await p.evaluate((t) => { document.title = t; }, `${route || "landing"} :: ${width}`);

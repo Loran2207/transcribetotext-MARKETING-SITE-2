@@ -6,6 +6,7 @@ import { Reviews } from "../components/sections/Reviews";
 import { ProductValue } from "../components/sections/ProductValue";
 import { HowItWorks } from "../components/sections/HowItWorks";
 import { Languages } from "../components/sections/Languages";
+import { LanguagesCards } from "../components/sections/LanguagesCards";
 import { Pricing } from "../components/sections/Pricing";
 import { Industries } from "../components/sections/Industries";
 import { FinalCta } from "../components/sections/FinalCta";
@@ -28,6 +29,7 @@ export function Landing() {
         <ProductValue />
         <HowItWorks />
         <Languages />
+        <LanguagesCards />
         <Pricing />
         <Industries />
         <FinalCta />
