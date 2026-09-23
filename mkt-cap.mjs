@@ -215,12 +215,12 @@ if (tabArg === "lang") {
   /* "langs" opens every language list on the page, so the expanded state of
      the languages sections can be captured as a frame. */
   await p.evaluate(() => {
-    document.querySelectorAll("#languages button, #languages-cards button").forEach((b) => {
+    document.querySelectorAll("#languages button").forEach((b) => {
       if (/see all/i.test(b.textContent || "")) b.click();
     });
   });
   await p.waitForTimeout(800);
-  console.log("language cards:", await p.evaluate(() => document.querySelectorAll("#languages-cards li").length));
+  console.log("language cards:", await p.evaluate(() => document.querySelectorAll("#languages li").length));
 } else if (tabArg !== undefined) {
   await p.evaluate((n) => {
     const tabs = document.querySelectorAll("#features button");

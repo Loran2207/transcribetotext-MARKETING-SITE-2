@@ -9,7 +9,11 @@ import { brand } from "../../data/assets";
 import { fadeUp, stagger, viewportOnce } from "../../lib/motion";
 import { SECTION_TITLE } from "../../lib/typography";
 
-/* The brief asks for this block to take less room: the language names go and
+/* The row is capped at twelve flags, so "See all" adds a second row of eight
+   under it instead of stretching the first one across the page (Kirill,
+   round 25b).
+
+   The brief asks for this block to take less room: the language names go and
    the flags stay. A flag on its own is a puzzle for anyone who does not know it,
    so every circle still carries its language name for a pointer and for a
    screen reader - the name is hidden, not thrown away. */
@@ -60,7 +64,7 @@ export function Languages() {
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          className="mt-7 flex flex-wrap items-center justify-start gap-2.5 sm:justify-center sm:gap-3"
+          className="mx-auto mt-7 flex max-w-[680px] flex-wrap items-center justify-start gap-2.5 sm:justify-center sm:gap-3"
         >
           {shown.map((name) => (
             <motion.li key={name} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} title={name}>
